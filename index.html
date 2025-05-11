@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>artemisia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E4E4E4 0%, #CCCCCC 100%);
+        }
+
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .login-card {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            min-height: 500px;
+        }
+
+        .logo-section {
+            flex: 1;
+            /* background: linear-gradient(180deg, #E4E4E4 0%, #CCCCCC 100%); */
+            background: white;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-section img {
+            max-width: 250px;
+            margin-bottom: 1rem;
+        }
+
+        .logo-section h2 {
+            color: #333333;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: white;
+        }
+
+        .form-section h1 {
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #FF0000;
+            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #FF0000;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #CC0000;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .login-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .login-card {
+                flex-direction: column;
+                margin: 1rem;
+                min-height: auto;
+            }
+
+            .logo-section {
+                padding: 2rem 1rem;
+            }
+
+            .logo-section img {
+                max-width: 180px;
+            }
+
+            .form-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1rem;
+            }
+
+            .form-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .logo-section img {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-section">
+                <img src="assets/images/artemisia_logo.png" alt="León Mayorista">
+                
+            </div>
+            <div class="form-section">
+                <h1>ingreso al sistema</h1>
+                <form action="validar.php" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="usuario" placeholder="Ingrese Usuario" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" placeholder="Ingrese contraseña" required>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#">Olvidé mi contraseña</a>
+                    </div>
+                    <button type="submit" class="login-button">
+                        Ingresar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
