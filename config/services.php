@@ -35,4 +35,23 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Google (ingreso con Google)
+    |--------------------------------------------------------------------------
+    |
+    | `redirect` es solo un valor por defecto: Socialite::buildProvider()
+    | exige la clave para no explotar al resolver el driver, pero
+    | GoogleLoginController siempre la pisa en tiempo de ejecución con
+    | Panel::route('auth.google.callback'), que devuelve la URL absoluta del
+    | subdominio correcto (admin.* o clientes.*) para cada panel.
+    |
+    */
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => '/auth/google/callback',
+    ],
+
 ];

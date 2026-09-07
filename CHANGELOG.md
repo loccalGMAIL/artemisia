@@ -7,6 +7,33 @@ y este proyecto usa [Versionado Semántico](https://semver.org/lang/es/).
 
 ## [Sin publicar]
 
+## [0.2.0] - 2026-09-07
+
+### Added
+
+- Ingreso con Google (Socialite) en ambos paneles, sin auto-registro: si el
+  email de Google no corresponde a un usuario ya creado por el staff, se
+  rechaza el acceso. Cada panel resuelve su propia URL de callback
+  (`admin.*`/`clientes.*`), preservando el aislamiento de sesión entre
+  subdominios.
+- Roles y permisos con spatie/laravel-permission, en reemplazo de la columna
+  `tipo`: roles `staff` y `cliente`, con permisos `{acción}_{modelo}`
+  aplicados vía policies en los 14 modelos administrados desde el panel
+  admin (incluye `delete_any` para el borrado masivo). `RoleResource` nuevo
+  para administrar roles y sus permisos desde el panel.
+- Registro de actividad con spatie/laravel-activitylog: cambios en los
+  modelos del negocio (solo atributos que cambiaron), inicios/cierres/fallos
+  de sesión (contraseña o Google) y altas/bajas de roles y permisos.
+  `ActivityResource` de solo lectura en el panel admin para consultarlo, con
+  filtros por tipo, usuario y fecha.
+- Botón "Entrar con Google" en el login de ambos paneles (oculto si no hay
+  credenciales de Google Cloud configuradas).
+
+### Changed
+
+- `User::canAccessPanel()` ahora decide por rol (`hasRole()`) en vez de la
+  columna `tipo`, que se elimina.
+
 ## [0.1.0] - 2026-09-06
 
 ### Added
@@ -39,5 +66,6 @@ y este proyecto usa [Versionado Semántico](https://semver.org/lang/es/).
 - Suite de tests (Pest) para las reglas de negocio principales y el scoping
   de datos del panel de clientes.
 
-[Sin publicar]: https://github.com/loccalGMAIL/artemisia/compare/v0.1.0...HEAD
+[Sin publicar]: https://github.com/loccalGMAIL/artemisia/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/loccalGMAIL/artemisia/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/loccalGMAIL/artemisia/releases/tag/v0.1.0

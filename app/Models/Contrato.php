@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\EstadoContrato;
+use App\Models\Concerns\RegistraActividad;
 use Carbon\CarbonPeriod;
 use Database\Factories\ContratoFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class Contrato extends Model
 {
     /** @use HasFactory<ContratoFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $fillable = [
         'presupuesto_id',

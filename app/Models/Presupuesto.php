@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\EstadoPresupuesto;
 use App\Enums\EstadoProduccion;
+use App\Models\Concerns\RegistraActividad;
 use Database\Factories\PresupuestoFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 class Presupuesto extends Model
 {
     /** @use HasFactory<PresupuestoFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $fillable = [
         'cliente_id',

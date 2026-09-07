@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\UnidadServicio;
+use App\Models\Concerns\RegistraActividad;
 use Carbon\CarbonInterface;
 use Database\Factories\ServicioFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ use Illuminate\Support\Carbon;
 class Servicio extends Model
 {
     /** @use HasFactory<ServicioFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $fillable = [
         'rubro_id',

@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\TipoUsuario;
 use App\Models\User;
 use Filament\Facades\Filament;
 
@@ -19,8 +18,7 @@ it('lets a cliente user with cliente_id into the cliente panel and blocks admin'
 });
 
 it('blocks a cliente user without cliente_id from every panel', function () {
-    $user = User::factory()->create([
-        'tipo' => TipoUsuario::Cliente,
+    $user = User::factory()->cliente()->create([
         'cliente_id' => null,
     ]);
 

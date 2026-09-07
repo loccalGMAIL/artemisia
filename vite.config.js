@@ -7,7 +7,15 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
+            refresh: [
+                'routes/**',
+                'app/View/Components/**',
+                'app/Livewire/**',
+                'app/Filament/**',
+                'lang/**',
+                'resources/lang/**',
+                'resources/views/**',
+            ],
             fonts: [
                 bunny('Instrument Sans', {
                     weights: [400, 500, 600],
