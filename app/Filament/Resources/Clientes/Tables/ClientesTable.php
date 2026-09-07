@@ -18,26 +18,37 @@ class ClientesTable
     {
         return $table
             ->columns([
-                TextColumn::make('categoriaCliente.nombre')
-                    ->label('Categoría')
-                    ->badge()
-                    ->sortable(),
                 TextColumn::make('nombre')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('razon_social')
                     ->searchable()
+                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('cuit')
                     ->searchable()
+                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
                 TextColumn::make('telefono')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
                 TextColumn::make('direccion')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+                TextColumn::make('categoriaCliente.nombre')
+                    ->label('Categoría')
+                    ->badge()
+                    ->toggleable()
+                    ->sortable(),
                 IconColumn::make('activo')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

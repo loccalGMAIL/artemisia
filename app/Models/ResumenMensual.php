@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\EstadoPago;
+use App\Models\Concerns\RegistraActividad;
 use Database\Factories\ResumenMensualFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ResumenMensual extends Model
 {
     /** @use HasFactory<ResumenMensualFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $table = 'resumenes_mensuales';
 

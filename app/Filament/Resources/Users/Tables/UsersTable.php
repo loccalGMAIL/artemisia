@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
-use App\Enums\TipoUsuario;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -21,7 +20,8 @@ class UsersTable
                     ->searchable(),
                 TextColumn::make('email')
                     ->searchable(),
-                TextColumn::make('tipo')
+                TextColumn::make('roles.name')
+                    ->label('Rol')
                     ->badge(),
                 TextColumn::make('cliente.nombre')
                     ->label('Cliente')
@@ -33,8 +33,9 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('tipo')
-                    ->options(TipoUsuario::class),
+                SelectFilter::make('roles')
+                    ->label('Rol')
+                    ->relationship('roles', 'name'),
             ])
             ->recordActions([
                 ViewAction::make(),

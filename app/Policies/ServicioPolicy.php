@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Servicio;
+use App\Models\User;
+
+class ServicioPolicy
+{
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
+    {
+        return $user->can('view_any_servicio');
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, Servicio $servicio): bool
+    {
+        return $user->can('view_servicio');
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        return $user->can('create_servicio');
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, Servicio $servicio): bool
+    {
+        return $user->can('update_servicio');
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, Servicio $servicio): bool
+    {
+        return $user->can('delete_servicio');
+    }
+
+    /**
+     * Determine whether the user can bulk-delete (Filament's `DeleteBulkAction`).
+     */
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('delete_any_servicio');
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, Servicio $servicio): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, Servicio $servicio): bool
+    {
+        return false;
+    }
+}

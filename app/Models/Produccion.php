@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\EstadoProduccion;
+use App\Models\Concerns\RegistraActividad;
 use Database\Factories\ProduccionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Produccion extends Model
 {
     /** @use HasFactory<ProduccionFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $table = 'producciones';
 

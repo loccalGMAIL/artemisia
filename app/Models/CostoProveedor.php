@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\RegistraActividad;
 use Database\Factories\CostoProveedorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class CostoProveedor extends Model
 {
     /** @use HasFactory<CostoProveedorFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $table = 'costos_proveedor';
 

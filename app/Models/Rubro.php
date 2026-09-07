@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\RegistraActividad;
 use Database\Factories\RubroFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Rubro extends Model
 {
     /** @use HasFactory<RubroFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $fillable = [
         'nombre',

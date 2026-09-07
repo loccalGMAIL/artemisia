@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\PermissionRegistrar;
 use Tests\TestCase;
 
 /*
@@ -16,6 +17,11 @@ use Tests\TestCase;
 
 pest()->extend(TestCase::class)
     ->use(RefreshDatabase::class)
+    // RefreshDatabase vacía las tablas de roles/permisos en cada test, pero
+    // el caché de permisos de Spatie (CACHE_STORE=array) vive en el mismo
+    // proceso PHP durante todo el suite. Sin este flush, un test puede leer
+    // ids de roles/permisos que ya no existen en la base recién reseteada.
+    ->beforeEach(fn () => app(PermissionRegistrar::class)->forgetCachedPermissions())
     ->in('Feature');
 
 /*

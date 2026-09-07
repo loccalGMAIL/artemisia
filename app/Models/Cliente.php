@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\RegistraActividad;
 use Database\Factories\ClienteFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class Cliente extends Model
 {
     /** @use HasFactory<ClienteFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $fillable = [
         'categoria_cliente_id',

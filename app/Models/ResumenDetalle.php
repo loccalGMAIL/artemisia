@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\RegistraActividad;
 use Database\Factories\ResumenDetalleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ResumenDetalle extends Model
 {
     /** @use HasFactory<ResumenDetalleFactory> */
-    use HasFactory;
+    use HasFactory, RegistraActividad;
 
     protected $table = 'resumen_detalle';
 

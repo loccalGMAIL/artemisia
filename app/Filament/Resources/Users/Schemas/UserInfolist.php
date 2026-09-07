@@ -13,7 +13,8 @@ class UserInfolist
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('email'),
-                TextEntry::make('tipo')
+                TextEntry::make('roles.name')
+                    ->label('Rol')
                     ->badge(),
                 TextEntry::make('cliente.nombre')
                     ->label('Cliente')
