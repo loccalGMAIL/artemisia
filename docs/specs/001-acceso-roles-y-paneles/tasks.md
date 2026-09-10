@@ -104,7 +104,7 @@
   todavía, y el test verifica que la cuenta nace activa, con un solo rol, con enlace enviado y con
   asiento en `account_histories`; commit del test hecho.
 
-### - [ ] T9: Implementar `CreateAccountAction`
+### - [x] T9: Implementar `CreateAccountAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-2, RF-3, RF-5, RF-35
