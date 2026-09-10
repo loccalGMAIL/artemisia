@@ -111,7 +111,7 @@
 - **Depende de**: T8
 - **Hecho cuando**: el test de T8 pasa y la suite completa queda verde.
 
-### - [ ] T10: Escribir test de email duplicado incluyendo cuentas inactivas
+### - [x] T10: Escribir test de email duplicado incluyendo cuentas inactivas
 
 - **Tipo**: test
 - **Cubre**: RF-4
