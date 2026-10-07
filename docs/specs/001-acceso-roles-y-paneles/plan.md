@@ -253,7 +253,7 @@ Migraciones a crear, en orden:
   cualquier token de `password_reset_tokens` vigente para esa cuenta; registra historial con `$actor` como autor (RF-35).
 - **SetPasswordAction::handle(string $token, string $email, string $password): void** — delega en
   el `PasswordBroker`; si el token es inválido o vencido, lanza excepción con el motivo (RF-28).
-- **RequestPasswordResetAction::handle(string $email): void** — siempre devuelve éxito silencioso;
+- **RequestPasswordResetAction::handle(string $email): string** — siempre devuelve el mismo mensaje de confirmación;
   solo dispara el envío real si el email corresponde a una cuenta activa.
 - **AttemptLoginAction::handle(array $credentials|SocialiteUser $googleUser, string $portal,
   string $method): AuthResult** — evalúa en orden: (1) credenciales o email de Google corresponden

@@ -249,7 +249,7 @@
   y que un email inexistente o de cuenta inactiva devuelve el mismo mensaje de confirmación sin
   enviar ningún correo; commit del test hecho.
 
-### - [ ] T25: Implementar `RequestPasswordResetAction`
+### - [x] T25: Implementar `RequestPasswordResetAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-29, RF-30
