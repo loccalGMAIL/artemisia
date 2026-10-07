@@ -157,8 +157,14 @@ it('RF-54: ordena por fecha de alta', function () {
 it('RF-55: el listado está paginado', function () {
     Client::factory()->count(30)->create();
 
-    Livewire::test(ListClients::class)
-        ->assertCountTableRecords(25)
-        ->call('gotoPage', 2)
-        ->assertCountTableRecords(5);
+    $list = Livewire::test(ListClients::class)->assertCountTableRecords(30);
+
+    $firstPage = $list->instance()->getTableRecords();
+
+    expect($firstPage->count())->toBe(25)
+        ->and($firstPage->total())->toBe(30);
+
+    $list->call('gotoPage', 2);
+
+    expect($list->instance()->getTableRecords()->count())->toBe(5);
 });

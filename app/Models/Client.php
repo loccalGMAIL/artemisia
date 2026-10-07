@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 #[Fillable([
     'person_type', 'first_name', 'last_name', 'company_name', 'document', 'status',
@@ -45,6 +46,56 @@ class Client extends Model
     protected function availableForBudgets(Builder $query): void
     {
         $query->where('status', ClientStatus::Active);
+    }
+
+    /**
+     * SQL for the display name, so the list can sort and search by it (RF-5, RF-52, RF-54).
+     * Concatenation differs between SQLite and MySQL.
+     */
+    public static function displayNameSql(): string
+    {
+        $fullName = DB::connection()->getDriverName() === 'sqlite'
+            ? "TRIM(COALESCE(first_name, '') || ' ' || COALESCE(last_name, ''))"
+            : "TRIM(CONCAT(COALESCE(first_name, ''), ' ', COALESCE(last_name, '')))";
+
+        return "COALESCE(company_name, {$fullName})";
+    }
+
+    /**
+     * Case-insensitive text search over the display name, the document and the phone or
+     * email of any contact (RF-52). LIKE wildcards typed by the user are taken literally.
+     *
+     * @param  Builder<Client>  $query
+     */
+    #[Scope]
+    protected function search(Builder $query, string $term): void
+    {
+        $term = trim($term);
+
+        if ($term === '') {
+            return;
+        }
+
+        $like = '%'.self::escapeLike(mb_strtolower($term)).'%';
+        $digits = (string) preg_replace('/[\s.\-]/', '', $term);
+
+        $query->where(function (Builder $query) use ($like, $digits): void {
+            $query->whereRaw('LOWER('.self::displayNameSql().") LIKE ? ESCAPE '!'", [$like]);
+
+            if ($digits !== '' && ctype_digit($digits)) {
+                $query->orWhereRaw("document LIKE ? ESCAPE '!'", ['%'.self::escapeLike($digits).'%']);
+            }
+
+            $query->orWhereHas('contacts', function (Builder $contacts) use ($like): void {
+                $contacts->whereRaw("LOWER(phone) LIKE ? ESCAPE '!'", [$like])
+                    ->orWhereRaw("LOWER(email) LIKE ? ESCAPE '!'", [$like]);
+            });
+        });
+    }
+
+    private static function escapeLike(string $value): string
+    {
+        return str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $value);
     }
 
     /**

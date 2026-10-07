@@ -201,7 +201,7 @@
 - **Depende de**: T21
 - **Hecho cuando**: el test falla y verifica columnas, exclusión de archivados por defecto, filtro explícito de archivados, búsqueda case-insensitive por nombre/documento/teléfono/email, filtros por estado y tipo, orden por nombre y fecha, y paginado; commit del test hecho.
 
-### - [ ] T23: Implementar tabla, scopes y filtros del listado
+### - [x] T23: Implementar tabla, scopes y filtros del listado
 
 - **Tipo**: ui
 - **Cubre**: RF-49, RF-50, RF-51, RF-52, RF-53, RF-54, RF-55
