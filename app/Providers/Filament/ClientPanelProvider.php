@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\PortalRequestPasswordReset;
+use App\Filament\Auth\PortalResetPassword;
 use App\Filament\Client\Pages\Auth\Login;
 use App\Http\Middleware\EnsureAccountIsActive;
 use Filament\Http\Middleware\Authenticate;
@@ -31,6 +33,7 @@ class ClientPanelProvider extends PanelProvider
             ->id('client')
             ->path('portal')
             ->login(Login::class)
+            ->passwordReset(PortalRequestPasswordReset::class, PortalResetPassword::class)
             ->renderHook(
                 PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
                 fn (): View => view('auth.google-login', ['url' => route('google.client.redirect')]),

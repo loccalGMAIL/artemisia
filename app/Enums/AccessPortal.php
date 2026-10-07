@@ -9,6 +9,14 @@ enum AccessPortal: string
     case Staff = 'staff';
     case Client = 'client';
 
+    /**
+     * The portal an account belongs to by role: clients to theirs, everyone else to staff.
+     */
+    public static function forAccount(User $user): self
+    {
+        return $user->hasRole('client') ? self::Client : self::Staff;
+    }
+
     public function label(): string
     {
         return __('logs.portals.'.$this->value);

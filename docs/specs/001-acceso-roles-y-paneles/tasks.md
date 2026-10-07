@@ -408,7 +408,7 @@
   un enlace vigente (queda invalidado); un enlace vencido o ya usado, que ofrece pedir uno nuevo; y
   el rechazo de menos de 8 caracteres; commit del test hecho.
 
-### - [ ] T42: Implementar las pantallas de contraseña y la URL del enlace
+### - [x] T42: Implementar las pantallas de contraseña y la URL del enlace
 
 - **Tipo**: impl
 - **Cubre**: RF-5, RF-27, RF-28, RF-29, RF-30, RNF-1

@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\PortalRequestPasswordReset;
+use App\Filament\Auth\PortalResetPassword;
 use App\Filament\Staff\Pages\Auth\Login;
 use App\Http\Middleware\EnsureAccountIsActive;
 use Filament\Http\Middleware\Authenticate;
@@ -32,6 +34,7 @@ class StaffPanelProvider extends PanelProvider
             ->id('staff')
             ->path('staff')
             ->login(Login::class)
+            ->passwordReset(PortalRequestPasswordReset::class, PortalResetPassword::class)
             ->renderHook(
                 PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
                 fn (): View => view('auth.google-login', ['url' => route('google.staff.redirect')]),

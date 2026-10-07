@@ -15,6 +15,8 @@ return [
         'created' => 'Cuenta admin creada: :email. Se envió el enlace para definir la contraseña.',
         'admin_exists' => 'Ya existe una cuenta admin: este comando solo sirve para la instalación inicial.',
     ],
+    'password_defined' => 'Contraseña definida. Ya puede ingresar.',
+    'request_new_link' => 'Pedir un enlace nuevo',
     'last_active_admin' => 'La operación dejaría al sistema sin ninguna cuenta admin activa.',
     'rejection' => [
         'invalid_credentials' => 'Las credenciales ingresadas no son válidas.',
