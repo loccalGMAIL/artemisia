@@ -240,7 +240,7 @@
 - **Depende de**: T26
 - **Hecho cuando**: el test de T26 pasa, la página no recibe `client_id` arbitrario desde la URL y la suite completa queda verde.
 
-### - [ ] T28: Escribir test de autogestión del cliente
+### - [x] T28: Escribir test de autogestión del cliente
 
 - **Tipo**: test
 - **Cubre**: RF-59, RF-60, RF-61
