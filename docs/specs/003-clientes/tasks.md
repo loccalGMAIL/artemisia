@@ -258,7 +258,7 @@
 
 ## Fase 8: Extensiones comerciales y rendimiento
 
-### - [ ] T30: Reservar secciones comerciales condicionales en la ficha
+### - [x] T30: Reservar secciones comerciales condicionales en la ficha
 
 - **Tipo**: ui
 - **Cubre**: RF-46, RF-47, RF-48

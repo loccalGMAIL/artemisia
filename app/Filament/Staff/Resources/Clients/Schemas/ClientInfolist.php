@@ -4,8 +4,10 @@ namespace App\Filament\Staff\Resources\Clients\Schemas;
 
 use App\Enums\ClientStatus;
 use App\Enums\ClientType;
+use App\Filament\Staff\Resources\Clients\ClientCardExtensions;
 use App\Models\Client;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -46,6 +48,11 @@ class ClientInfolist
                 TextEntry::make('province.name')->label(__('clients.fields.province'))->placeholder('—'),
                 TextEntry::make('postal_code')->label(__('clients.fields.postal_code'))->placeholder('—'),
             ])->columns(2),
+
+            // Budgets, contracts and payments plug in here once those modules exist (RF-46 to RF-48).
+            Group::make()
+                ->schema(fn (Client $record): array => ClientCardExtensions::componentsFor($record))
+                ->columnSpanFull(),
         ]);
     }
 }
