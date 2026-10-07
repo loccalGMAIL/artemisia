@@ -265,7 +265,7 @@
 - **Depende de**: T29
 - **Hecho cuando**: la ficha del cliente deja puntos de extensión documentados para presupuestos, contratos y pagos, sin consultar tablas todavía inexistentes ni romper la suite actual.
 
-### - [ ] T31: Escribir test de rendimiento del listado con 5.000 clientes
+### - [x] T31: Escribir test de rendimiento del listado con 5.000 clientes
 
 - **Tipo**: test
 - **Cubre**: RNF-5
