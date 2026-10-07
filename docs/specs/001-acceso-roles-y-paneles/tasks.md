@@ -323,7 +323,7 @@
   habilitada), y flujo fallido o cancelado (vuelve a la pantalla de acceso sin crear nada); commit
   del test hecho.
 
-### - [ ] T33: Implementar las rutas de Google por portal
+### - [x] T33: Implementar las rutas de Google por portal
 
 - **Tipo**: impl
 - **Cubre**: RF-13, RF-14, RF-15, RF-17

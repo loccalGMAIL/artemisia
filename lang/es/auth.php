@@ -6,6 +6,8 @@ return [
     'cannot_deactivate_own_account' => 'No se puede desactivar la propia cuenta.',
     'invalid_password_link' => 'El enlace venció o ya fue usado. Solicite uno nuevo.',
     'password_reset_requested' => 'Si el email corresponde a una cuenta activa, enviamos un enlace para definir la contraseña.',
+    'google_failed' => 'No pudimos completar el ingreso con Google. Intente nuevamente.',
+    'google_login' => 'Ingresar con Google',
     'last_active_admin' => 'La operación dejaría al sistema sin ninguna cuenta admin activa.',
     'rejection' => [
         'invalid_credentials' => 'Las credenciales ingresadas no son válidas.',
