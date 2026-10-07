@@ -10,5 +10,6 @@ return [
         'account_not_enabled' => 'Esa cuenta no está habilitada. Contacte a la agencia.',
         'account_inactive' => 'La cuenta está deshabilitada. Contacte a la agencia.',
         'wrong_portal' => 'Esta cuenta no accede a ese portal.',
+        'too_many_attempts' => 'Demasiados intentos fallidos. Intente nuevamente en un minuto.',
     ],
 ];

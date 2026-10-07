@@ -212,7 +212,7 @@
   minuto se rechaza, y que al vencer los 60 segundos vuelve a aceptarse automáticamente; commit del
   test hecho.
 
-### - [ ] T21: Implementar el límite con el `RateLimiter` nativo
+### - [x] T21: Implementar el límite con el `RateLimiter` nativo
 
 - **Tipo**: impl
 - **Cubre**: RNF-2

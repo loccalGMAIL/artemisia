@@ -9,10 +9,15 @@ use App\Enums\AccessRejection;
 use App\Models\User;
 use App\Services\AccessLogger;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 class AttemptLoginAction
 {
+    private const MAX_FAILED_ATTEMPTS = 5;
+
+    private const DECAY_SECONDS = 60;
+
     public function __construct(private readonly AccessLogger $accessLogger) {}
 
     /**
@@ -26,7 +31,7 @@ class AttemptLoginAction
     {
         $email = $this->normalizedEmail($input);
 
-        $result = $this->evaluate($email, $input, $portal, $method);
+        $result = $this->evaluateWithThrottle($email, $input, $portal, $method);
 
         $this->accessLogger->log(
             $result->user,
@@ -36,6 +41,33 @@ class AttemptLoginAction
             $result->successful ? AccessOutcome::Success : AccessOutcome::Rejected,
             $result->rejection,
         );
+
+        return $result;
+    }
+
+    /**
+     * Password attempts are limited per email: after MAX_FAILED_ATTEMPTS invalid
+     * credentials within DECAY_SECONDS, every further attempt is rejected (RNF-2).
+     *
+     * @param  array{email: string, password: string}|SocialiteUser  $input
+     */
+    private function evaluateWithThrottle(string $email, array|SocialiteUser $input, AccessPortal $portal, AccessMethod $method): AuthResult
+    {
+        if ($method !== AccessMethod::Password) {
+            return $this->evaluate($email, $input, $portal, $method);
+        }
+
+        $key = 'login-attempts:'.$email;
+
+        if (RateLimiter::tooManyAttempts($key, self::MAX_FAILED_ATTEMPTS)) {
+            return AuthResult::rejected(AccessRejection::TooManyAttempts);
+        }
+
+        $result = $this->evaluate($email, $input, $portal, $method);
+
+        if ($result->rejection === AccessRejection::InvalidCredentials) {
+            RateLimiter::hit($key, self::DECAY_SECONDS);
+        }
 
         return $result;
     }
