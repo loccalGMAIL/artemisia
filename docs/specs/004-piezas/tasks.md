@@ -259,7 +259,7 @@
 - **Tipo**: test
 - **Cubre**: RF-4, RF-11, RF-15, RF-28, RF-36, RF-39
 - **Depende de**: T30
-- **Hecho cuando**: el test falla y comprueba que `admin` y `staff` pueden operar piezas desde `/staff`, y que una cuenta `cliente` no puede acceder a esas operaciones; commit del test hecho.
+- **Hecho cuando**: el test falla y comprueba que `admin` y `staff` pueden operar piezas desde `/staff`, y que una cuenta `client` no puede acceder a esas operaciones; commit del test hecho.
 
 ### - [ ] T32: Implementar `PiecePolicy`
 
@@ -380,6 +380,5 @@
 
 - **El plan no define el punto exacto de entrada desde `002-presupuestos` para abrir la propuesta al aceptar un presupuesto.** Las tareas lo cubren desde la UI de staff, pero conviene precisar si aparece como acción en `BudgetResource`, redirección posterior a aceptar, o acción manual sobre presupuestos aceptados.
 - **Hay una tensión en `budget_item_id`: el plan pide FK a `budget_items` sin cascada, pero también admite que el ítem pueda dejar de existir.** Si `budget_items` se borra físicamente, una FK restrictiva impediría ese borrado; si usa soft delete, no hay problema. Conviene aclarar el comportamiento esperado de `budget_items` en la spec `002` o en este plan.
-- **El nombre del rol cliente aparece inconsistente entre documentos.** La spec 004 usa rol `cliente`, mientras `AGENTS.md` describe acceso con rol `client`. Las tareas asumen el rol efectivo implementado por `001`; antes de implementar conviene normalizar el nombre en documentación o adaptar las referencias.
 - **El plan no fija el tamaño máximo de la columna ni normalización del nombre de archivo original.** Solo define `file_path` y `file_extension`; si se necesita mostrar nombre original al staff o cliente, eso no está cubierto por el modelo de datos actual.
 - **RNF-2 depende del entorno de medición.** La tarea T37 lo hace verificable, pero el plan no define base de datos, hardware ni tolerancia para medir “menos de 2 segundos”; conviene explicitar que se valida en el entorno de test/local del proyecto.

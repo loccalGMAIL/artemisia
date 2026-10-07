@@ -71,7 +71,7 @@
 - **Cubre**: RF-3
 - **Depende de**: T3
 - **Hecho cuando**: `php artisan migrate:fresh --seed` crea las tablas del paquete y `RoleSeeder`
-  deja exactamente los roles `admin`, `staff` y `cliente`.
+  deja exactamente los roles `admin`, `staff` y `client`.
 
 ### - [ ] T5: Crear migración de `account_histories`
 

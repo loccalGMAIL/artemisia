@@ -210,7 +210,7 @@ Migraciones a crear, en orden:
   - `MarkPieceDeliveredAction` — transición final.
   - `DiscardPieceAction` — soft delete, solo desde `pending`.
 - **Policies**: `PiecePolicy` (`admin` y `staff` igual, para todas las acciones de producción y
-  consulta); `PieceApprovalPortalPolicy` (rol `cliente`: `view`, `approve`, `reject`, acotado a su
+  consulta); `PieceApprovalPortalPolicy` (rol `client`: `view`, `approve`, `reject`, acotado a su
   `client_id`).
 - **Filament Resources / Pages / Widgets**:
   - Panel `staff`: `PieceResource` (list/create desde la propuesta/edit/view), relation manager de
@@ -279,7 +279,7 @@ Migraciones a crear, en orden:
 
 - `PiecePolicy` autoriza por igual a `admin` y `staff` para generar, delegar, cambiar estado,
   descartar y consultar piezas; ninguna acción de esta spec distingue entre ambos roles.
-- `PieceApprovalPortalPolicy` autoriza a una cuenta con rol `cliente` únicamente sobre las piezas
+- `PieceApprovalPortalPolicy` autoriza a una cuenta con rol `client` únicamente sobre las piezas
   cuyo presupuesto pertenece al cliente al que está vinculada (RF-48), y solo puede aprobar o
   rechazar mientras estén en `client_approval` (RF-47).
 

@@ -147,7 +147,7 @@ WhatsApp con un mensaje de texto precargado para el contacto del cliente.
 - **RF-57**: MIENTRAS un usuario con rol `admin` o `staff` tenga sesión iniciada en el portal de staff, EL SISTEMA le mostrará el listado de presupuestos con identificador, cliente, título, modalidad, total, estado y fecha de emisión.
 - **RF-58**: EL SISTEMA permitirá filtrar el listado de presupuestos por cliente.
 - **RF-59**: EL SISTEMA permitirá filtrar el listado de presupuestos por estado.
-- **RF-60**: SI un usuario con rol `cliente` solicita cualquier acción sobre presupuestos o sobre el catálogo, ENTONCES EL SISTEMA la rechazará y mostrará un mensaje de permiso insuficiente.
+- **RF-60**: SI un usuario con rol `client` solicita cualquier acción sobre presupuestos o sobre el catálogo, ENTONCES EL SISTEMA la rechazará y mostrará un mensaje de permiso insuficiente.
 
 ### PDF y envío
 
@@ -193,7 +193,7 @@ WhatsApp con un mensaje de texto precargado para el contacto del cliente.
 
 ## 9. Dependencias y supuestos
 
-- Requiere la spec `001-acceso-roles-y-paneles`: los roles `admin`, `staff` y `cliente` y el portal de staff.
+- Requiere la spec `001-acceso-roles-y-paneles`: los roles `admin`, `staff` y `client` y el portal de staff.
 - **Requiere la spec `003-clientes` aprobada e implementada antes que esta.** El presupuesto se dirige a un cliente existente y necesita de él, como mínimo, nombre para mostrar y teléfono de contacto para la acción de WhatsApp. Sin ese módulo, esta spec no se puede implementar.
 - Se supone que las categorías de trabajo (branding, redes, papelería) son datos de referencia cargados al instalar el sistema y no se administran desde la interfaz.
 - Se supone una única moneda para todo el sistema, con precios de lista finales.

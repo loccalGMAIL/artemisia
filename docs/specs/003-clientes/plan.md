@@ -237,7 +237,7 @@ registra cada alta y cada cambio con su snapshot antes/después.
 
 | Columna | Tipo | Nulo | Default | Notas |
 |---|---|---|---|---|
-| client_id | bigint unsigned | sí | null | FK a `clients`; solo tiene sentido en cuentas con rol `cliente` |
+| client_id | bigint unsigned | sí | null | FK a `clients`; solo tiene sentido en cuentas con rol `client` |
 
 - **Índices**: índice sobre `client_id`.
 - **Claves foráneas**: `client_id` → `clients.id` (`set null` on delete, aunque `clients` nunca
@@ -355,7 +355,7 @@ Migraciones a crear, en orden:
 - `admin` y `staff` tienen exactamente los mismos permisos sobre clientes: alta, edición,
   contactos, activar/desactivar, archivar/restaurar, vincular/desvincular cuentas, consultar
   historial y exportar. `ClientPolicy` no distingue entre ambos roles.
-- `cliente` nunca pasa por `ClientPolicy`: sus acciones se autorizan con `ClientPortalPolicy`,
+- `client` nunca pasa por `ClientPolicy`: sus acciones se autorizan con `ClientPortalPolicy`,
   siempre acotadas a `auth()->user()->client_id`; cualquier intento sobre un `client_id` distinto
   se rechaza (RF-62).
 - Un cliente archivado revoca el `view` de `ClientPortalPolicy` para sus cuentas vinculadas

@@ -85,7 +85,7 @@
 - **Tipo**: test
 - **Cubre**: RF-1, RF-4, RF-7, RF-10, RF-60
 - **Depende de**: T7
-- **Hecho cuando**: el test falla y comprueba que `admin` y `staff` gestionan servicios e historial desde el panel `staff`, y que un usuario `cliente` recibe permiso insuficiente; commit del test hecho.
+- **Hecho cuando**: el test falla y comprueba que `admin` y `staff` gestionan servicios e historial desde el panel `staff`, y que un usuario `client` recibe permiso insuficiente; commit del test hecho.
 
 ### - [ ] T9: Crear `ServicePolicy` y `ServiceResource`
 
@@ -213,7 +213,7 @@
 - **Tipo**: test
 - **Cubre**: RF-34, RF-54, RF-55, RF-57, RF-58, RF-59, RF-60
 - **Depende de**: T23
-- **Hecho cuando**: el test falla y verifica columnas del listado, filtros por cliente y estado, indicador de vencido, fecha de validez en ficha, historial cronológico visible y rechazo al rol `cliente`; commit del test hecho.
+- **Hecho cuando**: el test falla y verifica columnas del listado, filtros por cliente y estado, indicador de vencido, fecha de validez en ficha, historial cronológico visible y rechazo al rol `client`; commit del test hecho.
 
 ### - [ ] T25: Crear `BudgetPolicy` y estructura base de `BudgetResource`
 

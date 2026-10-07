@@ -153,7 +153,7 @@
 - **Tipo**: test
 - **Cubre**: RF-38, RF-39, RF-40, RF-41, RF-42, RF-44
 - **Depende de**: T15
-- **Hecho cuando**: el test falla y cubre vincular cuenta con rol `cliente`, varias cuentas al mismo cliente, rechazo de una cuenta ya vinculada a otro cliente, desvinculación, corte de sesión en la siguiente solicitud y asiento de historial; commit del test hecho.
+- **Hecho cuando**: el test falla y cubre vincular cuenta con rol `client`, varias cuentas al mismo cliente, rechazo de una cuenta ya vinculada a otro cliente, desvinculación, corte de sesión en la siguiente solicitud y asiento de historial; commit del test hecho.
 
 ### - [ ] T17: Implementar `LinkAccountToClientAction` y `UnlinkAccountFromClientAction`
 
@@ -167,7 +167,7 @@
 - **Tipo**: test
 - **Cubre**: RF-43, RF-57, RF-58, RF-59, RF-60, RF-62
 - **Depende de**: T17
-- **Hecho cuando**: el test falla y verifica permisos completos para `admin` y `staff`, cuenta `cliente` limitada a su propio cliente, cuenta sin vínculo con mensaje de acceso no habilitado, cliente archivado bloqueado y rechazo al intentar operar sobre otro cliente; commit del test hecho.
+- **Hecho cuando**: el test falla y verifica permisos completos para `admin` y `staff`, cuenta `client` limitada a su propio cliente, cuenta sin vínculo con mensaje de acceso no habilitado, cliente archivado bloqueado y rechazo al intentar operar sobre otro cliente; commit del test hecho.
 
 ### - [ ] T19: Implementar `ClientPolicy` y autorización del portal
 

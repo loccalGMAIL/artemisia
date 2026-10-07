@@ -38,7 +38,7 @@ la spec distingue.
 
 ### D-1: Rol único con `spatie/laravel-permission`, sin columna `role` propia
 
-- **Decisión**: `User` usa el trait `HasRoles` del paquete; los roles `admin`, `staff` y `cliente`
+- **Decisión**: `User` usa el trait `HasRoles` del paquete; los roles `admin`, `staff` y `client`
   se siembran como registros de `Role`.
 - **Motivo**: el paquete ya está en el stack exactamente para esto (AGENTS.md, sección 2).
 - **Alternativa descartada**: columna `role` enum propia en `users`. Duplicaría lo que el paquete
@@ -201,7 +201,7 @@ la spec distingue.
 ### Tablas de terceros reutilizadas (no se crean en este plan)
 
 - `roles`, `model_has_roles`, `permissions` — migraciones propias de `spatie/laravel-permission`,
-  publicadas al instalar el paquete. `RoleSeeder` siembra `admin`, `staff`, `cliente`.
+  publicadas al instalar el paquete. `RoleSeeder` siembra `admin`, `staff`, `client`.
 - `password_reset_tokens` — migración por defecto de Laravel, reutilizada según D-3.
 
 Migraciones a crear, en orden:
@@ -284,11 +284,11 @@ Migraciones a crear, en orden:
 ## 8. Autorización
 
 - `AccountPolicy` autoriza únicamente a `admin` para crear cuentas, cambiar roles, activar y
-  desactivar. `staff` y `cliente` no pasan ninguna de sus reglas.
+  desactivar. `staff` y `client` no pasan ninguna de sus reglas.
 - `AccessLogPolicy` autoriza únicamente a `admin` para consultar `access_logs` y
   `account_histories`.
 - `canAccessPanel()` de `StaffPanelProvider` exige rol `admin` o `staff`; el de
-  `ClientPanelProvider` exige rol `cliente`. Ninguno depende de permisos finos: la spec deja el
+  `ClientPanelProvider` exige rol `client`. Ninguno depende de permisos finos: la spec deja el
   reparto fino de permisos por módulo a cada spec de dominio (sección 8 de la spec, Fuera de
   alcance).
 
@@ -302,9 +302,9 @@ Migraciones a crear, en orden:
   cruzado; cancelación del flujo de Google; definición y recuperación de contraseña, incluido
   enlace vencido o ya usado; activación/desactivación con corte de sesión; límite de intentos
   fallidos (RNF-2); acceso a `AccountResource` y `AccessLogResource` restringido a `admin`.
-- **Factories nuevas**: `UserFactory` (con estado `admin`/`staff`/`cliente`), `AccessLogFactory`,
+- **Factories nuevas**: `UserFactory` (con estado `admin`/`staff`/`client`), `AccessLogFactory`,
   `AccountHistoryFactory`.
-- **Seeders**: `RoleSeeder` (datos de referencia: `admin`, `staff`, `cliente`).
+- **Seeders**: `RoleSeeder` (datos de referencia: `admin`, `staff`, `client`).
 
 ## 10. Mapa RF → componente
 

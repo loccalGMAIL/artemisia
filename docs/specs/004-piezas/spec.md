@@ -141,17 +141,17 @@ piezas pendientes sin eliminación física.
 ### Aprobación del cliente
 
 - **RF-32**: MIENTRAS una pieza esté en estado en aprobación del cliente, EL SISTEMA permitirá a
-  una cuenta con rol `cliente` vinculada al cliente destinatario del presupuesto aprobarla o
+  una cuenta con rol `client` vinculada al cliente destinatario del presupuesto aprobarla o
   rechazarla.
-- **RF-33**: CUANDO una cuenta con rol `cliente` aprueba una pieza, EL SISTEMA la dejará en
+- **RF-33**: CUANDO una cuenta con rol `client` aprueba una pieza, EL SISTEMA la dejará en
   estado aprobada y registrará la fecha de la aprobación.
-- **RF-34**: CUANDO una cuenta con rol `cliente` rechaza una pieza, EL SISTEMA la devolverá al
+- **RF-34**: CUANDO una cuenta con rol `client` rechaza una pieza, EL SISTEMA la devolverá al
   estado en producción y registrará el motivo de rechazo, la fecha, y a qué envío corresponde.
 - **RF-35**: EL SISTEMA aceptará vacío el motivo de rechazo.
 - **RF-36**: MIENTRAS un usuario con rol `admin` o `staff` tenga sesión iniciada en el portal de
   staff, EL SISTEMA le permitirá consultar el historial completo de envíos a aprobación de una
   pieza, con su archivo, su resultado y, si corresponde, su motivo de rechazo.
-- **RF-37**: MIENTRAS una cuenta con rol `cliente` esté vinculada al cliente destinatario de una
+- **RF-37**: MIENTRAS una cuenta con rol `client` esté vinculada al cliente destinatario de una
   pieza, EL SISTEMA le permitirá consultar los envíos a aprobación de esa pieza que ella misma
   resolvió, incluidos los rechazados, aunque la pieza haya vuelto a producción.
 
@@ -177,15 +177,15 @@ piezas pendientes sin eliminación física.
 
 ### Portal de clientes
 
-- **RF-45**: MIENTRAS una cuenta con rol `cliente` tenga sesión iniciada en el portal de
+- **RF-45**: MIENTRAS una cuenta con rol `client` tenga sesión iniciada en el portal de
   clientes, EL SISTEMA le mostrará únicamente las piezas del cliente al que está vinculada que
   estén en aprobación del cliente, aprobadas o entregadas.
 - **RF-46**: EL SISTEMA no mostrará en el portal de clientes las piezas en estado pendiente, en
   producción ni en revisión.
-- **RF-47**: SI una cuenta con rol `cliente` intenta aprobar o rechazar una pieza que no está en
+- **RF-47**: SI una cuenta con rol `client` intenta aprobar o rechazar una pieza que no está en
   aprobación del cliente, ENTONCES EL SISTEMA la rechazará y mostrará un mensaje de permiso
   insuficiente.
-- **RF-48**: SI una cuenta con rol `cliente` intenta actuar sobre una pieza de un cliente
+- **RF-48**: SI una cuenta con rol `client` intenta actuar sobre una pieza de un cliente
   distinto de aquel al que está vinculada, ENTONCES EL SISTEMA la rechazará y mostrará un mensaje
   de permiso insuficiente.
 
@@ -217,11 +217,11 @@ piezas pendientes sin eliminación física.
 
 ## 9. Dependencias y supuestos
 
-- Requiere la spec `001-acceso-roles-y-paneles`: los roles `admin`, `staff` y `cliente`, y los
+- Requiere la spec `001-acceso-roles-y-paneles`: los roles `admin`, `staff` y `client`, y los
   portales de staff y de clientes.
 - Requiere la spec `002-presupuestos`: un presupuesto aceptado con sus ítems, servicios y
   categorías de trabajo.
-- Requiere la spec `003-clientes`: el vínculo entre una cuenta con rol `cliente` y el cliente
+- Requiere la spec `003-clientes`: el vínculo entre una cuenta con rol `client` y el cliente
   destinatario del presupuesto, para mostrarle únicamente lo que le corresponde.
 - Se supone que las categorías de trabajo ya sembradas por la spec `002` alcanzan para clasificar
   también las piezas sueltas.

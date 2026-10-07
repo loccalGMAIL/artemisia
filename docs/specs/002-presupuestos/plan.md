@@ -270,7 +270,7 @@ Migraciones a crear, en orden:
   - `DiscardBudgetAction` — soft delete de un presupuesto en borrador.
   - `GenerateBudgetPdfAction` — renderiza y devuelve el PDF; captura fallas de render (RF-67).
   - `BuildWhatsAppLinkAction` — arma la URL `wa.me` o `null` si no hay teléfono.
-- **Policies**: `ServicePolicy`, `BudgetPolicy` (ambas: `admin` y `staff` igual, `cliente`
+- **Policies**: `ServicePolicy`, `BudgetPolicy` (ambas: `admin` y `staff` igual, `client`
   rechazado siempre, RF-60).
 - **Filament Resources / Pages / Widgets**:
   - Panel `staff`: `ServiceResource` (catálogo + relation manager de historial de precios);
@@ -337,7 +337,7 @@ Migraciones a crear, en orden:
   deja de listarse (RF-52, RF-53).
 - Un presupuesto `sent` con `validity_date` pasada se señala vencido sin cambiar de estado, y
   igual admite cerrarse como aceptado o rechazado (RF-55, RF-56).
-- Ningún usuario con rol `cliente` puede ejecutar ninguna acción sobre presupuestos ni sobre el
+- Ningún usuario con rol `client` puede ejecutar ninguna acción sobre presupuestos ni sobre el
   catálogo (RF-60).
 - El PDF nunca incluye ítems quitados ni asientos de historial (RF-66); si su generación falla,
   se avisa y no se descarga nada (RF-67).
@@ -348,7 +348,7 @@ Migraciones a crear, en orden:
 
 - `ServicePolicy` y `BudgetPolicy` autorizan por igual a `admin` y `staff` para todas las
   acciones de esta spec (catálogo y presupuestos); ninguna las distingue entre sí.
-- Cualquier acción de un usuario con rol `cliente` sobre presupuestos o catálogo se rechaza en la
+- Cualquier acción de un usuario con rol `client` sobre presupuestos o catálogo se rechaza en la
   policy correspondiente (RF-60); esta spec no expone ningún componente en el panel `client`.
 - Ningún presupuesto ni su PDF quedan accesibles fuera de una sesión autenticada del panel
   `staff` (RF-71): no hay rutas públicas para esta spec.
@@ -364,7 +364,7 @@ Migraciones a crear, en orden:
   presupuesto (alta, ítems, descuento, envío, aceptación); descarte de un borrador y su
   desaparición del listado; reversión de `accepted` a `sent` y reedición; descarga de PDF y su
   contenido; fallo simulado de generación de PDF; listado con filtros por cliente y por estado;
-  rechazo de cualquier acción intentada por un usuario con rol `cliente`; acceso denegado sin
+  rechazo de cualquier acción intentada por un usuario con rol `client`; acceso denegado sin
   sesión a la descarga de PDF.
 - **Factories nuevas**: `ServiceFactory`, `BudgetFactory`, `BudgetItemFactory`,
   `ServicePriceHistoryFactory`, `BudgetHistoryFactory`.
