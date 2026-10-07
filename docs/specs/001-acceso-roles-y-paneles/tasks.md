@@ -30,7 +30,7 @@
 
 ## Prerequisito externo: Puesta en marcha del proyecto
 
-### - [ ] P0: Instalar el proyecto Laravel con el stack de AGENTS.md
+### - [x] P0: Instalar el proyecto Laravel con el stack de AGENTS.md
 
 - **Tipo**: prerequisito externo
 - **Cubre**: — (fuera de spec; ver `docs/adr/0001-bootstrap-laravel-fuera-de-specs.md`)
