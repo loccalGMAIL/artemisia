@@ -61,9 +61,10 @@ it('RF-4: el formulario de alta muestra el conflicto con la cuenta existente, in
     User::factory()->staff()->inactive()->create(['name' => 'Ana Pérez', 'email' => 'ana@example.com']);
 
     Livewire::test(CreateAccount::class)
-        ->fillForm(['name' => 'Otra Ana', 'email' => ' ANA@example.com ', 'role' => 'staff'])
+        ->fillForm(['name' => 'Otra Ana', 'email' => 'ANA@Example.com', 'role' => 'staff'])
         ->call('create')
-        ->assertHasFormErrors(['email']);
+        ->assertHasFormErrors(['email'])
+        ->assertSee('Ya existe una cuenta con el email ana@example.com (Ana Pérez).');
 
     expect(User::query()->count())->toBe(2);
 

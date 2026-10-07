@@ -351,7 +351,7 @@
 - **Depende de**: T34
 - **Hecho cuando**: el test de T34 pasa y la suite completa queda verde.
 
-### - [ ] T36: Crear `AccountResource` en el panel de staff
+### - [x] T36: Crear `AccountResource` en el panel de staff
 
 - **Tipo**: ui
 - **Cubre**: RF-2, RF-6, RF-8, RF-32
