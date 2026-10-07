@@ -279,7 +279,7 @@
 - **Depende de**: T31
 - **Hecho cuando**: el test de T31 pasa sin agregar dependencias y la suite completa queda verde.
 
-### - [ ] T33: Escribir test de rendimiento de exportación con 5.000 clientes
+### - [x] T33: Escribir test de rendimiento de exportación con 5.000 clientes
 
 - **Tipo**: test
 - **Cubre**: RNF-6
