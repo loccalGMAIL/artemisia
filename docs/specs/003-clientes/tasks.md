@@ -194,7 +194,7 @@
 - **Depende de**: T20
 - **Hecho cuando**: el test de T20 pasa, el recurso delega reglas en Actions/Policies y la suite completa queda verde.
 
-### - [ ] T22: Escribir test del listado de clientes
+### - [x] T22: Escribir test del listado de clientes
 
 - **Tipo**: test
 - **Cubre**: RF-49, RF-50, RF-51, RF-52, RF-53, RF-54, RF-55
