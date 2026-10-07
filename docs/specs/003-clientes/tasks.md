@@ -130,7 +130,7 @@
 - **Depende de**: T12
 - **Hecho cuando**: el test de T12 pasa con `ActivateClientAction`, `DeactivateClientAction`, `ArchiveClientAction`, `RestoreClientAction` y `Client::availableForBudgets()`, y la suite completa queda verde.
 
-### - [ ] T14: Escribir test de historial cronológico e inmutable
+### - [x] T14: Escribir test de historial cronológico e inmutable
 
 - **Tipo**: test
 - **Cubre**: RF-35, RF-36, RF-37, RF-44, RNF-7
