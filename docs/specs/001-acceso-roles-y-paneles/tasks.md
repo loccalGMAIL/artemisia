@@ -81,7 +81,7 @@
 - **Hecho cuando**: la tabla existe con `field`, `old_value`, `new_value`, `author_id`, `created_at`
   y el índice `(user_id, created_at)`, sin columna `updated_at`.
 
-### - [ ] T6: Crear migración de `access_logs`
+### - [x] T6: Crear migración de `access_logs`
 
 - **Tipo**: migration
 - **Cubre**: RF-36, RF-37
