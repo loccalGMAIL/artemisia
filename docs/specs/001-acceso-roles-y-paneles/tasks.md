@@ -376,7 +376,7 @@
   meses, conserva los más nuevos y **no toca ninguna fila de `account_histories`**; commit del test
   hecho.
 
-### - [ ] T39: Implementar el comando `access-logs:prune` y programarlo
+### - [x] T39: Implementar el comando `access-logs:prune` y programarlo
 
 - **Tipo**: impl
 - **Cubre**: RNF-5, RNF-6

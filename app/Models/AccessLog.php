@@ -7,6 +7,8 @@ use App\Enums\AccessOutcome;
 use App\Enums\AccessPortal;
 use Database\Factories\AccessLogFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +20,18 @@ class AccessLog extends Model
     use HasFactory;
 
     public const UPDATED_AT = null;
+
+    /** Access logs are kept for 24 months (RNF-5). */
+    public const RETENTION_MONTHS = 24;
+
+    /**
+     * @param  Builder<AccessLog>  $query
+     */
+    #[Scope]
+    protected function expired(Builder $query): void
+    {
+        $query->where('created_at', '<', now()->subMonths(self::RETENTION_MONTHS));
+    }
 
     /**
      * @return array<string, string>

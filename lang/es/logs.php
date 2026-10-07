@@ -2,6 +2,9 @@
 
 return [
     'navigation_group' => 'Registros',
+    'prune' => [
+        'done' => 'Se eliminaron :count registros de acceso con más de :months meses.',
+    ],
     'access_log' => [
         'model' => 'registro de acceso',
         'plural' => 'Registros de acceso',
