@@ -22,8 +22,8 @@
 
 ## Resumen
 
-- Total: 39 tareas funcionales, mas 1 prerequisito externo.
-- Por tipo: 14 test, 17 impl, 4 migration, 4 ui.
+- Total: 42 tareas funcionales, mas 1 prerequisito externo.
+- Por tipo: 16 test, 18 impl, 4 migration, 4 ui.
 - Cubre: RF-1 a RF-39, RNF-1 a RNF-6.
 
 ---
@@ -394,6 +394,41 @@
 
 ---
 
+## Fase 8: Pantallas de contraseña y umbrales (agregada tras validar la spec)
+
+### - [ ] T41: Escribir test de las pantallas de definición y recuperación de contraseña
+
+- **Tipo**: test
+- **Cubre**: RF-5, RF-27, RF-28, RF-29, RF-30, RNF-1
+- **Depende de**: T40
+- **Hecho cuando**: el test falla y cubre, en cada portal: el enlace de recuperación visible en la
+  pantalla de acceso; pedir recuperación con una cuenta activa (envía el enlace) y con una
+  inexistente o inactiva (mismo mensaje, sin correo); el enlace del mail de alta apuntando al
+  portal según el rol de la cuenta y abriendo la pantalla de definición; definir la contraseña con
+  un enlace vigente (queda invalidado); un enlace vencido o ya usado, que ofrece pedir uno nuevo; y
+  el rechazo de menos de 8 caracteres; commit del test hecho.
+
+### - [ ] T42: Implementar las pantallas de contraseña y la URL del enlace
+
+- **Tipo**: impl
+- **Cubre**: RF-5, RF-27, RF-28, RF-29, RF-30, RNF-1
+- **Depende de**: T41
+- **Hecho cuando**: el test de T41 pasa y la suite completa queda verde; ambos paneles tienen
+  `passwordReset()` con `PortalRequestPasswordReset` y `PortalResetPassword`, que solo delegan en
+  `RequestPasswordResetAction` y `SetPasswordAction`; el mail de alta y el de recuperación apuntan a
+  la pantalla del portal que corresponde al rol (plan D-11).
+
+### - [ ] T43: Escribir test de los umbrales de sesión y de enlace
+
+- **Tipo**: test
+- **Cubre**: RNF-3, RNF-4
+- **Depende de**: T42
+- **Hecho cuando**: un test comprueba que `session.lifetime` es 120 minutos y que el vencimiento del
+  broker de contraseñas es 1440 minutos. Es un test de verificación sobre configuración ya hecha en
+  T2: pasa sin implementación nueva.
+
+---
+
 ## Mapa RF → tareas
 
 | RF | Tareas |
@@ -402,7 +437,7 @@
 | RF-2 | T8, T9, T36 |
 | RF-3 | T4, T7, T8, T9 |
 | RF-4 | T3, T10, T11 |
-| RF-5 | T8, T9 |
+| RF-5 | T8, T9, T41, T42 |
 | RF-6 | T12, T13, T36 |
 | RF-7 | T12, T13 |
 | RF-8 | T36 |
@@ -424,10 +459,10 @@
 | RF-24 | T26, T27 |
 | RF-25 | T31 |
 | RF-26 | T27, T28 |
-| RF-27 | T22, T23 |
-| RF-28 | T22, T23 |
-| RF-29 | T24, T25 |
-| RF-30 | T24, T25 |
+| RF-27 | T22, T23, T41, T42 |
+| RF-28 | T22, T23, T41, T42 |
+| RF-29 | T24, T25, T41, T42 |
+| RF-30 | T24, T25, T41, T42 |
 | RF-31 | T14, T15 |
 | RF-32 | T14, T15, T36 |
 | RF-33 | T29, T30 |
@@ -437,10 +472,10 @@
 | RF-37 | T6, T7, T18, T19 |
 | RF-38 | T37 |
 | RF-39 | T34, T35 |
-| RNF-1 | T22, T23 |
+| RNF-1 | T22, T23, T41, T42 |
 | RNF-2 | T20, T21 |
-| RNF-3 | T2, T22 |
-| RNF-4 | T2 |
+| RNF-3 | T2, T22, T43 |
+| RNF-4 | T2, T43 |
 | RNF-5 | T38, T39 |
 | RNF-6 | T38, T39 |
 
@@ -457,3 +492,6 @@
 - **Las traducciones de `lang/es/auth.php` figuran en el plan §5 como un ítem suelto**, pero no
   cuelgan de ningún RF puntual: acá se repartieron entre cada tarea de `impl` que produce el
   mensaje. Si se prefiere una tarea única de traducciones, hay que decidirlo en el plan.
+- **El plan no incluía la interfaz de definición y recuperación de contraseña (RF-27 a RF-30), y el mail de alta (RF-5) no tenía URL a la que apuntar.** Lo detectó el `spec-validator` al cierre de la 001: `Route [password.reset] not defined` al enviar el enlace fuera de los tests. Se resolvió con el plan D-11 y las tareas T41 a T43.
+- **RNF-2 decía "60 segundos siguientes al último intento" pero el `RateLimiter` nativo (plan D-8) usa una ventana fija desde el primer fallo.** La spec se enmendó con aprobación de Claudio (2026-10-07).
+- **RNF-4 no tenía test.** T43 verifica el umbral de sesión y el de vencimiento del enlace.
