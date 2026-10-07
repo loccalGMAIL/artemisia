@@ -226,7 +226,7 @@
 
 ## Fase 7: Portal de clientes
 
-### - [ ] T26: Escribir test de acceso a ficha propia en portal
+### - [x] T26: Escribir test de acceso a ficha propia en portal
 
 - **Tipo**: test
 - **Cubre**: RF-43, RF-57, RF-58, RF-62
