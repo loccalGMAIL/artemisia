@@ -57,7 +57,7 @@
 
 ## Fase 1: Esquema y modelos
 
-### - [ ] T3: Crear migración de `users`
+### - [x] T3: Crear migración de `users`
 
 - **Tipo**: migration
 - **Cubre**: RF-4, RF-34
