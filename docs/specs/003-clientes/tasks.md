@@ -137,7 +137,7 @@
 - **Depende de**: T13
 - **Hecho cuando**: el test falla y comprueba orden cronológico, autor, fecha, campo afectado, valores anterior/nuevo, conservación indefinida y rechazo de edición o borrado de asientos; commit del test hecho.
 
-### - [ ] T15: Implementar historial append-only
+### - [x] T15: Implementar historial append-only
 
 - **Tipo**: impl
 - **Cubre**: RF-35, RF-36, RF-37, RF-44, RNF-7

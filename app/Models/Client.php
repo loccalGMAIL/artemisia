@@ -130,11 +130,13 @@ class Client extends Model
     }
 
     /**
+     * Change history, oldest first (RF-37).
+     *
      * @return HasMany<ClientHistory, $this>
      */
     public function histories(): HasMany
     {
-        return $this->hasMany(ClientHistory::class);
+        return $this->hasMany(ClientHistory::class)->orderBy('created_at')->orderBy('id');
     }
 
     /**
