@@ -243,8 +243,8 @@ Migraciones a crear, en orden:
 
 ## 6. Contratos de Actions y servicios
 
-- **CreateAccountAction::handle(array $data): User** — crea la cuenta activa, `syncRoles([$data['role']])`,
-  envía el enlace de definición vía el broker, registra `AccountHistory` de alta.
+- **CreateAccountAction::handle(array $data, User $actor): User** — crea la cuenta activa, `syncRoles([$data['role']])`,
+  envía el enlace de definición vía el broker, registra `AccountHistory` de alta con `$actor` como autor (RF-35).
 - **ChangeAccountRoleAction::handle(User $target, string $role, User $actor): User** — lanza
   excepción si `$target->is($actor)`; lanza excepción si el cambio deja sin ningún `admin` activo;
   registra historial.
