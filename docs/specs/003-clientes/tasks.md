@@ -34,7 +34,7 @@
 - **Depende de**: —
 - **Hecho cuando**: `php artisan migrate:fresh` crea `provinces` y `clients` con las columnas, FK, índices, `UNIQUE(document)` y `deleted_at` definidos en el plan §4.
 
-### - [ ] T2: Crear migraciones de contactos, historial y vínculo de usuario
+### - [x] T2: Crear migraciones de contactos, historial y vínculo de usuario
 
 - **Tipo**: migration
 - **Cubre**: RF-13, RF-15, RF-16, RF-17, RF-35, RF-36, RF-37, RF-38, RF-39, RF-40, RF-44, RNF-4, RNF-7
