@@ -293,7 +293,7 @@
 - **Hecho cuando**: el test falla y comprueba que una cuenta con sesión abierta que se desactiva
   queda fuera en su siguiente solicitud y vuelve a la pantalla de acceso; commit del test hecho.
 
-### - [ ] T30: Implementar el middleware `EnsureAccountIsActive`
+### - [x] T30: Implementar el middleware `EnsureAccountIsActive`
 
 - **Tipo**: impl
 - **Cubre**: RF-33
