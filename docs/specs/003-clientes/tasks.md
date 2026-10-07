@@ -155,7 +155,7 @@
 - **Depende de**: T15
 - **Hecho cuando**: el test falla y cubre vincular cuenta con rol `client`, varias cuentas al mismo cliente, rechazo de una cuenta ya vinculada a otro cliente, desvinculación, corte de sesión en la siguiente solicitud y asiento de historial; commit del test hecho.
 
-### - [ ] T17: Implementar `LinkAccountToClientAction` y `UnlinkAccountFromClientAction`
+### - [x] T17: Implementar `LinkAccountToClientAction` y `UnlinkAccountFromClientAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-38, RF-39, RF-40, RF-41, RF-42, RF-44
