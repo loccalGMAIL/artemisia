@@ -43,7 +43,7 @@
 
 ## Fase 0: Configuracion base funcional
 
-### - [ ] T2: Configurar entorno y umbrales de sesión y de enlaces
+### - [x] T2: Configurar entorno y umbrales de sesión y de enlaces
 
 - **Tipo**: impl
 - **Cubre**: RNF-3, RNF-4
