@@ -268,7 +268,7 @@
 - **Hecho cuando**: `/staff` y `/portal` responden con su propia pantalla de acceso y
   `canAccessPanel()` de cada panel exige el rol correspondiente.
 
-### - [ ] T27: Escribir test de acceso cruzado, sin sesión y cierre de sesión
+### - [x] T27: Escribir test de acceso cruzado, sin sesión y cierre de sesión
 
 - **Tipo**: test
 - **Cubre**: RF-16, RF-21, RF-22, RF-23, RF-24, RF-26
