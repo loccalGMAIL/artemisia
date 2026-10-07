@@ -73,7 +73,7 @@
 - **Depende de**: T5
 - **Hecho cuando**: el test falla y verifica edición válida de identificación, rechazo al cambiar `person_type`, validación de documento, unicidad contra clientes activos o archivados, y asiento de historial con valor anterior y nuevo; commit del test hecho.
 
-### - [ ] T7: Implementar `UpdateClientIdentificationAction`
+### - [x] T7: Implementar `UpdateClientIdentificationAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-7, RF-8, RF-36, RNF-1, RNF-2, RNF-3
