@@ -344,7 +344,7 @@
   intentar una acción de gestión de cuentas y al intentar consultar registros de acceso o historial
   de cuentas; commit del test hecho.
 
-### - [ ] T35: Implementar `AccountPolicy` y `AccessLogPolicy`
+### - [x] T35: Implementar `AccountPolicy` y `AccessLogPolicy`
 
 - **Tipo**: impl
 - **Cubre**: RF-9, RF-39

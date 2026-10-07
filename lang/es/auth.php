@@ -8,6 +8,9 @@ return [
     'password_reset_requested' => 'Si el email corresponde a una cuenta activa, enviamos un enlace para definir la contraseña.',
     'google_failed' => 'No pudimos completar el ingreso con Google. Intente nuevamente.',
     'google_login' => 'Ingresar con Google',
+    'insufficient_permission' => 'No tiene permiso para realizar esta acción.',
+    'account_not_deletable' => 'Las cuentas no se eliminan: solo pueden desactivarse.',
+    'record_read_only' => 'Este registro es de solo lectura.',
     'last_active_admin' => 'La operación dejaría al sistema sin ninguna cuenta admin activa.',
     'rejection' => [
         'invalid_credentials' => 'Las credenciales ingresadas no son válidas.',
