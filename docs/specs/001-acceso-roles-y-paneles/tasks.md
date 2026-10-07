@@ -335,7 +335,7 @@
 
 ## Fase 7: Administración y retención
 
-### - [ ] T34: Escribir test de las policies de cuentas y de registros
+### - [x] T34: Escribir test de las policies de cuentas y de registros
 
 - **Tipo**: test
 - **Cubre**: RF-9, RF-39
