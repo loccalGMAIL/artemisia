@@ -123,7 +123,7 @@
 - **Depende de**: T11
 - **Hecho cuando**: el test falla y verifica activar, desactivar, archivar como SoftDelete e inactivo, restaurar como inactivo, ficha e historial consultables, clientes inactivos o archivados fuera de `availableForBudgets()` y ausencia de hard delete; commit del test hecho.
 
-### - [ ] T13: Implementar actions de estado, archivado y restauración
+### - [x] T13: Implementar actions de estado, archivado y restauración
 
 - **Tipo**: impl
 - **Cubre**: RF-23, RF-25, RF-26, RF-27, RF-28, RF-29, RF-30, RF-31, RF-32, RF-33, RF-34, RF-36

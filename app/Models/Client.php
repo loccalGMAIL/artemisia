@@ -6,6 +6,8 @@ use App\Enums\ClientStatus;
 use App\Enums\ClientType;
 use Database\Factories\ClientFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +33,18 @@ class Client extends Model
             'person_type' => ClientType::class,
             'status' => ClientStatus::class,
         ];
+    }
+
+    /**
+     * Clients that can be chosen for a new budget: active and not archived (RF-26, RF-30).
+     * The archived ones are already left out by the soft delete scope.
+     *
+     * @param  Builder<Client>  $query
+     */
+    #[Scope]
+    protected function availableForBudgets(Builder $query): void
+    {
+        $query->where('status', ClientStatus::Active);
     }
 
     /**
