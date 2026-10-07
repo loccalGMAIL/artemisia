@@ -4,6 +4,7 @@ return [
     'email_conflict' => 'Ya existe una cuenta con el email :email (:name).',
     'cannot_change_own_role' => 'No se puede cambiar el rol de la propia cuenta.',
     'cannot_deactivate_own_account' => 'No se puede desactivar la propia cuenta.',
+    'invalid_password_link' => 'El enlace venció o ya fue usado. Solicite uno nuevo.',
     'last_active_admin' => 'La operación dejaría al sistema sin ninguna cuenta admin activa.',
     'rejection' => [
         'invalid_credentials' => 'Las credenciales ingresadas no son válidas.',

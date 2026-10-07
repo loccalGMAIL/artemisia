@@ -233,7 +233,7 @@
   invalidado), el vencido y el ya usado (rechazo con opción de pedir uno nuevo), y el rechazo de
   contraseñas de menos de 8 caracteres; commit del test hecho.
 
-### - [ ] T23: Implementar `SetPasswordAction`
+### - [x] T23: Implementar `SetPasswordAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-27, RF-28, RNF-1
