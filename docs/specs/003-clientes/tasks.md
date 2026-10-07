@@ -148,7 +148,7 @@
 
 ## Fase 5: Vínculo cuenta-cliente y autorización
 
-### - [ ] T16: Escribir test de vinculación y desvinculación de cuentas
+### - [x] T16: Escribir test de vinculación y desvinculación de cuentas
 
 - **Tipo**: test
 - **Cubre**: RF-38, RF-39, RF-40, RF-41, RF-42, RF-44
