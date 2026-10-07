@@ -278,7 +278,7 @@
   página inicial de su portal, y cierre de sesión que vuelve a la pantalla de acceso; commit del
   test hecho.
 
-### - [ ] T28: Implementar las Login Pages propias con email y contraseña
+### - [x] T28: Implementar las Login Pages propias con email y contraseña
 
 - **Tipo**: impl
 - **Cubre**: RF-13, RF-16, RF-26
