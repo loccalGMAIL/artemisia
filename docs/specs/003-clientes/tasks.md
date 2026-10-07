@@ -116,7 +116,7 @@
 
 ## Fase 4: Estado, archivado e historial
 
-### - [ ] T12: Escribir test de estado, archivado y disponibilidad
+### - [x] T12: Escribir test de estado, archivado y disponibilidad
 
 - **Tipo**: test
 - **Cubre**: RF-23, RF-25, RF-26, RF-27, RF-28, RF-29, RF-30, RF-31, RF-32, RF-33, RF-34, RF-36
