@@ -260,7 +260,7 @@
 
 ## Fase 5: Paneles y acceso
 
-### - [ ] T26: Crear los dos paneles Filament con su control de acceso
+### - [x] T26: Crear los dos paneles Filament con su control de acceso
 
 - **Tipo**: ui
 - **Cubre**: RF-12, RF-24
