@@ -91,7 +91,7 @@ it('RF-15, RNF-4: los formularios del portal muestran las reglas de contactos', 
 
     Livewire::test(ClientProfilePage::class)
         ->callAction('addContact', ['name' => 'Contacto 11', 'phone' => '11-0000-0000', 'email' => null])
-        ->assertSee('hasta 10 contactos');
+        ->assertNotified('Un cliente admite hasta 10 contactos.');
 
     expect($this->client->contacts()->count())->toBe(10);
 });

@@ -63,7 +63,7 @@ class ContactsRelationManager extends RelationManager
                         try {
                             return app(AddClientContactAction::class)->handle($this->getOwnerRecord(), $data, Auth::user());
                         } catch (ValidationException $exception) {
-                            throw FormValidation::prefixed($exception, FormValidation::actionPath($action->getNestingIndex()));
+                            FormValidation::forAction($exception, $action);
                         }
                     }),
             ])
@@ -78,7 +78,7 @@ class ContactsRelationManager extends RelationManager
                         try {
                             return app(UpdateClientContactAction::class)->handle($record, $data, Auth::user());
                         } catch (ValidationException $exception) {
-                            throw FormValidation::prefixed($exception, FormValidation::actionPath($action->getNestingIndex()));
+                            FormValidation::forAction($exception, $action);
                         }
                     }),
                 DeleteAction::make()

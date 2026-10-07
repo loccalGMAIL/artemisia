@@ -78,6 +78,17 @@ return [
     ],
     'portal' => [
         'profile' => 'Mi ficha',
+        'actions' => [
+            'edit_address' => 'Modificar domicilio',
+            'add_contact' => 'Agregar contacto',
+            'edit_contact' => 'Modificar',
+            'remove_contact' => 'Quitar',
+        ],
+        'notifications' => [
+            'address_saved' => 'Domicilio actualizado.',
+            'contact_saved' => 'Contacto actualizado.',
+            'contact_removed' => 'Contacto quitado.',
+        ],
         'primary_contact' => 'Principal',
         'no_contacts' => 'Sin contactos cargados',
         'not_enabled' => 'Su acceso todavía no fue habilitado por la agencia.',

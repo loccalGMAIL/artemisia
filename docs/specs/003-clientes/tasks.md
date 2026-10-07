@@ -247,7 +247,7 @@
 - **Depende de**: T27
 - **Hecho cuando**: el test falla y verifica que la cuenta vinculada edita domicilio y contactos propios, no puede editar identificación, estado ni archivado, y cada cambio queda registrado con esa cuenta como autor; commit del test hecho.
 
-### - [ ] T29: Implementar formularios de autogestión
+### - [x] T29: Implementar formularios de autogestión
 
 - **Tipo**: ui
 - **Cubre**: RF-59, RF-60, RF-61

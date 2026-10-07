@@ -69,7 +69,7 @@ class AccountsRelationManager extends RelationManager
                                 Auth::user(),
                             );
                         } catch (ValidationException $exception) {
-                            throw FormValidation::prefixed($exception, FormValidation::actionPath($action->getNestingIndex()));
+                            FormValidation::forAction($exception, $action);
                         }
                     }),
             ])
