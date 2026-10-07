@@ -105,7 +105,7 @@
 - **Depende de**: T9
 - **Hecho cuando**: el test falla y cubre alta sin contactos, teléfono-o-email obligatorio, tope de 10 contactos, primer contacto principal, cambio de principal, edición, eliminación, reasignación al quitar el principal y cálculo de teléfono de contacto; commit del test hecho.
 
-### - [ ] T11: Implementar actions de contactos y teléfono de contacto
+### - [x] T11: Implementar actions de contactos y teléfono de contacto
 
 - **Tipo**: impl
 - **Cubre**: RF-13, RF-14, RF-15, RF-16, RF-17, RF-18, RF-19, RF-20, RF-21, RF-22, RF-36, RNF-4

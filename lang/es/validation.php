@@ -19,5 +19,12 @@ return [
         'last_name' => 'apellido',
         'company_name' => 'razón social',
         'document' => 'documento',
+        'role' => 'cargo',
+        'phone' => 'teléfono',
+        'street' => 'calle',
+        'street_number' => 'número',
+        'city' => 'localidad',
+        'province_id' => 'provincia',
+        'postal_code' => 'código postal',
     ],
 ];

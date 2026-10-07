@@ -25,6 +25,23 @@ class ClientContact extends Model
     }
 
     /**
+     * The contact as stored, for history entries.
+     *
+     * @return array<string, mixed>
+     */
+    public function snapshot(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'role' => $this->role,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'is_primary' => (bool) $this->is_primary,
+        ];
+    }
+
+    /**
      * @return BelongsTo<Client, $this>
      */
     public function client(): BelongsTo
