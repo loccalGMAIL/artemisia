@@ -127,7 +127,7 @@
   con espacios exteriores, y contra una cuenta inactiva) no crea la cuenta **y** que se informa el
   conflicto indicando la cuenta existente; commit del test hecho.
 
-### - [ ] T11: Implementar la validación de unicidad de email
+### - [x] T11: Implementar la validación de unicidad de email
 
 - **Tipo**: impl
 - **Cubre**: RF-4

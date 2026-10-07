@@ -2,6 +2,7 @@
 
 use App\Actions\CreateAccountAction;
 use App\Enums\AccountHistoryField;
+use App\Exceptions\DuplicateAccountEmailException;
 use App\Models\AccountHistory;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;

@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Enums\AccountHistoryField;
+use App\Exceptions\DuplicateAccountEmailException;
 use App\Models\AccountHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -12,13 +13,23 @@ class CreateAccountAction
 {
     /**
      * @param  array{name: string, email: string, role: string}  $data
+     *
+     * @throws DuplicateAccountEmailException
      */
     public function handle(array $data, User $actor): User
     {
-        $user = DB::transaction(function () use ($data, $actor): User {
+        $email = mb_strtolower(trim($data['email']));
+
+        $existing = User::query()->whereRaw('LOWER(email) = ?', [$email])->first();
+
+        if ($existing !== null) {
+            throw new DuplicateAccountEmailException($existing);
+        }
+
+        $user = DB::transaction(function () use ($data, $email, $actor): User {
             $user = User::query()->create([
                 'name' => $data['name'],
-                'email' => $data['email'],
+                'email' => $email,
                 'is_active' => true,
             ]);
 
