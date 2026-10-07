@@ -224,7 +224,7 @@
 
 ## Fase 4: Contraseña
 
-### - [ ] T22: Escribir test de definición de contraseña por enlace
+### - [x] T22: Escribir test de definición de contraseña por enlace
 
 - **Tipo**: test
 - **Cubre**: RF-27, RF-28, RNF-1, RNF-3
