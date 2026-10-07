@@ -187,7 +187,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: el test de T16 pasa y la suite completa queda verde.
 
-### - [ ] T18: Escribir test del registro de accesos
+### - [x] T18: Escribir test del registro de accesos
 
 - **Tipo**: test
 - **Cubre**: RF-36, RF-37
