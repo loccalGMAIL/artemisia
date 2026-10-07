@@ -102,7 +102,7 @@
 
 ## Fase 2: Gestión de cuentas
 
-### - [ ] T8: Escribir test de alta de cuenta con rol único
+### - [x] T8: Escribir test de alta de cuenta con rol único
 
 - **Tipo**: test
 - **Cubre**: RF-2, RF-3, RF-5, RF-35
