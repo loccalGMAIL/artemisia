@@ -203,7 +203,7 @@
 - **Depende de**: T18
 - **Hecho cuando**: el test de T18 pasa y la suite completa queda verde.
 
-### - [ ] T20: Escribir test del límite de intentos fallidos
+### - [x] T20: Escribir test del límite de intentos fallidos
 
 - **Tipo**: test
 - **Cubre**: RNF-2
