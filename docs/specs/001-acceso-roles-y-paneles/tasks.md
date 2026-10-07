@@ -89,7 +89,7 @@
 - **Hecho cuando**: la tabla existe con `user_id` nullable, `email_used`, `portal`, `method`,
   `outcome`, `rejection_reason` y los índices sobre `created_at` y `email_used`.
 
-### - [ ] T7: Crear enums y modelos con sus relaciones
+### - [x] T7: Crear enums y modelos con sus relaciones
 
 - **Tipo**: impl
 - **Cubre**: RF-3, RF-35, RF-36, RF-37
