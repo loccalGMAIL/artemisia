@@ -98,7 +98,7 @@
 - **Depende de**: T8
 - **Hecho cuando**: el test de T8 pasa y la suite completa queda verde.
 
-### - [ ] T10: Escribir test de reglas de contactos
+### - [x] T10: Escribir test de reglas de contactos
 
 - **Tipo**: test
 - **Cubre**: RF-13, RF-14, RF-15, RF-16, RF-17, RF-18, RF-19, RF-20, RF-21, RF-22, RF-36, RNF-4
