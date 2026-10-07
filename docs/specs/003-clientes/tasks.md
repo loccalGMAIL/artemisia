@@ -162,7 +162,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: el test de T16 pasa, la desvinculación se integra con el mecanismo de corte de sesión de la spec `001` y la suite completa queda verde.
 
-### - [ ] T18: Escribir test de policies de staff y portal
+### - [x] T18: Escribir test de policies de staff y portal
 
 - **Tipo**: test
 - **Cubre**: RF-43, RF-57, RF-58, RF-59, RF-60, RF-62
