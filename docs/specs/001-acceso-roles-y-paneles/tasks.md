@@ -367,7 +367,7 @@
 - **Hecho cuando**: un `admin` consulta desde la interfaz los registros de acceso y el historial de
   cuentas, sin ninguna acción de edición ni de borrado disponible.
 
-### - [ ] T38: Escribir test de la purga de registros de acceso
+### - [x] T38: Escribir test de la purga de registros de acceso
 
 - **Tipo**: test
 - **Cubre**: RNF-5, RNF-6
