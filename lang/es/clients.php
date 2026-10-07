@@ -13,7 +13,12 @@ return [
         'active' => 'Activo',
         'inactive' => 'Inactivo',
     ],
+    'portal' => [
+        'not_enabled' => 'Su acceso todavía no fue habilitado por la agencia.',
+        'archived' => 'La ficha de su cliente no está disponible.',
+    ],
     'validation' => [
+        'client_not_deletable' => 'Los clientes no se eliminan: solo pueden archivarse.',
         'invalid_dni' => 'El DNI debe tener 7 u 8 dígitos numéricos.',
         'invalid_cuit' => 'El CUIT debe tener 11 dígitos numéricos con dígito verificador válido.',
         'account_not_client' => 'Solo se pueden vincular cuentas con rol cliente.',

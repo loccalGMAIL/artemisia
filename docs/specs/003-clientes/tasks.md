@@ -169,7 +169,7 @@
 - **Depende de**: T17
 - **Hecho cuando**: el test falla y verifica permisos completos para `admin` y `staff`, cuenta `client` limitada a su propio cliente, cuenta sin vínculo con mensaje de acceso no habilitado, cliente archivado bloqueado y rechazo al intentar operar sobre otro cliente; commit del test hecho.
 
-### - [ ] T19: Implementar `ClientPolicy` y autorización del portal
+### - [x] T19: Implementar `ClientPolicy` y autorización del portal
 
 - **Tipo**: impl
 - **Cubre**: RF-43, RF-57, RF-58, RF-59, RF-60, RF-62
