@@ -66,7 +66,7 @@
 - **Depende de**: T4
 - **Hecho cuando**: el test de T4 pasa, los mensajes visibles salen de `lang/es/clients.php` y la suite completa queda verde.
 
-### - [ ] T6: Escribir test de edición de identificación
+### - [x] T6: Escribir test de edición de identificación
 
 - **Tipo**: test
 - **Cubre**: RF-7, RF-8, RF-36, RNF-1, RNF-2, RNF-3
