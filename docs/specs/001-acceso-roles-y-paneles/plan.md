@@ -248,9 +248,9 @@ Migraciones a crear, en orden:
 - **ChangeAccountRoleAction::handle(User $target, string $role, User $actor): User** — lanza
   excepción si `$target->is($actor)`; lanza excepción si el cambio deja sin ningún `admin` activo;
   registra historial.
-- **ActivateAccountAction::handle(User $target): User** / **DeactivateAccountAction::handle(User
+- **ActivateAccountAction::handle(User $target, User $actor): User** / **DeactivateAccountAction::handle(User
   $target, User $actor): User** — la segunda valida no-autodesactivación y último admin; invalida
-  cualquier token de `password_reset_tokens` vigente para esa cuenta; registra historial.
+  cualquier token de `password_reset_tokens` vigente para esa cuenta; registra historial con `$actor` como autor (RF-35).
 - **SetPasswordAction::handle(string $token, string $email, string $password): void** — delega en
   el `PasswordBroker`; si el token es inválido o vencido, lanza excepción con el motivo (RF-28).
 - **RequestPasswordResetAction::handle(string $email): void** — siempre devuelve éxito silencioso;

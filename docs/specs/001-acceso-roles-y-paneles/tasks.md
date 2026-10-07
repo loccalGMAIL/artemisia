@@ -150,7 +150,7 @@
 - **Depende de**: T12
 - **Hecho cuando**: el test de T12 pasa y la suite completa queda verde.
 
-### - [ ] T14: Escribir test de activación y desactivación de cuentas
+### - [x] T14: Escribir test de activación y desactivación de cuentas
 
 - **Tipo**: test
 - **Cubre**: RF-10, RF-11, RF-31, RF-32, RF-35
