@@ -84,7 +84,7 @@
 
 ## Fase 3: Domicilio y contactos
 
-### - [ ] T8: Escribir test de domicilio opcional y editable
+### - [x] T8: Escribir test de domicilio opcional y editable
 
 - **Tipo**: test
 - **Cubre**: RF-9, RF-10, RF-11, RF-12, RF-36
