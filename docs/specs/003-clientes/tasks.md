@@ -215,7 +215,7 @@
 - **Depende de**: T23
 - **Hecho cuando**: el test falla y comprueba que la exportación CSV respeta búsqueda, filtros y orden aplicados, incluye las columnas esperadas y se genera en streaming; commit del test hecho.
 
-### - [ ] T25: Implementar `ExportClientListAction`
+### - [x] T25: Implementar `ExportClientListAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-56, RNF-6

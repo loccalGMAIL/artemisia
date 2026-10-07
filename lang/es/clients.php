@@ -55,6 +55,7 @@ return [
         'histories' => 'Historial',
     ],
     'actions' => [
+        'export' => 'Exportar listado',
         'deactivate' => 'Marcar como inactivo',
         'activate' => 'Reactivar',
         'archive' => 'Archivar',

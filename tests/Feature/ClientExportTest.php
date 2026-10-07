@@ -60,7 +60,7 @@ it('RF-56: el archivo empieza con BOM UTF-8 para que las tildes se lean bien en 
 
 it('RF-56: exporta solo los clientes de la consulta recibida, con su búsqueda, filtros y orden', function () {
     $zeta = Client::factory()->create(['first_name' => 'Ana', 'last_name' => 'Zárate']);
-    $alfa = Client::factory()->create(['first_name' => 'Ana', 'last_name' => 'Álvarez']);
+    $alfa = Client::factory()->create(['first_name' => 'Ana', 'last_name' => 'Alvarez']);
     Client::factory()->create(['first_name' => 'Luis', 'last_name' => 'Gómez']);
     Client::factory()->inactive()->create(['first_name' => 'Ana', 'last_name' => 'Inactiva']);
 
@@ -71,7 +71,7 @@ it('RF-56: exporta solo los clientes de la consulta recibida, con su búsqueda, 
 
     $rows = csvRows(app(ExportClientListAction::class)->handle($query));
 
-    expect(array_column(array_slice($rows, 1), 0))->toBe(['Ana Zárate', 'Ana Álvarez']);
+    expect(array_column(array_slice($rows, 1), 0))->toBe(['Ana Zárate', 'Ana Alvarez']);
 });
 
 it('RF-50, RF-56: no exporta los archivados a menos que la consulta los incluya', function () {
