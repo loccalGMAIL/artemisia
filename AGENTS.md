@@ -109,7 +109,7 @@ El bootstrap inicial de Laravel es un prerequisito fundacional fuera de las spec
 
 ## 5. Flujo git y PR
 
-Rama base: `main`. Toda rama sale de `main` y vuelve por PR.
+Rama base: `master`. Toda rama sale de `master` y vuelve por PR.
 
 **Formato obligatorio de rama:** `vXX.XX.XX-[problema o solución]`
 
