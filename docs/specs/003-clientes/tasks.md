@@ -208,7 +208,7 @@
 - **Depende de**: T22
 - **Hecho cuando**: el test de T22 pasa, la lógica de búsqueda vive en scopes del modelo o query builders reutilizables y la suite completa queda verde.
 
-### - [ ] T24: Escribir test de exportación del listado
+### - [x] T24: Escribir test de exportación del listado
 
 - **Tipo**: test
 - **Cubre**: RF-56, RNF-6
