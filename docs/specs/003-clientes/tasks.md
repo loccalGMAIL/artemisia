@@ -180,7 +180,7 @@
 
 ## Fase 6: Panel de staff
 
-### - [ ] T20: Escribir test de alta, edición y ficha en staff
+### - [x] T20: Escribir test de alta, edición y ficha en staff
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-7, RF-9, RF-12, RF-13, RF-19, RF-25, RF-28, RF-32, RF-37, RF-38, RF-41, RF-45
