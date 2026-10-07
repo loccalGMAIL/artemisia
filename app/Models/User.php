@@ -9,6 +9,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,6 +44,17 @@ class User extends Authenticatable implements FilamentUser
         $portal = AccessPortal::tryFrom($panel->getId());
 
         return $portal !== null && $portal->allows($this);
+    }
+
+    /**
+     * Whether any account, active or not, has the admin role. It queries the relation
+     * instead of using the role scope, which fails while the roles are not seeded yet.
+     */
+    public static function anyAdminExists(): bool
+    {
+        return static::query()
+            ->whereHas('roles', fn (Builder $roles) => $roles->where('name', 'admin'))
+            ->exists();
     }
 
     /**

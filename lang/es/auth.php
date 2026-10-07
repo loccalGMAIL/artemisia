@@ -11,6 +11,10 @@ return [
     'insufficient_permission' => 'No tiene permiso para realizar esta acción.',
     'account_not_deletable' => 'Las cuentas no se eliminan: solo pueden desactivarse.',
     'record_read_only' => 'Este registro es de solo lectura.',
+    'install' => [
+        'created' => 'Cuenta admin creada: :email. Se envió el enlace para definir la contraseña.',
+        'admin_exists' => 'Ya existe una cuenta admin: este comando solo sirve para la instalación inicial.',
+    ],
     'last_active_admin' => 'La operación dejaría al sistema sin ninguna cuenta admin activa.',
     'rejection' => [
         'invalid_credentials' => 'Las credenciales ingresadas no son válidas.',

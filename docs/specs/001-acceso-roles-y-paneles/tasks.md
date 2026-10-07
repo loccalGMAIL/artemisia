@@ -384,7 +384,7 @@
 - **Hecho cuando**: el test de T38 pasa, el comando queda programado mensualmente en el scheduler y
   la suite completa queda verde.
 
-### - [ ] T40: Crear el comando de instalación de la primera cuenta `admin`
+### - [x] T40: Crear el comando de instalación de la primera cuenta `admin`
 
 - **Tipo**: impl
 - **Cubre**: — (supuesto de instalación, spec §9)

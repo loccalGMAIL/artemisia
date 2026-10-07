@@ -12,11 +12,13 @@ use Illuminate\Support\Facades\Password;
 class CreateAccountAction
 {
     /**
+     * Without an actor (installation of the first admin) the account is its own author.
+     *
      * @param  array{name: string, email: string, role: string}  $data
      *
      * @throws DuplicateAccountEmailException
      */
-    public function handle(array $data, User $actor): User
+    public function handle(array $data, ?User $actor = null): User
     {
         $email = mb_strtolower(trim($data['email']));
 
@@ -40,7 +42,7 @@ class CreateAccountAction
                 'field' => AccountHistoryField::Created,
                 'old_value' => null,
                 'new_value' => ['role' => $data['role'], 'is_active' => true],
-                'author_id' => $actor->id,
+                'author_id' => ($actor ?? $user)->id,
             ]);
 
             return $user;
