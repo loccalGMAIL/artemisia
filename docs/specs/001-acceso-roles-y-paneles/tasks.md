@@ -65,7 +65,7 @@
 - **Hecho cuando**: `php artisan migrate:fresh` corre sin errores y la tabla `users` existe con
   `name`, `email` (único), `password` nullable e `is_active`, sin `deleted_at`, según el plan §4.
 
-### - [ ] T4: Publicar migraciones de permisos y sembrar los tres roles
+### - [x] T4: Publicar migraciones de permisos y sembrar los tres roles
 
 - **Tipo**: migration
 - **Cubre**: RF-3
