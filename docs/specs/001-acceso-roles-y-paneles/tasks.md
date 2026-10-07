@@ -396,7 +396,7 @@
 
 ## Fase 8: Pantallas de contraseña y umbrales (agregada tras validar la spec)
 
-### - [ ] T41: Escribir test de las pantallas de definición y recuperación de contraseña
+### - [x] T41: Escribir test de las pantallas de definición y recuperación de contraseña
 
 - **Tipo**: test
 - **Cubre**: RF-5, RF-27, RF-28, RF-29, RF-30, RNF-1
