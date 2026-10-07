@@ -31,4 +31,21 @@ class User extends Authenticatable
             'is_active' => 'boolean',
         ];
     }
+
+    /**
+     * Whether this account is an active admin and no other active admin exists (RF-10).
+     */
+    public function isLastActiveAdmin(): bool
+    {
+        if (! $this->is_active || ! $this->roles()->where('name', 'admin')->exists()) {
+            return false;
+        }
+
+        return ! static::query()
+            ->role('admin')
+            ->where('is_active', true)
+            ->whereKeyNot($this->getKey())
+            ->lockForUpdate()
+            ->exists();
+    }
 }

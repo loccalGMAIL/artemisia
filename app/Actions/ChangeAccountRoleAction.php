@@ -24,7 +24,7 @@ class ChangeAccountRoleAction
         return DB::transaction(function () use ($target, $role, $actor): User {
             $oldRole = $target->roles()->pluck('name')->first();
 
-            if ($oldRole === 'admin' && $role !== 'admin' && $target->is_active && ! $this->otherActiveAdminExists($target)) {
+            if ($role !== 'admin' && $target->isLastActiveAdmin()) {
                 throw new LastActiveAdminException;
             }
 
@@ -40,15 +40,5 @@ class ChangeAccountRoleAction
 
             return $target->load('roles');
         });
-    }
-
-    private function otherActiveAdminExists(User $target): bool
-    {
-        return User::query()
-            ->role('admin')
-            ->where('is_active', true)
-            ->whereKeyNot($target->getKey())
-            ->lockForUpdate()
-            ->exists();
     }
 }

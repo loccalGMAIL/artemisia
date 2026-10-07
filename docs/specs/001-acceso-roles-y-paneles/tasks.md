@@ -159,7 +159,7 @@
   el rechazo de la desactivación del último `admin` activo, y que al desactivar se invalide un
   enlace de definición vigente sin usar; commit del test hecho.
 
-### - [ ] T15: Implementar `ActivateAccountAction` y `DeactivateAccountAction`
+### - [x] T15: Implementar `ActivateAccountAction` y `DeactivateAccountAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-10, RF-11, RF-31, RF-32, RF-35
