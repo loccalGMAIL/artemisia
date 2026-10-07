@@ -6,4 +6,9 @@ enum AccessOutcome: string
 {
     case Success = 'success';
     case Rejected = 'rejected';
+
+    public function label(): string
+    {
+        return __('logs.outcomes.'.$this->value);
+    }
 }

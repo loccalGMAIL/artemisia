@@ -8,4 +8,9 @@ enum AccountHistoryField: string
     case Activated = 'activated';
     case Deactivated = 'deactivated';
     case RoleChanged = 'role_changed';
+
+    public function label(): string
+    {
+        return __('logs.history_fields.'.$this->value);
+    }
 }

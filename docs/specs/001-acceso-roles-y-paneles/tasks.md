@@ -359,7 +359,7 @@
 - **Hecho cuando**: un `admin` puede crear cuentas, cambiar roles y activar/desactivar desde la
   interfaz, y un test comprueba que la sección no aparece en la navegación de una cuenta `staff`.
 
-### - [ ] T37: Crear `AccessLogResource` de solo lectura
+### - [x] T37: Crear `AccessLogResource` de solo lectura
 
 - **Tipo**: ui
 - **Cubre**: RF-38

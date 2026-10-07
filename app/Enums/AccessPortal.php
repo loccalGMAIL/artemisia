@@ -9,6 +9,11 @@ enum AccessPortal: string
     case Staff = 'staff';
     case Client = 'client';
 
+    public function label(): string
+    {
+        return __('logs.portals.'.$this->value);
+    }
+
     /**
      * Whether the account's role corresponds to this portal (RF-21, RF-22).
      */
