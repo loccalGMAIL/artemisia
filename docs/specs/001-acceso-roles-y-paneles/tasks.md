@@ -240,7 +240,7 @@
 - **Depende de**: T22
 - **Hecho cuando**: el test de T22 pasa y la suite completa queda verde.
 
-### - [ ] T24: Escribir test de recuperación de contraseña
+### - [x] T24: Escribir test de recuperación de contraseña
 
 - **Tipo**: test
 - **Cubre**: RF-29, RF-30
