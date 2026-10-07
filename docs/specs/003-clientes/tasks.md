@@ -233,7 +233,7 @@
 - **Depende de**: T25
 - **Hecho cuando**: el test falla y cubre cuenta vinculada que ve su ficha, cuenta sin vínculo con mensaje de acceso no habilitado, cliente archivado bloqueado e intento de acceder a otro cliente rechazado; commit del test hecho.
 
-### - [ ] T27: Crear `ClientProfilePage` de solo ficha propia
+### - [x] T27: Crear `ClientProfilePage` de solo ficha propia
 
 - **Tipo**: ui
 - **Cubre**: RF-43, RF-57, RF-58, RF-62

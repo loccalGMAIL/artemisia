@@ -77,6 +77,9 @@ return [
         'archived_on' => 'Archivado el :date',
     ],
     'portal' => [
+        'profile' => 'Mi ficha',
+        'primary_contact' => 'Principal',
+        'no_contacts' => 'Sin contactos cargados',
         'not_enabled' => 'Su acceso todavía no fue habilitado por la agencia.',
         'archived' => 'La ficha de su cliente no está disponible.',
     ],
