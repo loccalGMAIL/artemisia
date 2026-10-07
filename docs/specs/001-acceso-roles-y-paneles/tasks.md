@@ -301,7 +301,7 @@
 - **Hecho cuando**: el test de T29 pasa, el middleware está registrado en ambos paneles y la suite
   completa queda verde.
 
-### - [ ] T31: Crear la landing pública y verificar que no hay registro público
+### - [x] T31: Crear la landing pública y verificar que no hay registro público
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-25
