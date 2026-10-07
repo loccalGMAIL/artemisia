@@ -196,7 +196,7 @@
   fecha, hora, portal y método sin sobrescribir los anteriores, y que un rechazo deja el email
   usado y el motivo; commit del test hecho.
 
-### - [ ] T19: Implementar `AccessLogger` e integrarlo en `AttemptLoginAction`
+### - [x] T19: Implementar `AccessLogger` e integrarlo en `AttemptLoginAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-36, RF-37
