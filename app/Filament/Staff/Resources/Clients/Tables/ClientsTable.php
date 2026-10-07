@@ -4,6 +4,7 @@ namespace App\Filament\Staff\Resources\Clients\Tables;
 
 use App\Enums\ClientStatus;
 use App\Enums\ClientType;
+use App\Filament\Staff\Resources\Clients\ClientResource;
 use App\Models\Client;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -36,6 +37,6 @@ class ClientsTable
                 ViewAction::make(),
                 EditAction::make(),
             ])
-            ->recordUrl(fn (Client $record): string => ViewAction::make()->getRecordUrl($record));
+            ->recordUrl(fn (Client $record): string => ClientResource::getUrl('view', ['record' => $record]));
     }
 }
