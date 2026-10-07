@@ -418,7 +418,7 @@
   `RequestPasswordResetAction` y `SetPasswordAction`; el mail de alta y el de recuperación apuntan a
   la pantalla del portal que corresponde al rol (plan D-11).
 
-### - [ ] T43: Escribir test de los umbrales de sesión y de enlace
+### - [x] T43: Escribir test de los umbrales de sesión y de enlace
 
 - **Tipo**: test
 - **Cubre**: RNF-3, RNF-4
