@@ -285,7 +285,7 @@
 - **Depende de**: T27
 - **Hecho cuando**: el test de T27 pasa y la suite completa queda verde.
 
-### - [ ] T29: Escribir test del corte de sesión al desactivar una cuenta
+### - [x] T29: Escribir test del corte de sesión al desactivar una cuenta
 
 - **Tipo**: test
 - **Cubre**: RF-33
