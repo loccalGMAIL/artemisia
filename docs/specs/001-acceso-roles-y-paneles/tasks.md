@@ -143,7 +143,7 @@
   siguiente solicitud, rechazo del cambio sobre la cuenta propia, y rechazo del cambio que dejaría
   al sistema sin ningún `admin` activo; commit del test hecho.
 
-### - [ ] T13: Implementar `ChangeAccountRoleAction`
+### - [x] T13: Implementar `ChangeAccountRoleAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-6, RF-7, RF-10, RF-11
