@@ -59,7 +59,7 @@
 - **Depende de**: T3
 - **Hecho cuando**: el test falla y comprueba alta de persona física, alta de persona jurídica, nombre para mostrar calculado, cliente activo por defecto, historial de alta, normalización de documento y rechazo de DNI, CUIT o documento duplicado incluyendo archivados; commit del test hecho.
 
-### - [ ] T5: Implementar `CreateClientAction`
+### - [x] T5: Implementar `CreateClientAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-6, RF-24, RF-35, RNF-1, RNF-2, RNF-3

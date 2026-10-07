@@ -13,6 +13,11 @@ return [
         'active' => 'Activo',
         'inactive' => 'Inactivo',
     ],
+    'validation' => [
+        'invalid_dni' => 'El DNI debe tener 7 u 8 dígitos numéricos.',
+        'invalid_cuit' => 'El CUIT debe tener 11 dígitos numéricos con dígito verificador válido.',
+        'document_conflict' => 'Ya existe un cliente con el documento :document (:name).',
+    ],
     'history_fields' => [
         'identification' => 'Identificación',
         'address' => 'Domicilio',

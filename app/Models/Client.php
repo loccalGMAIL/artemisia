@@ -46,6 +46,22 @@ class Client extends Model
     }
 
     /**
+     * The identification fields as stored, for history entries.
+     *
+     * @return array<string, string|null>
+     */
+    public function identificationSnapshot(): array
+    {
+        return [
+            'person_type' => $this->person_type->value,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'company_name' => $this->company_name,
+            'document' => $this->document,
+        ];
+    }
+
+    /**
      * Phone of the primary contact, or of another contact if the primary has none (RF-21).
      * Null when no contact has a phone (RF-22).
      */
