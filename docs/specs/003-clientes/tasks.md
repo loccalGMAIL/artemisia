@@ -52,7 +52,7 @@
 
 ## Fase 2: Identificación y alta
 
-### - [ ] T4: Escribir test de alta e identificación de clientes
+### - [x] T4: Escribir test de alta e identificación de clientes
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-6, RF-24, RF-35, RNF-1, RNF-2, RNF-3
