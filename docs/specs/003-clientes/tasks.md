@@ -286,7 +286,7 @@
 - **Depende de**: T32
 - **Hecho cuando**: el test falla si la exportación CSV filtrada de 5.000 clientes supera 5 segundos o carga todos los resultados en memoria innecesariamente; commit del test hecho.
 
-### - [ ] T34: Ajustar streaming de exportación
+### - [x] T34: Ajustar streaming de exportación
 
 - **Tipo**: impl
 - **Cubre**: RNF-6
@@ -375,3 +375,13 @@
 - **RF-46 a RF-48 son condicionales a módulos futuros**, por lo que T30 solo reserva puntos de extensión en la ficha. El contenido real debe quedar para las specs de presupuestos, contratos y pagos.
 - **La restricción `primary_marker` es específica de MySQL**, y el plan define la idea pero no la expresión exacta de migración Laravel/MySQL. T2 debe precisar esa sintaxis antes de escribir la migración.
 - **Los tests de rendimiento pueden ser sensibles al entorno local**, especialmente en Windows/XAMPP. T31 y T33 deben fijar datos, conexión y medición de forma estable para evitar falsos negativos.
+
+## Resolución de los cambios detectados (agregado al implementar)
+
+- **Corte de sesión al desvincular (RF-42)**: se resolvió extendiendo `EnsureAccountIsActive` de la `001`. La sesión recuerda el `client_id` con el que se ingresó y se corta si luego desaparece o cambia; una cuenta que nunca tuvo vínculo no se ve afectada, así RF-43 sigue mostrando el aviso de acceso no habilitado al volver a ingresar.
+- **`primary_marker`**: la expresión es `CASE WHEN is_primary = 1 THEN client_id ELSE NULL END`, válida en MySQL y SQLite; se verificó en MySQL que un segundo contacto principal del mismo cliente viola el índice único.
+- **Tests de rendimiento**: quedan en el grupo `performance` (`--group=performance` o `--exclude-group=performance`), con datos cargados en bloque por el helper `tests/Helpers/BulkClients.php` y una pasada de calentamiento sin medir.
+- **T34 no requirió código**: la exportación ya iteraba con `cursor()` desde T25 y los tests de T33 pasaron de entrada. Para comprobar que esos tests miden lo que dicen se hizo una prueba de mutación (cambiar `cursor()` por `get()` hizo fallar el de memoria: 13,8 MB contra un umbral de 4 MB) y se restauró el código.
+- **T32 encontró un hueco de T2**: el plan pide un índice sobre `client_contacts.client_id` y la migración se apoyaba en la clave foránea, que en SQLite no crea índice. La búsqueda por contacto tardaba 2,5 s con 5.000 clientes; con el índice explícito, 0,1 s.
+- **Los contratos de las Actions cambiaron en el plan §6**: todas reciben `User $actor` (el historial exige autor) y `ExportClientListAction` recibe la consulta del listado en vez de un array de filtros.
+- **Las habilidades del portal** se registran como `portal.view`, `portal.updateAddress` y `portal.updateContacts`, porque Laravel admite una sola policy por modelo.
