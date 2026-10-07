@@ -170,7 +170,7 @@
 
 ## Fase 3: Autenticación
 
-### - [ ] T16: Escribir test del orden de evaluación del ingreso
+### - [x] T16: Escribir test del orden de evaluación del ingreso
 
 - **Tipo**: test
 - **Cubre**: RF-17, RF-18, RF-19, RF-20, RF-21, RF-22
