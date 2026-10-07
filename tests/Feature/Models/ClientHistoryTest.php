@@ -23,7 +23,10 @@ it('RF-37: el historial se lista en orden cronológico, aunque los asientos se h
     $third = ClientHistory::factory()->for($client)->create(['created_at' => now()->subDay()]);
     $first = ClientHistory::factory()->for($client)->create(['created_at' => now()->subDays(5)]);
 
-    expect($client->histories->pluck('id')->all())->toBe([$first->id, $second->id, $third->id]);
+    expect($client->histories->pluck('id')->all())->toBe([$first->id, $second->id, $third->id])
+        // The engine happens to read rows through the (client_id, created_at) index; the order
+        // must not depend on that, so it has to be requested explicitly.
+        ->and($client->histories()->toSql())->toContain('order by');
 });
 
 it('RF-37: los asientos con la misma fecha se ordenan por el orden en que se registraron', function () {
