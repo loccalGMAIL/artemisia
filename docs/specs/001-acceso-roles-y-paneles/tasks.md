@@ -15,42 +15,49 @@
 - La suite queda verde después de cada tarea de `impl`.
 - Cada tarea de `impl` que produce un mensaje visible crea también sus claves en `lang/es/auth.php`
   (constitución, principio 6). No hay una tarea separada de traducciones.
-- **T1 y T40 son las dos únicas tareas que no cubren ningún RF**: son puesta en marcha del
-  proyecto y paso de instalación. Ver "Cambios en el plan detectados".
+- El bootstrap Laravel inicial es un prerequisito fundacional fuera de esta spec, segun
+  `docs/adr/0001-bootstrap-laravel-fuera-de-specs.md`.
+- **T40 es la unica tarea funcional que no cubre ningun RF**: es un paso de instalacion previsto
+  por la spec, no comportamiento de producto visible. Ver "Cambios en el plan detectados".
 
 ## Resumen
 
-- Total: 40 tareas.
-- Por tipo: 14 test, 18 impl, 4 migration, 4 ui.
+- Total: 39 tareas funcionales, mas 1 prerequisito externo.
+- Por tipo: 14 test, 17 impl, 4 migration, 4 ui.
 - Cubre: RF-1 a RF-39, RNF-1 a RNF-6.
 
 ---
 
-## Fase 0: Puesta en marcha del proyecto
+## Prerequisito externo: Puesta en marcha del proyecto
 
-### - [x] T1: Instalar el proyecto Laravel con el stack de AGENTS.md
+### - [ ] P0: Instalar el proyecto Laravel con el stack de AGENTS.md
 
-- **Tipo**: impl
-- **Cubre**: — (habilita todas; ver "Cambios en el plan detectados")
+- **Tipo**: prerequisito externo
+- **Cubre**: — (fuera de spec; ver `docs/adr/0001-bootstrap-laravel-fuera-de-specs.md`)
 - **Depende de**: —
 - **Hecho cuando**: `composer install` y `npm install` corren sin errores, y `php artisan --version`
   reporta Laravel 13 con Filament 5, `spatie/laravel-permission`, `laravel/socialite`, Pest y Pint
   instalados.
 
-### - [x] T2: Configurar entorno y umbrales de sesión y de enlaces
+---
+
+## Fase 0: Configuracion base funcional
+
+### - [ ] T2: Configurar entorno y umbrales de sesión y de enlaces
 
 - **Tipo**: impl
 - **Cubre**: RNF-3, RNF-4
-- **Depende de**: T1
+- **Depende de**: P0
 - **Hecho cuando**: `.env.example` declara `DB_DATABASE=artemisia` y las tres variables de Google,
-  `config/session.php` tiene `lifetime => 120` y `config/auth.php` tiene `expire => 1440` para el
-  broker de contraseñas.
+  `CACHE_STORE=database`, `config/session.php` tiene `lifetime => 120`, `config/auth.php` tiene
+  `expire => 1440` para el broker de contraseñas, y las migraciones de cache de Laravel quedan
+  disponibles para que el `RateLimiter` use persistencia en base.
 
 ---
 
 ## Fase 1: Esquema y modelos
 
-### - [x] T3: Crear migración de `users`
+### - [ ] T3: Crear migración de `users`
 
 - **Tipo**: migration
 - **Cubre**: RF-4, RF-34
@@ -58,7 +65,7 @@
 - **Hecho cuando**: `php artisan migrate:fresh` corre sin errores y la tabla `users` existe con
   `name`, `email` (único), `password` nullable e `is_active`, sin `deleted_at`, según el plan §4.
 
-### - [x] T4: Publicar migraciones de permisos y sembrar los tres roles
+### - [ ] T4: Publicar migraciones de permisos y sembrar los tres roles
 
 - **Tipo**: migration
 - **Cubre**: RF-3
@@ -66,7 +73,7 @@
 - **Hecho cuando**: `php artisan migrate:fresh --seed` crea las tablas del paquete y `RoleSeeder`
   deja exactamente los roles `admin`, `staff` y `cliente`.
 
-### - [x] T5: Crear migración de `account_histories`
+### - [ ] T5: Crear migración de `account_histories`
 
 - **Tipo**: migration
 - **Cubre**: RF-35
@@ -74,7 +81,7 @@
 - **Hecho cuando**: la tabla existe con `field`, `old_value`, `new_value`, `author_id`, `created_at`
   y el índice `(user_id, created_at)`, sin columna `updated_at`.
 
-### - [x] T6: Crear migración de `access_logs`
+### - [ ] T6: Crear migración de `access_logs`
 
 - **Tipo**: migration
 - **Cubre**: RF-36, RF-37
@@ -82,7 +89,7 @@
 - **Hecho cuando**: la tabla existe con `user_id` nullable, `email_used`, `portal`, `method`,
   `outcome`, `rejection_reason` y los índices sobre `created_at` y `email_used`.
 
-### - [x] T7: Crear enums y modelos con sus relaciones
+### - [ ] T7: Crear enums y modelos con sus relaciones
 
 - **Tipo**: impl
 - **Cubre**: RF-3, RF-35, RF-36, RF-37
@@ -104,14 +111,14 @@
   todavía, y el test verifica que la cuenta nace activa, con un solo rol, con enlace enviado y con
   asiento en `account_histories`; commit del test hecho.
 
-### - [x] T9: Implementar `CreateAccountAction`
+### - [ ] T9: Implementar `CreateAccountAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-2, RF-3, RF-5, RF-35
 - **Depende de**: T8
 - **Hecho cuando**: el test de T8 pasa y la suite completa queda verde.
 
-### - [x] T10: Escribir test de email duplicado incluyendo cuentas inactivas
+### - [ ] T10: Escribir test de email duplicado incluyendo cuentas inactivas
 
 - **Tipo**: test
 - **Cubre**: RF-4
@@ -211,7 +218,7 @@
 - **Cubre**: RNF-2
 - **Depende de**: T20
 - **Hecho cuando**: el test de T20 pasa, la suite completa queda verde y el driver de caché usado en
-  tests queda declarado en `phpunit.xml`.
+  tests queda declarado en `phpunit.xml` como `database`.
 
 ---
 
@@ -440,14 +447,13 @@
 ## Cambios en el plan detectados al descomponer
 
 - **El plan asume que el proyecto Laravel ya existe, y no existe.** Este repo es solo
-  documentación: no hay `composer.json`, ni `app/`, ni `tests/`. T1 cubre esa puesta en marcha pero
-  no cubre ningún RF, lo cual rompe la regla de "toda tarea cubre algo". Candidato a resolverse
-  como un paso de instalación fuera del `tasks.md`, o como una decisión propia (ADR) sobre cómo se
-  inicializa el proyecto.
-- **El plan no define qué driver de caché usa el `RateLimiter`**, y lo deja anotado como riesgo
-  ("depende del driver de caché del entorno"). T20/T21 lo necesitan definido para que el test de
-  RNF-2 sea determinista; hoy queda resuelto en `phpunit.xml`, pero la decisión de entorno debería
-  volver al plan o a `AGENTS.md` §3.
+  documentación: no hay `composer.json`, ni `app/`, ni `tests/`. Se resolvio con
+  `docs/adr/0001-bootstrap-laravel-fuera-de-specs.md`: la puesta en marcha queda como prerequisito
+  externo `P0`, no como tarea funcional de esta spec.
+- **El plan no definia qué driver de caché usa el `RateLimiter`**, y lo dejaba anotado como riesgo
+  ("depende del driver de caché del entorno"). Queda resuelto usando cache en base de datos:
+  `CACHE_STORE=database` en entorno local y `phpunit.xml` configurado con cache `database` para
+  tests.
 - **Las traducciones de `lang/es/auth.php` figuran en el plan §5 como un ítem suelto**, pero no
   cuelgan de ningún RF puntual: acá se repartieron entre cada tarea de `impl` que produce el
   mensaje. Si se prefiere una tarea única de traducciones, hay que decidirlo en el plan.

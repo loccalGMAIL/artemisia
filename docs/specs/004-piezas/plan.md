@@ -347,8 +347,8 @@ Migraciones a crear, en orden:
 ## 11. Riesgos
 
 - **Dependencia de `budgets`/`budget_items` (spec 002), `clients` y su vínculo con cuentas (spec
-  003), y `users` (spec 001)**: implementar en el orden de dependencia (001 → 002 → 003 → 004), no
-  en el orden en que se redactaron los planes.
+  003), y `users` (spec 001)**: implementar en el orden de dependencia canonico
+  (001 → 003 → 002 → 004), no en el orden en que se redactaron los planes.
 - **`budget_item_id` puede quedar apuntando a un ítem ya inexistente** si ese ítem se quita del
   presupuesto tras una reversión a "enviado" (consecuencia deliberada de D-7): mitigación —
   ninguna clave foránea con borrado en cascada; la relación se vuelve informativa/histórica si el

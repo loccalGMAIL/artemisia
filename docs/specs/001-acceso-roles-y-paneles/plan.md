@@ -109,14 +109,15 @@ la spec distingue.
   columnas comunes.
 - **Consecuencias**: un único servicio `AccessLogger` centraliza cada escritura.
 
-### D-8: Límite de intentos fallidos con el `RateLimiter` nativo, sin tabla propia
+### D-8: Límite de intentos fallidos con el `RateLimiter` nativo, usando cache en base de datos
 
 - **Decisión**: RNF-2 se implementa con `RateLimiter::for()` de Laravel, con clave por email
-  normalizado, sin persistir los intentos en una tabla.
+   normalizado, usando `CACHE_STORE=database` en local y tests, sin tabla propia de intentos.
 - **Motivo**: es exactamente el caso de uso del componente, sin dependencia nueva ni esquema
   propio.
 - **Alternativa descartada**: tabla `login_attempts` propia. Reinventa el `RateLimiter`.
-- **Consecuencias**: el límite depende del driver de caché configurado en el entorno (ver Riesgos).
+- **Consecuencias**: el entorno debe tener disponibles las migraciones de cache de Laravel antes de
+  ejecutar los tests o usar el login.
 
 ### D-9: `access_logs` se purga a los 24 meses; `account_histories` nunca
 
@@ -355,10 +356,9 @@ Migraciones a crear, en orden:
   `client_id` a `users` y debe ejecutarse después de que esta spec cree la tabla. Mitigación: el
   orden de implementación sigue el orden de dependencia (001 antes que 003), sin importar en qué
   orden se redactaron los planes.
-- **`RateLimiter` depende del driver de caché del entorno**: en un entorno sin caché persistente
-  entre procesos (por ejemplo `array` en ciertos setups), el límite de intentos podría no
-  sostenerse entre solicitudes. Mitigación: documentar en el entorno local (`AGENTS.md`, sección
-  3) qué driver de caché usar; no es una decisión de este plan.
+- **`RateLimiter` depende del driver de caché del entorno**: queda resuelto usando cache en base de
+  datos en local y tests (`CACHE_STORE=database`), documentado en `AGENTS.md`. La mitigacion
+  pendiente es asegurar que la migracion de cache exista antes de ejecutar la suite.
 - **Dos pares de rutas de Google por portal duplican código de manejo de callback**: mitigación —
   ambos pares delegan en el mismo `AttemptLoginAction`, la única diferencia es el parámetro
   `portal`.
