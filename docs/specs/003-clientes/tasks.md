@@ -27,7 +27,7 @@
 
 ## Fase 1: Esquema, modelos y datos de referencia
 
-### - [ ] T1: Crear migraciones de provincias y clientes
+### - [x] T1: Crear migraciones de provincias y clientes
 
 - **Tipo**: migration
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-9, RF-10, RF-11, RF-23, RF-24, RF-28, RF-31, RF-34, RNF-1, RNF-2, RNF-3, RNF-5
