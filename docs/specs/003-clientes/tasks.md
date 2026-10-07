@@ -41,7 +41,7 @@
 - **Depende de**: T1
 - **Hecho cuando**: `client_contacts`, `client_histories` y `users.client_id` existen con sus FK, índices y la restricción que impide más de un contacto principal por cliente.
 
-### - [ ] T3: Crear enums, modelos, factories y seeder de provincias
+### - [x] T3: Crear enums, modelos, factories y seeder de provincias
 
 - **Tipo**: impl
 - **Cubre**: RF-2, RF-5, RF-21, RF-22, RF-23, RF-37, RNF-7
