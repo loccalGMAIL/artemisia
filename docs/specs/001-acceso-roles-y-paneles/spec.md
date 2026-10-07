@@ -35,7 +35,7 @@ Se sabrá que se logró cuando:
 ## 4. Glosario
 
 - **Cuenta** — identidad con la que una persona ingresa al sistema, identificada por su email.
-- **Rol** — categoría única de una cuenta: `admin`, `staff` o `cliente`.
+- **Rol** — categoría única de una cuenta: `admin`, `staff` o `client`.
 - **Cuenta activa / inactiva** — cuenta habilitada o deshabilitada para ingresar; la inactiva se conserva con todo su historial.
 - **Portal de staff** — superficie interna de la agencia, en `/staff`.
 - **Portal de clientes** — superficie del cliente, en `/portal`.
@@ -57,7 +57,7 @@ ingresos exitosos e intentos fallidos.
 ### Alta y gestión de cuentas
 
 - **RF-1**: EL SISTEMA no ofrecerá ningún mecanismo de registro público de cuentas.
-- **RF-2**: MIENTRAS un admin tenga sesión iniciada en el portal de staff, EL SISTEMA le permitirá crear cuentas indicando nombre completo, email y un rol entre `admin`, `staff` y `cliente`.
+- **RF-2**: MIENTRAS un admin tenga sesión iniciada en el portal de staff, EL SISTEMA le permitirá crear cuentas indicando nombre completo, email y un rol entre `admin`, `staff` y `client`.
 - **RF-3**: EL SISTEMA asignará a cada cuenta exactamente un rol.
 - **RF-4**: SI el email de una cuenta nueva coincide con el de una cuenta existente, incluidas las inactivas (comparación ignorando mayúsculas y espacios exteriores), ENTONCES EL SISTEMA no la creará y mostrará el mensaje de conflicto en el formulario, indicando la cuenta existente.
 - **RF-5**: CUANDO se crea una cuenta, EL SISTEMA la dejará activa y enviará a su email un enlace de definición de contraseña.
@@ -79,7 +79,7 @@ ingresos exitosos e intentos fallidos.
 - **RF-18**: SI el email y la contraseña no coinciden con ninguna cuenta, ENTONCES EL SISTEMA devolverá a la pantalla de acceso con un mensaje genérico de credenciales inválidas, sin revelar si el email existe.
 - **RF-19**: EL SISTEMA evaluará, en este orden, si las credenciales o el ingreso con Google corresponden a una cuenta, si esa cuenta está activa, y si su rol corresponde al portal solicitado, deteniéndose en la primera condición que no se cumpla.
 - **RF-20**: SI una cuenta cuyas credenciales o cuyo ingreso con Google son correctos está inactiva, ENTONCES EL SISTEMA rechazará su ingreso por cualquiera de los dos métodos e indicará que la cuenta está deshabilitada.
-- **RF-21**: SI una cuenta con rol `cliente` intenta ingresar por la pantalla de acceso del portal de staff, ENTONCES EL SISTEMA rechazará el ingreso e indicará que esa cuenta no accede a ese portal.
+- **RF-21**: SI una cuenta con rol `client` intenta ingresar por la pantalla de acceso del portal de staff, ENTONCES EL SISTEMA rechazará el ingreso e indicará que esa cuenta no accede a ese portal.
 - **RF-22**: SI una cuenta con rol `admin` o `staff` intenta ingresar por la pantalla de acceso del portal de clientes, ENTONCES EL SISTEMA rechazará el ingreso e indicará que esa cuenta no accede a ese portal.
 - **RF-23**: SI un visitante sin sesión solicita cualquier ruta de un portal, ENTONCES EL SISTEMA lo llevará a la pantalla de acceso de ese portal.
 - **RF-24**: SI una cuenta con sesión iniciada solicita una ruta del portal que no corresponde a su rol, ENTONCES EL SISTEMA le negará el acceso y mostrará un mensaje de acceso no permitido.
@@ -119,7 +119,7 @@ ingresos exitosos e intentos fallidos.
 
 ## 8. Fuera de alcance
 
-- **Vinculación entre una cuenta con rol `cliente` y la entidad cliente de la agencia** — se define en la spec `003-clientes`; acá solo se establece el rol y el acceso al portal.
+- **Vinculación entre una cuenta con rol `client` y la entidad cliente de la agencia** — se define en la spec `003-clientes`; acá solo se establece el rol y el acceso al portal.
 - **Contenido y funcionalidad interna de cada portal** — cada módulo trae su propia spec.
 - **Contenido de la landing pública** — solo se define que es anónima.
 - **Reparto fino de permisos por módulo** — cada spec define qué puede hacer cada rol dentro de su módulo.
@@ -134,7 +134,7 @@ ingresos exitosos e intentos fallidos.
 - Requiere credenciales de Google OAuth configuradas en el entorno.
 - Requiere un canal de envío de email operativo; sin él, no hay definición ni recuperación de contraseña.
 - La primera cuenta `admin` del sistema nace por un comando o seed ejecutado al instalar el sistema, fuera de la interfaz web; es un paso de instalación y no un requisito funcional de esta spec. A partir de esa cuenta, toda cuenta nueva se crea según RF-2.
-- Se supone que los roles `admin`, `staff` y `cliente` son datos de referencia fijos: no se crean roles nuevos desde la interfaz.
+- Se supone que los roles `admin`, `staff` y `client` son datos de referencia fijos: no se crean roles nuevos desde la interfaz.
 - Se supone que un email pertenece a una sola persona y no se reutiliza entre cuentas.
 
 ## 10. Preguntas abiertas

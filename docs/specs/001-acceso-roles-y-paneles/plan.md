@@ -38,7 +38,7 @@ la spec distingue.
 
 ### D-1: Rol único con `spatie/laravel-permission`, sin columna `role` propia
 
-- **Decisión**: `User` usa el trait `HasRoles` del paquete; los roles `admin`, `staff` y `cliente`
+- **Decisión**: `User` usa el trait `HasRoles` del paquete; los roles `admin`, `staff` y `client`
   se siembran como registros de `Role`.
 - **Motivo**: el paquete ya está en el stack exactamente para esto (AGENTS.md, sección 2).
 - **Alternativa descartada**: columna `role` enum propia en `users`. Duplicaría lo que el paquete
@@ -109,14 +109,15 @@ la spec distingue.
   columnas comunes.
 - **Consecuencias**: un único servicio `AccessLogger` centraliza cada escritura.
 
-### D-8: Límite de intentos fallidos con el `RateLimiter` nativo, sin tabla propia
+### D-8: Límite de intentos fallidos con el `RateLimiter` nativo, usando cache en base de datos
 
 - **Decisión**: RNF-2 se implementa con `RateLimiter::for()` de Laravel, con clave por email
-  normalizado, sin persistir los intentos en una tabla.
+   normalizado, usando `CACHE_STORE=database` en local y tests, sin tabla propia de intentos.
 - **Motivo**: es exactamente el caso de uso del componente, sin dependencia nueva ni esquema
   propio.
 - **Alternativa descartada**: tabla `login_attempts` propia. Reinventa el `RateLimiter`.
-- **Consecuencias**: el límite depende del driver de caché configurado en el entorno (ver Riesgos).
+- **Consecuencias**: el entorno debe tener disponibles las migraciones de cache de Laravel antes de
+  ejecutar los tests o usar el login.
 
 ### D-9: `access_logs` se purga a los 24 meses; `account_histories` nunca
 
@@ -200,7 +201,7 @@ la spec distingue.
 ### Tablas de terceros reutilizadas (no se crean en este plan)
 
 - `roles`, `model_has_roles`, `permissions` — migraciones propias de `spatie/laravel-permission`,
-  publicadas al instalar el paquete. `RoleSeeder` siembra `admin`, `staff`, `cliente`.
+  publicadas al instalar el paquete. `RoleSeeder` siembra `admin`, `staff`, `client`.
 - `password_reset_tokens` — migración por defecto de Laravel, reutilizada según D-3.
 
 Migraciones a crear, en orden:
@@ -283,11 +284,11 @@ Migraciones a crear, en orden:
 ## 8. Autorización
 
 - `AccountPolicy` autoriza únicamente a `admin` para crear cuentas, cambiar roles, activar y
-  desactivar. `staff` y `cliente` no pasan ninguna de sus reglas.
+  desactivar. `staff` y `client` no pasan ninguna de sus reglas.
 - `AccessLogPolicy` autoriza únicamente a `admin` para consultar `access_logs` y
   `account_histories`.
 - `canAccessPanel()` de `StaffPanelProvider` exige rol `admin` o `staff`; el de
-  `ClientPanelProvider` exige rol `cliente`. Ninguno depende de permisos finos: la spec deja el
+  `ClientPanelProvider` exige rol `client`. Ninguno depende de permisos finos: la spec deja el
   reparto fino de permisos por módulo a cada spec de dominio (sección 8 de la spec, Fuera de
   alcance).
 
@@ -301,9 +302,9 @@ Migraciones a crear, en orden:
   cruzado; cancelación del flujo de Google; definición y recuperación de contraseña, incluido
   enlace vencido o ya usado; activación/desactivación con corte de sesión; límite de intentos
   fallidos (RNF-2); acceso a `AccountResource` y `AccessLogResource` restringido a `admin`.
-- **Factories nuevas**: `UserFactory` (con estado `admin`/`staff`/`cliente`), `AccessLogFactory`,
+- **Factories nuevas**: `UserFactory` (con estado `admin`/`staff`/`client`), `AccessLogFactory`,
   `AccountHistoryFactory`.
-- **Seeders**: `RoleSeeder` (datos de referencia: `admin`, `staff`, `cliente`).
+- **Seeders**: `RoleSeeder` (datos de referencia: `admin`, `staff`, `client`).
 
 ## 10. Mapa RF → componente
 
@@ -355,10 +356,9 @@ Migraciones a crear, en orden:
   `client_id` a `users` y debe ejecutarse después de que esta spec cree la tabla. Mitigación: el
   orden de implementación sigue el orden de dependencia (001 antes que 003), sin importar en qué
   orden se redactaron los planes.
-- **`RateLimiter` depende del driver de caché del entorno**: en un entorno sin caché persistente
-  entre procesos (por ejemplo `array` en ciertos setups), el límite de intentos podría no
-  sostenerse entre solicitudes. Mitigación: documentar en el entorno local (`AGENTS.md`, sección
-  3) qué driver de caché usar; no es una decisión de este plan.
+- **`RateLimiter` depende del driver de caché del entorno**: queda resuelto usando cache en base de
+  datos en local y tests (`CACHE_STORE=database`), documentado en `AGENTS.md`. La mitigacion
+  pendiente es asegurar que la migracion de cache exista antes de ejecutar la suite.
 - **Dos pares de rutas de Google por portal duplican código de manejo de callback**: mitigación —
   ambos pares delegan en el mismo `AttemptLoginAction`, la única diferencia es el parámetro
   `portal`.

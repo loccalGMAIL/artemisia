@@ -11,7 +11,7 @@
 
 La agencia trabaja con clientes desde antes de tener sistema, pero hoy esa información vive
 repartida entre contactos sueltos, planillas y la memoria de quien los atendió. La spec de acceso
-ya reservó un rol `cliente` para el portal, y la de presupuestos ya necesita dirigir una propuesta
+ya reservó un rol `client` para el portal, y la de presupuestos ya necesita dirigir una propuesta
 a un cliente existente, pero ninguna de las dos define qué es un cliente para la agencia, qué datos
 tiene, ni cómo una persona que ingresa al portal de clientes queda asociada a él. Sin esa entidad,
 no hay a quién dirigir un presupuesto, no hay ficha que reúna el trato comercial con cada cliente,
@@ -52,7 +52,7 @@ Los términos de cuenta, rol, portal de staff y portal de clientes están defini
 - **Contacto principal** — el único contacto de un cliente usado por defecto para comunicarse con él.
 - **Cliente activo / inactivo** — cliente disponible o no disponible para elegir en presupuestos nuevos; ambos estados conservan ficha e historial.
 - **Cliente archivado** — cliente retirado del listado y de la operación diaria, marcado también como inactivo, conservado con su ficha e historial y restaurable.
-- **Vínculo cuenta-cliente** — asociación entre una cuenta con rol `cliente` y el cliente de la agencia al que representa.
+- **Vínculo cuenta-cliente** — asociación entre una cuenta con rol `client` y el cliente de la agencia al que representa.
 - **Historial del cliente** — asientos de cada alta y cada cambio sobre un cliente, con valor anterior, valor nuevo, autor y fecha.
 
 ## 5. Alcance
@@ -60,7 +60,7 @@ Los términos de cuenta, rol, portal de staff y portal de clientes están defini
 Alta de clientes como persona física o jurídica con su documento; carga y edición de un domicilio y
 de uno o varios contactos, con exactamente uno marcado como principal; estado activo o inactivo de
 cada cliente; archivado y restauración sin eliminación física; vinculación y desvinculación de
-cuentas con rol `cliente` a un cliente de la agencia, admitiendo varias cuentas por cliente; ficha
+cuentas con rol `client` a un cliente de la agencia, admitiendo varias cuentas por cliente; ficha
 del cliente con su identificación, domicilio, contactos, estado y, cuando existan los módulos
 correspondientes, su historial de presupuestos, contratos y pagos; historial de cambios sobre cada
 cliente; listado de clientes con búsqueda, filtros, orden, paginado y exportación; y autogestión del
@@ -125,12 +125,12 @@ cliente sobre su propio domicilio y sus propios contactos desde el portal de cli
 
 ### Vinculación con cuentas del portal
 
-- **RF-38**: MIENTRAS un usuario con rol `admin` o `staff` tenga sesión iniciada en el portal de staff, EL SISTEMA le permitirá vincular una cuenta con rol `cliente` a un cliente de la agencia.
+- **RF-38**: MIENTRAS un usuario con rol `admin` o `staff` tenga sesión iniciada en el portal de staff, EL SISTEMA le permitirá vincular una cuenta con rol `client` a un cliente de la agencia.
 - **RF-39**: EL SISTEMA permitirá vincular varias cuentas a un mismo cliente.
 - **RF-40**: SI se intenta vincular una cuenta que ya está vinculada a otro cliente, ENTONCES EL SISTEMA lo impedirá y mostrará el motivo.
 - **RF-41**: MIENTRAS un usuario con rol `admin` o `staff` tenga sesión iniciada en el portal de staff, EL SISTEMA le permitirá desvincular una cuenta de un cliente.
 - **RF-42**: CUANDO se desvincula una cuenta que tiene sesión abierta en el portal de clientes, EL SISTEMA cerrará esa sesión en la siguiente solicitud que realice.
-- **RF-43**: SI una cuenta con rol `cliente` sin vínculo con ningún cliente ingresa al portal de clientes, ENTONCES EL SISTEMA le indicará que su acceso todavía no fue habilitado por la agencia.
+- **RF-43**: SI una cuenta con rol `client` sin vínculo con ningún cliente ingresa al portal de clientes, ENTONCES EL SISTEMA le indicará que su acceso todavía no fue habilitado por la agencia.
 - **RF-44**: CUANDO se vincula o se desvincula una cuenta, EL SISTEMA lo registrará con el autor y la fecha.
 
 ### Ficha y historial comercial
@@ -153,12 +153,12 @@ cliente sobre su propio domicilio y sus propios contactos desde el portal de cli
 
 ### Autogestión desde el portal de clientes
 
-- **RF-57**: MIENTRAS una cuenta con rol `cliente` vinculada a un cliente tenga sesión iniciada en el portal de clientes, EL SISTEMA le mostrará la ficha de ese cliente.
+- **RF-57**: MIENTRAS una cuenta con rol `client` vinculada a un cliente tenga sesión iniciada en el portal de clientes, EL SISTEMA le mostrará la ficha de ese cliente.
 - **RF-58**: MIENTRAS un cliente esté archivado, EL SISTEMA no permitirá a las cuentas vinculadas acceder a su ficha desde el portal de clientes.
-- **RF-59**: MIENTRAS una cuenta con rol `cliente` tenga sesión iniciada en el portal de clientes, EL SISTEMA le permitirá modificar el domicilio y los contactos del cliente al que está vinculada.
-- **RF-60**: EL SISTEMA no permitirá a una cuenta con rol `cliente` modificar la identificación, el estado ni el archivado de ningún cliente.
-- **RF-61**: CUANDO una cuenta con rol `cliente` modifica el domicilio o los contactos de un cliente, EL SISTEMA lo registrará con esa cuenta como autor.
-- **RF-62**: SI una cuenta con rol `cliente` solicita la ficha de un cliente distinto de aquel al que está vinculada, ENTONCES EL SISTEMA rechazará la solicitud y mostrará un mensaje de permiso insuficiente.
+- **RF-59**: MIENTRAS una cuenta con rol `client` tenga sesión iniciada en el portal de clientes, EL SISTEMA le permitirá modificar el domicilio y los contactos del cliente al que está vinculada.
+- **RF-60**: EL SISTEMA no permitirá a una cuenta con rol `client` modificar la identificación, el estado ni el archivado de ningún cliente.
+- **RF-61**: CUANDO una cuenta con rol `client` modifica el domicilio o los contactos de un cliente, EL SISTEMA lo registrará con esa cuenta como autor.
+- **RF-62**: SI una cuenta con rol `client` solicita la ficha de un cliente distinto de aquel al que está vinculada, ENTONCES EL SISTEMA rechazará la solicitud y mostrará un mensaje de permiso insuficiente.
 
 ## 7. Requisitos no funcionales
 
@@ -179,14 +179,14 @@ cliente sobre su propio domicilio y sus propios contactos desde el portal de cli
 - **Detección automática de clientes duplicados más allá de la coincidencia de documento** — no previsto.
 - **Notas libres y archivos adjuntos por cliente** — spec posterior.
 - **Asignación de un `staff` responsable por cliente** — no hay caso de uso conocido.
-- **Alta de la cuenta con rol `cliente`** — se rige por la spec `001-acceso-roles-y-paneles`; acá solo se vincula una cuenta ya existente a un cliente.
+- **Alta de la cuenta con rol `client`** — se rige por la spec `001-acceso-roles-y-paneles`; acá solo se vincula una cuenta ya existente a un cliente.
 - **Segmentación, etiquetas o categorización comercial de clientes** — spec posterior.
 - **Reportes y métricas de cartera de clientes** — spec posterior.
 - **Domicilios fuera de la Argentina** — no previsto.
 
 ## 9. Dependencias y supuestos
 
-- Requiere la spec `001-acceso-roles-y-paneles`: el rol `cliente`, las cuentas y el portal de clientes.
+- Requiere la spec `001-acceso-roles-y-paneles`: el rol `client`, las cuentas y el portal de clientes.
 - Habilita la spec `002-presupuestos`, que necesita un cliente existente con nombre para mostrar y teléfono de contacto.
 - Se supone que las provincias y los tipos de documento son datos de referencia fijos, cargados al instalar el sistema y no administrados desde la interfaz.
 - Se supone que todo cliente opera dentro de la Argentina.
