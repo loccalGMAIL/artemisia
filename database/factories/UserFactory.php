@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 /**
  * @extends Factory<User>
@@ -29,8 +30,39 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'is_active' => true,
             'remember_token' => Str::random(10),
         ];
+    }
+
+    public function admin(): static
+    {
+        return $this->withRole('admin');
+    }
+
+    public function staff(): static
+    {
+        return $this->withRole('staff');
+    }
+
+    public function client(): static
+    {
+        return $this->withRole('client');
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_active' => false,
+        ]);
+    }
+
+    protected function withRole(string $role): static
+    {
+        return $this->afterCreating(function (User $user) use ($role) {
+            Role::findOrCreate($role, 'web');
+            $user->syncRoles([$role]);
+        });
     }
 
     /**

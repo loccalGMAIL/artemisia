@@ -22,8 +22,8 @@
 
 ## Resumen
 
-- Total: 39 tareas funcionales, mas 1 prerequisito externo.
-- Por tipo: 14 test, 17 impl, 4 migration, 4 ui.
+- Total: 42 tareas funcionales, mas 1 prerequisito externo.
+- Por tipo: 16 test, 18 impl, 4 migration, 4 ui.
 - Cubre: RF-1 a RF-39, RNF-1 a RNF-6.
 
 ---
@@ -43,7 +43,7 @@
 
 ## Fase 0: Configuracion base funcional
 
-### - [ ] T2: Configurar entorno y umbrales de sesión y de enlaces
+### - [x] T2: Configurar entorno y umbrales de sesión y de enlaces
 
 - **Tipo**: impl
 - **Cubre**: RNF-3, RNF-4
@@ -57,7 +57,7 @@
 
 ## Fase 1: Esquema y modelos
 
-### - [ ] T3: Crear migración de `users`
+### - [x] T3: Crear migración de `users`
 
 - **Tipo**: migration
 - **Cubre**: RF-4, RF-34
@@ -65,7 +65,7 @@
 - **Hecho cuando**: `php artisan migrate:fresh` corre sin errores y la tabla `users` existe con
   `name`, `email` (único), `password` nullable e `is_active`, sin `deleted_at`, según el plan §4.
 
-### - [ ] T4: Publicar migraciones de permisos y sembrar los tres roles
+### - [x] T4: Publicar migraciones de permisos y sembrar los tres roles
 
 - **Tipo**: migration
 - **Cubre**: RF-3
@@ -73,7 +73,7 @@
 - **Hecho cuando**: `php artisan migrate:fresh --seed` crea las tablas del paquete y `RoleSeeder`
   deja exactamente los roles `admin`, `staff` y `client`.
 
-### - [ ] T5: Crear migración de `account_histories`
+### - [x] T5: Crear migración de `account_histories`
 
 - **Tipo**: migration
 - **Cubre**: RF-35
@@ -81,7 +81,7 @@
 - **Hecho cuando**: la tabla existe con `field`, `old_value`, `new_value`, `author_id`, `created_at`
   y el índice `(user_id, created_at)`, sin columna `updated_at`.
 
-### - [ ] T6: Crear migración de `access_logs`
+### - [x] T6: Crear migración de `access_logs`
 
 - **Tipo**: migration
 - **Cubre**: RF-36, RF-37
@@ -89,7 +89,7 @@
 - **Hecho cuando**: la tabla existe con `user_id` nullable, `email_used`, `portal`, `method`,
   `outcome`, `rejection_reason` y los índices sobre `created_at` y `email_used`.
 
-### - [ ] T7: Crear enums y modelos con sus relaciones
+### - [x] T7: Crear enums y modelos con sus relaciones
 
 - **Tipo**: impl
 - **Cubre**: RF-3, RF-35, RF-36, RF-37
@@ -102,7 +102,7 @@
 
 ## Fase 2: Gestión de cuentas
 
-### - [ ] T8: Escribir test de alta de cuenta con rol único
+### - [x] T8: Escribir test de alta de cuenta con rol único
 
 - **Tipo**: test
 - **Cubre**: RF-2, RF-3, RF-5, RF-35
@@ -111,14 +111,14 @@
   todavía, y el test verifica que la cuenta nace activa, con un solo rol, con enlace enviado y con
   asiento en `account_histories`; commit del test hecho.
 
-### - [ ] T9: Implementar `CreateAccountAction`
+### - [x] T9: Implementar `CreateAccountAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-2, RF-3, RF-5, RF-35
 - **Depende de**: T8
 - **Hecho cuando**: el test de T8 pasa y la suite completa queda verde.
 
-### - [ ] T10: Escribir test de email duplicado incluyendo cuentas inactivas
+### - [x] T10: Escribir test de email duplicado incluyendo cuentas inactivas
 
 - **Tipo**: test
 - **Cubre**: RF-4
@@ -127,14 +127,14 @@
   con espacios exteriores, y contra una cuenta inactiva) no crea la cuenta **y** que se informa el
   conflicto indicando la cuenta existente; commit del test hecho.
 
-### - [ ] T11: Implementar la validación de unicidad de email
+### - [x] T11: Implementar la validación de unicidad de email
 
 - **Tipo**: impl
 - **Cubre**: RF-4
 - **Depende de**: T10
 - **Hecho cuando**: el test de T10 pasa y la suite completa queda verde.
 
-### - [ ] T12: Escribir test de cambio de rol, con sus dos bloqueos
+### - [x] T12: Escribir test de cambio de rol, con sus dos bloqueos
 
 - **Tipo**: test
 - **Cubre**: RF-6, RF-7, RF-10, RF-11
@@ -143,14 +143,14 @@
   siguiente solicitud, rechazo del cambio sobre la cuenta propia, y rechazo del cambio que dejaría
   al sistema sin ningún `admin` activo; commit del test hecho.
 
-### - [ ] T13: Implementar `ChangeAccountRoleAction`
+### - [x] T13: Implementar `ChangeAccountRoleAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-6, RF-7, RF-10, RF-11
 - **Depende de**: T12
 - **Hecho cuando**: el test de T12 pasa y la suite completa queda verde.
 
-### - [ ] T14: Escribir test de activación y desactivación de cuentas
+### - [x] T14: Escribir test de activación y desactivación de cuentas
 
 - **Tipo**: test
 - **Cubre**: RF-10, RF-11, RF-31, RF-32, RF-35
@@ -159,7 +159,7 @@
   el rechazo de la desactivación del último `admin` activo, y que al desactivar se invalide un
   enlace de definición vigente sin usar; commit del test hecho.
 
-### - [ ] T15: Implementar `ActivateAccountAction` y `DeactivateAccountAction`
+### - [x] T15: Implementar `ActivateAccountAction` y `DeactivateAccountAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-10, RF-11, RF-31, RF-32, RF-35
@@ -170,7 +170,7 @@
 
 ## Fase 3: Autenticación
 
-### - [ ] T16: Escribir test del orden de evaluación del ingreso
+### - [x] T16: Escribir test del orden de evaluación del ingreso
 
 - **Tipo**: test
 - **Cubre**: RF-17, RF-18, RF-19, RF-20, RF-21, RF-22
@@ -180,14 +180,14 @@
   rol que no corresponde al portal, e ingreso válido; incluye el caso de contraseña incorrecta
   contra una cuenta inactiva; commit del test hecho.
 
-### - [ ] T17: Implementar `AttemptLoginAction`
+### - [x] T17: Implementar `AttemptLoginAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-17, RF-18, RF-19, RF-20, RF-21, RF-22
 - **Depende de**: T16
 - **Hecho cuando**: el test de T16 pasa y la suite completa queda verde.
 
-### - [ ] T18: Escribir test del registro de accesos
+### - [x] T18: Escribir test del registro de accesos
 
 - **Tipo**: test
 - **Cubre**: RF-36, RF-37
@@ -196,14 +196,14 @@
   fecha, hora, portal y método sin sobrescribir los anteriores, y que un rechazo deja el email
   usado y el motivo; commit del test hecho.
 
-### - [ ] T19: Implementar `AccessLogger` e integrarlo en `AttemptLoginAction`
+### - [x] T19: Implementar `AccessLogger` e integrarlo en `AttemptLoginAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-36, RF-37
 - **Depende de**: T18
 - **Hecho cuando**: el test de T18 pasa y la suite completa queda verde.
 
-### - [ ] T20: Escribir test del límite de intentos fallidos
+### - [x] T20: Escribir test del límite de intentos fallidos
 
 - **Tipo**: test
 - **Cubre**: RNF-2
@@ -212,7 +212,7 @@
   minuto se rechaza, y que al vencer los 60 segundos vuelve a aceptarse automáticamente; commit del
   test hecho.
 
-### - [ ] T21: Implementar el límite con el `RateLimiter` nativo
+### - [x] T21: Implementar el límite con el `RateLimiter` nativo
 
 - **Tipo**: impl
 - **Cubre**: RNF-2
@@ -224,7 +224,7 @@
 
 ## Fase 4: Contraseña
 
-### - [ ] T22: Escribir test de definición de contraseña por enlace
+### - [x] T22: Escribir test de definición de contraseña por enlace
 
 - **Tipo**: test
 - **Cubre**: RF-27, RF-28, RNF-1, RNF-3
@@ -233,14 +233,14 @@
   invalidado), el vencido y el ya usado (rechazo con opción de pedir uno nuevo), y el rechazo de
   contraseñas de menos de 8 caracteres; commit del test hecho.
 
-### - [ ] T23: Implementar `SetPasswordAction`
+### - [x] T23: Implementar `SetPasswordAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-27, RF-28, RNF-1
 - **Depende de**: T22
 - **Hecho cuando**: el test de T22 pasa y la suite completa queda verde.
 
-### - [ ] T24: Escribir test de recuperación de contraseña
+### - [x] T24: Escribir test de recuperación de contraseña
 
 - **Tipo**: test
 - **Cubre**: RF-29, RF-30
@@ -249,7 +249,7 @@
   y que un email inexistente o de cuenta inactiva devuelve el mismo mensaje de confirmación sin
   enviar ningún correo; commit del test hecho.
 
-### - [ ] T25: Implementar `RequestPasswordResetAction`
+### - [x] T25: Implementar `RequestPasswordResetAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-29, RF-30
@@ -260,7 +260,7 @@
 
 ## Fase 5: Paneles y acceso
 
-### - [ ] T26: Crear los dos paneles Filament con su control de acceso
+### - [x] T26: Crear los dos paneles Filament con su control de acceso
 
 - **Tipo**: ui
 - **Cubre**: RF-12, RF-24
@@ -268,7 +268,7 @@
 - **Hecho cuando**: `/staff` y `/portal` responden con su propia pantalla de acceso y
   `canAccessPanel()` de cada panel exige el rol correspondiente.
 
-### - [ ] T27: Escribir test de acceso cruzado, sin sesión y cierre de sesión
+### - [x] T27: Escribir test de acceso cruzado, sin sesión y cierre de sesión
 
 - **Tipo**: test
 - **Cubre**: RF-16, RF-21, RF-22, RF-23, RF-24, RF-26
@@ -278,14 +278,14 @@
   página inicial de su portal, y cierre de sesión que vuelve a la pantalla de acceso; commit del
   test hecho.
 
-### - [ ] T28: Implementar las Login Pages propias con email y contraseña
+### - [x] T28: Implementar las Login Pages propias con email y contraseña
 
 - **Tipo**: impl
 - **Cubre**: RF-13, RF-16, RF-26
 - **Depende de**: T27
 - **Hecho cuando**: el test de T27 pasa y la suite completa queda verde.
 
-### - [ ] T29: Escribir test del corte de sesión al desactivar una cuenta
+### - [x] T29: Escribir test del corte de sesión al desactivar una cuenta
 
 - **Tipo**: test
 - **Cubre**: RF-33
@@ -293,7 +293,7 @@
 - **Hecho cuando**: el test falla y comprueba que una cuenta con sesión abierta que se desactiva
   queda fuera en su siguiente solicitud y vuelve a la pantalla de acceso; commit del test hecho.
 
-### - [ ] T30: Implementar el middleware `EnsureAccountIsActive`
+### - [x] T30: Implementar el middleware `EnsureAccountIsActive`
 
 - **Tipo**: impl
 - **Cubre**: RF-33
@@ -301,7 +301,7 @@
 - **Hecho cuando**: el test de T29 pasa, el middleware está registrado en ambos paneles y la suite
   completa queda verde.
 
-### - [ ] T31: Crear la landing pública y verificar que no hay registro público
+### - [x] T31: Crear la landing pública y verificar que no hay registro público
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-25
@@ -313,7 +313,7 @@
 
 ## Fase 6: Ingreso con Google
 
-### - [ ] T32: Escribir test del ingreso con Google
+### - [x] T32: Escribir test del ingreso con Google
 
 - **Tipo**: test
 - **Cubre**: RF-14, RF-15, RF-17
@@ -323,7 +323,7 @@
   habilitada), y flujo fallido o cancelado (vuelve a la pantalla de acceso sin crear nada); commit
   del test hecho.
 
-### - [ ] T33: Implementar las rutas de Google por portal
+### - [x] T33: Implementar las rutas de Google por portal
 
 - **Tipo**: impl
 - **Cubre**: RF-13, RF-14, RF-15, RF-17
@@ -335,7 +335,7 @@
 
 ## Fase 7: Administración y retención
 
-### - [ ] T34: Escribir test de las policies de cuentas y de registros
+### - [x] T34: Escribir test de las policies de cuentas y de registros
 
 - **Tipo**: test
 - **Cubre**: RF-9, RF-39
@@ -344,14 +344,14 @@
   intentar una acción de gestión de cuentas y al intentar consultar registros de acceso o historial
   de cuentas; commit del test hecho.
 
-### - [ ] T35: Implementar `AccountPolicy` y `AccessLogPolicy`
+### - [x] T35: Implementar `AccountPolicy` y `AccessLogPolicy`
 
 - **Tipo**: impl
 - **Cubre**: RF-9, RF-39
 - **Depende de**: T34
 - **Hecho cuando**: el test de T34 pasa y la suite completa queda verde.
 
-### - [ ] T36: Crear `AccountResource` en el panel de staff
+### - [x] T36: Crear `AccountResource` en el panel de staff
 
 - **Tipo**: ui
 - **Cubre**: RF-2, RF-6, RF-8, RF-32
@@ -359,7 +359,7 @@
 - **Hecho cuando**: un `admin` puede crear cuentas, cambiar roles y activar/desactivar desde la
   interfaz, y un test comprueba que la sección no aparece en la navegación de una cuenta `staff`.
 
-### - [ ] T37: Crear `AccessLogResource` de solo lectura
+### - [x] T37: Crear `AccessLogResource` de solo lectura
 
 - **Tipo**: ui
 - **Cubre**: RF-38
@@ -367,7 +367,7 @@
 - **Hecho cuando**: un `admin` consulta desde la interfaz los registros de acceso y el historial de
   cuentas, sin ninguna acción de edición ni de borrado disponible.
 
-### - [ ] T38: Escribir test de la purga de registros de acceso
+### - [x] T38: Escribir test de la purga de registros de acceso
 
 - **Tipo**: test
 - **Cubre**: RNF-5, RNF-6
@@ -376,7 +376,7 @@
   meses, conserva los más nuevos y **no toca ninguna fila de `account_histories`**; commit del test
   hecho.
 
-### - [ ] T39: Implementar el comando `access-logs:prune` y programarlo
+### - [x] T39: Implementar el comando `access-logs:prune` y programarlo
 
 - **Tipo**: impl
 - **Cubre**: RNF-5, RNF-6
@@ -384,13 +384,48 @@
 - **Hecho cuando**: el test de T38 pasa, el comando queda programado mensualmente en el scheduler y
   la suite completa queda verde.
 
-### - [ ] T40: Crear el comando de instalación de la primera cuenta `admin`
+### - [x] T40: Crear el comando de instalación de la primera cuenta `admin`
 
 - **Tipo**: impl
 - **Cubre**: — (supuesto de instalación, spec §9)
 - **Depende de**: T39
 - **Hecho cuando**: el comando crea una cuenta `admin` activa sobre una base vacía y falla con un
   mensaje claro si ya existe alguna cuenta `admin`.
+
+---
+
+## Fase 8: Pantallas de contraseña y umbrales (agregada tras validar la spec)
+
+### - [x] T41: Escribir test de las pantallas de definición y recuperación de contraseña
+
+- **Tipo**: test
+- **Cubre**: RF-5, RF-27, RF-28, RF-29, RF-30, RNF-1
+- **Depende de**: T40
+- **Hecho cuando**: el test falla y cubre, en cada portal: el enlace de recuperación visible en la
+  pantalla de acceso; pedir recuperación con una cuenta activa (envía el enlace) y con una
+  inexistente o inactiva (mismo mensaje, sin correo); el enlace del mail de alta apuntando al
+  portal según el rol de la cuenta y abriendo la pantalla de definición; definir la contraseña con
+  un enlace vigente (queda invalidado); un enlace vencido o ya usado, que ofrece pedir uno nuevo; y
+  el rechazo de menos de 8 caracteres; commit del test hecho.
+
+### - [x] T42: Implementar las pantallas de contraseña y la URL del enlace
+
+- **Tipo**: impl
+- **Cubre**: RF-5, RF-27, RF-28, RF-29, RF-30, RNF-1
+- **Depende de**: T41
+- **Hecho cuando**: el test de T41 pasa y la suite completa queda verde; ambos paneles tienen
+  `passwordReset()` con `PortalRequestPasswordReset` y `PortalResetPassword`, que solo delegan en
+  `RequestPasswordResetAction` y `SetPasswordAction`; el mail de alta y el de recuperación apuntan a
+  la pantalla del portal que corresponde al rol (plan D-11).
+
+### - [x] T43: Escribir test de los umbrales de sesión y de enlace
+
+- **Tipo**: test
+- **Cubre**: RNF-3, RNF-4
+- **Depende de**: T42
+- **Hecho cuando**: un test comprueba que `session.lifetime` es 120 minutos y que el vencimiento del
+  broker de contraseñas es 1440 minutos. Es un test de verificación sobre configuración ya hecha en
+  T2: pasa sin implementación nueva.
 
 ---
 
@@ -402,7 +437,7 @@
 | RF-2 | T8, T9, T36 |
 | RF-3 | T4, T7, T8, T9 |
 | RF-4 | T3, T10, T11 |
-| RF-5 | T8, T9 |
+| RF-5 | T8, T9, T41, T42 |
 | RF-6 | T12, T13, T36 |
 | RF-7 | T12, T13 |
 | RF-8 | T36 |
@@ -424,10 +459,10 @@
 | RF-24 | T26, T27 |
 | RF-25 | T31 |
 | RF-26 | T27, T28 |
-| RF-27 | T22, T23 |
-| RF-28 | T22, T23 |
-| RF-29 | T24, T25 |
-| RF-30 | T24, T25 |
+| RF-27 | T22, T23, T41, T42 |
+| RF-28 | T22, T23, T41, T42 |
+| RF-29 | T24, T25, T41, T42 |
+| RF-30 | T24, T25, T41, T42 |
 | RF-31 | T14, T15 |
 | RF-32 | T14, T15, T36 |
 | RF-33 | T29, T30 |
@@ -437,10 +472,10 @@
 | RF-37 | T6, T7, T18, T19 |
 | RF-38 | T37 |
 | RF-39 | T34, T35 |
-| RNF-1 | T22, T23 |
+| RNF-1 | T22, T23, T41, T42 |
 | RNF-2 | T20, T21 |
-| RNF-3 | T2, T22 |
-| RNF-4 | T2 |
+| RNF-3 | T2, T22, T43 |
+| RNF-4 | T2, T43 |
 | RNF-5 | T38, T39 |
 | RNF-6 | T38, T39 |
 
@@ -457,3 +492,6 @@
 - **Las traducciones de `lang/es/auth.php` figuran en el plan §5 como un ítem suelto**, pero no
   cuelgan de ningún RF puntual: acá se repartieron entre cada tarea de `impl` que produce el
   mensaje. Si se prefiere una tarea única de traducciones, hay que decidirlo en el plan.
+- **El plan no incluía la interfaz de definición y recuperación de contraseña (RF-27 a RF-30), y el mail de alta (RF-5) no tenía URL a la que apuntar.** Lo detectó el `spec-validator` al cierre de la 001: `Route [password.reset] not defined` al enviar el enlace fuera de los tests. Se resolvió con el plan D-11 y las tareas T41 a T43.
+- **RNF-2 decía "60 segundos siguientes al último intento" pero el `RateLimiter` nativo (plan D-8) usa una ventana fija desde el primer fallo.** La spec se enmendó con aprobación de Claudio (2026-10-07).
+- **RNF-4 no tenía test.** T43 verifica el umbral de sesión y el de vencimiento del enlace.

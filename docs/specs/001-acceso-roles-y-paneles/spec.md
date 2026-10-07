@@ -111,7 +111,7 @@ ingresos exitosos e intentos fallidos.
 ## 7. Requisitos no funcionales
 
 - **RNF-1**: EL SISTEMA exigirá contraseñas de al menos 8 caracteres.
-- **RNF-2**: SI se registran 5 intentos de ingreso fallidos con email y contraseña contra el mismo email dentro de 1 minuto, ENTONCES EL SISTEMA rechazará todo intento adicional contra ese email durante los 60 segundos siguientes al último intento, y volverá a aceptarlos automáticamente al vencer ese plazo.
+- **RNF-2**: SI se registran 5 intentos de ingreso fallidos con email y contraseña contra el mismo email dentro de una ventana de 60 segundos contada desde el primer fallo, ENTONCES EL SISTEMA rechazará todo intento adicional contra ese email hasta que esa ventana venza, y volverá a aceptarlos automáticamente al vencer.
 - **RNF-3**: EL SISTEMA mantendrá vigente un enlace de definición de contraseña durante 24 horas desde su envío.
 - **RNF-4**: EL SISTEMA cerrará por inactividad toda sesión, en cualquiera de los dos portales, que no tenga actividad durante 120 minutos.
 - **RNF-5**: EL SISTEMA conservará los registros de acceso (ingresos exitosos e intentos fallidos) durante 24 meses desde su creación.
@@ -145,3 +145,4 @@ anteriores.
 ## 11. Aprobación
 
 - [x] Aprobada por Claudio el 2026-09-10
+- [x] Enmienda de RNF-2 aprobada por Claudio el 2026-10-07: ventana fija de 60 s desde el primer fallo, que es lo que hace el `RateLimiter` nativo (plan D-8).

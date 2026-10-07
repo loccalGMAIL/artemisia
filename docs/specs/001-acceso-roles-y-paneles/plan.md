@@ -144,6 +144,22 @@ la spec distingue.
 - **Consecuencias**: ambos pares de rutas delegan en el mismo `AttemptLoginAction`, parametrizado
   por portal.
 
+### D-11: Pantallas propias de definición y recuperación de contraseña, sobre las Actions
+
+- **Decisión**: cada panel habilita `passwordReset()` con dos páginas propias, compartidas por ambos
+  portales: `PortalRequestPasswordReset` (pedir enlace) y `PortalResetPassword` (definir contraseña).
+  Solo recogen datos y delegan en `RequestPasswordResetAction` y `SetPasswordAction`. El enlace del
+  mail se arma con `ResetPassword::createUrlUsing()` y apunta al portal que corresponde al rol de la
+  cuenta (`AccessPortal::forAccount()`).
+- **Motivo**: RF-27 a RF-30 piden pantallas, y el plan original solo cubría las Actions. Las
+  páginas de recuperación que trae Filament muestran el estado real del broker (cuenta inexistente
+  o inactiva), lo que contradice RF-30; además no pasan por nuestras Actions (principio 3). Sin una
+  URL de reseteo definida, el mail de alta de cuenta (RF-5) no se puede generar.
+- **Alternativa descartada**: usar las páginas de Filament tal cual.
+- **Consecuencias**: el enlace de recuperación aparece en cada pantalla de acceso (RF-29) porque
+  `PortalLogin` extiende la `Login` de Filament, que lo muestra cuando el panel tiene
+  `passwordReset()`. Las rutas de Filament usan un enlace firmado, además del vencimiento del token.
+
 ## 4. Modelo de datos
 
 ### users (referenciada por otras specs; esta spec la crea)
@@ -231,6 +247,8 @@ Migraciones a crear, en orden:
 - **Filament Resources / Pages / Widgets**:
   - `StaffPanelProvider` (`/staff`) y `ClientPanelProvider` (`/portal`), cada uno con su propia
     Login Page (formulario email/contraseña + botón Google) y `canAccessPanel()` según rol.
+  - `PortalRequestPasswordReset` y `PortalResetPassword` (ambos paneles, D-11): pedir el enlace y
+    definir la contraseña, delegando en `RequestPasswordResetAction` y `SetPasswordAction`.
   - `AccountResource` (panel `staff`, oculto para `staff` vía `shouldRegisterNavigation`, RF-8).
   - `AccessLogResource` (panel `staff`, solo `admin`, RF-38/RF-39): registros de acceso e
     historial de cuentas, de solo lectura.
@@ -243,17 +261,17 @@ Migraciones a crear, en orden:
 
 ## 6. Contratos de Actions y servicios
 
-- **CreateAccountAction::handle(array $data): User** — crea la cuenta activa, `syncRoles([$data['role']])`,
-  envía el enlace de definición vía el broker, registra `AccountHistory` de alta.
+- **CreateAccountAction::handle(array $data, ?User $actor = null): User** — crea la cuenta activa, `syncRoles([$data['role']])`,
+  envía el enlace de definición vía el broker, registra `AccountHistory` de alta con `$actor` como autor (RF-35); sin actor (instalación) la cuenta es su propia autora.
 - **ChangeAccountRoleAction::handle(User $target, string $role, User $actor): User** — lanza
   excepción si `$target->is($actor)`; lanza excepción si el cambio deja sin ningún `admin` activo;
   registra historial.
-- **ActivateAccountAction::handle(User $target): User** / **DeactivateAccountAction::handle(User
+- **ActivateAccountAction::handle(User $target, User $actor): User** / **DeactivateAccountAction::handle(User
   $target, User $actor): User** — la segunda valida no-autodesactivación y último admin; invalida
-  cualquier token de `password_reset_tokens` vigente para esa cuenta; registra historial.
+  cualquier token de `password_reset_tokens` vigente para esa cuenta; registra historial con `$actor` como autor (RF-35).
 - **SetPasswordAction::handle(string $token, string $email, string $password): void** — delega en
   el `PasswordBroker`; si el token es inválido o vencido, lanza excepción con el motivo (RF-28).
-- **RequestPasswordResetAction::handle(string $email): void** — siempre devuelve éxito silencioso;
+- **RequestPasswordResetAction::handle(string $email): string** — siempre devuelve el mismo mensaje de confirmación;
   solo dispara el envío real si el email corresponde a una cuenta activa.
 - **AttemptLoginAction::handle(array $credentials|SocialiteUser $googleUser, string $portal,
   string $method): AuthResult** — evalúa en orden: (1) credenciales o email de Google corresponden
@@ -311,7 +329,7 @@ Migraciones a crear, en orden:
 | RF | Descripción corta | Cubierto por |
 |---|---|---|
 | RF-1 | Sin registro público | Ausencia deliberada de ruta de registro |
-| RF-2, RF-3, RF-5 | Alta de cuenta con rol único | `CreateAccountAction`, migración `create_users_table`, `RoleSeeder` |
+| RF-2, RF-3, RF-5 | Alta de cuenta con rol único | `CreateAccountAction`, migración `create_users_table`, `RoleSeeder`; el enlace del mail apunta a `PortalResetPassword` (D-11) |
 | RF-4 | Email único | `UNIQUE(email)`, `CreateAccountAction` |
 | RF-6 | Cambiar rol de cualquier cuenta salvo la propia | `ChangeAccountRoleAction` |
 | RF-7 | Rol nuevo aplica en la siguiente solicitud | Comportamiento estándar de `spatie/laravel-permission` (sin caché de permisos entre requests) |
@@ -332,8 +350,8 @@ Migraciones a crear, en orden:
 | RF-24 | Ruta que no corresponde al rol | `canAccessPanel()` |
 | RF-25 | Landing anónima | Ruta `/` sin middleware `auth` |
 | RF-26 | Logout a la pantalla de acceso | Comportamiento estándar de logout de Filament |
-| RF-27, RF-28 | Enlace vigente / vencido o usado | `SetPasswordAction`, broker nativo (D-3) |
-| RF-29, RF-30 | Recuperación por email, mensaje uniforme | `RequestPasswordResetAction` |
+| RF-27, RF-28 | Enlace vigente / vencido o usado | `SetPasswordAction`, broker nativo (D-3), pantalla `PortalResetPassword` (D-11) |
+| RF-29, RF-30 | Recuperación por email, mensaje uniforme | `RequestPasswordResetAction`, pantalla `PortalRequestPasswordReset` y enlace en cada pantalla de acceso (D-11) |
 | RF-31 | Invalidar enlace al desactivar | `DeactivateAccountAction` |
 | RF-32 | Activar/desactivar cualquier cuenta salvo la propia | `ActivateAccountAction`, `DeactivateAccountAction` |
 | RF-33 | Corte de sesión al desactivar | Middleware `EnsureAccountIsActive` (D-5) |
