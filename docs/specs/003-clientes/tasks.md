@@ -91,7 +91,7 @@
 - **Depende de**: T7
 - **Hecho cuando**: el test falla y cubre alta sin domicilio, carga de un único domicilio, modificación posterior y asiento de historial con snapshots; commit del test hecho.
 
-### - [ ] T9: Implementar `UpdateClientAddressAction`
+### - [x] T9: Implementar `UpdateClientAddressAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-9, RF-10, RF-11, RF-12, RF-36

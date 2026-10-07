@@ -62,6 +62,22 @@ class Client extends Model
     }
 
     /**
+     * The address fields as stored, for history entries.
+     *
+     * @return array<string, string|int|null>
+     */
+    public function addressSnapshot(): array
+    {
+        return [
+            'street' => $this->street,
+            'street_number' => $this->street_number,
+            'city' => $this->city,
+            'province_id' => $this->province_id,
+            'postal_code' => $this->postal_code,
+        ];
+    }
+
+    /**
      * Phone of the primary contact, or of another contact if the primary has none (RF-21).
      * Null when no contact has a phone (RF-22).
      */
