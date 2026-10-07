@@ -115,7 +115,8 @@ registra cada alta y cada cambio con su snapshot antes/después.
 ### D-8: Contacto principal garantizado también a nivel de base
 
 - **Decisión**: columna generada virtual `primary_marker` (`client_id` si `is_primary = true`,
-  si no `NULL`) con índice `UNIQUE` sobre esa columna, además de la validación en la Action.
+  si no `NULL`) con índice `UNIQUE` sobre esa columna, además de la validación en la Action. La
+  expresión es `CASE WHEN is_primary = 1 THEN client_id ELSE NULL END`, portable entre MySQL y SQLite.
 - **Motivo**: refuerza RF-17 (exactamente un principal) incluso ante una escritura concurrente que
   la validación de aplicación no llegue a serializar.
 - **Alternativa descartada**: confiar solo en la regla de negocio de la Action. Una carrera entre
@@ -274,7 +275,9 @@ Migraciones a crear, en orden:
   - `ExportClientListAction` — genera el CSV del listado filtrado.
 - **Policies**: `ClientPolicy` (staff: `viewAny`, `view`, `create`, `update`, `archive`, `restore`,
   `linkAccount`, `unlinkAccount`, `export` — todas iguales para `admin` y `staff`);
-  `ClientPortalPolicy` (cliente: `view`, `updateAddress`, `updateContacts`, siempre acotado a
+  `ClientPortalPolicy` (cliente: `view`, `updateAddress`, `updateContacts`, registradas como
+  habilidades `portal.view`, `portal.updateAddress` y `portal.updateContacts` porque Laravel admite una
+  sola policy por modelo; siempre acotado a
   `auth()->user()->client_id`).
 - **Filament Resources / Pages / Widgets**:
   - Panel `staff`: `ClientResource` (list/create/edit/view), relation manager de contactos,
@@ -289,36 +292,37 @@ Migraciones a crear, en orden:
 
 ## 6. Contratos de Actions y servicios
 
-- **CreateClientAction::handle(array $data): Client** — valida identificación según
+- **CreateClientAction::handle(array $data, User $actor): Client** — valida identificación según
   `person_type`, normaliza y verifica unicidad de `document` (con `withTrashed()`), crea el
   cliente activo, registra `ClientHistory` de alta. Lanza `ValidationException` en conflicto de
   documento o campos faltantes.
-- **UpdateClientIdentificationAction::handle(Client $client, array $data): Client** — rechaza si
+- **UpdateClientIdentificationAction::handle(Client $client, array $data, User $actor): Client** — rechaza si
   `data['person_type']` difiere del actual; registra historial con snapshot anterior/nuevo.
-- **UpdateClientAddressAction::handle(Client $client, array $data): Client** — sin validaciones de
+- **UpdateClientAddressAction::handle(Client $client, array $data, User $actor): Client** — sin validaciones de
   obligatoriedad; registra historial.
-- **AddClientContactAction::handle(Client $client, array $data): ClientContact** — valida tope de
+- **AddClientContactAction::handle(Client $client, array $data, User $actor): ClientContact** — valida tope de
   10 contactos y teléfono-o-email; marca principal si es el primero; registra historial.
-- **UpdateClientContactAction::handle(ClientContact $contact, array $data): ClientContact** —
+- **UpdateClientContactAction::handle(ClientContact $contact, array $data, User $actor): ClientContact** —
   registra historial con el cliente dueño del contacto.
-- **RemoveClientContactAction::handle(ClientContact $contact): void** — si era principal y quedan
+- **RemoveClientContactAction::handle(ClientContact $contact, User $actor): void** — si era principal y quedan
   otros, marca otro como principal en la misma transacción; registra historial con el snapshot
   del contacto quitado.
-- **SetPrimaryContactAction::handle(Client $client, ClientContact $contact): void** — desmarca el
+- **SetPrimaryContactAction::handle(Client $client, ClientContact $contact, User $actor): void** — desmarca el
   principal anterior y marca el nuevo dentro de una transacción.
-- **ActivateClientAction::handle(Client $client): Client** / **DeactivateClientAction::handle**
+- **ActivateClientAction::handle(Client $client, User $actor): Client** / **DeactivateClientAction::handle**
   — cambian `status`, registran historial.
-- **ArchiveClientAction::handle(Client $client): Client** — `delete()` + `status = inactive`,
+- **ArchiveClientAction::handle(Client $client, User $actor): Client** — `delete()` + `status = inactive`,
   todo en una transacción; registra historial.
-- **RestoreClientAction::handle(Client $client): Client** — `restore()`, mantiene
+- **RestoreClientAction::handle(Client $client, User $actor): Client** — `restore()`, mantiene
   `status = inactive`; registra historial.
-- **LinkAccountToClientAction::handle(Client $client, User $account): void** — lanza excepción si
+- **LinkAccountToClientAction::handle(Client $client, User $account, User $actor): void** — lanza excepción si
   `$account->client_id` ya está asignado a otro cliente; registra historial.
-- **UnlinkAccountFromClientAction::handle(User $account): void** — limpia el vínculo e invalida la
+- **UnlinkAccountFromClientAction::handle(User $account, User $actor): void** — limpia el vínculo e invalida la
   sesión activa de esa cuenta (coordinado con el mecanismo de corte de sesión de la spec `001`);
   registra historial.
-- **ExportClientListAction::handle(array $filters): StreamedResponse** — aplica los mismos
-  filtros/orden/búsqueda que el listado y devuelve el CSV en streaming.
+- **ExportClientListAction::handle(Builder $query): StreamedResponse** — recibe la consulta del listado
+  (ya con búsqueda, filtros y orden, tomada de la tabla de Filament) y devuelve el CSV en streaming
+  con `cursor()`, con BOM UTF-8 y protegiendo las celdas contra inyección de fórmulas.
 
 ## 7. Reglas de negocio y validaciones
 

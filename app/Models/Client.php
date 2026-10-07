@@ -1,0 +1,202 @@
+<?php
+
+namespace App\Models;
+
+use App\Enums\ClientStatus;
+use App\Enums\ClientType;
+use Database\Factories\ClientFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+
+#[Fillable([
+    'person_type', 'first_name', 'last_name', 'company_name', 'document', 'status',
+    'street', 'street_number', 'city', 'province_id', 'postal_code', 'created_by',
+])]
+class Client extends Model
+{
+    /** @use HasFactory<ClientFactory> */
+    use HasFactory, SoftDeletes;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'person_type' => ClientType::class,
+            'status' => ClientStatus::class,
+        ];
+    }
+
+    /**
+     * Clients that can be chosen for a new budget: active and not archived (RF-26, RF-30).
+     * The archived ones are already left out by the soft delete scope.
+     *
+     * @param  Builder<Client>  $query
+     */
+    #[Scope]
+    protected function availableForBudgets(Builder $query): void
+    {
+        $query->where('status', ClientStatus::Active);
+    }
+
+    /**
+     * SQL for the display name, so the list can sort and search by it (RF-5, RF-52, RF-54).
+     * Concatenation differs between SQLite and MySQL.
+     */
+    public static function displayNameSql(): string
+    {
+        $fullName = DB::connection()->getDriverName() === 'sqlite'
+            ? "TRIM(COALESCE(first_name, '') || ' ' || COALESCE(last_name, ''))"
+            : "TRIM(CONCAT(COALESCE(first_name, ''), ' ', COALESCE(last_name, '')))";
+
+        return "COALESCE(company_name, {$fullName})";
+    }
+
+    /**
+     * Case-insensitive text search over the display name, the document and the phone or
+     * email of any contact (RF-52). LIKE wildcards typed by the user are taken literally.
+     *
+     * @param  Builder<Client>  $query
+     */
+    #[Scope]
+    protected function search(Builder $query, string $term): void
+    {
+        $term = trim($term);
+
+        if ($term === '') {
+            return;
+        }
+
+        $like = '%'.self::escapeLike(mb_strtolower($term)).'%';
+        $digits = (string) preg_replace('/[\s.\-]/', '', $term);
+
+        $query->where(function (Builder $query) use ($like, $digits): void {
+            $query->whereRaw('LOWER('.self::displayNameSql().") LIKE ? ESCAPE '!'", [$like]);
+
+            if ($digits !== '' && ctype_digit($digits)) {
+                $query->orWhereRaw("document LIKE ? ESCAPE '!'", ['%'.self::escapeLike($digits).'%']);
+            }
+
+            $query->orWhereHas('contacts', function (Builder $contacts) use ($like): void {
+                $contacts->whereRaw("LOWER(phone) LIKE ? ESCAPE '!'", [$like])
+                    ->orWhereRaw("LOWER(email) LIKE ? ESCAPE '!'", [$like]);
+            });
+        });
+    }
+
+    private static function escapeLike(string $value): string
+    {
+        return str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $value);
+    }
+
+    /**
+     * Full name of an individual, or the company name (RF-5). Computed, not stored (plan D-2).
+     *
+     * @return Attribute<string, never>
+     */
+    protected function displayName(): Attribute
+    {
+        return Attribute::get(fn (): string => $this->person_type === ClientType::Company
+            ? (string) $this->company_name
+            : trim($this->first_name.' '.$this->last_name));
+    }
+
+    /**
+     * The identification fields as stored, for history entries.
+     *
+     * @return array<string, string|null>
+     */
+    public function identificationSnapshot(): array
+    {
+        return [
+            'person_type' => $this->person_type->value,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'company_name' => $this->company_name,
+            'document' => $this->document,
+        ];
+    }
+
+    /**
+     * The address fields as stored, for history entries.
+     *
+     * @return array<string, string|int|null>
+     */
+    public function addressSnapshot(): array
+    {
+        return [
+            'street' => $this->street,
+            'street_number' => $this->street_number,
+            'city' => $this->city,
+            'province_id' => $this->province_id,
+            'postal_code' => $this->postal_code,
+        ];
+    }
+
+    /**
+     * Phone of the primary contact, or of another contact if the primary has none (RF-21).
+     * Null when no contact has a phone (RF-22).
+     */
+    public function contactPhone(): ?string
+    {
+        return $this->contacts()
+            ->whereNotNull('phone')
+            ->where('phone', '!=', '')
+            ->orderByDesc('is_primary')
+            ->orderBy('id')
+            ->value('phone');
+    }
+
+    /**
+     * @return BelongsTo<Province, $this>
+     */
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * @return HasMany<ClientContact, $this>
+     */
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(ClientContact::class);
+    }
+
+    /**
+     * Change history, oldest first (RF-37).
+     *
+     * @return HasMany<ClientHistory, $this>
+     */
+    public function histories(): HasMany
+    {
+        return $this->hasMany(ClientHistory::class)->orderBy('created_at')->orderBy('id');
+    }
+
+    /**
+     * Portal accounts linked to this client.
+     *
+     * @return HasMany<User, $this>
+     */
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+}

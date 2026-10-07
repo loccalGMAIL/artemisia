@@ -5,9 +5,12 @@ namespace App\Providers;
 use App\Enums\AccessPortal;
 use App\Models\AccessLog;
 use App\Models\AccountHistory;
+use App\Models\Client;
 use App\Models\User;
 use App\Policies\AccessLogPolicy;
 use App\Policies\AccountPolicy;
+use App\Policies\ClientPolicy;
+use App\Policies\ClientPortalPolicy;
 use Filament\Facades\Filament;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Gate;
@@ -33,6 +36,13 @@ class AppServiceProvider extends ServiceProvider
             fn (User $user, string $token): string => Filament::getPanel(AccessPortal::forAccount($user)->value)
                 ->getResetPasswordUrl($token, $user),
         );
+
+        Gate::policy(Client::class, ClientPolicy::class);
+
+        // One policy per model, so the portal abilities are registered by name (spec 003).
+        Gate::define('portal.view', [ClientPortalPolicy::class, 'view']);
+        Gate::define('portal.updateAddress', [ClientPortalPolicy::class, 'updateAddress']);
+        Gate::define('portal.updateContacts', [ClientPortalPolicy::class, 'updateContacts']);
 
         Gate::policy(User::class, AccountPolicy::class);
         Gate::policy(AccessLog::class, AccessLogPolicy::class);
