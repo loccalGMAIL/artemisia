@@ -187,7 +187,7 @@
 - **Depende de**: T19
 - **Hecho cuando**: el test falla y cubre creación, edición, domicilio, contactos, estado, archivado/restauración, vínculos de cuentas y ficha con identificación, domicilio, contactos, estado e historial; commit del test hecho.
 
-### - [ ] T21: Crear `ClientResource` para gestión y ficha de clientes
+### - [x] T21: Crear `ClientResource` para gestión y ficha de clientes
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-7, RF-9, RF-12, RF-13, RF-19, RF-25, RF-28, RF-32, RF-37, RF-38, RF-41, RF-45
