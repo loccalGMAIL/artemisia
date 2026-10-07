@@ -134,7 +134,7 @@
 - **Depende de**: T10
 - **Hecho cuando**: el test de T10 pasa y la suite completa queda verde.
 
-### - [ ] T12: Escribir test de cambio de rol, con sus dos bloqueos
+### - [x] T12: Escribir test de cambio de rol, con sus dos bloqueos
 
 - **Tipo**: test
 - **Cubre**: RF-6, RF-7, RF-10, RF-11
