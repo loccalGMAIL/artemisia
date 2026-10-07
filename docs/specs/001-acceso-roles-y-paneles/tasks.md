@@ -313,7 +313,7 @@
 
 ## Fase 6: Ingreso con Google
 
-### - [ ] T32: Escribir test del ingreso con Google
+### - [x] T32: Escribir test del ingreso con Google
 
 - **Tipo**: test
 - **Cubre**: RF-14, RF-15, RF-17
