@@ -272,7 +272,7 @@
 - **Depende de**: T30
 - **Hecho cuando**: el test falla si el listado principal con búsqueda, filtros y orden sobre 5.000 clientes supera 2 segundos en entorno de test; commit del test hecho.
 
-### - [ ] T32: Ajustar consultas e índices del listado
+### - [x] T32: Ajustar consultas e índices del listado
 
 - **Tipo**: impl
 - **Cubre**: RNF-5

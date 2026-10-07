@@ -26,6 +26,9 @@ return new class extends Migration
                 ->nullable()
                 ->unique();
             $table->timestamps();
+
+            // Plan section 4. Explicit because SQLite, unlike MySQL, does not index foreign keys.
+            $table->index('client_id');
         });
     }
 
