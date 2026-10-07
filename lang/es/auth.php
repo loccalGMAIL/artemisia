@@ -5,4 +5,10 @@ return [
     'cannot_change_own_role' => 'No se puede cambiar el rol de la propia cuenta.',
     'cannot_deactivate_own_account' => 'No se puede desactivar la propia cuenta.',
     'last_active_admin' => 'La operación dejaría al sistema sin ninguna cuenta admin activa.',
+    'rejection' => [
+        'invalid_credentials' => 'Las credenciales ingresadas no son válidas.',
+        'account_not_enabled' => 'Esa cuenta no está habilitada. Contacte a la agencia.',
+        'account_inactive' => 'La cuenta está deshabilitada. Contacte a la agencia.',
+        'wrong_portal' => 'Esta cuenta no accede a ese portal.',
+    ],
 ];

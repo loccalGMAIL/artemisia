@@ -180,7 +180,7 @@
   rol que no corresponde al portal, e ingreso válido; incluye el caso de contraseña incorrecta
   contra una cuenta inactiva; commit del test hecho.
 
-### - [ ] T17: Implementar `AttemptLoginAction`
+### - [x] T17: Implementar `AttemptLoginAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-17, RF-18, RF-19, RF-20, RF-21, RF-22
