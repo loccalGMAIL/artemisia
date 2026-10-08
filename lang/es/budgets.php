@@ -25,6 +25,9 @@ return [
     ],
     'validation' => [
         'service_name_conflict' => 'Ya existe un servicio con el nombre «:name».',
+        'client_required' => 'Debe elegir el cliente destinatario del presupuesto.',
+        'client_missing' => 'El cliente elegido no existe.',
+        'validity_after_issue' => 'La fecha de validez debe ser posterior a la fecha de emisión.',
         'service_not_deletable' => 'Los servicios no se eliminan: solo pueden desactivarse.',
     ],
     'services' => [

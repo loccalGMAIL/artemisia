@@ -105,7 +105,7 @@
 - **Depende de**: T9
 - **Hecho cuando**: el test falla y verifica cliente obligatorio, estado `draft`, identificador por `id`, modalidad única, autor, fecha de validez obligatoria y posterior, y creación aunque el cliente esté inactivo o archivado; commit del test hecho.
 
-### - [ ] T11: Implementar creación de presupuesto
+### - [x] T11: Implementar creación de presupuesto
 
 - **Tipo**: impl
 - **Cubre**: RF-11, RF-12, RF-13, RF-14, RF-15, RF-17, RF-18, RF-19, RF-20
