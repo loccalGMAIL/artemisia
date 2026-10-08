@@ -41,7 +41,7 @@
 - **Depende de**: T1
 - **Hecho cuando**: `budgets`, `budget_items` y `budget_histories` existen con `SoftDeletes` en `budgets`, totales desnormalizados, índices del plan §4 y referencias a `clients` y `users`.
 
-### - [ ] T3: Crear modelos, enums, factories y relaciones
+### - [x] T3: Crear modelos, enums, factories y relaciones
 
 - **Tipo**: impl
 - **Cubre**: RF-2, RF-13, RF-15, RF-24, RF-25, RF-35, RF-42, RNF-1
