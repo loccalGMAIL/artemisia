@@ -34,7 +34,7 @@
 - **Depende de**: —
 - **Hecho cuando**: `php artisan migrate:fresh --seed` crea `work_categories`, `services` y `service_price_histories` con columnas, índices, claves foráneas y datos de referencia del plan §4.
 
-### - [ ] T2: Crear migraciones de presupuestos
+### - [x] T2: Crear migraciones de presupuestos
 
 - **Tipo**: migration
 - **Cubre**: RF-11, RF-13, RF-14, RF-15, RF-35, RF-36, RF-37, RF-42, RF-46, RF-47, RF-51, RF-52, RF-53, RNF-1, RNF-8
