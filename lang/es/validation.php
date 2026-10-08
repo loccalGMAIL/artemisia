@@ -3,9 +3,18 @@
 return [
     'required' => 'El campo :attribute es obligatorio.',
     'string' => 'El campo :attribute debe ser texto.',
+    'integer' => 'El campo :attribute debe ser un número entero.',
+    'numeric' => 'El campo :attribute debe ser un número.',
+    'decimal' => 'El campo :attribute debe tener hasta :decimal decimales.',
+    'exists' => 'El valor elegido para :attribute no es válido.',
     'enum' => 'El campo :attribute seleccionado no es válido.',
+    'date' => 'El campo :attribute debe ser una fecha válida.',
+    'min' => [
+        'numeric' => 'El campo :attribute debe ser como mínimo :min.',
+    ],
     'max' => [
         'string' => 'El campo :attribute no debe superar los :max caracteres.',
+        'numeric' => 'El campo :attribute no debe ser mayor que :max.',
     ],
     'password' => [
         'min' => 'La :attribute debe tener al menos :min caracteres.',
@@ -26,5 +35,17 @@ return [
         'city' => 'localidad',
         'province_id' => 'provincia',
         'postal_code' => 'código postal',
+        'description' => 'descripción',
+        'work_category_id' => 'categoría',
+        'list_price' => 'precio de lista',
+        'title' => 'título',
+        'client_id' => 'cliente',
+        'modality' => 'modalidad',
+        'issue_date' => 'fecha de emisión',
+        'validity_date' => 'fecha de validez',
+        'quantity' => 'cantidad',
+        'discount_type' => 'tipo de descuento',
+        'discount_value' => 'valor del descuento',
+        'rejection_reason' => 'motivo de rechazo',
     ],
 ];

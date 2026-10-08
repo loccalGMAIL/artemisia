@@ -59,7 +59,7 @@
 - **Depende de**: T3
 - **Hecho cuando**: el test falla y verifica alta activa, categoría obligatoria, conflicto por nombre normalizado contra servicios activos o desactivados, y primer asiento de `service_price_histories`; commit del test hecho.
 
-### - [ ] T5: Implementar alta de servicio
+### - [x] T5: Implementar alta de servicio
 
 - **Tipo**: impl
 - **Cubre**: RF-1, RF-2, RF-3, RF-5, RF-9, RF-10
