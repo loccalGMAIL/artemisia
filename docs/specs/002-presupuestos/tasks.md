@@ -27,7 +27,7 @@
 
 ## Fase 1: Esquema y base de dominio
 
-### - [ ] T1: Crear migraciones del catálogo de servicios
+### - [x] T1: Crear migraciones del catálogo de servicios
 
 - **Tipo**: migration
 - **Cubre**: RF-1, RF-2, RF-3, RF-5, RF-7, RF-9, RF-10, RNF-1, RNF-8
