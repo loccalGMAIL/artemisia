@@ -49,7 +49,7 @@ it('RF-15, RF-42: la modalidad y el estado son enums y el presupuesto nace en bo
 
 it('RF-42: solo borrador y enviado admiten cambios', function (BudgetStatus $status, bool $editable) {
     expect($status->isEditable())->toBe($editable);
-})->with([
+})->with(fn () => [
     'borrador' => [BudgetStatus::Draft, true],
     'enviado' => [BudgetStatus::Sent, true],
     'aceptado' => [BudgetStatus::Accepted, false],
