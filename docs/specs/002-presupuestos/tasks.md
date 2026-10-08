@@ -66,7 +66,7 @@
 - **Depende de**: T4
 - **Hecho cuando**: `CreateServiceAction` pasa el test de T4, usa mensajes de `lang/es/budgets.php` y la suite completa queda verde.
 
-### - [ ] T6: Escribir test de edición de servicio, cambio de precio y activación
+### - [x] T6: Escribir test de edición de servicio, cambio de precio y activación
 
 - **Tipo**: test
 - **Cubre**: RF-4, RF-5, RF-6, RF-7, RF-8, RF-9, RF-10
