@@ -80,7 +80,7 @@
 - **Depende de**: T6
 - **Hecho cuando**: `UpdateServiceAction` y `ToggleServiceActiveAction` pasan el test de T6 y la suite completa queda verde.
 
-### - [ ] T8: Escribir test de acceso al catálogo desde staff y rechazo al cliente
+### - [x] T8: Escribir test de acceso al catálogo desde staff y rechazo al cliente
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-4, RF-7, RF-10, RF-60
