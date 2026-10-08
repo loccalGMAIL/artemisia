@@ -52,7 +52,7 @@
 
 ## Fase 2: Catálogo de servicios
 
-### - [ ] T4: Escribir test de alta de servicio con categoría, unicidad e historial inicial
+### - [x] T4: Escribir test de alta de servicio con categoría, unicidad e historial inicial
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-3, RF-5, RF-9, RF-10
