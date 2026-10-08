@@ -73,7 +73,7 @@
 - **Depende de**: T5
 - **Hecho cuando**: el test falla y cubre edición de datos, registro de cambio de precio, preservación de precios copiados en ítems existentes, desactivación/reactivación y exclusión de servicios inactivos para nuevos ítems; commit del test hecho.
 
-### - [ ] T7: Implementar edición y activación de servicios
+### - [x] T7: Implementar edición y activación de servicios
 
 - **Tipo**: impl
 - **Cubre**: RF-4, RF-5, RF-6, RF-7, RF-8, RF-9, RF-10

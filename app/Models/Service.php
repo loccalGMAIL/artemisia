@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Database\Factories\ServiceFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +26,17 @@ class Service extends Model
             'list_price' => 'decimal:2',
             'is_active' => 'boolean',
         ];
+    }
+
+    /**
+     * Services that can be added to a budget: a deactivated one is not offered (RF-8).
+     *
+     * @param  Builder<Service>  $query
+     */
+    #[Scope]
+    protected function active(Builder $query): void
+    {
+        $query->where('is_active', true);
     }
 
     /**
