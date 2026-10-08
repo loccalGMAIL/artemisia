@@ -98,7 +98,7 @@
 
 ## Fase 3: Alta y cabecera de presupuestos
 
-### - [ ] T10: Escribir test de creación de presupuesto
+### - [x] T10: Escribir test de creación de presupuesto
 
 - **Tipo**: test
 - **Cubre**: RF-11, RF-12, RF-13, RF-14, RF-15, RF-17, RF-18, RF-19, RF-20
