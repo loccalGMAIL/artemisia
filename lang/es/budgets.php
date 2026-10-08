@@ -25,5 +25,34 @@ return [
     ],
     'validation' => [
         'service_name_conflict' => 'Ya existe un servicio con el nombre «:name».',
+        'service_not_deletable' => 'Los servicios no se eliminan: solo pueden desactivarse.',
+    ],
+    'services' => [
+        'model' => 'servicio',
+        'plural' => 'Servicios',
+        'fields' => [
+            'name' => 'Nombre',
+            'description' => 'Descripción',
+            'category' => 'Categoría',
+            'list_price' => 'Precio de lista',
+            'is_active' => 'Activo',
+        ],
+        'actions' => [
+            'activate' => 'Reactivar',
+            'deactivate' => 'Desactivar',
+        ],
+        'notifications' => [
+            'created' => 'Servicio creado.',
+            'saved' => 'Servicio actualizado.',
+            'activated' => 'Servicio reactivado.',
+            'deactivated' => 'Servicio desactivado.',
+        ],
+        'price_histories' => [
+            'title' => 'Historial de precios',
+            'date' => 'Fecha y hora',
+            'old_price' => 'Precio anterior',
+            'new_price' => 'Precio nuevo',
+            'author' => 'Autor',
+        ],
     ],
 ];

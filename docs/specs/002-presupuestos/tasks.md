@@ -87,7 +87,7 @@
 - **Depende de**: T7
 - **Hecho cuando**: el test falla y comprueba que `admin` y `staff` gestionan servicios e historial desde el panel `staff`, y que un usuario `client` recibe permiso insuficiente; commit del test hecho.
 
-### - [ ] T9: Crear `ServicePolicy` y `ServiceResource`
+### - [x] T9: Crear `ServicePolicy` y `ServiceResource`
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-4, RF-7, RF-10, RF-60
