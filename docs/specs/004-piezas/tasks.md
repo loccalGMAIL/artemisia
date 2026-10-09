@@ -102,7 +102,7 @@
 - **Depende de**: T9
 - **Hecho cuando**: el test de T9 pasa y la suite completa queda verde.
 
-### - [ ] T11: Escribir test de independencia frente a cambios posteriores del presupuesto
+### - [x] T11: Escribir test de independencia frente a cambios posteriores del presupuesto
 
 - **Tipo**: test
 - **Cubre**: RF-8
