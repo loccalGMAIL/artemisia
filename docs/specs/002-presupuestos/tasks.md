@@ -144,7 +144,7 @@
 - **Depende de**: T14
 - **Hecho cuando**: `AddBudgetItemAction` pasa el test de T14, recalcula totales y la suite completa queda verde.
 
-### - [ ] T16: Escribir test de modificación, actualización de precio y remoción de ítems
+### - [x] T16: Escribir test de modificación, actualización de precio y remoción de ítems
 
 - **Tipo**: test
 - **Cubre**: RF-26, RF-27, RF-28, RF-29, RF-30, RF-32, RF-33, RF-48
