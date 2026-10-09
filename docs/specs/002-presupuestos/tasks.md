@@ -130,7 +130,7 @@
 
 ## Fase 4: Ítems, totales y descuentos
 
-### - [ ] T14: Escribir test de agregado de ítems
+### - [x] T14: Escribir test de agregado de ítems
 
 - **Tipo**: test
 - **Cubre**: RF-21, RF-22, RF-23, RF-24, RF-25, RF-29, RF-31, RF-33, RNF-4
