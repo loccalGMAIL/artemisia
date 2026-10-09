@@ -14,7 +14,7 @@ use Illuminate\Validation\ValidationException;
 final class FormValidation
 {
     /** Errors about the whole operation rather than one field, shown as a notification. */
-    private const NON_FIELD_KEYS = ['contacts', 'contact'];
+    private const NON_FIELD_KEYS = ['contacts', 'contact', 'items'];
 
     public static function prefixed(ValidationException $exception, string $statePath): ValidationException
     {

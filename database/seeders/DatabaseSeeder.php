@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             ProvinceSeeder::class,
+            WorkCategorySeeder::class,
         ]);
     }
 }

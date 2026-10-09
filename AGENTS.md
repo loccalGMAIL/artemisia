@@ -26,6 +26,7 @@ cliente, aprobación de piezas, historial de pagos e información propia.
 - MySQL 8
 - spatie/laravel-permission (roles y permisos)
 - laravel/socialite (login con Google)
+- barryvdh/laravel-dompdf (PDF de presupuestos)
 - Pest (tests), Laravel Pint (estilo)
 - Node 20+ y Vite para assets
 

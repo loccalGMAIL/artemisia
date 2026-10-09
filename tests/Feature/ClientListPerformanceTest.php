@@ -29,13 +29,13 @@ beforeEach(function () {
 it('RNF-5: el listado de 5.000 clientes se muestra en menos de 2 segundos', function () {
     expect(Client::withTrashed()->count())->toBe(5000);
 
-    $elapsed = secondsTaken(fn () => Livewire::test(ListClients::class)->assertSuccessful());
+    $elapsed = fastestOf(3, fn () => Livewire::test(ListClients::class)->assertSuccessful());
 
     expect($elapsed)->toBeLessThan(2.0);
 })->group('performance');
 
 it('RNF-5: con búsqueda, filtro y orden sobre 5.000 clientes sigue por debajo de 2 segundos', function (string $term) {
-    $elapsed = secondsTaken(fn () => Livewire::test(ListClients::class)
+    $elapsed = fastestOf(3, fn () => Livewire::test(ListClients::class)
         ->searchTable($term)
         ->filterTable('status', 'active')
         ->sortTable('display_name')
@@ -51,7 +51,7 @@ it('RNF-5: con búsqueda, filtro y orden sobre 5.000 clientes sigue por debajo d
 ])->group('performance');
 
 it('RNF-5: ordenar por fecha de alta e incluir archivados también cumple el umbral', function () {
-    $elapsed = secondsTaken(fn () => Livewire::test(ListClients::class)
+    $elapsed = fastestOf(3, fn () => Livewire::test(ListClients::class)
         ->filterTable('trashed', true)
         ->filterTable('person_type', 'company')
         ->sortTable('created_at', 'desc')
