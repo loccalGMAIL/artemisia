@@ -88,7 +88,7 @@
 - **Depende de**: T7
 - **Hecho cuando**: el test de T7 pasa, cada pieza creada registra su historial y la suite completa queda verde.
 
-### - [ ] T9: Escribir test de pieza suelta
+### - [x] T9: Escribir test de pieza suelta
 
 - **Tipo**: test
 - **Cubre**: RF-5, RF-6, RF-7, RF-9, RF-10, RF-16, RF-18, RF-19, RF-38
