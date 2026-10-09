@@ -240,7 +240,7 @@
 
 ## Fase 7: PDF y WhatsApp
 
-### - [ ] T28: Escribir test de generación y descarga de PDF
+### - [x] T28: Escribir test de generación y descarga de PDF
 
 - **Tipo**: test
 - **Cubre**: RF-54, RF-61, RF-62, RF-63, RF-64, RF-65, RF-66, RF-67, RF-71, RNF-6
