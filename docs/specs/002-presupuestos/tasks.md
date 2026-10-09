@@ -119,7 +119,7 @@
 - **Depende de**: T11
 - **Hecho cuando**: el test falla y cubre edición en `draft` y `sent`, rechazo en `accepted` o `rejected`, validación de fechas e historial `header_changed`; commit del test hecho.
 
-### - [ ] T13: Implementar edición de cabecera
+### - [x] T13: Implementar edición de cabecera
 
 - **Tipo**: impl
 - **Cubre**: RF-16, RF-18, RF-19, RF-20, RF-33, RF-48

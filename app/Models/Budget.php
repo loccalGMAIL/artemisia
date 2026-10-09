@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\BudgetDiscountType;
 use App\Enums\BudgetModality;
 use App\Enums\BudgetStatus;
+use App\Exceptions\BudgetNotEditableException;
 use Database\Factories\BudgetFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,6 +40,34 @@ class Budget extends Model
             'subtotal' => 'decimal:2',
             'discount_amount' => 'decimal:2',
             'total' => 'decimal:2',
+        ];
+    }
+
+    /**
+     * Items, discount and header change only while the budget is draft or sent (RF-16, RF-48).
+     *
+     * @throws BudgetNotEditableException
+     */
+    public function assertEditable(): void
+    {
+        if (! $this->status->isEditable()) {
+            throw new BudgetNotEditableException;
+        }
+    }
+
+    /**
+     * The header data as stored, for history entries.
+     *
+     * @return array<string, string|int>
+     */
+    public function headerSnapshot(): array
+    {
+        return [
+            'client_id' => $this->client_id,
+            'title' => $this->title,
+            'modality' => $this->modality->value,
+            'issue_date' => $this->issue_date->toDateString(),
+            'validity_date' => $this->validity_date->toDateString(),
         ];
     }
 

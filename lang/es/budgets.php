@@ -25,6 +25,7 @@ return [
     ],
     'validation' => [
         'service_name_conflict' => 'Ya existe un servicio con el nombre «:name».',
+        'budget_not_editable' => 'El presupuesto no admite cambios: solo se modifica en borrador o enviado.',
         'client_required' => 'Debe elegir el cliente destinatario del presupuesto.',
         'client_missing' => 'El cliente elegido no existe.',
         'validity_after_issue' => 'La fecha de validez debe ser posterior a la fecha de emisión.',
