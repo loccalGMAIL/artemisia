@@ -173,7 +173,7 @@
 - **Depende de**: T18
 - **Hecho cuando**: el test falla y cubre envío solo desde `in_review`, un único archivo por envío, formatos JPG/PNG/PDF/MP4, tope de 100 MB, rechazo con motivo y conservación de múltiples envíos; commit del test hecho.
 
-### - [ ] T20: Implementar `SendPieceForClientApprovalAction`
+### - [x] T20: Implementar `SendPieceForClientApprovalAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-22, RF-23, RF-28, RF-29, RF-30, RF-31, RNF-1, RNF-3

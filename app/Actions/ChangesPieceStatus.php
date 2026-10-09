@@ -30,9 +30,7 @@ abstract class ChangesPieceStatus extends ChangesPiece
      */
     protected function moveTo(Piece $piece, PieceStatus $next, array $fields, User $actor): Piece
     {
-        if (! in_array($piece->status, $this->allowedFrom(), true) || ! $piece->status->canMoveTo($next)) {
-            throw new InvalidPieceTransitionException($piece->status, $next);
-        }
+        $this->assertMoveAllowed($piece, $next);
 
         return DB::transaction(function () use ($piece, $next, $fields, $actor): Piece {
             $previous = $piece->status;
@@ -49,5 +47,15 @@ abstract class ChangesPieceStatus extends ChangesPiece
 
             return $piece;
         });
+    }
+
+    /**
+     * @throws InvalidPieceTransitionException
+     */
+    protected function assertMoveAllowed(Piece $piece, PieceStatus $next): void
+    {
+        if (! in_array($piece->status, $this->allowedFrom(), true) || ! $piece->status->canMoveTo($next)) {
+            throw new InvalidPieceTransitionException($piece->status, $next);
+        }
     }
 }
