@@ -5,7 +5,7 @@
 | **Estado** | Aprobada |
 | **Fecha** | 2026-09-10 |
 | **Autor** | Claudio |
-| **Rama propuesta** | v00.04.00-piezas |
+| **Rama propuesta** | v00.05.00-piezas |
 
 ## 1. Problema
 
