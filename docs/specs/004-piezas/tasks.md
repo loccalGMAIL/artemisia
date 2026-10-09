@@ -42,7 +42,7 @@
 - **Depende de**: T1
 - **Hecho cuando**: `php artisan migrate:fresh` crea `piece_approval_submissions` con archivo, resolución, cuenta resolutora, fecha de envío, fecha de resolución y motivo de rechazo, sin `deleted_at`.
 
-### - [ ] T3: Crear migración de `piece_histories`
+### - [x] T3: Crear migración de `piece_histories`
 
 - **Tipo**: migration
 - **Cubre**: RF-38, RF-39, RF-40, RNF-3
