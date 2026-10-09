@@ -294,6 +294,7 @@ it('RF-11 a RF-51: recorre el flujo completo, de la alta al reenvío tras una re
 
     Livewire::test(ViewBudget::class, ['record' => $budget->getKey()])->callAction('revert');
 
+    $budget->refresh();
     $item = $budget->items()->sole();
 
     itemsManager($budget)->callAction(TestAction::make('editItem')->table($item), ['quantity' => 5, 'description' => null]);

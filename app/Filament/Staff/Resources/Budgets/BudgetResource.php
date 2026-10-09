@@ -7,6 +7,7 @@ use App\Filament\Staff\Resources\Budgets\Pages\EditBudget;
 use App\Filament\Staff\Resources\Budgets\Pages\ListBudgets;
 use App\Filament\Staff\Resources\Budgets\Pages\ViewBudget;
 use App\Filament\Staff\Resources\Budgets\RelationManagers\HistoriesRelationManager;
+use App\Filament\Staff\Resources\Budgets\RelationManagers\ItemsRelationManager;
 use App\Filament\Staff\Resources\Budgets\Schemas\BudgetForm;
 use App\Filament\Staff\Resources\Budgets\Schemas\BudgetInfolist;
 use App\Filament\Staff\Resources\Budgets\Tables\BudgetsTable;
@@ -67,6 +68,7 @@ class BudgetResource extends Resource
     public static function getRelations(): array
     {
         return [
+            ItemsRelationManager::class,
             HistoriesRelationManager::class,
         ];
     }

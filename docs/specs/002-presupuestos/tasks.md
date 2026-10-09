@@ -229,7 +229,7 @@
 - **Depende de**: T25
 - **Hecho cuando**: el test falla y cubre desde Filament crear presupuesto, agregar ítems, editar cabecera, modificar ítems, cargar descuento, enviar, aceptar, revertir a enviado, reeditar y descartar un borrador; commit del test hecho.
 
-### - [ ] T27: Completar formularios y acciones de `BudgetResource`
+### - [x] T27: Completar formularios y acciones de `BudgetResource`
 
 - **Tipo**: ui
 - **Cubre**: RF-11, RF-16, RF-21, RF-26, RF-27, RF-28, RF-30, RF-36, RF-43, RF-45, RF-49, RF-51
