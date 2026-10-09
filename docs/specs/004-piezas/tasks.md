@@ -141,7 +141,7 @@
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y cubre `pending` → `in_production` → `in_review`, bloqueo de transiciones inválidas, `approved` → `delivered`, e imposibilidad de cambiar estado de una entregada; commit del test hecho.
 
-### - [ ] T16: Implementar actions de transición de estado
+### - [x] T16: Implementar actions de transición de estado
 
 - **Tipo**: impl
 - **Cubre**: RF-18, RF-20, RF-21, RF-22, RF-24, RF-25, RF-38
