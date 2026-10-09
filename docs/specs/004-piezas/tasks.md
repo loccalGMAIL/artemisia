@@ -148,7 +148,7 @@
 - **Depende de**: T15
 - **Hecho cuando**: existen `MarkPieceInProductionAction`, `MarkPieceInReviewAction` y `MarkPieceDeliveredAction`, el test de T15 pasa y la suite completa queda verde.
 
-### - [ ] T17: Escribir test de descarte de pieza pendiente
+### - [x] T17: Escribir test de descarte de pieza pendiente
 
 - **Tipo**: test
 - **Cubre**: RF-26, RF-27, RF-40
