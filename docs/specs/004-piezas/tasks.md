@@ -67,7 +67,7 @@
 - **Depende de**: T4
 - **Hecho cuando**: el test falla y comprueba que un presupuesto aceptado genera una propuesta en memoria con una línea por ítem, nombre, cantidad y categoría heredada, y que un presupuesto no aceptado se rechaza con motivo; commit del test hecho.
 
-### - [ ] T6: Implementar `ProposePiecesFromBudgetAction`
+### - [x] T6: Implementar `ProposePiecesFromBudgetAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-1, RF-2, RF-6, RF-7, RF-10

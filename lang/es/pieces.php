@@ -19,4 +19,7 @@ return [
         'assignee_changed' => 'Responsable',
         'due_date_changed' => 'Fecha de entrega',
     ],
+    'validation' => [
+        'budget_not_accepted' => 'Solo se pueden generar piezas a partir de un presupuesto aceptado.',
+    ],
 ];
