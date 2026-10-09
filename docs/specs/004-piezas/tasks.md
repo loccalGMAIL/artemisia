@@ -95,7 +95,7 @@
 - **Depende de**: T8
 - **Hecho cuando**: el test falla y cubre creación sin `budget_item_id`, categoría obligatoria, fecha de entrega opcional, rechazo de presupuesto no aceptado e historial de creación; commit del test hecho.
 
-### - [ ] T10: Implementar `CreateLoosePieceAction`
+### - [x] T10: Implementar `CreateLoosePieceAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-5, RF-6, RF-7, RF-9, RF-10, RF-16, RF-18, RF-19, RF-38

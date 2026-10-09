@@ -21,5 +21,7 @@ return [
     ],
     'validation' => [
         'budget_not_accepted' => 'Solo se pueden generar piezas a partir de un presupuesto aceptado.',
+        'category_required' => 'Debe elegir la categoría de trabajo de la pieza.',
+        'category_missing' => 'La categoría de trabajo elegida no existe.',
     ],
 ];

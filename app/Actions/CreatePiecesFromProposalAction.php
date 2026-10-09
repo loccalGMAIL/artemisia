@@ -2,17 +2,14 @@
 
 namespace App\Actions;
 
-use App\Enums\PieceHistoryField;
-use App\Enums\PieceStatus;
 use App\Exceptions\BudgetNotAcceptedException;
 use App\Models\Budget;
 use App\Models\Piece;
-use App\Models\PieceHistory;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class CreatePiecesFromProposalAction
+class CreatePiecesFromProposalAction extends CreatesPiece
 {
     /**
      * Creates the pieces of a proposal the staff already edited: one pending piece per line.
@@ -28,26 +25,8 @@ class CreatePiecesFromProposalAction
     {
         $budget->assertAccepted();
 
-        return DB::transaction(fn (): Collection => collect($lines)->map(function (array $line) use ($budget, $author): Piece {
-            $piece = Piece::query()->create([
-                'budget_id' => $budget->id,
-                'budget_item_id' => $line['budget_item_id'] ?? null,
-                'name' => $line['name'],
-                'description' => $line['description'] ?? null,
-                'work_category_id' => $line['work_category_id'],
-                'status' => PieceStatus::Pending,
-                'created_by' => $author->id,
-            ]);
-
-            PieceHistory::query()->create([
-                'piece_id' => $piece->id,
-                'field' => PieceHistoryField::Created,
-                'old_value' => null,
-                'new_value' => $piece->creationSnapshot(),
-                'author_id' => $author->id,
-            ]);
-
-            return $piece;
-        })->values());
+        return DB::transaction(fn (): Collection => collect($lines)
+            ->map(fn (array $line): Piece => $this->storePiece($budget, $line, $author))
+            ->values());
     }
 }
