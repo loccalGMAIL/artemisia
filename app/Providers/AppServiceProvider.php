@@ -15,6 +15,7 @@ use App\Policies\AccountPolicy;
 use App\Policies\BudgetPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ClientPortalPolicy;
+use App\Policies\PieceApprovalPortalPolicy;
 use App\Policies\ServicePolicy;
 use App\Support\Pdf\DompdfRenderer;
 use App\Support\Pdf\PdfRenderer;
@@ -55,6 +56,10 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('portal.view', [ClientPortalPolicy::class, 'view']);
         Gate::define('portal.updateAddress', [ClientPortalPolicy::class, 'updateAddress']);
         Gate::define('portal.updateContacts', [ClientPortalPolicy::class, 'updateContacts']);
+
+        // The client's answer on a piece is also a named ability, limited to its own client (spec 004).
+        Gate::define('portal.pieces.approve', [PieceApprovalPortalPolicy::class, 'approve']);
+        Gate::define('portal.pieces.reject', [PieceApprovalPortalPolicy::class, 'reject']);
 
         Gate::policy(User::class, AccountPolicy::class);
         Gate::policy(AccessLog::class, AccessLogPolicy::class);

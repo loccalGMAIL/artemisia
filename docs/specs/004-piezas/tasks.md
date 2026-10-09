@@ -187,7 +187,7 @@
 - **Depende de**: T20
 - **Hecho cuando**: el test falla y cubre aprobación con fecha, rechazo con motivo vacío o informado, vuelta automática a `in_production`, rechazo si la pieza no está en aprobación y rechazo si pertenece a otro cliente; commit del test hecho.
 
-### - [ ] T22: Implementar `ApprovePieceAction`, `RejectPieceAction` y `PieceApprovalPortalPolicy`
+### - [x] T22: Implementar `ApprovePieceAction`, `RejectPieceAction` y `PieceApprovalPortalPolicy`
 
 - **Tipo**: impl
 - **Cubre**: RF-32, RF-33, RF-34, RF-35, RF-47, RF-48
