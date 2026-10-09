@@ -109,7 +109,7 @@
 - **Depende de**: T10
 - **Hecho cuando**: el test falla y comprueba que una pieza ya creada no cambia si el presupuesto vuelve a `sent` o si se modifica o quita el ítem de origen; commit del test hecho.
 
-### - [ ] T12: Implementar la independencia de piezas ya generadas
+### - [x] T12: Implementar la independencia de piezas ya generadas
 
 - **Tipo**: impl
 - **Cubre**: RF-8
