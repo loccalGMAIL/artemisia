@@ -183,7 +183,7 @@
 - **Depende de**: T19
 - **Hecho cuando**: el test falla y cubre `draft` → `sent`, rechazo de envío sin ítems, `sent` → `accepted/rejected`, fecha de respuesta, motivo opcional, reversión a `sent`, bloqueo de edición en estados cerrados, vencido sin cambio de estado y cierre de vencidos; commit del test hecho.
 
-### - [ ] T21: Implementar transiciones de estado
+### - [x] T21: Implementar transiciones de estado
 
 - **Tipo**: impl
 - **Cubre**: RF-42, RF-43, RF-44, RF-45, RF-46, RF-47, RF-48, RF-49, RF-50, RF-55, RF-56

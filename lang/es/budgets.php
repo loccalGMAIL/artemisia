@@ -29,6 +29,8 @@ return [
     ],
     'validation' => [
         'service_name_conflict' => 'Ya existe un servicio con el nombre «:name».',
+        'invalid_transition' => 'No se puede pasar un presupuesto de «:from» a «:to».',
+        'cannot_send_without_items' => 'No se puede enviar un presupuesto sin ítems.',
         'percentage_range' => 'El descuento porcentual debe estar entre 0 y 100.',
         'discount_exceeds_total' => 'El descuento dejaría el total por debajo de cero.',
         'service_inactive' => 'El servicio está desactivado y no se puede agregar a un presupuesto.',

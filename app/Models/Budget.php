@@ -8,6 +8,8 @@ use App\Enums\BudgetStatus;
 use App\Exceptions\BudgetNotEditableException;
 use Database\Factories\BudgetFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -83,6 +85,38 @@ class Budget extends Model
             'discount_value' => $this->discount_value,
             'discount_amount' => $this->discount_amount,
         ];
+    }
+
+    /**
+     * The status and the answer data as stored, for history entries (RF-50).
+     *
+     * @return array<string, string|null>
+     */
+    public function statusSnapshot(): array
+    {
+        return [
+            'status' => $this->status->value,
+            'response_date' => $this->response_date?->toDateString(),
+            'rejection_reason' => $this->rejection_reason,
+        ];
+    }
+
+    /**
+     * A sent budget whose validity date is before today is expired: it is only flagged, its
+     * status does not change (RF-55).
+     */
+    public function isExpired(): bool
+    {
+        return $this->status === BudgetStatus::Sent && $this->validity_date->lt(today());
+    }
+
+    /**
+     * @param  Builder<Budget>  $query
+     */
+    #[Scope]
+    protected function expired(Builder $query): void
+    {
+        $query->where('status', BudgetStatus::Sent)->whereDate('validity_date', '<', today());
     }
 
     /** "Importe mensual" for a monthly budget, "Total" otherwise (RF-41). */
