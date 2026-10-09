@@ -155,7 +155,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: el test falla y comprueba que solo una pieza `pending` se descarta, que el descarte usa `SoftDeletes`, que no borra historial ni envíos, y que deja de aparecer en el listado normal; commit del test hecho.
 
-### - [ ] T18: Implementar `DiscardPieceAction`
+### - [x] T18: Implementar `DiscardPieceAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-26, RF-27, RF-40

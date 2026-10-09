@@ -25,6 +25,7 @@ return [
         'category_missing' => 'La categoría de trabajo elegida no existe.',
         'assignee_invalid' => 'La pieza solo se puede delegar a una cuenta con rol staff o admin.',
         'piece_delivered' => 'La pieza ya está entregada y no admite cambios.',
+        'not_discardable' => 'Solo se puede descartar una pieza pendiente.',
         'invalid_transition' => 'No se puede pasar una pieza de «:from» a «:to».',
     ],
 ];

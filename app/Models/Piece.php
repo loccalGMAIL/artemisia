@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use LogicException;
 
 #[Fillable([
     'budget_id', 'budget_item_id', 'name', 'description', 'work_category_id', 'status',
@@ -22,6 +23,14 @@ class Piece extends Model
 {
     /** @use HasFactory<PieceFactory> */
     use HasFactory, SoftDeletes;
+
+    /**
+     * A piece is discarded with a soft delete and never erased for good (RF-40).
+     */
+    protected static function booted(): void
+    {
+        static::forceDeleting(fn () => throw new LogicException('Pieces cannot be deleted for good.'));
+    }
 
     /**
      * @return array<string, string>
