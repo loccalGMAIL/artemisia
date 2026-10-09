@@ -134,7 +134,7 @@
 - **Depende de**: T13
 - **Hecho cuando**: el test de T13 pasa, `Piece::overdue()` excluye piezas entregadas y la suite completa queda verde.
 
-### - [ ] T15: Escribir test de transiciones de estado de producción
+### - [x] T15: Escribir test de transiciones de estado de producción
 
 - **Tipo**: test
 - **Cubre**: RF-18, RF-20, RF-21, RF-22, RF-24, RF-25, RF-38
