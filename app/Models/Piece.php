@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Enums\PieceStatus;
+use App\Exceptions\PieceDeliveredException;
 use Database\Factories\PieceFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +32,48 @@ class Piece extends Model
             'status' => PieceStatus::class,
             'due_date' => 'date',
         ];
+    }
+
+    /**
+     * Pieces delegated to the given account (RF-13, RF-43).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function delegatedTo(Builder $query, User $assignee): void
+    {
+        $query->where('assignee_id', $assignee->id);
+    }
+
+    /**
+     * Pieces whose committed date has passed and that are not delivered yet (RF-17, RF-44).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function overdue(Builder $query): void
+    {
+        $query->whereDate('due_date', '<', today())
+            ->where('status', '!=', PieceStatus::Delivered);
+    }
+
+    public function isOverdue(): bool
+    {
+        return $this->due_date !== null
+            && $this->due_date->lt(today())
+            && $this->status !== PieceStatus::Delivered;
+    }
+
+    /**
+     * A delivered piece admits no change of state, file or owner (RF-25).
+     *
+     * @throws PieceDeliveredException
+     */
+    public function assertNotDelivered(): void
+    {
+        if ($this->status === PieceStatus::Delivered) {
+            throw new PieceDeliveredException;
+        }
     }
 
     /**

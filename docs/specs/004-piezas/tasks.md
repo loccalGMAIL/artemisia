@@ -127,7 +127,7 @@
 - **Depende de**: T12
 - **Hecho cuando**: el test falla y comprueba responsable único, reasignación, rechazo sobre pieza entregada, fecha nullable, cálculo de atraso e historial de responsable y fecha; commit del test hecho.
 
-### - [ ] T14: Implementar `AssignPieceOwnerAction`, `SetPieceDueDateAction` y scope de atraso
+### - [x] T14: Implementar `AssignPieceOwnerAction`, `SetPieceDueDateAction` y scope de atraso
 
 - **Tipo**: impl
 - **Cubre**: RF-11, RF-12, RF-13, RF-14, RF-15, RF-16, RF-17, RF-25, RF-38
