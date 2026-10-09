@@ -112,7 +112,7 @@
 - **Depende de**: T10
 - **Hecho cuando**: `CreateBudgetAction` pasa el test de T10, usa mensajes traducidos y la suite completa queda verde.
 
-### - [ ] T12: Escribir test de edición de cabecera e historial
+### - [x] T12: Escribir test de edición de cabecera e historial
 
 - **Tipo**: test
 - **Cubre**: RF-16, RF-18, RF-19, RF-20, RF-33, RF-48
