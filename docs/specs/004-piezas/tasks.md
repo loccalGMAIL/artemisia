@@ -35,7 +35,7 @@
 - **Depende de**: —
 - **Hecho cuando**: `php artisan migrate:fresh` crea `pieces` con las columnas, claves foráneas, índices y `SoftDeletes` del plan §4, sin cascada destructiva sobre `budget_item_id`.
 
-### - [ ] T2: Crear migración de `piece_approval_submissions`
+### - [x] T2: Crear migración de `piece_approval_submissions`
 
 - **Tipo**: migration
 - **Cubre**: RF-23, RF-28, RF-29, RF-30, RF-33, RF-34, RF-35, RF-36, RF-37, RNF-3
