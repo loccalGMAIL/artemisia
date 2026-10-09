@@ -60,7 +60,7 @@
 
 ## Fase 2: Generación de piezas
 
-### - [ ] T5: Escribir test de propuesta desde presupuesto aceptado
+### - [x] T5: Escribir test de propuesta desde presupuesto aceptado
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-6, RF-7, RF-10
