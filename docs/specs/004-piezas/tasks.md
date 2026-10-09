@@ -74,7 +74,7 @@
 - **Depende de**: T5
 - **Hecho cuando**: el test de T5 pasa, la action no persiste ninguna fila y la suite completa queda verde.
 
-### - [ ] T7: Escribir test de creación desde propuesta confirmada
+### - [x] T7: Escribir test de creación desde propuesta confirmada
 
 - **Tipo**: test
 - **Cubre**: RF-2, RF-3, RF-4, RF-6, RF-9, RF-10, RF-18, RF-19, RF-38
