@@ -29,6 +29,7 @@ return [
     ],
     'validation' => [
         'service_name_conflict' => 'Ya existe un servicio con el nombre «:name».',
+        'not_discardable' => 'Solo se puede descartar un presupuesto en borrador.',
         'invalid_transition' => 'No se puede pasar un presupuesto de «:from» a «:to».',
         'cannot_send_without_items' => 'No se puede enviar un presupuesto sin ítems.',
         'percentage_range' => 'El descuento porcentual debe estar entre 0 y 100.',

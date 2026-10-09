@@ -197,7 +197,7 @@
 - **Depende de**: T21
 - **Hecho cuando**: el test falla y comprueba que solo un presupuesto en `draft` se descarta con `SoftDeletes`, desaparece del listado normal y conserva historial sin borrar físicamente el presupuesto ni sus asientos; commit del test hecho.
 
-### - [ ] T23: Implementar descarte de presupuesto
+### - [x] T23: Implementar descarte de presupuesto
 
 - **Tipo**: impl
 - **Cubre**: RF-51, RF-52, RF-53, RNF-8
