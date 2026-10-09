@@ -35,6 +35,11 @@ class BudgetFactory extends Factory
         return $this->state(fn (): array => ['modality' => BudgetModality::Monthly]);
     }
 
+    public function draft(): static
+    {
+        return $this->state(fn (): array => ['status' => BudgetStatus::Draft]);
+    }
+
     public function sent(): static
     {
         return $this->state(fn (): array => ['status' => BudgetStatus::Sent]);

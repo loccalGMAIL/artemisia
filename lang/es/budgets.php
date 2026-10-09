@@ -25,6 +25,8 @@ return [
     ],
     'validation' => [
         'service_name_conflict' => 'Ya existe un servicio con el nombre «:name».',
+        'service_inactive' => 'El servicio está desactivado y no se puede agregar a un presupuesto.',
+        'items_limit' => 'Un presupuesto admite hasta :max ítems.',
         'budget_not_editable' => 'El presupuesto no admite cambios: solo se modifica en borrador o enviado.',
         'client_required' => 'Debe elegir el cliente destinatario del presupuesto.',
         'client_missing' => 'El cliente elegido no existe.',

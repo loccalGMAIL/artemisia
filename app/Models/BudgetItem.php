@@ -37,6 +37,24 @@ class BudgetItem extends Model
         return Attribute::get(fn (): string => Money::fromCents($this->amountInCents()));
     }
 
+    /**
+     * The item as stored, for history entries (RF-32, RF-33).
+     *
+     * @return array<string, mixed>
+     */
+    public function snapshot(): array
+    {
+        return [
+            'id' => $this->id,
+            'service_id' => $this->service_id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'unit_price' => $this->unit_price,
+            'quantity' => $this->quantity,
+            'amount' => $this->amount,
+        ];
+    }
+
     public function amountInCents(): int
     {
         return Money::toCents($this->unit_price) * (int) $this->quantity;

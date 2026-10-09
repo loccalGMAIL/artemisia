@@ -137,7 +137,7 @@
 - **Depende de**: T13
 - **Hecho cuando**: el test falla y verifica agregado solo en `draft` o `sent`, copia de nombre/descripción/precio vigente, repetición del mismo servicio, cantidad entera mayor que cero, rechazo de servicios inactivos, tope de 100 e historial `item_added`; commit del test hecho.
 
-### - [ ] T15: Implementar agregado de ítems
+### - [x] T15: Implementar agregado de ítems
 
 - **Tipo**: impl
 - **Cubre**: RF-21, RF-22, RF-23, RF-24, RF-25, RF-29, RF-31, RF-33, RNF-4
