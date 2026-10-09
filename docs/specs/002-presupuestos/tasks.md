@@ -190,7 +190,7 @@
 - **Depende de**: T20
 - **Hecho cuando**: las actions de estado pasan el test de T20, registran `status_changed` y la suite completa queda verde.
 
-### - [ ] T22: Escribir test de descarte de presupuesto
+### - [x] T22: Escribir test de descarte de presupuesto
 
 - **Tipo**: test
 - **Cubre**: RF-51, RF-52, RF-53, RNF-8
