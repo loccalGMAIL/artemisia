@@ -49,7 +49,7 @@
 - **Depende de**: T2
 - **Hecho cuando**: `php artisan migrate:fresh` crea `piece_histories` con `field`, `old_value`, `new_value`, `author_id`, `created_at`, índice `(piece_id, created_at)` y sin `updated_at`.
 
-### - [ ] T4: Crear enums, modelos y factories de piezas
+### - [x] T4: Crear enums, modelos y factories de piezas
 
 - **Tipo**: impl
 - **Cubre**: RF-18, RF-30, RF-38, RF-40, RNF-3
