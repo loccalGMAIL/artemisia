@@ -215,7 +215,7 @@
 - **Depende de**: T23
 - **Hecho cuando**: el test falla y verifica columnas del listado, filtros por cliente y estado, indicador de vencido, fecha de validez en ficha, historial cronológico visible y rechazo al rol `client`; commit del test hecho.
 
-### - [ ] T25: Crear `BudgetPolicy` y estructura base de `BudgetResource`
+### - [x] T25: Crear `BudgetPolicy` y estructura base de `BudgetResource`
 
 - **Tipo**: ui
 - **Cubre**: RF-34, RF-54, RF-55, RF-57, RF-58, RF-59, RF-60

@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\Enums\AccessPortal;
 use App\Models\AccessLog;
 use App\Models\AccountHistory;
+use App\Models\Budget;
 use App\Models\Client;
 use App\Models\Service;
 use App\Models\User;
 use App\Policies\AccessLogPolicy;
 use App\Policies\AccountPolicy;
+use App\Policies\BudgetPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ClientPortalPolicy;
 use App\Policies\ServicePolicy;
@@ -41,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::policy(Client::class, ClientPolicy::class);
         Gate::policy(Service::class, ServicePolicy::class);
+        Gate::policy(Budget::class, BudgetPolicy::class);
 
         // One policy per model, so the portal abilities are registered by name (spec 003).
         Gate::define('portal.view', [ClientPortalPolicy::class, 'view']);

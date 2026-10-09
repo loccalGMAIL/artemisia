@@ -1,6 +1,42 @@
 <?php
 
 return [
+    'model' => 'presupuesto',
+    'plural' => 'Presupuestos',
+    'expired' => 'Vencido',
+    'sections' => [
+        'header' => 'Datos del presupuesto',
+        'amounts' => 'Importes',
+    ],
+    'fields' => [
+        'id' => 'N°',
+        'client' => 'Cliente',
+        'title' => 'Título',
+        'modality' => 'Modalidad',
+        'issue_date' => 'Fecha de emisión',
+        'validity_date' => 'Válido hasta',
+        'response_date' => 'Fecha de respuesta',
+        'rejection_reason' => 'Motivo del rechazo',
+        'author' => 'Autor',
+        'status' => 'Estado',
+        'subtotal' => 'Subtotal',
+        'discount' => 'Descuento',
+        'total' => 'Total',
+    ],
+    'relations' => [
+        'histories' => 'Historial',
+    ],
+    'history' => [
+        'date' => 'Fecha y hora',
+        'fact' => 'Hecho',
+        'old_value' => 'Valor anterior',
+        'new_value' => 'Valor nuevo',
+        'author' => 'Autor',
+    ],
+    'notifications' => [
+        'created' => 'Presupuesto creado.',
+        'saved' => 'Presupuesto actualizado.',
+    ],
     'modalities' => [
         'single' => 'Pago único',
         'monthly' => 'Abono mensual',
@@ -40,6 +76,7 @@ return [
         'client_required' => 'Debe elegir el cliente destinatario del presupuesto.',
         'client_missing' => 'El cliente elegido no existe.',
         'validity_after_issue' => 'La fecha de validez debe ser posterior a la fecha de emisión.',
+        'budget_not_deletable' => 'Los presupuestos no se eliminan: solo pueden descartarse en borrador.',
         'service_not_deletable' => 'Los servicios no se eliminan: solo pueden desactivarse.',
     ],
     'services' => [

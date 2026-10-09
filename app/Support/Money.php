@@ -25,6 +25,12 @@ final class Money
         return sprintf('%s%d.%02d', $sign, intdiv($cents, 100), $cents % 100);
     }
 
+    /** An amount for screens: "$ 1.234,50". */
+    public static function display(string|int|float|null $amount): string
+    {
+        return '$ '.number_format(self::toCents($amount) / 100, 2, ',', '.');
+    }
+
     /** Integer division rounded to the nearest unit, half up (RNF-2). */
     public static function divideRounded(int $numerator, int $denominator): int
     {
