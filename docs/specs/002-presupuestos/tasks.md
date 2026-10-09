@@ -158,7 +158,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: las actions de ítems pasan el test de T16, recalculan totales, registran historial y la suite completa queda verde.
 
-### - [ ] T18: Escribir test de totales, descuentos y redondeo
+### - [x] T18: Escribir test de totales, descuentos y redondeo
 
 - **Tipo**: test
 - **Cubre**: RF-35, RF-36, RF-37, RF-38, RF-39, RF-40, RF-41, RNF-1, RNF-2, RNF-3
