@@ -28,7 +28,7 @@
 
 ## Fase 1: Esquema y base de dominio
 
-### - [ ] T1: Crear migración de `pieces`
+### - [x] T1: Crear migración de `pieces`
 
 - **Tipo**: migration
 - **Cubre**: RF-3, RF-5, RF-9, RF-10, RF-12, RF-16, RF-18, RF-19, RF-27, RF-40, RNF-2

@@ -113,7 +113,8 @@ persistida: solo se graba algo cuando el staff confirma.
   presupuesto o el ítem. Descartada porque la spec pide exactamente lo contrario: que no se
   alteren.
 - **Consecuencias**: `budget_item_id` puede quedar apuntando a un ítem que ya no exista si se
-  quita del presupuesto (ver Riesgos); no se agrega ninguna clave foránea con borrado en cascada.
+  quita del presupuesto (ver Riesgos); `pieces.budget_item_id` no lleva clave foránea (decisión
+  tomada al implementar T1, porque la spec 002 borra los ítems físicamente).
 
 ## 4. Modelo de datos
 
@@ -123,7 +124,7 @@ persistida: solo se graba algo cuando el staff confirma.
 |---|---|---|---|---|
 | id | bigint unsigned | no | auto | PK |
 | budget_id | bigint unsigned | no | — | FK a `budgets` (spec `002`) |
-| budget_item_id | bigint unsigned | sí | null | FK a `budget_items`; null en piezas sueltas (RF-5) |
+| budget_item_id | bigint unsigned | sí | null | referencia informativa a `budget_items`, sin FK (D-7); null en piezas sueltas (RF-5) |
 | name | string(150) | no | — | |
 | description | text | sí | null | |
 | work_category_id | bigint unsigned | no | — | FK a `work_categories` (spec `002`) |
@@ -136,9 +137,10 @@ persistida: solo se graba algo cuando el staff confirma.
 
 - **Índices**: índice sobre `budget_id`; índice sobre `status`; índice sobre `assignee_id`;
   índice sobre `due_date`; índice sobre `deleted_at`.
-- **Claves foráneas**: `budget_id` → `budgets.id`; `budget_item_id` → `budget_items.id` (sin
-  cascada de borrado, ver D-7); `work_category_id` → `work_categories.id`; `assignee_id` →
-  `users.id`; `created_by` → `users.id`.
+- **Claves foráneas**: `budget_id` → `budgets.id`; `work_category_id` → `work_categories.id`;
+  `assignee_id` → `users.id`; `created_by` → `users.id`. `budget_item_id` no tiene clave foránea
+  (solo índice): `RemoveBudgetItemAction` borra el ítem físicamente y una FK, restrictiva o con
+  `nullOnDelete`, haría fallar el borrado o alteraría la pieza (ver D-7).
 - **Enums**: `PieceStatus` (`pending`, `in_production`, `in_review`, `client_approval`,
   `approved`, `delivered`).
 - **Soft deletes**: sí.
