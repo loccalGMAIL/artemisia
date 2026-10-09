@@ -254,7 +254,7 @@
 - **Depende de**: T28
 - **Hecho cuando**: la dependencia queda agregada y justificada en el PR, `GenerateBudgetPdfAction` y la vista Blade pasan el test de T28, no hay ruta pública y la suite completa queda verde.
 
-### - [ ] T30: Escribir test de enlace de WhatsApp
+### - [x] T30: Escribir test de enlace de WhatsApp
 
 - **Tipo**: test
 - **Cubre**: RF-68, RF-69, RF-70
