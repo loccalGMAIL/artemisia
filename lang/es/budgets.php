@@ -37,7 +37,15 @@ return [
         'amount' => 'Importe',
         'service' => 'Servicio',
     ],
+    'pdf' => [
+        'title' => 'Presupuesto #:id',
+        'client' => 'Cliente',
+        'items' => 'Detalle',
+        'phone' => 'Teléfono',
+        'generation_failed' => 'No se pudo generar el PDF del presupuesto. Intente nuevamente.',
+    ],
     'actions' => [
+        'download_pdf' => 'Descargar PDF',
         'set_discount' => 'Cargar descuento',
         'no_discount' => 'Sin descuento',
         'send' => 'Marcar como enviado',

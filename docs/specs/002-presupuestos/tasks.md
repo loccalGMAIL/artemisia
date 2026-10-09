@@ -247,7 +247,7 @@
 - **Depende de**: T27
 - **Hecho cuando**: el test falla y verifica descarga autenticada desde staff, contenido del PDF, total mensual cuando corresponde, exclusión de ítems quitados e historial, fallo simulado sin archivo, y rechazo sin sesión; commit del test hecho.
 
-### - [ ] T29: Implementar PDF con `barryvdh/laravel-dompdf`
+### - [x] T29: Implementar PDF con `barryvdh/laravel-dompdf`
 
 - **Tipo**: impl
 - **Cubre**: RF-54, RF-61, RF-62, RF-63, RF-64, RF-65, RF-66, RF-67, RF-71, RNF-6

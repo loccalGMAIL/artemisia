@@ -4,6 +4,7 @@ namespace App\Filament\Staff\Resources\Budgets;
 
 use App\Actions\AcceptBudgetAction;
 use App\Actions\DiscardBudgetAction;
+use App\Actions\GenerateBudgetPdfAction;
 use App\Actions\RejectBudgetAction;
 use App\Actions\RevertBudgetToSentAction;
 use App\Actions\SendBudgetAction;
@@ -12,6 +13,7 @@ use App\Enums\BudgetDiscountType;
 use App\Enums\BudgetStatus;
 use App\Exceptions\BudgetNotDiscardableException;
 use App\Exceptions\BudgetNotEditableException;
+use App\Exceptions\BudgetPdfGenerationException;
 use App\Exceptions\InvalidBudgetTransitionException;
 use App\Filament\Support\FormValidation;
 use App\Models\Budget;
@@ -23,6 +25,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Header actions of a budget: state changes, discount and discard. Each one only triggers an
@@ -36,7 +39,32 @@ final class BudgetActions
      */
     public static function all(): array
     {
-        return [self::setDiscount(), self::send(), self::accept(), self::reject(), self::revert(), self::discard()];
+        return [self::downloadPdf(), self::setDiscount(), self::send(), self::accept(), self::reject(), self::revert(), self::discard()];
+    }
+
+    public static function downloadPdf(): Action
+    {
+        return Action::make('downloadPdf')
+            ->label(__('budgets.actions.download_pdf'))
+            ->icon('heroicon-o-arrow-down-tray')
+            ->color('gray')
+            ->authorize('downloadPdf')
+            ->action(function (Budget $record): ?StreamedResponse {
+                try {
+                    $bytes = app(GenerateBudgetPdfAction::class)->handle($record);
+                } catch (BudgetPdfGenerationException $exception) {
+                    // Nothing is downloaded when the document could not be generated (RF-67).
+                    Notification::make()->danger()->title($exception->getMessage())->send();
+
+                    return null;
+                }
+
+                return response()->streamDownload(
+                    fn () => print $bytes,
+                    "presupuesto-{$record->id}.pdf",
+                    ['Content-Type' => 'application/pdf'],
+                );
+            });
     }
 
     public static function setDiscount(): Action

@@ -28,11 +28,15 @@ beforeEach(function () {
 function budgetForPdf(array $attributes = []): Budget
 {
     $province = Province::query()->firstOrCreate(['name' => 'Córdoba']);
-    $client = Client::factory()->create([
-        'first_name' => 'Ana', 'last_name' => 'Pérez', 'document' => '12345678',
-        'street' => 'Av. Colón', 'street_number' => '1234', 'city' => 'Córdoba', 'province_id' => $province->id,
-    ]);
-    ClientContact::factory()->for($client)->primary()->create(['phone' => '11-5555-0001']);
+    $client = Client::query()->where('document', '12345678')->first();
+
+    if ($client === null) {
+        $client = Client::factory()->create([
+            'first_name' => 'Ana', 'last_name' => 'Pérez', 'document' => '12345678',
+            'street' => 'Av. Colón', 'street_number' => '1234', 'city' => 'Córdoba', 'province_id' => $province->id,
+        ]);
+        ClientContact::factory()->for($client)->primary()->create(['phone' => '11-5555-0001']);
+    }
 
     $budget = Budget::factory()->for($client)->create(array_merge([
         'title' => 'Identidad visual completa',

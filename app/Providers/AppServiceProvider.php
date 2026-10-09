@@ -15,6 +15,8 @@ use App\Policies\BudgetPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ClientPortalPolicy;
 use App\Policies\ServicePolicy;
+use App\Support\Pdf\DompdfRenderer;
+use App\Support\Pdf\PdfRenderer;
 use Filament\Facades\Filament;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Gate;
@@ -27,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(PdfRenderer::class, DompdfRenderer::class);
     }
 
     /**
