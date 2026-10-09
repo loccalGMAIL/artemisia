@@ -180,7 +180,7 @@
 - **Depende de**: T19
 - **Hecho cuando**: el test de T19 pasa, el archivo se guarda con el filesystem nativo de Laravel, la pieza queda en `client_approval` y la suite completa queda verde.
 
-### - [ ] T21: Escribir test de aprobación y rechazo desde cuenta cliente vinculada
+### - [x] T21: Escribir test de aprobación y rechazo desde cuenta cliente vinculada
 
 - **Tipo**: test
 - **Cubre**: RF-32, RF-33, RF-34, RF-35, RF-47, RF-48
