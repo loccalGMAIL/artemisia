@@ -272,14 +272,14 @@
 
 ## Fase 8: Performance y cierre de calidad
 
-### - [ ] T32: Escribir tests de performance de totales, PDF y listado
+### - [x] T32: Escribir tests de performance de totales, PDF y listado
 
 - **Tipo**: test
 - **Cubre**: RNF-5, RNF-6, RNF-7
 - **Depende de**: T31
 - **Hecho cuando**: el test falla si recalcular 100 ítems tarda 1 segundo o más, generar PDF de 100 ítems tarda 5 segundos o más, o listar 2.000 presupuestos tarda 2 segundos o más en entorno de test; commit del test hecho.
 
-### - [ ] T33: Ajustar consultas, índices y eager loading para performance
+### - [x] T33: Ajustar consultas, índices y eager loading para performance
 
 - **Tipo**: impl
 - **Cubre**: RNF-5, RNF-6, RNF-7
