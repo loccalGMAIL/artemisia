@@ -165,7 +165,7 @@
 - **Depende de**: T17
 - **Hecho cuando**: el test falla y verifica subtotal, un solo descuento fijo o porcentual, porcentaje entre 0 y 100, total no negativo, redondeo a 0,01, historial `discount_changed` y etiqueta de importe mensual; commit del test hecho.
 
-### - [ ] T19: Implementar recálculo y descuentos
+### - [x] T19: Implementar recálculo y descuentos
 
 - **Tipo**: impl
 - **Cubre**: RF-35, RF-36, RF-37, RF-38, RF-39, RF-40, RF-41, RNF-1, RNF-2, RNF-3

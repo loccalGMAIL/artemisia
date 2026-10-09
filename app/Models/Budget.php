@@ -72,6 +72,26 @@ class Budget extends Model
     }
 
     /**
+     * The discount as stored, for history entries (RF-40).
+     *
+     * @return array<string, string|null>
+     */
+    public function discountSnapshot(): array
+    {
+        return [
+            'discount_type' => $this->discount_type?->value,
+            'discount_value' => $this->discount_value,
+            'discount_amount' => $this->discount_amount,
+        ];
+    }
+
+    /** "Importe mensual" for a monthly budget, "Total" otherwise (RF-41). */
+    public function totalLabel(): string
+    {
+        return __('budgets.total_labels.'.$this->modality->value);
+    }
+
+    /**
      * The client, even if it was archived afterwards (RF-20).
      *
      * @return BelongsTo<Client, $this>

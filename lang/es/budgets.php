@@ -11,6 +11,10 @@ return [
         'accepted' => 'Aceptado',
         'rejected' => 'Rechazado',
     ],
+    'total_labels' => [
+        'single' => 'Total',
+        'monthly' => 'Importe mensual',
+    ],
     'discount_types' => [
         'percentage' => 'Porcentaje',
         'fixed' => 'Monto fijo',
@@ -25,6 +29,8 @@ return [
     ],
     'validation' => [
         'service_name_conflict' => 'Ya existe un servicio con el nombre «:name».',
+        'percentage_range' => 'El descuento porcentual debe estar entre 0 y 100.',
+        'discount_exceeds_total' => 'El descuento dejaría el total por debajo de cero.',
         'service_inactive' => 'El servicio está desactivado y no se puede agregar a un presupuesto.',
         'items_limit' => 'Un presupuesto admite hasta :max ítems.',
         'budget_not_editable' => 'El presupuesto no admite cambios: solo se modifica en borrador o enviado.',
