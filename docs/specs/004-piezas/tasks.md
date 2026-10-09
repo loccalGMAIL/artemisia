@@ -166,7 +166,7 @@
 
 ## Fase 4: Envíos a aprobación y resolución del cliente
 
-### - [ ] T19: Escribir test de envío a aprobación con archivo
+### - [x] T19: Escribir test de envío a aprobación con archivo
 
 - **Tipo**: test
 - **Cubre**: RF-22, RF-23, RF-28, RF-29, RF-30, RF-31, RNF-1, RNF-3
