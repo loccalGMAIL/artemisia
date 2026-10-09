@@ -286,6 +286,20 @@
 - **Depende de**: T32
 - **Hecho cuando**: el test de T32 pasa, el listado usa totales desnormalizados sin agregaciones por fila, no hay N+1 evidente y la suite completa queda verde.
 
+### - [x] T34: Escribir tests de la sección de presupuestos en la ficha del cliente
+
+- **Tipo**: test
+- **Cubre**: RF-46 y RF-26, RF-30 de la spec 003
+- **Depende de**: T27
+- **Hecho cuando**: el test falla porque la ficha no lista presupuestos; el selector de cliente del presupuesto solo ofrece activos y no archivados; commit del test hecho.
+
+### - [x] T35: Registrar la sección de presupuestos en ClientCardExtensions
+
+- **Tipo**: impl
+- **Cubre**: RF-46 (spec 003)
+- **Depende de**: T34
+- **Hecho cuando**: la ficha del cliente muestra identificador, título, total, estado y fecha de emisión de sus presupuestos, o un aviso si no tiene; la suite queda verde.
+
 ---
 
 ## Mapa RF/RNF → tareas

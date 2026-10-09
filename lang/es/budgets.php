@@ -4,6 +4,9 @@ return [
     'model' => 'presupuesto',
     'plural' => 'Presupuestos',
     'expired' => 'Vencido',
+    'client_section' => [
+        'empty' => 'Este cliente todavía no tiene presupuestos.',
+    ],
     'sections' => [
         'header' => 'Datos del presupuesto',
         'amounts' => 'Importes',

@@ -181,6 +181,14 @@ class Client extends Model
     }
 
     /**
+     * @return HasMany<Budget, $this>
+     */
+    public function budgets(): HasMany
+    {
+        return $this->hasMany(Budget::class);
+    }
+
+    /**
      * Change history, oldest first (RF-37).
      *
      * @return HasMany<ClientHistory, $this>
