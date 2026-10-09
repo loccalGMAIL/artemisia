@@ -120,7 +120,7 @@
 
 ## Fase 3: Delegación, agenda y estados
 
-### - [ ] T13: Escribir test de delegación, reasignación y fecha comprometida
+### - [x] T13: Escribir test de delegación, reasignación y fecha comprometida
 
 - **Tipo**: test
 - **Cubre**: RF-11, RF-12, RF-13, RF-14, RF-15, RF-16, RF-17, RF-25, RF-38
