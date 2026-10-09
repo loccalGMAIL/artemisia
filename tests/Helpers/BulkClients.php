@@ -51,3 +51,12 @@ function secondsTaken(Closure $callback): float
 
     return microtime(true) - $start;
 }
+
+/**
+ * The fastest of several runs. A threshold test should show what the system can do, not fail
+ * because the machine was busy for a moment; the callback must be safe to repeat.
+ */
+function fastestOf(int $runs, Closure $callback): float
+{
+    return min(array_map(fn () => secondsTaken($callback), range(1, $runs)));
+}
