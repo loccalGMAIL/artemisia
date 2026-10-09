@@ -208,7 +208,7 @@
 
 ## Fase 6: Panel de presupuestos
 
-### - [ ] T24: Escribir test de listado, filtros, ficha e historial
+### - [x] T24: Escribir test de listado, filtros, ficha e historial
 
 - **Tipo**: test
 - **Cubre**: RF-34, RF-54, RF-55, RF-57, RF-58, RF-59, RF-60
