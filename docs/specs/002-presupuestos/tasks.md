@@ -222,7 +222,7 @@
 - **Depende de**: T24
 - **Hecho cuando**: el test de T24 pasa, el resource lista solo presupuestos no descartados, muestra historial en orden cronológico y la suite completa queda verde.
 
-### - [ ] T26: Escribir test de flujo crítico de presupuesto en UI
+### - [x] T26: Escribir test de flujo crítico de presupuesto en UI
 
 - **Tipo**: test
 - **Cubre**: RF-11, RF-16, RF-21, RF-26, RF-27, RF-28, RF-30, RF-36, RF-43, RF-45, RF-49, RF-51
