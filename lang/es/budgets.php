@@ -37,6 +37,10 @@ return [
         'amount' => 'Importe',
         'service' => 'Servicio',
     ],
+    'whatsapp' => [
+        'message' => 'Hola :client, te enviamos el presupuesto #:id «:title». Quedamos atentos a tu respuesta.',
+        'missing_phone' => 'No se puede abrir WhatsApp: falta el teléfono del cliente.',
+    ],
     'pdf' => [
         'title' => 'Presupuesto #:id',
         'client' => 'Cliente',
@@ -45,6 +49,7 @@ return [
         'generation_failed' => 'No se pudo generar el PDF del presupuesto. Intente nuevamente.',
     ],
     'actions' => [
+        'whatsapp' => 'Abrir WhatsApp',
         'download_pdf' => 'Descargar PDF',
         'set_discount' => 'Cargar descuento',
         'no_discount' => 'Sin descuento',

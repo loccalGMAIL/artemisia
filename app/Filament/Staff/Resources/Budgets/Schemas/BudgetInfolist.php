@@ -2,6 +2,7 @@
 
 namespace App\Filament\Staff\Resources\Budgets\Schemas;
 
+use App\Actions\BuildWhatsAppLinkAction;
 use App\Enums\BudgetModality;
 use App\Enums\BudgetStatus;
 use App\Models\Budget;
@@ -45,6 +46,11 @@ class BudgetInfolist
                     ->label(__('budgets.fields.rejection_reason'))
                     ->visible(fn (Budget $record): bool => $record->rejection_reason !== null),
                 TextEntry::make('creator.name')->label(__('budgets.fields.author')),
+                TextEntry::make('whatsapp_notice')
+                    ->hiddenLabel()
+                    ->color('warning')
+                    ->state(__('budgets.whatsapp.missing_phone'))
+                    ->visible(fn (Budget $record): bool => app(BuildWhatsAppLinkAction::class)->handle($record) === null),
             ])->columns(2),
 
             Section::make(__('budgets.sections.amounts'))->schema([

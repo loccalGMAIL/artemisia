@@ -261,7 +261,7 @@
 - **Depende de**: T29
 - **Hecho cuando**: el test falla y verifica URL `wa.me` con teléfono y mensaje precargado que referencia identificador y título, ausencia de acción si falta teléfono, y que no adjunta PDF; commit del test hecho.
 
-### - [ ] T31: Implementar acción de WhatsApp
+### - [x] T31: Implementar acción de WhatsApp
 
 - **Tipo**: ui
 - **Cubre**: RF-68, RF-69, RF-70

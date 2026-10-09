@@ -3,6 +3,7 @@
 namespace App\Filament\Staff\Resources\Budgets;
 
 use App\Actions\AcceptBudgetAction;
+use App\Actions\BuildWhatsAppLinkAction;
 use App\Actions\DiscardBudgetAction;
 use App\Actions\GenerateBudgetPdfAction;
 use App\Actions\RejectBudgetAction;
@@ -39,7 +40,19 @@ final class BudgetActions
      */
     public static function all(): array
     {
-        return [self::downloadPdf(), self::setDiscount(), self::send(), self::accept(), self::reject(), self::revert(), self::discard()];
+        return [self::whatsapp(), self::downloadPdf(), self::setDiscount(), self::send(), self::accept(), self::reject(), self::revert(), self::discard()];
+    }
+
+    public static function whatsapp(): Action
+    {
+        return Action::make('whatsapp')
+            ->label(__('budgets.actions.whatsapp'))
+            ->icon('heroicon-o-chat-bubble-left-right')
+            ->color('success')
+            ->authorize('view')
+            // Not offered when the client has no phone; the card says so instead (RF-69).
+            ->hidden(fn (Budget $record): bool => app(BuildWhatsAppLinkAction::class)->handle($record) === null)
+            ->url(fn (Budget $record): ?string => app(BuildWhatsAppLinkAction::class)->handle($record), shouldOpenInNewTab: true);
     }
 
     public static function downloadPdf(): Action
