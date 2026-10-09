@@ -176,7 +176,7 @@
 
 ## Fase 5: Estados y descarte
 
-### - [ ] T20: Escribir test de transiciones de estado
+### - [x] T20: Escribir test de transiciones de estado
 
 - **Tipo**: test
 - **Cubre**: RF-42, RF-43, RF-44, RF-45, RF-46, RF-47, RF-48, RF-49, RF-50, RF-55, RF-56
