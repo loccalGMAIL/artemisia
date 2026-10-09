@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-use App\Enums\BudgetStatus;
 use App\Exceptions\BudgetNotAcceptedException;
 use App\Models\Budget;
 
@@ -19,9 +18,7 @@ class ProposePiecesFromBudgetAction
      */
     public function handle(Budget $budget): array
     {
-        if ($budget->status !== BudgetStatus::Accepted) {
-            throw new BudgetNotAcceptedException;
-        }
+        $budget->assertAccepted();
 
         return $budget->items()
             ->with('service:id,work_category_id')

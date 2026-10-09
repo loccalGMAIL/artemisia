@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\BudgetDiscountType;
 use App\Enums\BudgetModality;
 use App\Enums\BudgetStatus;
+use App\Exceptions\BudgetNotAcceptedException;
 use App\Exceptions\BudgetNotEditableException;
 use Database\Factories\BudgetFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -54,6 +55,18 @@ class Budget extends Model
     {
         if (! $this->status->isEditable()) {
             throw new BudgetNotEditableException;
+        }
+    }
+
+    /**
+     * Pieces are generated only from an accepted budget (RF-6, RF-7).
+     *
+     * @throws BudgetNotAcceptedException
+     */
+    public function assertAccepted(): void
+    {
+        if ($this->status !== BudgetStatus::Accepted) {
+            throw new BudgetNotAcceptedException;
         }
     }
 

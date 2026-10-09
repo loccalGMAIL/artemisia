@@ -81,7 +81,7 @@
 - **Depende de**: T6
 - **Hecho cuando**: el test falla y comprueba división de cantidades, eliminación de líneas de la propuesta, asociación con `budget_item_id`, estado `pending` e historial de creación; commit del test hecho.
 
-### - [ ] T8: Implementar `CreatePiecesFromProposalAction`
+### - [x] T8: Implementar `CreatePiecesFromProposalAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-2, RF-3, RF-4, RF-6, RF-9, RF-10, RF-18, RF-19, RF-38

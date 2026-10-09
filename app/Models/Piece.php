@@ -32,6 +32,21 @@ class Piece extends Model
     }
 
     /**
+     * The piece as it is created, for its first history entry (RF-38).
+     *
+     * @return array<string, int|string|null>
+     */
+    public function creationSnapshot(): array
+    {
+        return [
+            'name' => $this->name,
+            'status' => PieceStatus::Pending->value,
+            'budget_item_id' => $this->budget_item_id,
+            'work_category_id' => $this->work_category_id,
+        ];
+    }
+
+    /**
      * @return BelongsTo<Budget, $this>
      */
     public function budget(): BelongsTo
