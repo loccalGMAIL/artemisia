@@ -393,3 +393,15 @@
 - **Dependencia PDF exige justificación en PR**: T29 lo incluye explícitamente, porque `barryvdh/laravel-dompdf` rompe el stack mínimo salvo justificación escrita.
 - **API de teléfono depende de spec 003**: el plan asume `Client::contactPhone()`. Si la spec 003 implementó otro contrato, T30/T31 deben ajustarse sin cambiar el alcance funcional.
 - **Performance en entorno de test puede variar**: RNF-5 a RNF-7 se cubren con tests de umbral, pero conviene definir si esos tests quedan marcados como grupo específico de performance para evitar falsos negativos en máquinas lentas.
+
+### Resolución (implementación)
+
+- **Contrato del PDF**: `GenerateBudgetPdfAction::handle(Budget): string` devuelve los bytes y `renderHtml(Budget)` expone el HTML para testear el contenido. El motor queda detrás de `App\Support\Pdf\PdfRenderer` (enlazado a `DompdfRenderer` en `AppServiceProvider`). La UI envuelve los bytes en `streamDownload`.
+- **Excepción de fallo**: `BudgetPdfGenerationException`; ante ella no se descarga nada y se notifica el error (RF-67).
+- **Dependencia PDF**: `barryvdh/laravel-dompdf ^3.1`, única dependencia nueva, justificada en el PR.
+- **Teléfono**: se usó `Client::contactPhone()` de la spec 003, sin ajustes.
+- **Performance**: tests en el grupo `performance` con carga masiva y mejor de tres corridas (`fastestOf`); se corren aparte con `--group=performance`.
+- **Ítems por relation manager**, no por repeater: cada alta, edición y baja es una Action con su asiento de historial (RF-33).
+- **Actions con `$actor`** (`handle(..., User $actor)`), como en las specs 001 y 003; cada Action de estado declara `allowedFrom()`.
+- **Reglas decididas al implementar**: el descuento fijo se limita al subtotal al recalcular; revertir a enviado limpia `response_date` y `rejection_reason`; `CreateBudgetAction` acepta clientes inactivos o archivados y el selector de la UI ofrece solo `Client::availableForBudgets()`.
+- **WhatsApp**: `https://wa.me/<dígitos>?text=...`, con prefijo `549` si el número es local y mínimo 8 dígitos.

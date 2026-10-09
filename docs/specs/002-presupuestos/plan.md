@@ -274,7 +274,7 @@ Migraciones a crear, en orden:
   rechazado siempre, RF-60).
 - **Filament Resources / Pages / Widgets**:
   - Panel `staff`: `ServiceResource` (catálogo + relation manager de historial de precios);
-    `BudgetResource` (list/create/edit/view, repeater de ítems, acciones de estado, descarga de
+    `BudgetResource` (list/create/edit/view, relation manager de ítems, acciones de estado, descarga de
     PDF, botón de WhatsApp, relation manager de historial).
 - **Rutas**: ninguna manual; todo dentro del panel `staff` ya definido por la spec `001`.
 - **Traducciones**: `lang/es/budgets.php` con etiquetas, mensajes de rechazo (RF-3, RF-17, RF-31,
@@ -450,3 +450,10 @@ descartada.
 ## 14. Aprobación
 
 - [x] Aprobado por Claudio el 2026-09-10
+
+## Ajustes durante la implementación
+
+- Los ítems se gestionan con un relation manager (no un repeater); cada cambio es una Action con asiento de historial.
+- El PDF devuelve bytes desde `GenerateBudgetPdfAction` y el motor queda detrás de `PdfRenderer`; el fallo se tipa como `BudgetPdfGenerationException`.
+- Las Actions reciben `User $actor` y las de estado declaran `allowedFrom()`.
+- La ficha del cliente lista sus presupuestos mediante `ClientCardExtensions` (spec 003, RF-46).
