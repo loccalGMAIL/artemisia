@@ -151,7 +151,7 @@
 - **Depende de**: T15
 - **Hecho cuando**: el test falla y cubre cambio de cantidad, cambio de descripción, refresh al precio vigente, remoción con snapshot en historial, rechazo en estados cerrados y ausencia de precio arbitrario; commit del test hecho.
 
-### - [ ] T17: Implementar modificación y remoción de ítems
+### - [x] T17: Implementar modificación y remoción de ítems
 
 - **Tipo**: impl
 - **Cubre**: RF-26, RF-27, RF-28, RF-29, RF-30, RF-32, RF-33, RF-48
