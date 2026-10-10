@@ -17,6 +17,7 @@ class ViewContractPeriod extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            PeriodActions::registerPayment(),
             PeriodActions::addExtra(),
             PeriodActions::addDiscount(),
             PeriodActions::setInvoice(),

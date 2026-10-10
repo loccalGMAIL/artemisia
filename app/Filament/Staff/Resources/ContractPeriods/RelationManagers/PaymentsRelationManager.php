@@ -3,6 +3,7 @@
 namespace App\Filament\Staff\Resources\ContractPeriods\RelationManagers;
 
 use App\Enums\PaymentMethod;
+use App\Filament\Staff\Resources\ContractPeriods\PeriodActions;
 use App\Models\Payment;
 use App\Support\Money;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The payments of the period, the valid ones and the voided ones with their justification
- * (RF-77, RF-85).
+ * (RF-77, RF-85), and the voiding of a valid one (RF-75).
  */
 class PaymentsRelationManager extends RelationManager
 {
@@ -46,6 +47,9 @@ class PaymentsRelationManager extends RelationManager
                     ->state(fn (Payment $record): string => $record->isVoided() ? __('contracts.payments.voided') : __('contracts.payments.valid'))
                     ->color(fn (Payment $record): string => $record->isVoided() ? 'danger' : 'success'),
                 TextColumn::make('void_justification')->label(__('contracts.payments.void_justification'))->placeholder('—'),
+            ])
+            ->recordActions([
+                PeriodActions::voidPayment(),
             ])
             ->paginated(false);
     }

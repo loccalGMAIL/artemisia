@@ -4,15 +4,22 @@ namespace App\Filament\Staff\Resources\ContractPeriods;
 
 use App\Actions\AddPeriodDiscountAction;
 use App\Actions\AddPeriodExtraAction;
+use App\Actions\RegisterPaymentAction;
 use App\Actions\RemovePeriodConceptAction;
 use App\Actions\SetPeriodInvoiceAction;
+use App\Actions\VoidPaymentAction;
+use App\Enums\PaymentMethod;
+use App\Exceptions\PaymentExceedsBalanceException;
 use App\Exceptions\PeriodLimitExceededException;
 use App\Exceptions\PeriodTotalException;
 use App\Filament\Support\FormValidation;
 use App\Models\ContractPeriod;
+use App\Models\Payment;
 use App\Models\PeriodConcept;
+use App\Support\BusinessDate;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
@@ -21,7 +28,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 
 /**
- * Actions on a period: its extras, its discounts and its invoice reference. Each one only
+ * Actions on a period: its extras, its discounts, its invoice reference and its payments. Each one only
  * collects the data and triggers an Action; the totals, the limits and what a valid concept is
  * are decided by the Actions (constitution, principle 3).
  */
@@ -107,6 +114,55 @@ final class PeriodActions
             });
     }
 
+    public static function registerPayment(): Action
+    {
+        return Action::make('registerPayment')
+            ->label(__('contracts.actions.register_payment'))
+            ->icon('heroicon-o-banknotes')
+            ->color('success')
+            ->authorize(fn (): bool => Gate::allows('create', Payment::class))
+            ->modalHeading(__('contracts.actions.register_payment'))
+            ->mountUsing(function (Schema $schema): void {
+                $schema->fill(['paid_on' => BusinessDate::today()->toDateString()]);
+            })
+            ->schema([
+                DatePicker::make('paid_on')->label(__('contracts.payments.paid_on'))->native(false),
+                TextInput::make('amount')
+                    ->label(__('contracts.payments.amount'))
+                    ->numeric()
+                    ->inputMode('decimal'),
+                Select::make('method')
+                    ->label(__('contracts.payments.method'))
+                    ->options(collect(PaymentMethod::cases())->mapWithKeys(fn (PaymentMethod $method): array => [$method->value => $method->label()])->all()),
+                TextInput::make('reference')->label(__('contracts.payments.reference')),
+            ])
+            ->action(function (array $data, Action $action, ContractPeriod $record): void {
+                self::attempt($action, fn () => app(RegisterPaymentAction::class)->handle($record, $data, Auth::user()));
+
+                Notification::make()->success()->title(__('contracts.notifications.payment_registered'))->send();
+            });
+    }
+
+    public static function voidPayment(): Action
+    {
+        return Action::make('voidPayment')
+            ->label(__('contracts.actions.void_payment'))
+            ->icon('heroicon-o-x-circle')
+            ->color('danger')
+            ->visible(fn (Payment $record): bool => ! $record->isVoided())
+            ->authorize(fn (Payment $record): bool => Gate::allows('void', $record))
+            ->modalHeading(__('contracts.actions.void_payment'))
+            ->modalDescription(__('contracts.actions.void_payment_help'))
+            ->schema([
+                TextInput::make('void_justification')->label(__('contracts.payments.void_justification')),
+            ])
+            ->action(function (array $data, Action $action, Payment $record): void {
+                self::attempt($action, fn () => app(VoidPaymentAction::class)->handle($record, $data['void_justification'] ?? null, Auth::user()));
+
+                Notification::make()->success()->title(__('contracts.notifications.payment_voided'))->send();
+            });
+    }
+
     /**
      * @return list<TextInput>
      */
@@ -130,7 +186,7 @@ final class PeriodActions
     {
         try {
             $run();
-        } catch (PeriodLimitExceededException|PeriodTotalException $exception) {
+        } catch (PeriodLimitExceededException|PeriodTotalException|PaymentExceedsBalanceException $exception) {
             Notification::make()->danger()->title($exception->getMessage())->send();
 
             $action->halt();

@@ -85,6 +85,9 @@ return [
         'discount_justification' => 'Justificación',
         'set_invoice' => 'Referencia de factura',
         'invoice_help' => 'Número y fecha van juntos. Déjelos en blanco para quitar la referencia.',
+        'register_payment' => 'Registrar pago',
+        'void_payment' => 'Anular',
+        'void_payment_help' => 'El pago deja de computarse pero se conserva con su justificación. No se puede reactivar.',
         'remove_concept' => 'Quitar',
         'remove_concept_help' => 'El concepto se quita del período y queda registrado en su historial.',
     ],
@@ -93,6 +96,8 @@ return [
         'extra_added' => 'Extra agregado.',
         'discount_added' => 'Descuento agregado.',
         'concept_removed' => 'Concepto quitado.',
+        'payment_registered' => 'Pago registrado.',
+        'payment_voided' => 'Pago anulado.',
         'invoice_saved' => 'Referencia de factura guardada.',
     ],
     'statuses' => [

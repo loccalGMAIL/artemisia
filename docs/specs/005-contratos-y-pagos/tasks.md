@@ -304,7 +304,7 @@
 - **Depende de**: T32, T36
 - **Hecho cuando**: el test falla y comprueba registrar un pago y anularlo con su justificación desde la ficha del período, ver el saldo y el estado de pago cambiar, y que un rechazo de la action se muestra con su motivo; commit del test hecho.
 
-### - [ ] T38: Crear las acciones y el relation manager de pagos en la ficha del período
+### - [x] T38: Crear las acciones y el relation manager de pagos en la ficha del período
 
 - **Tipo**: ui
 - **Cubre**: RF-58, RF-75
