@@ -33,7 +33,7 @@
 
 **Demo posible al cerrarlo**: crear un contrato desde un presupuesto aceptado de abono mensual, ver su ficha con los períodos ya generados y el listado de contratos con sus filtros.
 
-### - [ ] T1: Crear migraciones de `contracts` y `contract_periods`
+### - [x] T1: Crear migraciones de `contracts` y `contract_periods`
 
 - **Tipo**: migration
 - **Cubre**: RF-5, RF-7, RF-8, RF-9, RF-19, RF-34, RF-38, RNF-1, RNF-3
