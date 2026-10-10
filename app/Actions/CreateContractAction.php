@@ -22,6 +22,8 @@ use Illuminate\Validation\ValidationException;
 
 class CreateContractAction
 {
+    public function __construct(private readonly GenerateContractPeriodsAction $generatePeriods) {}
+
     /**
      * Creates the contract of an accepted monthly budget with a total above zero, copying the
      * client and the monthly amount, and leaves it active with its first history entry
@@ -62,6 +64,9 @@ class CreateContractAction
                 'new_value' => $contract->creationSnapshot(),
                 'author_id' => $author->id,
             ]);
+
+            // The months already gone by are charged from the first day (RF-36).
+            $this->generatePeriods->handle($contract);
 
             return $contract;
         });

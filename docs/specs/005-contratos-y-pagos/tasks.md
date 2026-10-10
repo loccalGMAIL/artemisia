@@ -124,7 +124,7 @@
 - **Depende de**: T10
 - **Hecho cuando**: el test falla y cubre la reposición de los meses faltantes hasta el mes actual, que no genera con inicio futuro, a lo sumo un período por mes, el tope del plazo, la cuota y el vencimiento copiados aunque la fecha ya haya pasado, el asiento `generated` con autor nulo, que no genera en contratos cancelados y que sigue con un cliente inactivo o archivado; commit del test hecho.
 
-### - [ ] T14: Implementar `GenerateContractPeriodsAction` y generar al crear el contrato
+### - [x] T14: Implementar `GenerateContractPeriodsAction` y generar al crear el contrato
 
 - **Tipo**: impl
 - **Cubre**: RF-22, RF-35, RF-36, RF-37, RF-38, RF-39, RF-40, RF-41
