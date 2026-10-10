@@ -7,13 +7,13 @@ use App\Filament\Auth\PortalResetPassword;
 use App\Filament\Client\Pages\Auth\Login;
 use App\Filament\Client\Pages\ClientProfilePage;
 use App\Http\Middleware\EnsureAccountIsActive;
+use App\Support\BrandPanel;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -27,7 +27,7 @@ class ClientPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        return $panel
+        return BrandPanel::configure($panel)
             ->id('client')
             ->path('portal')
             ->login(Login::class)
@@ -36,9 +36,6 @@ class ClientPanelProvider extends PanelProvider
                 PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
                 fn (): View => view('auth.google-login', ['url' => route('google.client.redirect')]),
             )
-            ->colors([
-                'primary' => Color::Amber,
-            ])
             ->discoverResources(in: app_path('Filament/Client/Resources'), for: 'App\Filament\Client\Resources')
             ->discoverPages(in: app_path('Filament/Client/Pages'), for: 'App\Filament\Client\Pages')
             ->pages([

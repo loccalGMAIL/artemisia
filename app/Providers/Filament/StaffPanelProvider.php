@@ -6,6 +6,7 @@ use App\Filament\Auth\PortalRequestPasswordReset;
 use App\Filament\Auth\PortalResetPassword;
 use App\Filament\Staff\Pages\Auth\Login;
 use App\Http\Middleware\EnsureAccountIsActive;
+use App\Support\BrandPanel;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -13,7 +14,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
@@ -29,7 +29,7 @@ class StaffPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        return $panel
+        return BrandPanel::configure($panel)
             ->default()
             ->id('staff')
             ->path('staff')
@@ -39,9 +39,6 @@ class StaffPanelProvider extends PanelProvider
                 PanelsRenderHook::AUTH_LOGIN_FORM_AFTER,
                 fn (): View => view('auth.google-login', ['url' => route('google.staff.redirect')]),
             )
-            ->colors([
-                'primary' => Color::Amber,
-            ])
             ->discoverResources(in: app_path('Filament/Staff/Resources'), for: 'App\Filament\Staff\Resources')
             ->discoverPages(in: app_path('Filament/Staff/Pages'), for: 'App\Filament\Staff\Pages')
             ->pages([

@@ -45,14 +45,12 @@ it('los dos paneles usan la misma paleta', function (string $panel) {
 })->with(['staff', 'client']);
 
 it('los archivos de la identidad existen y son del tipo que dicen ser', function () {
-    expect(file_exists(public_path('brand/logotipo.png')))->toBeTrue()
-        ->and(file_exists(public_path('brand/isotipo.png')))->toBeTrue()
+    expect(file_exists(public_path('brand/isotipo.png')))->toBeTrue()
         ->and(file_exists(public_path('brand/favicon.ico')))->toBeTrue()
         ->and(file_exists(public_path('fonts/brand/AcuminVariableConcept.otf')))->toBeTrue()
         ->and(file_exists(public_path('css/brand/brand.css')))->toBeTrue();
 
-    expect(file_get_contents(public_path('brand/logotipo.png'), false, null, 0, 8))->toBe("\x89PNG\r\n\x1a\n")
-        ->and(file_get_contents(public_path('brand/isotipo.png'), false, null, 0, 8))->toBe("\x89PNG\r\n\x1a\n")
+    expect(file_get_contents(public_path('brand/isotipo.png'), false, null, 0, 8))->toBe("\x89PNG\r\n\x1a\n")
         ->and(file_get_contents(public_path('brand/favicon.ico'), false, null, 0, 4))->toBe("\x00\x00\x01\x00");
 });
 
@@ -71,7 +69,7 @@ it('la página de ingreso de cada portal muestra la marca de Artemisia, no la de
     $response = $this->get($url)->assertOk();
 
     $response->assertSee('Artemisia')
-        ->assertSee('brand/logotipo.png', false)
+        ->assertSee('brand/isotipo.png', false)
         ->assertSee('brand/favicon.ico', false)
         ->assertSee('css/brand/brand.css', false)
         ->assertSee('Acumin Variable Concept', false)
