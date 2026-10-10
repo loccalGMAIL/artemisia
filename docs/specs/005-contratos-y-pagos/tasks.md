@@ -256,7 +256,7 @@
 - **Depende de**: T30, T26, T28
 - **Hecho cuando**: el test falla y comprueba agregar un extra y un descuento con su justificación, quitar un concepto y cargar la referencia de factura desde la ficha del período, y que un rechazo de la action se muestra con su motivo; commit del test hecho.
 
-### - [ ] T32: Crear las acciones de conceptos y factura en la ficha del período
+### - [x] T32: Crear las acciones de conceptos y factura en la ficha del período
 
 - **Tipo**: ui
 - **Cubre**: RF-42, RF-43, RF-47, RF-53

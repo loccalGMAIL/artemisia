@@ -79,9 +79,21 @@ return [
     'actions' => [
         'create' => 'Crear contrato',
         'due_day_help' => 'Día del mes, de 1 a 28, en que vence el pago de cada período.',
+        'add_extra' => 'Agregar extra',
+        'add_discount' => 'Agregar descuento',
+        'extra_description' => 'Descripción',
+        'discount_justification' => 'Justificación',
+        'set_invoice' => 'Referencia de factura',
+        'invoice_help' => 'Número y fecha van juntos. Déjelos en blanco para quitar la referencia.',
+        'remove_concept' => 'Quitar',
+        'remove_concept_help' => 'El concepto se quita del período y queda registrado en su historial.',
     ],
     'notifications' => [
         'created' => 'Contrato creado.',
+        'extra_added' => 'Extra agregado.',
+        'discount_added' => 'Descuento agregado.',
+        'concept_removed' => 'Concepto quitado.',
+        'invoice_saved' => 'Referencia de factura guardada.',
     ],
     'statuses' => [
         'active' => 'Vigente',

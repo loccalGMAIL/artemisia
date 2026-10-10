@@ -3,6 +3,7 @@
 namespace App\Filament\Staff\Resources\ContractPeriods\RelationManagers;
 
 use App\Enums\ConceptType;
+use App\Filament\Staff\Resources\ContractPeriods\PeriodActions;
 use App\Support\Money;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\TextColumn;
@@ -10,7 +11,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * The extras and discounts of the period, with the description or the justification (RF-85).
+ * The extras and discounts of the period, with the description or the justification (RF-85),
+ * and the removal of each one (RF-47).
  */
 class ConceptsRelationManager extends RelationManager
 {
@@ -39,6 +41,9 @@ class ConceptsRelationManager extends RelationManager
                 TextColumn::make('amount')
                     ->label(__('contracts.concepts.amount'))
                     ->formatStateUsing(fn (string $state): string => Money::display($state)),
+            ])
+            ->recordActions([
+                PeriodActions::removeConcept(),
             ])
             ->paginated(false);
     }
