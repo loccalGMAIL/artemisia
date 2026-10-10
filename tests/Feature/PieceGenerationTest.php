@@ -84,7 +84,7 @@ it('RF-4: la propuesta exige el nombre y la categoría de cada pieza', function 
         ->callAction('generatePieces', ['lines' => [
             ['budget_item_id' => $item->id, 'name' => '', 'quantity' => 1, 'work_category_id' => null, 'description' => null],
         ]])
-        ->assertHasActionErrors();
+        ->assertNotified('Cada pieza necesita un nombre y una categoría de trabajo válidos.');
 
     expect(Piece::query()->count())->toBe(0);
 });

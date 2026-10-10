@@ -1,6 +1,26 @@
 <?php
 
 return [
+    'model' => 'pieza',
+    'plural' => 'Piezas',
+    'fields' => [
+        'name' => 'Nombre',
+        'description' => 'Descripción',
+        'category' => 'Categoría de trabajo',
+        'budget' => 'Presupuesto',
+        'status' => 'Estado',
+        'due_date' => 'Fecha de entrega',
+        'proposal' => 'Piezas a crear',
+    ],
+    'actions' => [
+        'generate' => 'Generar piezas',
+        'proposal_help' => 'Una pieza por ítem. Duplique una línea para dividir su cantidad en varias piezas, o quítela si no hace falta.',
+        'create_loose' => 'Crear pieza suelta',
+    ],
+    'notifications' => [
+        'generated' => '{1} Se creó :count pieza.|[2,*] Se crearon :count piezas.',
+        'created' => 'Pieza creada.',
+    ],
     'statuses' => [
         'pending' => 'Pendiente',
         'in_production' => 'En producción',
@@ -21,6 +41,7 @@ return [
     ],
     'validation' => [
         'budget_not_accepted' => 'Solo se pueden generar piezas a partir de un presupuesto aceptado.',
+        'lines_invalid' => 'Cada pieza necesita un nombre y una categoría de trabajo válidos.',
         'category_required' => 'Debe elegir la categoría de trabajo de la pieza.',
         'category_missing' => 'La categoría de trabajo elegida no existe.',
         'assignee_invalid' => 'La pieza solo se puede delegar a una cuenta con rol staff o admin.',

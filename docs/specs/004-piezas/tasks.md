@@ -219,7 +219,7 @@
 - **Depende de**: T24
 - **Hecho cuando**: el test falla y cubre que `admin` o `staff` abre la propuesta desde un presupuesto aceptado, divide o quita líneas, confirma piezas, crea pieza suelta y ve el motivo al intentar hacerlo sobre presupuesto no aceptado; commit del test hecho.
 
-### - [ ] T26: Crear UI staff de generación y alta de piezas
+### - [x] T26: Crear UI staff de generación y alta de piezas
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-6, RF-7, RF-9, RF-10

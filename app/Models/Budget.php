@@ -133,6 +133,17 @@ class Budget extends Model
     }
 
     /** "Importe mensual" for a monthly budget, "Total" otherwise (RF-41). */
+    /**
+     * Budgets that can originate pieces: accepted and not discarded (RF-6).
+     *
+     * @param  Builder<Budget>  $query
+     */
+    #[Scope]
+    protected function acceptedForPieces(Builder $query): void
+    {
+        $query->withoutTrashed()->where('status', BudgetStatus::Accepted);
+    }
+
     public function totalLabel(): string
     {
         return __('budgets.total_labels.'.$this->modality->value);
