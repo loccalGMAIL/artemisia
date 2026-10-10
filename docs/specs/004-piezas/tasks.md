@@ -212,7 +212,7 @@
 
 ## Fase 5: Staff panel
 
-### - [ ] T25: Escribir test del flujo staff para generar piezas
+### - [x] T25: Escribir test del flujo staff para generar piezas
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-6, RF-7, RF-9, RF-10
