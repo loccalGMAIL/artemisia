@@ -14,6 +14,25 @@ use Illuminate\Auth\Access\Response;
  */
 class PieceApprovalPortalPolicy
 {
+    /**
+     * The file of a submission is downloaded by the linked account while the piece is visible
+     * in the portal, and always for the submissions that account answered itself (RF-37, RF-45).
+     */
+    public function download(User $user, PieceApprovalSubmission $submission): Response
+    {
+        $denied = $this->linkedClientOnly($user, $submission);
+
+        if ($denied !== null) {
+            return $denied;
+        }
+
+        if ($submission->resolved_by === $user->id || in_array($submission->piece->status, PieceStatus::visibleToClient(), true)) {
+            return Response::allow();
+        }
+
+        return Response::deny(__('auth.insufficient_permission'));
+    }
+
     public function approve(User $user, PieceApprovalSubmission $submission): Response
     {
         return $this->resolve($user, $submission);
@@ -26,6 +45,24 @@ class PieceApprovalPortalPolicy
 
     private function resolve(User $user, PieceApprovalSubmission $submission): Response
     {
+        $denied = $this->linkedClientOnly($user, $submission);
+
+        if ($denied !== null) {
+            return $denied;
+        }
+
+        if ($submission->piece->status !== PieceStatus::ClientApproval || ! $submission->isPending()) {
+            return Response::deny(__('auth.insufficient_permission'));
+        }
+
+        return Response::allow();
+    }
+
+    /**
+     * Only a client account linked to the client of the piece's budget gets past this point.
+     */
+    private function linkedClientOnly(User $user, PieceApprovalSubmission $submission): ?Response
+    {
         if (! $user->hasRole('client')) {
             return Response::deny(__('auth.insufficient_permission'));
         }
@@ -34,16 +71,10 @@ class PieceApprovalPortalPolicy
             return Response::deny(__('clients.portal.not_enabled'));
         }
 
-        $piece = $submission->piece;
-
-        if ($piece->budget->client_id !== $user->client_id) {
+        if ($submission->piece->budget->client_id !== $user->client_id) {
             return Response::deny(__('auth.insufficient_permission'));
         }
 
-        if ($piece->status !== PieceStatus::ClientApproval || ! $submission->isPending()) {
-            return Response::deny(__('auth.insufficient_permission'));
-        }
-
-        return Response::allow();
+        return null;
     }
 }

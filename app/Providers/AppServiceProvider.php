@@ -61,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('portal.updateContacts', [ClientPortalPolicy::class, 'updateContacts']);
 
         // The client's answer on a piece is also a named ability, limited to its own client (spec 004).
+        Gate::define('portal.pieces.download', [PieceApprovalPortalPolicy::class, 'download']);
         Gate::define('portal.pieces.approve', [PieceApprovalPortalPolicy::class, 'approve']);
         Gate::define('portal.pieces.reject', [PieceApprovalPortalPolicy::class, 'reject']);
 

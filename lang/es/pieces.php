@@ -40,6 +40,14 @@ return [
         'new_value' => 'Valor nuevo',
         'author' => 'Autor',
     ],
+    'portal' => [
+        'navigation' => 'Piezas',
+        'title' => 'Piezas para aprobar',
+        'submitted_at' => 'Enviada',
+        'empty' => 'Todavía no hay piezas para ver.',
+        'responses' => 'Mis respuestas',
+        'no_responses' => 'Todavía no respondió ningún envío.',
+    ],
     'overdue' => 'Atrasada',
     'unassigned' => 'Sin responsable',
     'filters' => [

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use LogicException;
 
@@ -52,6 +53,24 @@ class Piece extends Model
     protected function delegatedTo(Builder $query, User $assignee): void
     {
         $query->where('assignee_id', $assignee->id);
+    }
+
+    /**
+     * What a client account sees: the pieces of the client it is linked to that are in
+     * approval, approved or delivered. An account with no link sees none (RF-45, RF-46, RF-48).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function visibleToClient(Builder $query, User $account): void
+    {
+        if ($account->client_id === null) {
+            $query->whereRaw('1 = 0');
+
+            return;
+        }
+
+        $query->forClient($account->client_id)->whereIn('status', PieceStatus::visibleToClient());
     }
 
     /**
@@ -162,6 +181,16 @@ class Piece extends Model
     public function submissions(): HasMany
     {
         return $this->hasMany(PieceApprovalSubmission::class)->orderBy('submitted_at')->orderBy('id');
+    }
+
+    /**
+     * The submission the client is asked to answer, or answered last.
+     *
+     * @return HasOne<PieceApprovalSubmission, $this>
+     */
+    public function latestSubmission(): HasOne
+    {
+        return $this->hasOne(PieceApprovalSubmission::class)->ofMany(['submitted_at' => 'max', 'id' => 'max']);
     }
 
     /**

@@ -279,7 +279,7 @@
 - **Depende de**: T32
 - **Hecho cuando**: el test falla y comprueba que la cuenta cliente solo ve piezas de su cliente en `client_approval`, `approved` o `delivered`, no ve `pending`, `in_production` ni `in_review`, y no ve piezas de otros clientes; commit del test hecho.
 
-### - [ ] T34: Crear `PieceApprovalPage` del portal de clientes
+### - [x] T34: Crear `PieceApprovalPage` del portal de clientes
 
 - **Tipo**: ui
 - **Cubre**: RF-37, RF-45, RF-46, RF-48

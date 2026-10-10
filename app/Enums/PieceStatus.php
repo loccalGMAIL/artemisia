@@ -29,6 +29,17 @@ enum PieceStatus: string
         };
     }
 
+    /**
+     * The states a client sees in its portal: in its approval, approved or delivered. What is
+     * still being produced stays internal (RF-45, RF-46).
+     *
+     * @return array<int, self>
+     */
+    public static function visibleToClient(): array
+    {
+        return [self::ClientApproval, self::Approved, self::Delivered];
+    }
+
     public function canMoveTo(self $next): bool
     {
         return in_array($next, $this->allowedNext(), true);
