@@ -331,7 +331,7 @@
 - **Depende de**: T39
 - **Hecho cuando**: el test de T39 pasa, la entrada está en `routes/console.php` junto a `access-logs:prune` y la suite completa queda verde.
 
-### - [ ] T41: Escribir test de cancelar y reactivar
+### - [x] T41: Escribir test de cancelar y reactivar
 
 - **Tipo**: test
 - **Cubre**: RF-21, RF-22, RF-23, RF-25, RF-26, RF-27, RF-28, RF-33
