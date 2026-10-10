@@ -159,7 +159,7 @@
 - **Depende de**: T17
 - **Hecho cuando**: el test de T17 pasa, la acción solo orquesta `ProposeContractDefaultsAction` y `CreateContractAction` y la suite completa queda verde.
 
-### - [ ] T19: Escribir test del listado y la ficha de contratos
+### - [x] T19: Escribir test del listado y la ficha de contratos
 
 - **Tipo**: test
 - **Cubre**: RF-81, RF-82, RF-83, RF-84, RF-86
