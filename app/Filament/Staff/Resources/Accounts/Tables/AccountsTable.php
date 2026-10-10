@@ -52,7 +52,7 @@ class AccountsTable
                     ->icon('heroicon-o-arrows-right-left')
                     ->authorize('changeRole')
                     ->hidden(fn (User $record): bool => $record->is(Auth::user()))
-                    ->fillForm(fn (User $record): array => ['role' => $record->roles->first()?->name])
+                    ->fillForm(fn (User $record): array => ['role' => $record->getRoleNames()->first()])
                     ->schema([
                         Select::make('role')
                             ->label(__('accounts.fields.role'))

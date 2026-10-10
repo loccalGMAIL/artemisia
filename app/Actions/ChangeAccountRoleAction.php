@@ -22,7 +22,7 @@ class ChangeAccountRoleAction
         }
 
         return DB::transaction(function () use ($target, $role, $actor): User {
-            $oldRole = $target->roles()->pluck('name')->first();
+            $oldRole = $target->roles()->value('name');
 
             if ($role !== 'admin' && $target->isLastActiveAdmin()) {
                 throw new LastActiveAdminException;

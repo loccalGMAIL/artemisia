@@ -25,7 +25,7 @@ class AttemptLoginAction
      * credentials or Google identity match an account, the account is active,
      * and its role corresponds to the requested portal. Every attempt is logged.
      *
-     * @param  array{email: string, password: string}|SocialiteUser  $input
+     * @param  array{email?: string|null, password?: string|null}|SocialiteUser  $input
      */
     public function handle(array|SocialiteUser $input, AccessPortal $portal, AccessMethod $method): AuthResult
     {
@@ -49,7 +49,7 @@ class AttemptLoginAction
      * Password attempts are limited per email: after MAX_FAILED_ATTEMPTS invalid
      * credentials within DECAY_SECONDS, every further attempt is rejected (RNF-2).
      *
-     * @param  array{email: string, password: string}|SocialiteUser  $input
+     * @param  array{email?: string|null, password?: string|null}|SocialiteUser  $input
      */
     private function evaluateWithThrottle(string $email, array|SocialiteUser $input, AccessPortal $portal, AccessMethod $method): AuthResult
     {
@@ -73,7 +73,7 @@ class AttemptLoginAction
     }
 
     /**
-     * @param  array{email: string, password: string}|SocialiteUser  $input
+     * @param  array{email?: string|null, password?: string|null}|SocialiteUser  $input
      */
     private function evaluate(string $email, array|SocialiteUser $input, AccessPortal $portal, AccessMethod $method): AuthResult
     {
@@ -99,7 +99,7 @@ class AttemptLoginAction
     }
 
     /**
-     * @param  array{email: string, password: string}|SocialiteUser  $input
+     * @param  array{email?: string|null, password?: string|null}|SocialiteUser  $input
      */
     private function normalizedEmail(array|SocialiteUser $input): string
     {
@@ -109,7 +109,7 @@ class AttemptLoginAction
     }
 
     /**
-     * @param  array{email: string, password: string}|SocialiteUser  $input
+     * @param  array{email?: string|null, password?: string|null}|SocialiteUser  $input
      */
     private function resolveAccount(string $email, array|SocialiteUser $input, AccessMethod $method): ?User
     {
@@ -131,7 +131,7 @@ class AttemptLoginAction
     }
 
     /**
-     * @param  array{email: string, password: string}|SocialiteUser  $input
+     * @param  array{email?: string|null, password?: string|null}|SocialiteUser  $input
      */
     private function passwordMatches(User $user, array|SocialiteUser $input): bool
     {
