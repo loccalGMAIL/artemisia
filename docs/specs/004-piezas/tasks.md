@@ -272,7 +272,7 @@
 
 ## Fase 6: Portal de clientes
 
-### - [ ] T33: Escribir test del listado del portal de clientes
+### - [x] T33: Escribir test del listado del portal de clientes
 
 - **Tipo**: test
 - **Cubre**: RF-37, RF-45, RF-46, RF-48
