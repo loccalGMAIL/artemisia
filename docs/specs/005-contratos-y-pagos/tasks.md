@@ -152,7 +152,7 @@
 - **Depende de**: T12, T16
 - **Hecho cuando**: el test falla y cubre que `admin` y `staff` abren «Crear contrato» desde un presupuesto, que el formulario viene precargado y es editable, que confirma y crea el contrato, y que sobre un presupuesto no elegible se muestra el motivo; commit del test hecho.
 
-### - [ ] T18: Crear la acción «Crear contrato» en la ficha del presupuesto
+### - [x] T18: Crear la acción «Crear contrato» en la ficha del presupuesto
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-13, RF-14, RF-15, RF-16

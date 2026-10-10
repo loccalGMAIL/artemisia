@@ -1,7 +1,22 @@
 <?php
 
 return [
+    'model' => 'contrato',
+    'plural' => 'Contratos',
     'system' => 'Sistema',
+    'fields' => [
+        'start_date' => 'Fecha de inicio',
+        'due_day' => 'Día de vencimiento',
+        'indefinite' => 'Plazo indefinido',
+        'term_months' => 'Plazo (meses)',
+    ],
+    'actions' => [
+        'create' => 'Crear contrato',
+        'due_day_help' => 'Día del mes, de 1 a 28, en que vence el pago de cada período.',
+    ],
+    'notifications' => [
+        'created' => 'Contrato creado.',
+    ],
     'statuses' => [
         'active' => 'Vigente',
         'finished' => 'Finalizado',

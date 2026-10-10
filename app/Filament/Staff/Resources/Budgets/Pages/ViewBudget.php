@@ -4,6 +4,7 @@ namespace App\Filament\Staff\Resources\Budgets\Pages;
 
 use App\Filament\Staff\Resources\Budgets\BudgetActions;
 use App\Filament\Staff\Resources\Budgets\BudgetResource;
+use App\Filament\Staff\Resources\Contracts\ContractActions;
 use App\Filament\Staff\Resources\Pieces\PieceActions;
 use App\Models\Budget;
 use Filament\Actions\EditAction;
@@ -22,6 +23,7 @@ class ViewBudget extends ViewRecord
             EditAction::make()
                 ->visible(fn (): bool => $this->getRecord()->status->isEditable() && ! $this->getRecord()->trashed()),
             PieceActions::generate(),
+            ContractActions::create(),
             ...BudgetActions::all(),
         ];
     }
