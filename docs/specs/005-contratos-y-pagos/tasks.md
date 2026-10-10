@@ -429,7 +429,7 @@
 - **Depende de**: T53
 - **Hecho cuando**: los tests de T53 pasan, todos los mensajes visibles están en `lang/es/contracts.php`, un test comprueba que cada importe del módulo se expresa con 2 decimales, y `php artisan test` y `./vendor/bin/pint` corren sin errores.
 
-### - [ ] T55: Documentar la programación en `AGENTS.md` y sincronizar plan y tareas
+### - [x] T55: Documentar la programación en `AGENTS.md` y sincronizar plan y tareas
 
 - **Tipo**: docs
 - **Cubre**: RNF-6
@@ -561,3 +561,6 @@ Cosas que se hicieron visibles al bajar a tareas y que idealmente vuelven al pla
 - **El plan no dice qué muestra la ficha de un contrato eliminado lógicamente.** No hay forma funcional de eliminarlo, así que T19 solo comprueba que no aparece en el listado.
 - **La hora de ejecución (00:10) del comando programado es una decisión del plan (D-9)** que la spec no fija; conviene confirmarla antes de implementar T40.
 - **Tests existentes de la ficha del cliente.** `ClientCardExtensionsTest` y `ClientBudgetsSectionTest` asumen qué secciones hay registradas; T47 los revisa, pero el plan solo lo menciona como riesgo.
+
+**Estado final**: las 55 tareas están hechas. Lo que la implementación ajustó respecto del plan quedó
+anotado en la sección 15 de `plan.md`.
