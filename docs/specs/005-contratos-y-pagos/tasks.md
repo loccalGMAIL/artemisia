@@ -131,7 +131,7 @@
 - **Depende de**: T13
 - **Hecho cuando**: el test de T13 pasa, `CreateContractAction` genera los períodos que le correspondan, la inserción es por lotes y la suite completa queda verde.
 
-### - [ ] T15: Escribir test de las policies del módulo
+### - [x] T15: Escribir test de las policies del módulo
 
 - **Tipo**: test
 - **Cubre**: RF-34, RF-80, RF-97, RF-98
