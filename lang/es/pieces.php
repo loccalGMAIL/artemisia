@@ -99,6 +99,7 @@ return [
         'file_format' => 'El archivo debe ser JPG, PNG, PDF o MP4.',
         'file_size' => 'El archivo no puede superar los 100 MB.',
         'rejection_reason_max' => 'El motivo del rechazo admite hasta 500 caracteres.',
+        'not_deletable' => 'Las piezas no se eliminan: solo pueden descartarse cuando están pendientes.',
         'not_discardable' => 'Solo se puede descartar una pieza pendiente.',
         'invalid_transition' => 'No se puede pasar una pieza de «:from» a «:to».',
     ],

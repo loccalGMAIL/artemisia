@@ -36,6 +36,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -53,6 +54,7 @@ final class PieceActions
             ->label(__('pieces.actions.generate'))
             ->icon('heroicon-o-squares-plus')
             ->color('primary')
+            ->authorize(fn (): bool => Gate::allows('create', Piece::class))
             ->hidden(fn (Budget $record): bool => $record->trashed())
             ->modalHeading(__('pieces.actions.generate'))
             ->mountUsing(function (Schema $schema, Action $action, Budget $record): void {
@@ -109,6 +111,7 @@ final class PieceActions
         return Action::make('createLoosePiece')
             ->label(__('pieces.actions.create_loose'))
             ->icon('heroicon-o-plus')
+            ->authorize(fn (): bool => Gate::allows('create', Piece::class))
             ->modalHeading(__('pieces.actions.create_loose'))
             ->schema([
                 Select::make('budget_id')
@@ -177,6 +180,7 @@ final class PieceActions
             ->label(__('pieces.actions.assign'))
             ->icon('heroicon-o-user-plus')
             ->color('gray')
+            ->authorize('update')
             ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status === PieceStatus::Delivered)
             ->fillForm(fn (Piece $record): array => ['assignee_id' => $record->assignee_id])
             ->schema([
@@ -208,6 +212,7 @@ final class PieceActions
             ->label(__('pieces.actions.set_due_date'))
             ->icon('heroicon-o-calendar-days')
             ->color('gray')
+            ->authorize('update')
             ->hidden(fn (Piece $record): bool => $record->trashed())
             ->fillForm(fn (Piece $record): array => ['due_date' => $record->due_date?->toDateString()])
             ->schema([
@@ -247,6 +252,7 @@ final class PieceActions
             ->label(__('pieces.actions.sendForApproval'))
             ->icon('heroicon-o-paper-airplane')
             ->color('primary')
+            ->authorize('update')
             ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status !== PieceStatus::InReview)
             ->schema([
                 FileUpload::make('file')
@@ -278,6 +284,7 @@ final class PieceActions
             ->icon('heroicon-o-trash')
             ->color('danger')
             ->requiresConfirmation()
+            ->authorize('discard')
             ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status !== PieceStatus::Pending)
             ->action(function (Piece $record, $livewire): void {
                 try {
@@ -303,6 +310,7 @@ final class PieceActions
             ->label(__("pieces.actions.{$name}"))
             ->icon($icon)
             ->color($color)
+            ->authorize('update')
             ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status !== $visibleFrom)
             ->action(function (Piece $record) use ($handler, $name): void {
                 self::report(fn () => $handler($record), __("pieces.notifications.{$name}"));

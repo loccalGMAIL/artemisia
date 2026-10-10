@@ -8,6 +8,7 @@ use App\Models\AccessLog;
 use App\Models\AccountHistory;
 use App\Models\Budget;
 use App\Models\Client;
+use App\Models\Piece;
 use App\Models\Service;
 use App\Models\User;
 use App\Policies\AccessLogPolicy;
@@ -16,6 +17,7 @@ use App\Policies\BudgetPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ClientPortalPolicy;
 use App\Policies\PieceApprovalPortalPolicy;
+use App\Policies\PiecePolicy;
 use App\Policies\ServicePolicy;
 use App\Support\Pdf\DompdfRenderer;
 use App\Support\Pdf\PdfRenderer;
@@ -48,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Client::class, ClientPolicy::class);
         Gate::policy(Service::class, ServicePolicy::class);
         Gate::policy(Budget::class, BudgetPolicy::class);
+        Gate::policy(Piece::class, PiecePolicy::class);
 
         // The client card lists the client's budgets now that the module exists (spec 003, RF-46).
         ClientBudgetsSection::register();

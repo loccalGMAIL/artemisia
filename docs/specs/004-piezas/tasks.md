@@ -261,7 +261,7 @@
 - **Depende de**: T30
 - **Hecho cuando**: el test falla y comprueba que `admin` y `staff` pueden operar piezas desde `/staff`, y que una cuenta `client` no puede acceder a esas operaciones; commit del test hecho.
 
-### - [ ] T32: Implementar `PiecePolicy`
+### - [x] T32: Implementar `PiecePolicy`
 
 - **Tipo**: impl
 - **Cubre**: RF-4, RF-11, RF-15, RF-28, RF-36, RF-39
