@@ -373,7 +373,7 @@
 - **Depende de**: T45
 - **Hecho cuando**: el test de T45 pasa, las acciones delegan en las Actions de dominio y la suite completa queda verde.
 
-### - [ ] T47: Escribir test de las secciones de la ficha del cliente
+### - [x] T47: Escribir test de las secciones de la ficha del cliente
 
 - **Tipo**: test
 - **Cubre**: RF-91, RF-92
