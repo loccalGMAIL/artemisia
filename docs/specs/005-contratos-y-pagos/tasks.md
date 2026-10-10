@@ -297,7 +297,7 @@
 - **Depende de**: T35
 - **Hecho cuando**: el test de T35 pasa, el modelo `Payment` rechaza cualquier modificación fuera de la anulación y la suite completa queda verde.
 
-### - [ ] T37: Escribir test de las acciones de pagos sobre un período
+### - [x] T37: Escribir test de las acciones de pagos sobre un período
 
 - **Tipo**: test
 - **Cubre**: RF-58, RF-75
