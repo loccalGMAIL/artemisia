@@ -207,7 +207,7 @@
 - **Depende de**: T23
 - **Hecho cuando**: el test de T23 pasa, `ContractPeriod` expone el saldo, el estado de pago y los scopes de pendientes, parciales, pagados y vencidos sobre `total` y `paid_amount`, y la suite completa queda verde.
 
-### - [ ] T25: Escribir test de quitar un concepto
+### - [x] T25: Escribir test de quitar un concepto
 
 - **Tipo**: test
 - **Cubre**: RF-47, RF-48, RF-51, RF-52
