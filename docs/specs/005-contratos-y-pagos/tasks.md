@@ -214,7 +214,7 @@
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre quitar un extra o un descuento, el rechazo si el total quedara bajo lo ya pagado, que la fila se borra y su foto queda en el historial, y el recálculo del total; commit del test hecho.
 
-### - [ ] T26: Implementar `RemovePeriodConceptAction`
+### - [x] T26: Implementar `RemovePeriodConceptAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-47, RF-48, RF-51, RF-52

@@ -88,7 +88,7 @@ it('RF-48: la fila del concepto se borra y su foto queda en el historial del per
             'description' => 'Banner extra',
             'amount' => '300.00',
         ])
-        ->and($entry->new_value)->toBeNull();
+        ->and($entry->new_value)->toBe(['removed' => true]);
 });
 
 it('RF-52: el asiento de la baja lleva el autor y la fecha', function () {
