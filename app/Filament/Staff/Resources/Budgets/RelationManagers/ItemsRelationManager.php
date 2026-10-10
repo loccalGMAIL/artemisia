@@ -9,6 +9,7 @@ use App\Actions\UpdateBudgetItemDescriptionAction;
 use App\Actions\UpdateBudgetItemQuantityAction;
 use App\Exceptions\BudgetNotEditableException;
 use App\Filament\Support\FormValidation;
+use App\Models\Budget;
 use App\Models\BudgetItem;
 use App\Models\Service;
 use App\Support\Money;
@@ -28,6 +29,8 @@ use Illuminate\Validation\ValidationException;
 /**
  * Items of a budget. Every change goes through the item Actions, which copy prices from the
  * catalog, recalculate the totals and write the history; nothing is computed here.
+ *
+ * @method Budget getOwnerRecord()
  */
 class ItemsRelationManager extends RelationManager
 {

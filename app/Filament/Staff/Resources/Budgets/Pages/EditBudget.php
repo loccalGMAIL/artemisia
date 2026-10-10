@@ -6,6 +6,7 @@ use App\Actions\UpdateBudgetHeaderAction;
 use App\Exceptions\BudgetNotEditableException;
 use App\Filament\Staff\Resources\Budgets\BudgetResource;
 use App\Filament\Support\FormValidation;
+use App\Models\Budget;
 use Filament\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
@@ -25,6 +26,10 @@ class EditBudget extends EditRecord
         ];
     }
 
+    /**
+     * @param  Budget  $record
+     * @param  array<string, mixed>  $data
+     */
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
         try {

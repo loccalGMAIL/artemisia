@@ -7,6 +7,7 @@ use App\Actions\RemoveClientContactAction;
 use App\Actions\SetPrimaryContactAction;
 use App\Actions\UpdateClientContactAction;
 use App\Filament\Support\FormValidation;
+use App\Models\Client;
 use App\Models\ClientContact;
 use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
@@ -22,6 +23,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @method Client getOwnerRecord()
+ */
 class ContactsRelationManager extends RelationManager
 {
     protected static string $relationship = 'contacts';

@@ -28,6 +28,7 @@ cliente, aprobación de piezas, historial de pagos e información propia.
 - laravel/socialite (login con Google)
 - barryvdh/laravel-dompdf (PDF de presupuestos)
 - Pest (tests), Laravel Pint (estilo)
+- larastan/larastan (análisis estático, solo desarrollo)
 - Node 20+ y Vite para assets
 
 No se agregan dependencias fuera de esta lista sin justificación escrita en el PR (constitución, principio 1).
@@ -66,6 +67,7 @@ Comandos habituales:
 ```bash
 php artisan test                 # o ./vendor/bin/pest
 ./vendor/bin/pint                # estilo antes de commitear
+composer analyse                 # análisis estático (Larastan, nivel 6) antes del PR
 php artisan make:filament-panel  # alta de panel
 php artisan boost:mcp            # servidor MCP de Boost
 ```
@@ -97,6 +99,8 @@ docs/constitution.md, docs/specs/
 - Autorización con Policies + spatie/laravel-permission. Cada panel decide acceso en `canAccessPanel()`.
 - Todo texto visible sale de `lang/es`; nunca hardcodeado.
 - `./vendor/bin/pint` (preset Laravel) antes de cada commit.
+- `composer analyse` (Larastan) sin errores antes de abrir el PR. La configuración está en
+  `phpstan.neon`; un ignore nuevo se acota por mensaje y ruta, nunca global.
 
 Orden canonico de implementacion de specs aprobado por dependencias:
 
@@ -143,6 +147,8 @@ implementar, y su commit precede al de la implementación.
   de uno, se listan separados por coma: `it('RF-3, RF-4: ...')`. Es lo que le permite al validador
   de specs recorrer los requisitos y decir qué test cubre cada uno.
 - La suite tiene que estar verde para mergear.
+- `phpstan.neon` activa `parseModelCastsMethod`: Larastan lee el cuerpo de `casts()` en los
+  modelos, así que los enums y las fechas se tipan solos. Sin esa opción solo entiende `$casts`.
 
 ## 7. Nota sobre Laravel Boost
 

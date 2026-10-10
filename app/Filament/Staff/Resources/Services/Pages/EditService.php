@@ -6,6 +6,7 @@ use App\Actions\UpdateServiceAction;
 use App\Filament\Staff\Resources\Services\ServiceActions;
 use App\Filament\Staff\Resources\Services\ServiceResource;
 use App\Filament\Support\FormValidation;
+use App\Models\Service;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,10 @@ class EditService extends EditRecord
         ];
     }
 
+    /**
+     * @param  Service  $record
+     * @param  array<string, mixed>  $data
+     */
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
         try {

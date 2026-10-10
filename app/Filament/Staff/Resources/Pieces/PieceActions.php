@@ -64,6 +64,8 @@ final class PieceActions
                     Notification::make()->danger()->title($exception->getMessage())->send();
 
                     $action->halt();
+
+                    return;
                 }
 
                 $schema->fill(['lines' => $lines]);

@@ -19,7 +19,7 @@ class CreatePiecesFromProposalAction extends CreatesPiece
      * Dividing an item quantity is several lines with the same budget_item_id, and a removed
      * line is simply not sent (RF-2, RF-3, RF-4, RF-19). Each piece starts its history (RF-38).
      *
-     * @param  list<array{budget_item_id: int|null, name: string, work_category_id: int, description?: string|null}>  $lines
+     * @param  array<array-key, array{budget_item_id: int|null, name: string, work_category_id: int, description?: string|null}>  $lines  keyed by position or by the form's row ids
      * @return Collection<int, Piece>
      *
      * @throws BudgetNotAcceptedException

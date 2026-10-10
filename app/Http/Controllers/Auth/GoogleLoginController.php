@@ -11,6 +11,7 @@ use Filament\Panel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\AbstractProvider;
 use Throwable;
 
 /**
@@ -55,7 +56,10 @@ class GoogleLoginController extends Controller
 
     private function provider(AccessPortal $portal): mixed
     {
-        return Socialite::driver('google')->redirectUrl(route("google.{$portal->value}.callback"));
+        /** @var AbstractProvider $driver */
+        $driver = Socialite::driver('google');
+
+        return $driver->redirectUrl(route("google.{$portal->value}.callback"));
     }
 
     private function rejected(Panel $panel, string $message): RedirectResponse

@@ -1,0 +1,25 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 6
+
+    # Reads the array that casts() returns instead of its declared type, so enum and date
+    # casts are known (Larastan only understands the $casts property otherwise).
+    parseModelCastsMethod: true
+
+    paths:
+        - app
+        - database
+
+    excludePaths:
+        - database/migrations
+
+    ignoreErrors:
+        # Filament hands the query to its callbacks as a Builder with no model, so the scopes
+        # of our models (SoftDeletes and #[Scope] methods) cannot be resolved there.
+        -
+            message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder::(withoutTrashed|search|forClient|delegatedTo|overdue)\(\)\.$#'
+            identifier: method.notFound
+            paths:
+                - app/Filament/Staff/Resources/*/Tables/*

@@ -5,6 +5,7 @@ namespace App\Filament\Staff\Resources\Clients\RelationManagers;
 use App\Actions\LinkAccountToClientAction;
 use App\Actions\UnlinkAccountFromClientAction;
 use App\Filament\Support\FormValidation;
+use App\Models\Client;
 use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
@@ -20,6 +21,8 @@ use Illuminate\Validation\ValidationException;
 /**
  * Portal accounts linked to the client (RF-38 to RF-41). Authorization comes from the
  * client policy, not from the account policy, which is admin-only.
+ *
+ * @method Client getOwnerRecord()
  */
 class AccountsRelationManager extends RelationManager
 {
