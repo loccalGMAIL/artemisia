@@ -269,7 +269,7 @@
 
 **Demo posible al cerrarlo**: registrar un pago parcial, ver el período pasar a parcial y a pagado con su saldo, ver rechazado un pago que supera el saldo y anular un pago con justificación.
 
-### - [ ] T33: Escribir test de registro de pagos
+### - [x] T33: Escribir test de registro de pagos
 
 - **Tipo**: test
 - **Cubre**: RF-24, RF-35, RF-58, RF-59, RF-60, RF-61, RF-62, RF-63, RF-64, RF-65, RF-66, RF-67, RF-68, RF-69, RF-79, RNF-2
