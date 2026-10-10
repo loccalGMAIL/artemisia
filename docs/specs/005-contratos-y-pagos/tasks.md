@@ -103,7 +103,7 @@
 - **Depende de**: T9
 - **Hecho cuando**: el test de T9 pasa, existe `ContractTermElapsedException`, `term_end_month` se calcula al crear el contrato con `BusinessDate` y la suite completa queda verde.
 
-### - [ ] T11: Escribir test de precarga desde un contrato anterior
+### - [x] T11: Escribir test de precarga desde un contrato anterior
 
 - **Tipo**: test
 - **Cubre**: RF-13, RF-14, RF-15, RF-17
