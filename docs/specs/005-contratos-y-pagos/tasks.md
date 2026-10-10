@@ -179,7 +179,7 @@
 
 **Demo posible al cerrarlo**: listado de períodos con filtros, y en un período agregar extras y descuentos con justificación, ver el total, cargar la referencia de factura y quitar un concepto.
 
-### - [ ] T21: Escribir test de extras y descuentos
+### - [x] T21: Escribir test de extras y descuentos
 
 - **Tipo**: test
 - **Cubre**: RF-42, RF-43, RF-44, RF-45, RF-46, RF-49, RF-50, RF-51, RF-52, RNF-2
