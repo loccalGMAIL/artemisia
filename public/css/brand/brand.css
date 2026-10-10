@@ -1,0 +1,109 @@
+/*
+ * Artemisia: identity of the staff and client panels.
+ *
+ * Plain CSS on top of Filament, no build step. The palette (red #f4193e, pink #ffb1bb,
+ * purple #2c0735, cream #fff7e9, yellow #ffedbb) is also given to Filament as its color
+ * scales, see App\Support\BrandPalette; this file only covers what the scales cannot reach:
+ * the typeface, the purple menu and the login screen. Rules here are not inside a cascade
+ * layer, so they win over Filament's own without needing more specificity.
+ */
+
+@font-face {
+    font-family: 'Acumin Variable Concept';
+    src: url('../../fonts/brand/AcuminVariableConcept.otf') format('opentype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --brand-red: #f4193e;
+    --brand-pink: #ffb1bb;
+    --brand-purple: #2c0735;
+    --brand-purple-light: #3a1f45;
+    --brand-cream: #fff7e9;
+    --brand-yellow: #ffedbb;
+}
+
+/* The menu: purple, with the pink logo on top of it. */
+.fi-sidebar {
+    background-color: var(--brand-purple);
+    --tw-ring-color: transparent;
+    box-shadow: none;
+}
+
+.fi-sidebar-header {
+    background-color: var(--brand-purple);
+    height: auto;
+    min-height: 7.5rem;
+    padding-block: 1.25rem;
+    box-shadow: none;
+    --tw-ring-color: transparent;
+}
+
+.fi-sidebar-header .fi-logo {
+    margin-inline: auto;
+}
+
+.fi-sidebar-group-label {
+    color: var(--brand-pink);
+    opacity: 0.75;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.fi-sidebar-item-label,
+.fi-sidebar-group-btn {
+    color: var(--brand-cream);
+}
+
+.fi-sidebar-item-btn svg,
+.fi-sidebar-group-btn svg {
+    color: var(--brand-pink);
+}
+
+.fi-sidebar-item-btn:hover,
+.fi-sidebar-group-btn:hover {
+    background-color: rgb(255 247 233 / 0.1);
+}
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn,
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn {
+    background-color: var(--brand-pink);
+}
+
+.fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-sidebar-item-btn svg {
+    color: var(--brand-purple);
+}
+
+/* The login screens: purple, with the logo above and the form on a lighter purple card. */
+.fi-simple-layout {
+    background-color: var(--brand-purple);
+}
+
+.fi-simple-main {
+    background-color: var(--brand-purple-light);
+    color: var(--brand-cream);
+    --tw-ring-color: rgb(255 177 187 / 0.25);
+}
+
+.fi-simple-layout .fi-logo {
+    height: 7rem !important;
+    margin-inline: auto;
+}
+
+.fi-simple-header-heading,
+.fi-simple-header-subheading,
+.fi-simple-main .fi-fo-field-label-content,
+.fi-simple-main label {
+    color: var(--brand-cream);
+}
+
+.fi-simple-main a:not(.fi-btn) {
+    color: var(--brand-pink);
+}
+
+.fi-simple-main a.fi-btn-color-gray {
+    color: var(--brand-purple);
+}
