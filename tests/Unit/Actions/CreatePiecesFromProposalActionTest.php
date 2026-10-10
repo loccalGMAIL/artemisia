@@ -11,6 +11,7 @@ use App\Models\Piece;
 use App\Models\PieceHistory;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
 
 beforeEach(function () {
     app()->setLocale('es');
@@ -114,3 +115,25 @@ it('RF-4: confirmar una propuesta vacía no crea nada', function () {
     expect($pieces)->toBeEmpty()
         ->and(Piece::query()->count())->toBe(0);
 });
+
+it('RF-4, RF-9, RF-10: rechaza una propuesta cuyas líneas no tienen nombre o categoría válidos, sin crear nada', function (array|Closure $override) {
+    $item = BudgetItem::factory()->for($this->budget)->create();
+    $override = $override instanceof Closure ? $override() : $override;
+    $line = [...app(ProposePiecesFromBudgetAction::class)->handle($this->budget)[0], ...$override];
+
+    try {
+        app(CreatePiecesFromProposalAction::class)->handle($this->budget, [$line], $this->author);
+        $this->fail('Debió rechazar la propuesta.');
+    } catch (ValidationException $exception) {
+        expect($exception->errors())->toHaveKey('lines')
+            ->and($exception->errors()['lines'][0])->toContain('nombre');
+    }
+
+    expect(Piece::query()->count())->toBe(0)
+        ->and($item->exists)->toBeTrue();
+})->with([
+    'sin nombre' => [['name' => '']],
+    'sin categoría' => [['work_category_id' => null]],
+    'categoría inexistente' => [['work_category_id' => 999999]],
+    'ítem de otro presupuesto' => [fn () => ['budget_item_id' => BudgetItem::factory()->create()->id]],
+]);
