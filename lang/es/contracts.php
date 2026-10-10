@@ -29,6 +29,11 @@ return [
     'sections' => [
         'data' => 'Datos del contrato',
     ],
+    'client_section' => [
+        'contracts_empty' => 'Este cliente todavía no tiene contratos.',
+        'payments_title' => 'Pagos',
+        'payments_empty' => 'Este cliente todavía no tiene pagos.',
+    ],
     'relations' => [
         'periods' => 'Períodos',
         'histories' => 'Historial',

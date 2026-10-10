@@ -380,7 +380,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: el test falla y comprueba que la ficha del cliente muestra sus contratos y su historial de pagos con vigentes y anulados, y que no muestra los de otro cliente; se revisan los tests de `ClientCardExtensions` que asumen qué secciones hay registradas; commit del test hecho.
 
-### - [ ] T48: Crear `ClientContractsSection` y `ClientPaymentsSection`
+### - [x] T48: Crear `ClientContractsSection` y `ClientPaymentsSection`
 
 - **Tipo**: ui
 - **Cubre**: RF-91, RF-92
