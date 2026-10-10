@@ -23,11 +23,27 @@ class Payment extends Model
     use HasFactory, SoftDeletes;
 
     /**
-     * A payment is never erased for good: a mistake is corrected by voiding it (RF-80).
+     * A registered payment is never changed, except to void it once, and is never erased: a
+     * mistake is corrected by voiding the payment and registering a new one (RF-78, RF-80).
      */
     protected static function booted(): void
     {
-        static::forceDeleting(fn () => throw new LogicException('Payments cannot be deleted for good.'));
+        static::updating(function (Payment $payment): void {
+            if (! $payment->isBeingVoided()) {
+                throw new LogicException('A registered payment cannot be modified, only voided.');
+            }
+        });
+
+        static::deleting(fn () => throw new LogicException('Payments cannot be deleted.'));
+    }
+
+    private function isBeingVoided(): bool
+    {
+        $changed = array_keys($this->getDirty());
+
+        return $this->getOriginal('voided_at') === null
+            && $this->voided_at !== null
+            && array_diff($changed, ['voided_at', 'voided_by', 'void_justification', 'updated_at']) === [];
     }
 
     protected function casts(): array

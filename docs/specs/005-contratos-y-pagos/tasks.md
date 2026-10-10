@@ -290,7 +290,7 @@
 - **Depende de**: T34
 - **Hecho cuando**: el test falla y cubre anular solo un pago vigente con justificación obligatoria, que deja de computarse en lo pagado y se conserva con su justificación, su autor y su fecha, que ningún dato de un pago registrado se modifica, que no se elimina nunca y el asiento de la anulación; commit del test hecho.
 
-### - [ ] T36: Implementar `VoidPaymentAction`
+### - [x] T36: Implementar `VoidPaymentAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-75, RF-76, RF-77, RF-78, RF-79, RF-80
