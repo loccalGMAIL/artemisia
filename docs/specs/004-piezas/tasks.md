@@ -254,7 +254,7 @@
 - **Depende de**: T29
 - **Hecho cuando**: el test de T29 pasa, las acciones delegan en Actions de dominio, los relation managers son de consulta cuando corresponde y la suite completa queda verde.
 
-### - [ ] T31: Escribir test de permisos staff sobre piezas
+### - [x] T31: Escribir test de permisos staff sobre piezas
 
 - **Tipo**: test
 - **Cubre**: RF-4, RF-11, RF-15, RF-28, RF-36, RF-39
