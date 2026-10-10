@@ -61,7 +61,7 @@
 - **Depende de**: —
 - **Hecho cuando**: el test falla porque no existe `BusinessDate`, y comprueba `today()` y `currentMonth()` en hora argentina, incluido el borde de las 21:00 a las 24:00 en que UTC ya está en el día siguiente, y que respeta `travelTo`; commit del test hecho.
 
-### - [ ] T5: Implementar `BusinessDate` y la zona horaria de negocio
+### - [x] T5: Implementar `BusinessDate` y la zona horaria de negocio
 
 - **Tipo**: impl
 - **Cubre**: RF-36, RF-66, RF-74
