@@ -422,7 +422,7 @@
 - **Depende de**: T30, T48, T52
 - **Hecho cuando**: los tests del grupo `performance` verifican con el mejor de tres corridas el listado de 5.000 períodos con filtros en menos de 2 s, la generación del mes para 500 contratos con 12 períodos cada uno en menos de 10 s y el portal de un cliente con 60 períodos y 200 pagos en menos de 2 s, y que no hay consultas por fila; commit del test hecho.
 
-### - [ ] T54: Optimizar consultas y validar textos
+### - [x] T54: Optimizar consultas y validar textos
 
 - **Tipo**: refactor
 - **Cubre**: RF-91, RNF-1, RNF-3, RNF-4, RNF-5
