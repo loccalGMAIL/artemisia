@@ -47,7 +47,7 @@
 - **Depende de**: T1
 - **Hecho cuando**: `php artisan migrate:fresh` crea ambas tablas con sus columnas, `SoftDeletes` solo en `payments`, y los índices y claves foráneas del plan §4.
 
-### - [ ] T3: Crear migraciones de `contract_histories` y `period_histories`
+### - [x] T3: Crear migraciones de `contract_histories` y `period_histories`
 
 - **Tipo**: migration
 - **Cubre**: RF-33, RF-41, RF-52, RF-57, RF-79, RNF-6
