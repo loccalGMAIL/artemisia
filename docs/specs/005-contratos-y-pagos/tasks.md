@@ -193,7 +193,7 @@
 - **Depende de**: T21
 - **Hecho cuando**: el test de T21 pasa, existen `ChangesPeriod` (transacción con bloqueo, recálculo e historial), `PeriodLimitExceededException` y `PeriodTotalException`, los importes se manejan en centavos con `Money` y la suite completa queda verde.
 
-### - [ ] T23: Escribir test del estado de pago y del vencido
+### - [x] T23: Escribir test del estado de pago y del vencido
 
 - **Tipo**: test
 - **Cubre**: RF-69, RF-70, RF-71, RF-72, RF-73, RF-74
