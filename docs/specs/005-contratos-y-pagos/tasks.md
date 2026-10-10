@@ -401,7 +401,7 @@
 - **Depende de**: T49
 - **Hecho cuando**: el test de T49 pasa, la action aplica `portal.contracts.view` a cada contrato y carga todo de una vez, y la suite completa queda verde.
 
-### - [ ] T51: Escribir test de `ContractsPage`
+### - [x] T51: Escribir test de `ContractsPage`
 
 - **Tipo**: test
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-98
