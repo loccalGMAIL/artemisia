@@ -24,6 +24,21 @@ class PeriodConcept extends Model
     }
 
     /**
+     * The concept as the history keeps it (RF-48, RF-52).
+     *
+     * @return array{id: int, type: string, description: string, amount: string}
+     */
+    public function snapshot(): array
+    {
+        return [
+            'id' => $this->id,
+            'type' => $this->type->value,
+            'description' => $this->description,
+            'amount' => $this->amount,
+        ];
+    }
+
+    /**
      * @return BelongsTo<ContractPeriod, $this>
      */
     public function contractPeriod(): BelongsTo

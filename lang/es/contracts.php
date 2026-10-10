@@ -86,6 +86,13 @@ return [
         'contract_not_deletable' => 'Los contratos no se eliminan: solo pueden cancelarse.',
         'period_not_deletable' => 'Los períodos no se eliminan.',
         'payment_not_deletable' => 'Los pagos no se eliminan: solo pueden anularse.',
+        'extra_description_required' => 'Debe indicar la descripción del extra.',
+        'discount_description_required' => 'Debe indicar la justificación del descuento.',
+        'concept_description_too_long' => 'La descripción no puede superar los :max caracteres.',
+        'concept_amount_invalid' => 'El importe debe ser un número mayor que cero.',
+        'concepts_limit' => 'El período ya tiene :max conceptos cargados: no se puede agregar otro.',
+        'total_below_zero' => 'El total del período no puede quedar por debajo de cero.',
+        'total_below_paid' => 'El total del período no puede quedar por debajo de lo ya pagado (:paid).',
     ],
     'period_history_fields' => [
         'generated' => 'Período generado',

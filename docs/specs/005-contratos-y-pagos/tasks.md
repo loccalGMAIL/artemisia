@@ -186,7 +186,7 @@
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y cubre agregar extras y descuentos, la justificación obligatoria del descuento, varios por período, el tope de 100 conceptos sin contar los quitados, el total como cuota más extras menos descuentos redondeado al centavo, el rechazo si el total quedara bajo cero o bajo lo ya pagado y el asiento de cada alta; commit del test hecho.
 
-### - [ ] T22: Implementar `AddPeriodExtraAction`, `AddPeriodDiscountAction` y `RecalculatePeriodTotalsAction`
+### - [x] T22: Implementar `AddPeriodExtraAction`, `AddPeriodDiscountAction` y `RecalculatePeriodTotalsAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-42, RF-43, RF-44, RF-45, RF-46, RF-49, RF-50, RF-51, RF-52, RNF-2
