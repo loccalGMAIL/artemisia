@@ -286,7 +286,7 @@
 - **Depende de**: T33
 - **Hecho cuando**: el test de T33 pasa, la página muestra piezas visibles y envíos resueltos propios, y la suite completa queda verde.
 
-### - [ ] T35: Escribir test de aprobar y rechazar desde el portal
+### - [x] T35: Escribir test de aprobar y rechazar desde el portal
 
 - **Tipo**: test
 - **Cubre**: RF-32, RF-33, RF-34, RF-35, RF-47, RF-48
