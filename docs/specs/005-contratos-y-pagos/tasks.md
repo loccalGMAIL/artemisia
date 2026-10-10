@@ -415,7 +415,7 @@
 - **Depende de**: T51
 - **Hecho cuando**: el test de T51 pasa, la página usa secciones de estado perezoso y la suite completa queda verde.
 
-### - [ ] T53: Escribir tests de rendimiento
+### - [x] T53: Escribir tests de rendimiento
 
 - **Tipo**: test
 - **Cubre**: RNF-3, RNF-4, RNF-5
