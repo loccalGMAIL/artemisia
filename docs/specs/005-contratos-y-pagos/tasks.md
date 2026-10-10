@@ -40,7 +40,7 @@
 - **Depende de**: —
 - **Hecho cuando**: `php artisan migrate:fresh` corre sin errores en una base limpia y crea ambas tablas con las columnas, el índice único de `budget_id`, el único `(contract_id, month)`, los índices y las claves foráneas del plan §4.
 
-### - [ ] T2: Crear migraciones de `period_concepts` y `payments`
+### - [x] T2: Crear migraciones de `period_concepts` y `payments`
 
 - **Tipo**: migration
 - **Cubre**: RF-42, RF-43, RF-58, RF-59, RF-60, RF-77, RF-80, RNF-1
