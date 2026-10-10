@@ -110,7 +110,7 @@
 - **Depende de**: T10
 - **Hecho cuando**: el test falla y comprueba que propone el día de vencimiento y el plazo del contrato de fecha de inicio más reciente de cualquier estado, el desempate por alta más reciente, la fecha de inicio propuesta solo si es de plazo fijo y que nunca devuelve el importe; commit del test hecho.
 
-### - [ ] T12: Implementar `ProposeContractDefaultsAction`
+### - [x] T12: Implementar `ProposeContractDefaultsAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-13, RF-14, RF-15, RF-17
