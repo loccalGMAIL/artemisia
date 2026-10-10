@@ -338,7 +338,7 @@
 - **Depende de**: T40
 - **Hecho cuando**: el test falla y cubre cancelar solo desde vigente, que los períodos existentes se conservan, reactivar y reponer los períodos faltantes sin pasar del plazo, el rechazo con motivo si el plazo fijo ya transcurrió, el rechazo de un contrato finalizado y el asiento de cada cambio de estado; commit del test hecho.
 
-### - [ ] T42: Implementar `CancelContractAction` y `ReactivateContractAction`
+### - [x] T42: Implementar `CancelContractAction` y `ReactivateContractAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-21, RF-22, RF-23, RF-25, RF-26, RF-27, RF-28, RF-33
