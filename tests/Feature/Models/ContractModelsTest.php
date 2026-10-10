@@ -109,12 +109,12 @@ it('RF-33, RF-41: el historial admite autor nulo, que es el sistema', function (
         ->and(ContractHistory::factory()->create()->author)->toBeInstanceOf(User::class);
 });
 
-it('RNF-6: un asiento del historial no se modifica ni se elimina', function (string $model) {
-    $entry = $model::factory()->create();
+it('RNF-6: un asiento del historial no se modifica ni se elimina', function (string $history) {
+    $entry = $history === 'contract' ? ContractHistory::factory()->create() : PeriodHistory::factory()->create();
 
     expect(fn () => $entry->update(['new_value' => ['x' => 1]]))->toThrow(LogicException::class)
         ->and(fn () => $entry->delete())->toThrow(LogicException::class);
-})->with([ContractHistory::class, PeriodHistory::class]);
+})->with(['contract', 'period']);
 
 it('RF-34, RF-80: un contrato y un pago no se eliminan físicamente, y un período no se elimina', function () {
     $contract = Contract::factory()->create();
@@ -135,6 +135,6 @@ it('RF-48: el concepto cargado muestra su tipo, su descripción y su importe', f
     expect($extra->type)->toBe(ConceptType::Extra)
         ->and($extra->description)->toBe('Banner extra')
         ->and($extra->amount)->toBe('250.50')
-        ->and($extra->period)->toBeInstanceOf(ContractPeriod::class)
+        ->and($extra->contractPeriod)->toBeInstanceOf(ContractPeriod::class)
         ->and($extra->creator)->toBeInstanceOf(User::class);
 });

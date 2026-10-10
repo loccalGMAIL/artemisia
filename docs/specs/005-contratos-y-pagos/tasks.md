@@ -68,7 +68,7 @@
 - **Depende de**: T4
 - **Hecho cuando**: el test de T4 pasa, `config('app.business_timezone')` existe con su valor por defecto, la zona global de la aplicación sigue en UTC y la suite completa queda verde.
 
-### - [ ] T6: Crear enums, modelos, factories y relaciones del módulo
+### - [x] T6: Crear enums, modelos, factories y relaciones del módulo
 
 - **Tipo**: impl
 - **Cubre**: RF-19, RF-34, RF-80, RNF-6
