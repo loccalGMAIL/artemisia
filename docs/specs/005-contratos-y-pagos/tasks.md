@@ -82,7 +82,7 @@
 - **Depende de**: T6
 - **Hecho cuando**: el test falla y comprueba el alta desde un presupuesto aceptado de abono mensual con cliente e importe copiados, estado vigente y asiento de creación, el rechazo con motivo si no está aceptado, es pago único o su total es cero, el rechazo que muestra el contrato existente, y que el contrato no cambia si el presupuesto vuelve a «enviado»; commit del test hecho.
 
-### - [ ] T8: Implementar `CreateContractAction`
+### - [x] T8: Implementar `CreateContractAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-6, RF-18, RF-20, RF-33

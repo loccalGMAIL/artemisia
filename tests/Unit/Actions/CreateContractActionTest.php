@@ -111,7 +111,8 @@ it('RF-18: el contrato no cambia si el presupuesto vuelve a enviado o se modific
     $before = $contract->only(['client_id', 'monthly_amount', 'status', 'due_day', 'term_months']);
 
     app(RevertBudgetToSentAction::class)->handle($this->budget->refresh(), $this->author);
-    app(UpdateBudgetHeaderAction::class)->handle($this->budget->refresh(), ['title' => 'Otro título'], $this->author);
+    $header = [...$this->budget->refresh()->headerSnapshot(), 'title' => 'Otro título'];
+    app(UpdateBudgetHeaderAction::class)->handle($this->budget, $header, $this->author);
     $this->budget->forceFill(['total' => '9999.00'])->save();
 
     expect($contract->refresh()->only(['client_id', 'monthly_amount', 'status', 'due_day', 'term_months']))->toBe($before)

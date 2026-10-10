@@ -41,6 +41,22 @@ class Contract extends Model
         ];
     }
 
+    /**
+     * The contract as it is created, for its first history entry (RF-33).
+     *
+     * @return array<string, int|string|null>
+     */
+    public function creationSnapshot(): array
+    {
+        return [
+            'status' => ContractStatus::Active->value,
+            'monthly_amount' => $this->monthly_amount,
+            'due_day' => $this->due_day,
+            'term_months' => $this->term_months,
+            'start_date' => $this->start_date->toDateString(),
+        ];
+    }
+
     /** A contract without an end date (RF-8). */
     public function isIndefinite(): bool
     {
