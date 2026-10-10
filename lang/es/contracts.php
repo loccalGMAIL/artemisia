@@ -29,6 +29,16 @@ return [
     'sections' => [
         'data' => 'Datos del contrato',
     ],
+    'portal' => [
+        'navigation' => 'Mis contratos',
+        'title' => 'Mis contratos',
+        'empty' => 'Todavía no tiene contratos.',
+        'contract_heading' => 'Contrato #:id',
+        'no_periods' => 'Este contrato todavía no tiene períodos.',
+        'extras' => 'Extras',
+        'discounts' => 'Descuentos',
+        'payments' => 'Pagos',
+    ],
     'client_section' => [
         'contracts_empty' => 'Este cliente todavía no tiene contratos.',
         'payments_title' => 'Pagos',

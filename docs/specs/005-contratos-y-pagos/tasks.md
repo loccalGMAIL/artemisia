@@ -408,7 +408,7 @@
 - **Depende de**: T50
 - **Hecho cuando**: el test falla y comprueba que la cuenta vinculada ve sus contratos, períodos y pagos en el portal, no ve los de otro cliente ni los pagos anulados, que la página no ofrece ninguna acción de escritura y que una cuenta sin vínculo ve el aviso correspondiente; commit del test hecho.
 
-### - [ ] T52: Crear `ContractsPage` del portal de clientes
+### - [x] T52: Crear `ContractsPage` del portal de clientes
 
 - **Tipo**: ui
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-98
