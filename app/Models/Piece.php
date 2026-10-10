@@ -1,0 +1,205 @@
+<?php
+
+namespace App\Models;
+
+use App\Enums\PieceStatus;
+use App\Exceptions\PieceDeliveredException;
+use Database\Factories\PieceFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use LogicException;
+
+#[Fillable([
+    'budget_id', 'budget_item_id', 'name', 'description', 'work_category_id', 'status',
+    'assignee_id', 'due_date', 'created_by',
+])]
+class Piece extends Model
+{
+    /** @use HasFactory<PieceFactory> */
+    use HasFactory, SoftDeletes;
+
+    /**
+     * A piece is discarded with a soft delete and never erased for good (RF-40).
+     */
+    protected static function booted(): void
+    {
+        static::forceDeleting(fn () => throw new LogicException('Pieces cannot be deleted for good.'));
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'status' => PieceStatus::class,
+            'due_date' => 'date',
+        ];
+    }
+
+    /**
+     * Pieces delegated to the given account (RF-13, RF-43).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function delegatedTo(Builder $query, User $assignee): void
+    {
+        $query->where('assignee_id', $assignee->id);
+    }
+
+    /**
+     * What a client account sees: the pieces of the client it is linked to that are in
+     * approval, approved or delivered. An account with no link sees none (RF-45, RF-46, RF-48).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function visibleToClient(Builder $query, User $account): void
+    {
+        if ($account->client_id === null) {
+            $query->whereRaw('1 = 0');
+
+            return;
+        }
+
+        $query->forClient($account->client_id)->whereIn('status', PieceStatus::visibleToClient());
+    }
+
+    /**
+     * Pieces of the budgets of one client (RF-42).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function forClient(Builder $query, int $clientId): void
+    {
+        $query->whereHas('budget', fn (Builder $budgets) => $budgets->where('client_id', $clientId));
+    }
+
+    /**
+     * Pieces whose committed date has passed and that are not delivered yet (RF-17, RF-44).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function overdue(Builder $query): void
+    {
+        $query->whereDate('due_date', '<', today())
+            ->where('status', '!=', PieceStatus::Delivered);
+    }
+
+    public function isOverdue(): bool
+    {
+        return $this->due_date !== null
+            && $this->due_date->lt(today())
+            && $this->status !== PieceStatus::Delivered;
+    }
+
+    /**
+     * A delivered piece admits no change of state, file or owner (RF-25).
+     *
+     * @throws PieceDeliveredException
+     */
+    public function assertNotDelivered(): void
+    {
+        if ($this->status === PieceStatus::Delivered) {
+            throw new PieceDeliveredException;
+        }
+    }
+
+    /**
+     * The piece as it is created, for its first history entry (RF-38).
+     *
+     * @return array<string, int|string|null>
+     */
+    public function creationSnapshot(): array
+    {
+        return [
+            'name' => $this->name,
+            'status' => PieceStatus::Pending->value,
+            'budget_item_id' => $this->budget_item_id,
+            'work_category_id' => $this->work_category_id,
+        ];
+    }
+
+    /**
+     * @return BelongsTo<Budget, $this>
+     */
+    public function budget(): BelongsTo
+    {
+        return $this->belongsTo(Budget::class)->withTrashed();
+    }
+
+    /**
+     * The item the piece came from. Null on loose pieces, and also when the item was removed
+     * from the budget afterwards (RF-8, plan D-7).
+     *
+     * @return BelongsTo<BudgetItem, $this>
+     */
+    public function budgetItem(): BelongsTo
+    {
+        return $this->belongsTo(BudgetItem::class);
+    }
+
+    /**
+     * @return BelongsTo<WorkCategory, $this>
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(WorkCategory::class, 'work_category_id');
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function assignee(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'assignee_id');
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * Every submission, from the first to the last, whatever its result (RF-30, RF-36).
+     *
+     * @return HasMany<PieceApprovalSubmission, $this>
+     */
+    public function submissions(): HasMany
+    {
+        return $this->hasMany(PieceApprovalSubmission::class)->orderBy('submitted_at')->orderBy('id');
+    }
+
+    /**
+     * The submission the client is asked to answer, or answered last.
+     *
+     * @return HasOne<PieceApprovalSubmission, $this>
+     */
+    public function latestSubmission(): HasOne
+    {
+        return $this->hasOne(PieceApprovalSubmission::class)->ofMany(['submitted_at' => 'max', 'id' => 'max']);
+    }
+
+    /**
+     * Chronological, as the staff reads it (RF-39).
+     *
+     * @return HasMany<PieceHistory, $this>
+     */
+    public function histories(): HasMany
+    {
+        return $this->hasMany(PieceHistory::class)->orderBy('created_at')->orderBy('id');
+    }
+}

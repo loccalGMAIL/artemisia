@@ -8,6 +8,7 @@ use App\Models\AccessLog;
 use App\Models\AccountHistory;
 use App\Models\Budget;
 use App\Models\Client;
+use App\Models\Piece;
 use App\Models\Service;
 use App\Models\User;
 use App\Policies\AccessLogPolicy;
@@ -15,6 +16,8 @@ use App\Policies\AccountPolicy;
 use App\Policies\BudgetPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ClientPortalPolicy;
+use App\Policies\PieceApprovalPortalPolicy;
+use App\Policies\PiecePolicy;
 use App\Policies\ServicePolicy;
 use App\Support\Pdf\DompdfRenderer;
 use App\Support\Pdf\PdfRenderer;
@@ -47,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Client::class, ClientPolicy::class);
         Gate::policy(Service::class, ServicePolicy::class);
         Gate::policy(Budget::class, BudgetPolicy::class);
+        Gate::policy(Piece::class, PiecePolicy::class);
 
         // The client card lists the client's budgets now that the module exists (spec 003, RF-46).
         ClientBudgetsSection::register();
@@ -55,6 +59,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('portal.view', [ClientPortalPolicy::class, 'view']);
         Gate::define('portal.updateAddress', [ClientPortalPolicy::class, 'updateAddress']);
         Gate::define('portal.updateContacts', [ClientPortalPolicy::class, 'updateContacts']);
+
+        // The client's answer on a piece is also a named ability, limited to its own client (spec 004).
+        Gate::define('portal.pieces.download', [PieceApprovalPortalPolicy::class, 'download']);
+        Gate::define('portal.pieces.approve', [PieceApprovalPortalPolicy::class, 'approve']);
+        Gate::define('portal.pieces.reject', [PieceApprovalPortalPolicy::class, 'reject']);
 
         Gate::policy(User::class, AccountPolicy::class);
         Gate::policy(AccessLog::class, AccessLogPolicy::class);

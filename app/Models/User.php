@@ -4,11 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\AccessPortal;
+use App\Enums\AccountRole;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -45,6 +47,18 @@ class User extends Authenticatable implements FilamentUser
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
+    }
+
+    /**
+     * Accounts a piece can be delegated to: admin and staff (spec 004, RF-11). It queries the
+     * relation instead of using the role scope, which fails while the roles are not seeded.
+     *
+     * @param  Builder<User>  $query
+     */
+    #[Scope]
+    protected function assignableToPieces(Builder $query): void
+    {
+        $query->whereHas('roles', fn (Builder $roles) => $roles->whereIn('name', [AccountRole::Admin->value, AccountRole::Staff->value]));
     }
 
     /**
