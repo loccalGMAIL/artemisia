@@ -5,10 +5,42 @@ return [
     'plural' => 'Contratos',
     'system' => 'Sistema',
     'fields' => [
+        'id' => 'N°',
+        'client' => 'Cliente',
+        'monthly_amount' => 'Importe mensual',
+        'status' => 'Estado',
+        'budget' => 'Presupuesto',
+        'creator' => 'Creado por',
         'start_date' => 'Fecha de inicio',
         'due_day' => 'Día de vencimiento',
         'indefinite' => 'Plazo indefinido',
+        'term' => 'Plazo',
         'term_months' => 'Plazo (meses)',
+        'term_end_month' => 'Último mes del plazo',
+    ],
+    'term' => [
+        'months' => '{1} :count mes|[2,*] :count meses',
+        'indefinite' => 'Indefinido',
+    ],
+    'sections' => [
+        'data' => 'Datos del contrato',
+    ],
+    'relations' => [
+        'periods' => 'Períodos',
+        'histories' => 'Historial',
+    ],
+    'periods' => [
+        'month' => 'Mes',
+        'due_date' => 'Vencimiento',
+        'total' => 'Total',
+        'paid' => 'Pagado',
+    ],
+    'history' => [
+        'date' => 'Fecha y hora',
+        'fact' => 'Hecho',
+        'old_value' => 'Valor anterior',
+        'new_value' => 'Valor nuevo',
+        'author' => 'Autor',
     ],
     'actions' => [
         'create' => 'Crear contrato',

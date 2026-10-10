@@ -166,7 +166,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: el test falla y comprueba las columnas del listado, los filtros por cliente y por estado, la ficha con sus períodos y sus totales, el historial cronológico del contrato y que un contrato eliminado lógicamente no aparece; commit del test hecho.
 
-### - [ ] T20: Crear `ContractResource` con listado, ficha y relation managers
+### - [x] T20: Crear `ContractResource` con listado, ficha y relation managers
 
 - **Tipo**: ui
 - **Cubre**: RF-81, RF-82, RF-83, RF-84, RF-86
