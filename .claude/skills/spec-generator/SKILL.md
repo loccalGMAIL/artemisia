@@ -14,8 +14,12 @@ acá, no se implementa.
    `docs/specs/` para respetar convenciones y no contradecir lo ya acordado. Si el proyecto usa
    otra ruta, seguí la del proyecto: la constitución manda sobre esta skill.
 2. **Entrevistá al usuario.** Preguntas de UNA en UNA, esperando respuesta antes de la siguiente.
-   Diez es el techo, no el objetivo: cortá antes si las respuestas ya no cambian lo que hay que
-   construir. Priorizá casos límite, comportamiento ante errores y qué queda fuera. Descartá las
+   Diez es el techo por defecto, no el objetivo: cortá antes si las respuestas ya no cambian lo que
+   hay que construir. Si al llegar a la décima todavía quedan dudas que sí lo cambian, no sigas ni
+   cortes en silencio: pedí autorización. Decí cuántas preguntas más estimás y qué tema cubre cada
+   una, en una línea por pregunta, y esperá la respuesta. Si el usuario acepta, seguí con ese lote
+   (de una en una, como siempre) y, si al agotarlo aún hace falta más, volvé a pedir autorización.
+   Si no acepta, cerrá la entrevista y marcá lo pendiente como `[NECESITA ACLARACIÓN: …]`. Priorizá casos límite, comportamiento ante errores y qué queda fuera. Descartá las
    preguntas con respuesta obvia por defecto. No propongas soluciones técnicas: si el usuario
    pregunta "¿cómo lo harías?", redirigí al QUÉ.
 3. **Elegí el número.** Mirá `docs/specs/` y usá el siguiente libre con tres dígitos:
