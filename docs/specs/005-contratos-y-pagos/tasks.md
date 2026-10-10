@@ -228,7 +228,7 @@
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre cargar y modificar número y fecha, el rechazo con motivo si falta uno de los dos, un período sin referencia, el mismo número en más de un período y el asiento con valor anterior y nuevo; commit del test hecho.
 
-### - [ ] T28: Implementar `SetPeriodInvoiceAction`
+### - [x] T28: Implementar `SetPeriodInvoiceAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-53, RF-54, RF-55, RF-56, RF-57
