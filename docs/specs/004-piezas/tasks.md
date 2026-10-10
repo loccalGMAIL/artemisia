@@ -240,7 +240,7 @@
 - **Depende de**: T27
 - **Hecho cuando**: el test de T27 pasa, la tabla usa eager loading e índices del plan y la suite completa queda verde.
 
-### - [ ] T29: Escribir test de acciones staff sobre una pieza
+### - [x] T29: Escribir test de acciones staff sobre una pieza
 
 - **Tipo**: test
 - **Cubre**: RF-11, RF-14, RF-15, RF-20, RF-21, RF-22, RF-23, RF-24, RF-25, RF-26, RF-28, RF-31, RF-36, RF-39
