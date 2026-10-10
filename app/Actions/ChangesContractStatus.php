@@ -29,7 +29,7 @@ abstract class ChangesContractStatus
             $locked = Contract::query()->whereKey($contract->id)->lockForUpdate()->firstOrFail();
 
             if ($locked->status !== $this->allowedFrom()) {
-                throw new InvalidContractTransitionException($locked->status, $next);
+                throw InvalidContractTransitionException::transition($locked->status, $next);
             }
 
             $this->beforeMove($locked);

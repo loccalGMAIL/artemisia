@@ -138,6 +138,8 @@ return [
         'due_day_range' => 'El día de vencimiento debe ser un número entero entre 1 y 28.',
         'term_months_invalid' => 'El plazo debe ser una cantidad entera de meses mayor que cero, o indefinido.',
         'invalid_transition' => 'No se puede pasar un contrato de «:from» a «:to».',
+        'not_active' => 'Solo se puede modificar un contrato vigente: este está :status.',
+        'monthly_amount_invalid' => 'El importe mensual debe ser un número mayor que cero, con hasta 2 decimales.',
         'term_elapsed' => 'El plazo del contrato ya transcurrió por completo.',
         'contract_not_deletable' => 'Los contratos no se eliminan: solo pueden cancelarse.',
         'period_not_deletable' => 'Los períodos no se eliminan.',

@@ -352,7 +352,7 @@
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y cubre que solo se modifica un contrato vigente, el importe mayor que cero con a lo sumo 2 decimales, el día de 1 a 28, que el cambio rige desde los períodos que se generen después sin alterar los existentes ni el del mes en curso, y el asiento con valor anterior y nuevo; commit del test hecho.
 
-### - [ ] T44: Implementar `UpdateContractAmountAction` y `UpdateContractDueDayAction`
+### - [x] T44: Implementar `UpdateContractAmountAction` y `UpdateContractDueDayAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-10, RF-30, RF-31, RF-32, RF-33
