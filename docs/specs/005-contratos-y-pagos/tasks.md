@@ -75,7 +75,7 @@
 - **Depende de**: T3
 - **Hecho cuando**: existen `ContractStatus`, `ConceptType`, `PaymentMethod`, `PaymentStatus`, `ContractHistoryField`, `PeriodHistoryField`, los modelos `Contract`, `ContractPeriod`, `PeriodConcept`, `Payment`, `ContractHistory` y `PeriodHistory` con sus relaciones y casts, `Budget::contract()`, `Client::contracts()` y `Client::payments()`, sus factories con estados, el borrado físico bloqueado y los historiales de solo alta, y un test de humo confirma que las relaciones cargan y que el borrado lanza excepción; la suite queda verde.
 
-### - [ ] T7: Escribir test de alta de contrato desde un presupuesto
+### - [x] T7: Escribir test de alta de contrato desde un presupuesto
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-6, RF-18, RF-20, RF-33
