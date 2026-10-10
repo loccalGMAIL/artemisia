@@ -2,7 +2,7 @@ includes:
     - vendor/larastan/larastan/extension.neon
 
 parameters:
-    level: 5
+    level: 6
 
     # Reads the array that casts() returns instead of its declared type, so enum and date
     # casts are known (Larastan only understands the $casts property otherwise).
