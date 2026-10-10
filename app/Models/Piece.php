@@ -144,18 +144,22 @@ class Piece extends Model
     }
 
     /**
+     * Every submission, from the first to the last, whatever its result (RF-30, RF-36).
+     *
      * @return HasMany<PieceApprovalSubmission, $this>
      */
     public function submissions(): HasMany
     {
-        return $this->hasMany(PieceApprovalSubmission::class);
+        return $this->hasMany(PieceApprovalSubmission::class)->orderBy('submitted_at')->orderBy('id');
     }
 
     /**
+     * Chronological, as the staff reads it (RF-39).
+     *
      * @return HasMany<PieceHistory, $this>
      */
     public function histories(): HasMany
     {
-        return $this->hasMany(PieceHistory::class);
+        return $this->hasMany(PieceHistory::class)->orderBy('created_at')->orderBy('id');
     }
 }

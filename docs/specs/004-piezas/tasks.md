@@ -201,7 +201,7 @@
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y comprueba historial cronológico para staff, envíos completos para staff y envíos resueltos por la propia cuenta cliente aunque la pieza haya vuelto a producción; commit del test hecho.
 
-### - [ ] T24: Implementar consultas de historial y envíos conservados
+### - [x] T24: Implementar consultas de historial y envíos conservados
 
 - **Tipo**: impl
 - **Cubre**: RF-36, RF-37, RF-38, RF-39, RF-40, RNF-3

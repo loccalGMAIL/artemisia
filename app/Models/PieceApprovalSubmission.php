@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\PieceApprovalResolution;
 use Database\Factories\PieceApprovalSubmissionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,6 +39,17 @@ class PieceApprovalSubmission extends Model
             'submitted_at' => 'datetime',
             'resolved_at' => 'datetime',
         ];
+    }
+
+    /**
+     * The submissions an account answered itself, rejected ones included (RF-37).
+     *
+     * @param  Builder<PieceApprovalSubmission>  $query
+     */
+    #[Scope]
+    protected function resolvedBy(Builder $query, User $account): void
+    {
+        $query->where('resolved_by', $account->id)->whereNotNull('resolution');
     }
 
     public function isPending(): bool
