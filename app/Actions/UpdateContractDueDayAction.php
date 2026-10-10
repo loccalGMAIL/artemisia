@@ -18,7 +18,11 @@ class UpdateContractDueDayAction extends ChangesContractTerms
      */
     public function handle(Contract $contract, mixed $day, User $actor): Contract
     {
-        $text = is_int($day) || is_string($day) ? trim((string) $day) : '';
+        $text = match (true) {
+            is_int($day), is_string($day) => trim((string) $day),
+            is_float($day) && floor($day) === $day => (string) (int) $day,
+            default => '',
+        };
 
         if (preg_match('/^\d{1,2}$/', $text) !== 1 || (int) $text < 1 || (int) $text > 28) {
             throw ValidationException::withMessages(['due_day' => __('contracts.validation.due_day_range')]);

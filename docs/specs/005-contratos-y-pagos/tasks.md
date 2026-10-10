@@ -366,7 +366,7 @@
 - **Depende de**: T20, T42, T44
 - **Hecho cuando**: el test falla y comprueba cancelar, reactivar, modificar el importe y modificar el día de vencimiento desde la ficha, que cada acción se ofrece solo en el estado que corresponde y que un rechazo de la action se muestra con su motivo; commit del test hecho.
 
-### - [ ] T46: Crear las acciones de la ficha del contrato
+### - [x] T46: Crear las acciones de la ficha del contrato
 
 - **Tipo**: ui
 - **Cubre**: RF-21, RF-25, RF-30, RF-31
