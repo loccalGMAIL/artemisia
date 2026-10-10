@@ -283,7 +283,7 @@
 - **Depende de**: T33
 - **Hecho cuando**: el test de T33 pasa, existe `PaymentExceedsBalanceException`, la action abre una transacción y bloquea el período antes de validar, y la suite completa queda verde.
 
-### - [ ] T35: Escribir test de anulación de pagos
+### - [x] T35: Escribir test de anulación de pagos
 
 - **Tipo**: test
 - **Cubre**: RF-75, RF-76, RF-77, RF-78, RF-79, RF-80
