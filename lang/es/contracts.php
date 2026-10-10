@@ -32,6 +32,10 @@ return [
         'budget_not_monthly' => 'Solo se puede crear un contrato a partir de un presupuesto de abono mensual.',
         'budget_zero_amount' => 'El presupuesto tiene un importe mensual de cero: no hay nada que cobrar.',
         'budget_has_contract' => 'El presupuesto ya tiene el contrato #:id.',
+        'start_date_required' => 'Debe indicar una fecha de inicio válida.',
+        'due_day_range' => 'El día de vencimiento debe ser un número entero entre 1 y 28.',
+        'term_months_invalid' => 'El plazo debe ser una cantidad entera de meses mayor que cero, o indefinido.',
+        'term_elapsed' => 'El plazo del contrato ya transcurrió por completo.',
     ],
     'period_history_fields' => [
         'generated' => 'Período generado',

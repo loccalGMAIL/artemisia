@@ -96,7 +96,7 @@
 - **Depende de**: T8
 - **Hecho cuando**: el test falla y cubre los datos obligatorios, el plazo entero mayor que cero o indefinido, el día de vencimiento de 1 a 28, la fecha de inicio pasada, actual o futura, el cálculo del último mes del plazo y el rechazo con motivo de un plazo fijo cuyo mes siguiente al último ya comenzó; commit del test hecho.
 
-### - [ ] T10: Implementar la validación del alta y `term_end_month`
+### - [x] T10: Implementar la validación del alta y `term_end_month`
 
 - **Tipo**: impl
 - **Cubre**: RF-7, RF-8, RF-9, RF-11, RF-12
