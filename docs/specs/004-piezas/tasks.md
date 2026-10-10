@@ -4,7 +4,7 @@
 |---|---|
 | **Spec** | docs/specs/004-piezas/spec.md |
 | **Plan** | docs/specs/004-piezas/plan.md |
-| **Estado** | En curso |
+| **Estado** | Completada |
 | **Fecha** | 2026-09-21 |
 
 ## Convenciones
@@ -311,7 +311,7 @@
 - **Depende de**: T36
 - **Hecho cuando**: el test falla si el listado staff con 5.000 piezas supera 2 segundos en el entorno de test definido, incluyendo filtros de estado, responsable, cliente y atrasadas; commit del test hecho.
 
-### - [ ] T38: Optimizar consultas, validar textos y correr suite completa
+### - [x] T38: Optimizar consultas, validar textos y correr suite completa
 
 - **Tipo**: impl
 - **Cubre**: RF-7, RF-31, RF-47, RF-48, RNF-2
@@ -382,3 +382,15 @@
 - **Hay una tensión en `budget_item_id`: el plan pide FK a `budget_items` sin cascada, pero también admite que el ítem pueda dejar de existir.** Si `budget_items` se borra físicamente, una FK restrictiva impediría ese borrado; si usa soft delete, no hay problema. Conviene aclarar el comportamiento esperado de `budget_items` en la spec `002` o en este plan.
 - **El plan no fija el tamaño máximo de la columna ni normalización del nombre de archivo original.** Solo define `file_path` y `file_extension`; si se necesita mostrar nombre original al staff o cliente, eso no está cubierto por el modelo de datos actual.
 - **RNF-2 depende del entorno de medición.** La tarea T37 lo hace verificable, pero el plan no define base de datos, hardware ni tolerancia para medir “menos de 2 segundos”; conviene explicitar que se valida en el entorno de test/local del proyecto.
+
+### Resolución (implementación)
+
+- **`budget_item_id` sin clave foránea**: `RemoveBudgetItemAction` (spec 002) borra los ítems físicamente, así que una FK, restrictiva o con `nullOnDelete`, haría fallar el borrado o alteraría la pieza (RF-8). Es una columna indexada e informativa; `Piece::budgetItem()` devuelve `null` si el ítem ya no existe. Decidido con el autor durante T1.
+- **Punto de entrada de la propuesta**: acción de cabecera «Generar piezas» en la ficha del presupuesto (`ViewBudget`), con un modal cuyo repetidor se llena con `ProposePiecesFromBudgetAction`. Dividir es duplicar una línea; quitar es borrarla. La pieza suelta es la acción «Crear pieza suelta» del listado de piezas.
+- **Una línea de la propuesta es una pieza**: `pieces` no guarda cantidad (plan §4); la cantidad del ítem solo orienta al dividir.
+- **Actions con `$actor`**: todas las que cambian una pieza reciben el autor para el historial (RF-38), como en las otras specs. `CreatePiecesFromProposalAction` valida las líneas y informa un único error `lines`.
+- **Autorización de la respuesta del cliente**: las Actions `ApprovePieceAction` y `RejectPieceAction` autorizan por Gate (`portal.pieces.approve`, `portal.pieces.reject`), con el envío como argumento; también existe `portal.pieces.download`. Así RF-47 y RF-48 no dependen de la interfaz.
+- **Archivo**: se guarda en el disco por defecto de Laravel bajo `piece-submissions/{pieza}`. Se agregó `config/livewire.php` solo para subir el tope de subida temporal de 12 MB a 100 MB (RNF-1); el servidor web debe admitir el mismo tamaño (`upload_max_filesize`, `post_max_size`). La descarga usa el nombre `pieza-{id}-envio-{id}.{ext}`.
+- **Pruebas de carga de archivos en la UI**: el *harness* de Filament sube un archivo vacío y sin tipo, así que la validación de formato y tamaño se prueba en `SendPieceForClientApprovalActionTest` y el test de pantalla verifica que se delega en la Action.
+- **Tests que pasan sin código nuevo**: T11 (RF-8), T37 (RNF-2) y los casos de T21/T23 que se cumplen por ausencia de acoplamiento o por índices. Se mantienen como guardas contra regresiones y T12/T38 se marcaron sin código.
+- **Rendimiento**: tests en el grupo `performance` con carga masiva y mejor de tres corridas (`fastestOf`), como en la spec 002.

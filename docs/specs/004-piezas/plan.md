@@ -212,13 +212,19 @@ Migraciones a crear, en orden:
   - `MarkPieceDeliveredAction` — transición final.
   - `DiscardPieceAction` — soft delete, solo desde `pending`.
 - **Policies**: `PiecePolicy` (`admin` y `staff` igual, para todas las acciones de producción y
-  consulta); `PieceApprovalPortalPolicy` (rol `client`: `view`, `approve`, `reject`, acotado a su
-  `client_id`).
+  consulta; nadie elimina ni restaura); `PieceApprovalPortalPolicy` (rol `client`: `approve`,
+  `reject`, `download`, acotado a su `client_id`), registrada como habilidades con nombre
+  (`portal.pieces.approve`, `portal.pieces.reject`, `portal.pieces.download`), igual que
+  `ClientPortalPolicy` en la spec 003.
 - **Filament Resources / Pages / Widgets**:
-  - Panel `staff`: `PieceResource` (list/create desde la propuesta/edit/view), relation manager de
-    envíos a aprobación, relation manager de historial, acciones de transición de estado.
-  - Panel `client`: `PieceApprovalPage` — piezas en `client_approval` para aprobar/rechazar, y las
-    ya resueltas por esa misma cuenta (RF-37), incluidas las que volvieron a producción.
+  - Panel `staff`: `PieceResource` (listado con filtros y ficha; sin formulario de alta), relation
+    manager de envíos a aprobación, relation manager de historial, acciones de la ficha
+    (delegar, fecha de entrega, transiciones de estado, enviar a aprobación, descartar). La
+    propuesta se abre con la acción «Generar piezas» de la ficha del presupuesto y la pieza suelta
+    con «Crear pieza suelta» del listado (`PieceActions`).
+  - Panel `client`: `PieceApprovalPage` — piezas en `client_approval`, aprobadas o entregadas, con
+    aprobar/rechazar, y las respuestas ya dadas por esa misma cuenta (RF-37), incluidas las que
+    volvieron a producción.
 - **Rutas**: ninguna manual; ambos paneles ya existen (spec `001`).
 - **Traducciones**: `lang/es/pieces.php` con etiquetas, nombres de estado y mensajes de rechazo
   (RF-7, RF-31, RF-47, RF-48).
@@ -229,29 +235,35 @@ Migraciones a crear, en orden:
   lista de líneas propuestas (una por ítem, con nombre y cantidad); lanza excepción si el
   presupuesto no está aceptado.
 - **CreatePiecesFromProposalAction::handle(Budget $budget, array $lines, User $author): Collection**
-  — cada línea puede representar una o varias piezas (según cómo el staff dividió la cantidad);
-  crea una `Piece` por unidad resultante, asociada a su `budget_item_id`, en estado `pending`;
-  registra `PieceHistory` de alta por cada una.
+  — una línea es una pieza: dividir la cantidad de un ítem es enviar varias líneas con el mismo
+  `budget_item_id`, y quitar una pieza de la propuesta es no enviarla. Valida que cada línea tenga
+  nombre y categoría válidos (un único error `lines`); crea una `Piece` por línea, asociada a su
+  `budget_item_id`, en estado `pending`; registra `PieceHistory` de alta por cada una.
 - **CreateLoosePieceAction::handle(Budget $budget, array $data, User $author): Piece** — exige
-  `work_category_id`; crea en `pending` sin `budget_item_id`; registra historial.
-- **AssignPieceOwnerAction::handle(Piece $piece, User $assignee): Piece** — rechaza si
-  `$piece->status` es `delivered`; registra historial.
-- **SetPieceDueDateAction::handle(Piece $piece, ?Carbon $dueDate): Piece** — registra historial.
-- **MarkPieceInProductionAction::handle(Piece $piece): Piece** / **MarkPieceInReviewAction::handle(Piece $piece): Piece**
-  — validan el estado de origen (`pending`→`in_production`, `in_production`→`in_review`); registran
+  nombre y `work_category_id`; la fecha de entrega es opcional; crea en `pending` sin
+  `budget_item_id`; registra historial.
+- **AssignPieceOwnerAction::handle(Piece $piece, User $assignee, User $actor): Piece** — rechaza si
+  `$piece->status` es `delivered` o si `$assignee` no tiene rol `admin` o `staff`; registra
   historial.
-- **SendPieceForClientApprovalAction::handle(Piece $piece, UploadedFile $file): PieceApprovalSubmission**
-  — exige que la pieza esté `in_review`; valida formato (`jpg`, `png`, `pdf`, `mp4`) y tamaño
-  (≤100 MB), rechazando con motivo si no cumple (RF-31); guarda el archivo, crea el envío
-  pendiente, deja la pieza en `client_approval`.
+- **SetPieceDueDateAction::handle(Piece $piece, ?CarbonInterface $dueDate, User $actor): Piece** —
+  registra historial.
+- **MarkPieceInProductionAction::handle(Piece $piece, User $actor): Piece** /
+  **MarkPieceInReviewAction::handle(Piece $piece, User $actor): Piece** — validan el estado de
+  origen (`pending`→`in_production`, `in_production`→`in_review`); registran historial.
+- **SendPieceForClientApprovalAction::handle(Piece $piece, ?UploadedFile $file, User $actor): PieceApprovalSubmission**
+  — exige que la pieza esté `in_review`; valida que haya archivo, su formato (`jpg`, `png`, `pdf`,
+  `mp4`) y su tamaño (≤100 MB), rechazando con motivo si no cumple (RF-31); guarda el archivo, crea
+  el envío pendiente, deja la pieza en `client_approval`.
 - **ApprovePieceAction::handle(PieceApprovalSubmission $submission, User $clientAccount): Piece**
-  — exige que la pieza esté `client_approval`; resuelve el envío como `approved`; deja la pieza en
-  `approved`.
+  — autoriza por Gate (`portal.pieces.approve`: cuenta `client` vinculada al cliente del
+  presupuesto, pieza en `client_approval`, envío pendiente); resuelve el envío como `approved`;
+  deja la pieza en `approved`.
 - **RejectPieceAction::handle(PieceApprovalSubmission $submission, User $clientAccount, ?string $reason): Piece**
-  — resuelve el envío como `rejected` (acepta `$reason` vacío); devuelve la pieza a
-  `in_production`.
-- **MarkPieceDeliveredAction::handle(Piece $piece): Piece** — exige que la pieza esté `approved`.
-- **DiscardPieceAction::handle(Piece $piece): void** — exige `pending`; `delete()`.
+  — autoriza por Gate (`portal.pieces.reject`); resuelve el envío como `rejected` (acepta
+  `$reason` vacío, hasta 500 caracteres); devuelve la pieza a `in_production`.
+- **MarkPieceDeliveredAction::handle(Piece $piece, User $actor): Piece** — exige que la pieza esté
+  `approved`.
+- **DiscardPieceAction::handle(Piece $piece, User $actor): void** — exige `pending`; `delete()`.
 
 ## 7. Reglas de negocio y validaciones
 
