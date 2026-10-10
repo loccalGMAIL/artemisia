@@ -345,7 +345,7 @@
 - **Depende de**: T41
 - **Hecho cuando**: el test de T41 pasa, existen `ChangesContractStatus` e `InvalidContractTransitionException` y la suite completa queda verde.
 
-### - [ ] T43: Escribir test de cambio de importe y de día de vencimiento
+### - [x] T43: Escribir test de cambio de importe y de día de vencimiento
 
 - **Tipo**: test
 - **Cubre**: RF-10, RF-30, RF-31, RF-32, RF-33
