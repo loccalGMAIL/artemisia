@@ -276,7 +276,7 @@
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre registrar un pago con fecha, importe y forma de pago, la referencia opcional, varios pagos por período, el importe mayor que cero y no mayor que el saldo con el saldo en el mensaje, la fecha futura rechazada y cualquier fecha pasada admitida, el tope de 100 pagos vigentes, el saldo que cambió entre la apertura y la confirmación, que se admiten pagos con el contrato cancelado, finalizado o con el cliente archivado y el asiento del pago; commit del test hecho.
 
-### - [ ] T34: Implementar `RegisterPaymentAction`
+### - [x] T34: Implementar `RegisterPaymentAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-24, RF-35, RF-58, RF-59, RF-60, RF-61, RF-62, RF-63, RF-64, RF-65, RF-66, RF-67, RF-68, RF-69, RF-79, RNF-2

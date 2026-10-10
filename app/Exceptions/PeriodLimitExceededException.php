@@ -13,4 +13,9 @@ class PeriodLimitExceededException extends RuntimeException
     {
         return new self(__('contracts.validation.concepts_limit', ['max' => $max]));
     }
+
+    public static function payments(int $max): self
+    {
+        return new self(__('contracts.validation.payments_limit', ['max' => $max]));
+    }
 }

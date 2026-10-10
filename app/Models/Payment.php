@@ -60,6 +60,22 @@ class Payment extends Model
         $query->whereNotNull('voided_at');
     }
 
+    /**
+     * The payment as the history keeps it (RF-79).
+     *
+     * @return array{id: int, amount: string, paid_on: string, method: string, reference: string|null}
+     */
+    public function snapshot(): array
+    {
+        return [
+            'id' => $this->id,
+            'amount' => $this->amount,
+            'paid_on' => $this->paid_on->toDateString(),
+            'method' => $this->method->value,
+            'reference' => $this->reference,
+        ];
+    }
+
     public function isVoided(): bool
     {
         return $this->voided_at !== null;
