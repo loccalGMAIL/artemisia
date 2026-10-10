@@ -8,9 +8,17 @@ return [
         'description' => 'Descripción',
         'category' => 'Categoría de trabajo',
         'budget' => 'Presupuesto',
+        'client' => 'Cliente',
+        'assignee' => 'Responsable',
         'status' => 'Estado',
         'due_date' => 'Fecha de entrega',
         'proposal' => 'Piezas a crear',
+    ],
+    'overdue' => 'Atrasada',
+    'unassigned' => 'Sin responsable',
+    'filters' => [
+        'mine' => 'Mis piezas delegadas',
+        'overdue' => 'Atrasadas',
     ],
     'actions' => [
         'generate' => 'Generar piezas',

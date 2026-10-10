@@ -233,7 +233,7 @@
 - **Depende de**: T26
 - **Hecho cuando**: el test falla y comprueba columnas requeridas, filtros por estado, responsable, cliente, mis piezas delegadas y atrasadas, con presupuesto y cliente cargados sin consultas innecesarias evidentes; commit del test hecho.
 
-### - [ ] T28: Crear `PieceResource` con listado y filtros
+### - [x] T28: Crear `PieceResource` con listado y filtros
 
 - **Tipo**: ui
 - **Cubre**: RF-13, RF-17, RF-41, RF-42, RF-43, RF-44, RNF-2

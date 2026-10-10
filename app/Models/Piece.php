@@ -55,6 +55,17 @@ class Piece extends Model
     }
 
     /**
+     * Pieces of the budgets of one client (RF-42).
+     *
+     * @param  Builder<Piece>  $query
+     */
+    #[Scope]
+    protected function forClient(Builder $query, int $clientId): void
+    {
+        $query->whereHas('budget', fn (Builder $budgets) => $budgets->where('client_id', $clientId));
+    }
+
+    /**
      * Pieces whose committed date has passed and that are not delivered yet (RF-17, RF-44).
      *
      * @param  Builder<Piece>  $query
