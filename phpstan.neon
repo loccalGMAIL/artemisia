@@ -1,0 +1,13 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 5
+    parseModelCastsMethod: true
+
+    paths:
+        - app
+        - database
+
+    excludePaths:
+        - database/migrations
