@@ -359,7 +359,7 @@
 - **Depende de**: T43
 - **Hecho cuando**: el test de T43 pasa y la suite completa queda verde.
 
-### - [ ] T45: Escribir test de las acciones sobre un contrato
+### - [x] T45: Escribir test de las acciones sobre un contrato
 
 - **Tipo**: test
 - **Cubre**: RF-21, RF-25, RF-30, RF-31
