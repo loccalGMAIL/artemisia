@@ -117,7 +117,7 @@
 - **Depende de**: T11
 - **Hecho cuando**: el test de T11 pasa, la action no persiste nada y la suite completa queda verde.
 
-### - [ ] T13: Escribir test de generación de períodos
+### - [x] T13: Escribir test de generación de períodos
 
 - **Tipo**: test
 - **Cubre**: RF-22, RF-35, RF-36, RF-37, RF-38, RF-39, RF-40, RF-41
