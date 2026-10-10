@@ -221,7 +221,7 @@
 - **Depende de**: T25
 - **Hecho cuando**: el test de T25 pasa y la suite completa queda verde.
 
-### - [ ] T27: Escribir test de la referencia de factura
+### - [x] T27: Escribir test de la referencia de factura
 
 - **Tipo**: test
 - **Cubre**: RF-53, RF-54, RF-55, RF-56, RF-57
