@@ -196,6 +196,9 @@ it('RF-94, RNF-4: arma el estado de cuenta con una cantidad fija de consultas, s
             }
         }
 
+        // The first call also loads the roles of the account, which is not what is being measured.
+        statement($this->account);
+
         DB::flushQueryLog();
         DB::enableQueryLog();
         statement($this->account);

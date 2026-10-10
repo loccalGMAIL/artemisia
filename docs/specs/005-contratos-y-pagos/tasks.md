@@ -394,7 +394,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: el test falla y comprueba que `BuildClientStatementAction` devuelve solo los contratos del cliente de la cuenta, con períodos, extras, descuentos con su justificación, total, pagado, saldo, estado de pago y vencimiento, solo pagos vigentes, nada de otros clientes y nada para una cuenta sin vínculo; commit del test hecho.
 
-### - [ ] T50: Implementar `BuildClientStatementAction`
+### - [x] T50: Implementar `BuildClientStatementAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-97
