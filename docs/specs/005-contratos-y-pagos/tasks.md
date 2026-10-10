@@ -200,7 +200,7 @@
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre el saldo, pendiente sin pagos, parcial con pagos y saldo, pagado con saldo cero incluso con total cero y sin pagos, que anular un pago devuelve el estado anterior y la señal de vencido sin cambiar el estado de pago, con los scopes de los filtros; commit del test hecho.
 
-### - [ ] T24: Implementar `PaymentStatus` derivado y los scopes del período
+### - [x] T24: Implementar `PaymentStatus` derivado y los scopes del período
 
 - **Tipo**: impl
 - **Cubre**: RF-69, RF-70, RF-71, RF-72, RF-73, RF-74

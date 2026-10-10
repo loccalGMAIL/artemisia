@@ -21,6 +21,7 @@ function periodOf(string $total, string $paid = '0.00', array $attributes = []):
         'fee' => $total,
         'total' => $total,
         'paid_amount' => $paid,
+        'due_date' => '2026-10-25',
         ...$attributes,
     ]);
 }
