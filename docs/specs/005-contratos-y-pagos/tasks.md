@@ -54,7 +54,7 @@
 - **Depende de**: T2
 - **Hecho cuando**: `php artisan migrate:fresh` crea ambas tablas con `author_id` nullable, los índices compuestos `(entidad, created_at)` y sin `updated_at`.
 
-### - [ ] T4: Escribir test de `BusinessDate`
+### - [x] T4: Escribir test de `BusinessDate`
 
 - **Tipo**: test
 - **Cubre**: RF-36, RF-66, RF-74
