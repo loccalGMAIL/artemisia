@@ -235,7 +235,7 @@
 - **Depende de**: T27
 - **Hecho cuando**: el test de T27 pasa y la suite completa queda verde.
 
-### - [ ] T29: Escribir test del listado y la ficha de períodos
+### - [x] T29: Escribir test del listado y la ficha de períodos
 
 - **Tipo**: test
 - **Cubre**: RF-74, RF-85, RF-86, RF-87, RF-88, RF-89, RF-90
