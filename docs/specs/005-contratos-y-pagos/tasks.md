@@ -242,7 +242,7 @@
 - **Depende de**: T16, T24
 - **Hecho cuando**: el test falla y comprueba las columnas del listado, los filtros por cliente, estado de pago y vencidos, la señal de vencido, el detalle con cuota, extras, descuentos con su justificación, factura y pagos vigentes y anulados, y el historial cronológico del período; commit del test hecho.
 
-### - [ ] T30: Crear `ContractPeriodResource` con listado, ficha y relation managers
+### - [x] T30: Crear `ContractPeriodResource` con listado, ficha y relation managers
 
 - **Tipo**: ui
 - **Cubre**: RF-74, RF-85, RF-86, RF-87, RF-88, RF-89, RF-90
