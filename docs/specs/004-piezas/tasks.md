@@ -194,7 +194,7 @@
 - **Depende de**: T21
 - **Hecho cuando**: el test de T21 pasa, las resoluciones actualizan el envío vigente sin crear duplicados y la suite completa queda verde.
 
-### - [ ] T23: Escribir test de consulta de envíos e historial
+### - [x] T23: Escribir test de consulta de envíos e historial
 
 - **Tipo**: test
 - **Cubre**: RF-36, RF-37, RF-38, RF-39, RF-40, RNF-3
