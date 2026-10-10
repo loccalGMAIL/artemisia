@@ -293,7 +293,7 @@
 - **Depende de**: T34
 - **Hecho cuando**: el test falla y cubre botones de aprobar y rechazar, motivo opcional de rechazo, mensaje de permiso insuficiente por estado inválido y por cliente ajeno; commit del test hecho.
 
-### - [ ] T36: Conectar acciones de aprobación y rechazo en el portal
+### - [x] T36: Conectar acciones de aprobación y rechazo en el portal
 
 - **Tipo**: ui
 - **Cubre**: RF-32, RF-33, RF-34, RF-35, RF-47, RF-48

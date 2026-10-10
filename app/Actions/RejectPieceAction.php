@@ -22,11 +22,11 @@ class RejectPieceAction extends ResolvesPieceSubmission
      */
     public function handle(PieceApprovalSubmission $submission, User $clientAccount, ?string $reason): Piece
     {
-        $reason = Validator::make(['reason' => $reason], [
-            'reason' => ['nullable', 'string', 'max:500'],
+        $reason = Validator::make(['rejection_reason' => $reason], [
+            'rejection_reason' => ['nullable', 'string', 'max:500'],
         ], [
-            'reason.max' => __('pieces.validation.rejection_reason_max'),
-        ])->validate()['reason'];
+            'rejection_reason.max' => __('pieces.validation.rejection_reason_max'),
+        ])->validate()['rejection_reason'];
 
         return $this->resolve(
             $submission,

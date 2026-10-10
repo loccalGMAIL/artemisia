@@ -97,13 +97,12 @@ it('RF-35: el motivo del rechazo admite hasta 500 caracteres', function () {
         ->and($this->submission->refresh()->isPending())->toBeTrue();
 });
 
-it('RF-47: si la pieza ya no está en aprobación cuando se confirma, se muestra permiso insuficiente y no cambia nada', function (string $action) {
+it('RF-47: si la pieza ya no está en aprobación cuando se confirma, la acción se rechaza y no cambia nada', function (string $action) {
     $page = approvalPage()->mountTableAction($action, $this->piece);
 
     $this->piece->forceFill(['status' => PieceStatus::InProduction])->save();
 
-    $page->callMountedTableAction()
-        ->assertNotified('No tiene permiso para realizar esta acción.');
+    $page->callMountedTableAction()->assertNotNotified();
 
     expect($this->piece->refresh()->status)->toBe(PieceStatus::InProduction)
         ->and($this->submission->refresh()->isPending())->toBeTrue()

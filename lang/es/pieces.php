@@ -47,6 +47,16 @@ return [
         'empty' => 'Todavía no hay piezas para ver.',
         'responses' => 'Mis respuestas',
         'no_responses' => 'Todavía no respondió ningún envío.',
+        'rejection_reason' => 'Motivo del rechazo',
+        'rejection_reason_help' => 'Opcional. Cuéntele al equipo qué hay que cambiar.',
+        'actions' => [
+            'approve' => 'Aprobar',
+            'reject' => 'Rechazar',
+        ],
+        'notifications' => [
+            'approved' => 'Pieza aprobada.',
+            'rejected' => 'Pieza rechazada.',
+        ],
     ],
     'overdue' => 'Atrasada',
     'unassigned' => 'Sin responsable',
