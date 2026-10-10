@@ -7,6 +7,7 @@ use App\Actions\UpdateClientIdentificationAction;
 use App\Filament\Staff\Resources\Clients\ClientActions;
 use App\Filament\Staff\Resources\Clients\ClientResource;
 use App\Filament\Support\FormValidation;
+use App\Models\Client;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +26,10 @@ class EditClient extends EditRecord
         ];
     }
 
+    /**
+     * @param  Client  $record
+     * @param  array<string, mixed>  $data
+     */
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
         try {
