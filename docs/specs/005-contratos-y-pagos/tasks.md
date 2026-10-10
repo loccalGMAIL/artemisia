@@ -387,7 +387,7 @@
 - **Depende de**: T47
 - **Hecho cuando**: el test de T47 pasa, las dos secciones se registran en `ClientCardExtensions` desde `AppServiceProvider` y la suite completa queda verde.
 
-### - [ ] T49: Escribir test del estado de cuenta del cliente
+### - [x] T49: Escribir test del estado de cuenta del cliente
 
 - **Tipo**: test
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-97
