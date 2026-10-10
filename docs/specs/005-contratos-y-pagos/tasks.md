@@ -317,7 +317,7 @@
 
 **Demo posible al cerrarlo**: cancelar y reactivar un contrato, cambiar el importe hacia adelante, las secciones de la ficha del cliente y el estado de cuenta de solo lectura en el portal del cliente.
 
-### - [ ] T39: Escribir test del comando programado
+### - [x] T39: Escribir test del comando programado
 
 - **Tipo**: test
 - **Cubre**: RF-29, RF-36
