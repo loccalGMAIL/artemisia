@@ -145,7 +145,7 @@
 - **Depende de**: T15
 - **Hecho cuando**: el test de T15 pasa, las policies y el gate están registrados en `AppServiceProvider` y la suite completa queda verde.
 
-### - [ ] T17: Escribir test del alta desde la ficha del presupuesto
+### - [x] T17: Escribir test del alta desde la ficha del presupuesto
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-13, RF-14, RF-15, RF-16
