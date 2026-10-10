@@ -324,7 +324,7 @@
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y comprueba que `contracts:generate-periods` genera los períodos del mes, repone un mes que no corrió, finaliza los contratos de plazo fijo vencidos con autor nulo, no duplica al correr dos veces, sigue con los demás si un contrato falla y que está programado a diario en la hora de negocio; commit del test hecho.
 
-### - [ ] T40: Implementar el comando, `FinishExpiredContractsAction` y la programación
+### - [x] T40: Implementar el comando, `FinishExpiredContractsAction` y la programación
 
 - **Tipo**: impl
 - **Cubre**: RF-29, RF-36

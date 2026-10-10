@@ -9,3 +9,6 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('access-logs:prune')->monthly();
+Schedule::command('contracts:generate-periods')
+    ->dailyAt('00:10')
+    ->timezone(config('app.business_timezone'));

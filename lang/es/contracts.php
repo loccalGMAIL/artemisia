@@ -4,6 +4,10 @@ return [
     'model' => 'contrato',
     'plural' => 'Contratos',
     'system' => 'Sistema',
+    'command' => [
+        'done' => 'Períodos creados: :created. Contratos finalizados: :finished.',
+        'failed' => 'El contrato #:id falló: :message',
+    ],
     'fields' => [
         'id' => 'N°',
         'client' => 'Cliente',
