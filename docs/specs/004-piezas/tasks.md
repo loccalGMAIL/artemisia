@@ -226,7 +226,7 @@
 - **Depende de**: T25
 - **Hecho cuando**: el test de T25 pasa, la UI solo orquesta las actions existentes y la suite completa queda verde.
 
-### - [ ] T27: Escribir test del listado staff y sus filtros
+### - [x] T27: Escribir test del listado staff y sus filtros
 
 - **Tipo**: test
 - **Cubre**: RF-13, RF-17, RF-41, RF-42, RF-43, RF-44, RNF-2
