@@ -249,7 +249,7 @@
 - **Depende de**: T29
 - **Hecho cuando**: el test de T29 pasa, la tabla usa los scopes y los índices del plan y la suite completa queda verde.
 
-### - [ ] T31: Escribir test de las acciones de conceptos y factura sobre un período
+### - [x] T31: Escribir test de las acciones de conceptos y factura sobre un período
 
 - **Tipo**: test
 - **Cubre**: RF-42, RF-43, RF-47, RF-53
