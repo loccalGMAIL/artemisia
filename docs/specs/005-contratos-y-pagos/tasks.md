@@ -89,7 +89,7 @@
 - **Depende de**: T7
 - **Hecho cuando**: el test de T7 pasa, existen `BudgetNotEligibleForContractException` y `BudgetAlreadyHasContractException`, no hay observer ni listener entre presupuestos y contratos, y la suite completa queda verde.
 
-### - [ ] T9: Escribir test de validación del alta y del plazo
+### - [x] T9: Escribir test de validación del alta y del plazo
 
 - **Tipo**: test
 - **Cubre**: RF-7, RF-8, RF-9, RF-11, RF-12
