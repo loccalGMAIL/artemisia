@@ -247,7 +247,7 @@
 - **Depende de**: T28
 - **Hecho cuando**: el test falla y cubre delegar, reasignar, cargar fecha, cambiar estados, enviar archivo, marcar entregada, descartar pendiente y consultar envíos e historial; commit del test hecho.
 
-### - [ ] T30: Crear acciones y relation managers en `PieceResource`
+### - [x] T30: Crear acciones y relation managers en `PieceResource`
 
 - **Tipo**: ui
 - **Cubre**: RF-11, RF-14, RF-15, RF-20, RF-21, RF-22, RF-23, RF-24, RF-25, RF-26, RF-28, RF-31, RF-36, RF-39

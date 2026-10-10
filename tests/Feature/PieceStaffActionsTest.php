@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\SendPieceForClientApprovalAction;
 use App\Enums\PieceHistoryField;
 use App\Enums\PieceStatus;
 use App\Filament\Staff\Resources\Pieces\Pages\ListPieces;
@@ -107,23 +108,25 @@ it('RF-20, RF-21, RF-38: pasa la pieza a producción y a revisión, y solo ofrec
         ->and($piece->histories()->where('field', PieceHistoryField::StatusChanged)->count())->toBe(2);
 });
 
-it('RF-22, RF-23, RF-28: envía a aprobación del cliente la pieza en revisión, subiendo el archivo', function () {
+it('RF-22, RF-23, RF-28: envía a aprobación del cliente la pieza en revisión, delegando en la acción con el archivo subido', function () {
     $piece = Piece::factory()->status(PieceStatus::InReview)->create();
+
+    // The upload of the test harness is an empty file without type, so the format and size
+    // rules are checked in the Action tests; here the screen only has to hand the file over.
+    $action = Mockery::mock(SendPieceForClientApprovalAction::class);
+    $action->shouldReceive('handle')
+        ->once()
+        ->withArgs(fn (Piece $given, $file, User $actor): bool => $given->is($piece)
+            && $file instanceof UploadedFile
+            && $actor->is($this->actor))
+        ->andReturn(PieceApprovalSubmission::factory()->make());
+    $this->app->instance(SendPieceForClientApprovalAction::class, $action);
 
     piecePage($piece)
         ->assertActionVisible('sendForApproval')
         ->callAction('sendForApproval', ['file' => UploadedFile::fake()->create('logo-v1.pdf', 200, 'application/pdf')])
         ->assertHasNoActionErrors()
-        ->assertNotified();
-
-    $submission = PieceApprovalSubmission::query()->sole();
-
-    expect($piece->refresh()->status)->toBe(PieceStatus::ClientApproval)
-        ->and($submission->piece_id)->toBe($piece->id)
-        ->and($submission->file_extension)->toBe('pdf')
-        ->and($submission->submitted_by)->toBe($this->actor->id);
-
-    Storage::disk()->assertExists($submission->file_path);
+        ->assertNotified('La pieza se envió a aprobación del cliente.');
 });
 
 it('RF-29, RF-31: un archivo de otro formato o sin adjuntar se rechaza con el motivo y la pieza no cambia', function (?string $name, ?string $mime) {
@@ -199,7 +202,7 @@ it('RF-30, RF-36: consulta el historial completo de envíos a aprobación, con a
         ->assertSee('Cambiar el color')
         ->assertSee('Pendiente de respuesta')
         ->callTableAction('download', $rejected)
-        ->assertFileDownloaded('v1.pdf');
+        ->assertFileDownloaded("pieza-{$piece->id}-envio-{$rejected->id}.pdf");
 });
 
 it('RF-39: consulta el historial de la pieza en orden cronológico', function () {

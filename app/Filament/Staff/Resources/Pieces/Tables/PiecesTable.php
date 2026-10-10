@@ -2,8 +2,8 @@
 
 namespace App\Filament\Staff\Resources\Pieces\Tables;
 
-use App\Enums\AccountRole;
 use App\Enums\PieceStatus;
+use App\Filament\Staff\Resources\Pieces\PieceResource;
 use App\Models\Client;
 use App\Models\Piece;
 use App\Models\User;
@@ -21,7 +21,7 @@ class PiecesTable
         return $table
             // Discarded pieces leave the list through the soft delete scope (RF-27); the
             // relations shown in each row are loaded at once.
-            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with(['budget.client', 'assignee']))
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->withoutTrashed()->with(['budget.client', 'assignee']))
             ->columns([
                 TextColumn::make('name')
                     ->label(__('pieces.fields.name'))
@@ -56,17 +56,14 @@ class PiecesTable
                     ->state(fn (Piece $record): ?string => $record->isOverdue() ? __('pieces.overdue') : null),
             ])
             ->defaultSort('id', 'desc')
+            ->recordUrl(fn (Piece $record): string => PieceResource::getUrl('view', ['record' => $record]))
             ->filters([
                 SelectFilter::make('status')
                     ->label(__('pieces.fields.status'))
                     ->options(collect(PieceStatus::cases())->mapWithKeys(fn (PieceStatus $status): array => [$status->value => $status->label()])->all()),
                 SelectFilter::make('assignee_id')
                     ->label(__('pieces.fields.assignee'))
-                    ->options(fn (): array => User::query()
-                        ->role([AccountRole::Admin->value, AccountRole::Staff->value])
-                        ->orderBy('name')
-                        ->pluck('name', 'id')
-                        ->all()),
+                    ->options(fn (): array => User::query()->assignableToPieces()->orderBy('name')->pluck('name', 'id')->all()),
                 SelectFilter::make('client')
                     ->label(__('pieces.fields.client'))
                     ->searchable()

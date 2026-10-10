@@ -2,15 +2,32 @@
 
 namespace App\Filament\Staff\Resources\Pieces;
 
+use App\Actions\AssignPieceOwnerAction;
 use App\Actions\CreateLoosePieceAction;
 use App\Actions\CreatePiecesFromProposalAction;
+use App\Actions\DiscardPieceAction;
+use App\Actions\MarkPieceDeliveredAction;
+use App\Actions\MarkPieceInProductionAction;
+use App\Actions\MarkPieceInReviewAction;
 use App\Actions\ProposePiecesFromBudgetAction;
+use App\Actions\SendPieceForClientApprovalAction;
+use App\Actions\SetPieceDueDateAction;
+use App\Enums\PieceStatus;
 use App\Exceptions\BudgetNotAcceptedException;
+use App\Exceptions\InvalidPieceAssigneeException;
+use App\Exceptions\InvalidPieceTransitionException;
+use App\Exceptions\PieceDeliveredException;
+use App\Exceptions\PieceNotDiscardableException;
 use App\Filament\Support\FormValidation;
 use App\Models\Budget;
+use App\Models\Piece;
+use App\Models\User;
 use App\Models\WorkCategory;
+use Carbon\CarbonImmutable;
+use Closure;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -22,9 +39,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 /**
- * Actions that create pieces: the proposal of an accepted budget and the loose piece. Each
- * one only collects the data and triggers an Action; whether the budget may originate pieces
- * and what a valid piece is are decided by the Actions (constitution, principle 3).
+ * Actions on pieces: creating them from an accepted budget or as loose pieces, and working on
+ * one (delegating, dating, moving it through production, discarding). Each one only collects
+ * the data and triggers an Action; what is valid and what fits the piece's state is decided by
+ * the Actions (constitution, principle 3).
  */
 final class PieceActions
 {
@@ -134,6 +152,175 @@ final class PieceActions
 
                 Notification::make()->success()->title(__('pieces.notifications.created'))->send();
             });
+    }
+
+    /**
+     * @return array<int, Action>
+     */
+    public static function forRecord(): array
+    {
+        return [
+            self::assign(),
+            self::setDueDate(),
+            self::markInProduction(),
+            self::markInReview(),
+            self::sendForApproval(),
+            self::markDelivered(),
+            self::discard(),
+        ];
+    }
+
+    /** Delegates or reassigns the piece to an admin or staff account (RF-11, RF-14). */
+    public static function assign(): Action
+    {
+        return Action::make('assignPiece')
+            ->label(__('pieces.actions.assign'))
+            ->icon('heroicon-o-user-plus')
+            ->color('gray')
+            ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status === PieceStatus::Delivered)
+            ->fillForm(fn (Piece $record): array => ['assignee_id' => $record->assignee_id])
+            ->schema([
+                Select::make('assignee_id')
+                    ->label(__('pieces.fields.assignee'))
+                    ->options(fn (): array => User::query()->assignableToPieces()->orderBy('name')->pluck('name', 'id')->all())
+                    ->searchable(),
+            ])
+            ->action(function (array $data, Piece $record): void {
+                $assignee = User::query()->find($data['assignee_id'] ?? null);
+
+                if ($assignee === null) {
+                    Notification::make()->danger()->title(__('pieces.validation.assignee_invalid'))->send();
+
+                    return;
+                }
+
+                self::report(
+                    fn () => app(AssignPieceOwnerAction::class)->handle($record, $assignee, Auth::user()),
+                    __('pieces.notifications.assigned'),
+                );
+            });
+    }
+
+    /** Loads, changes or clears the committed delivery date (RF-15, RF-16). */
+    public static function setDueDate(): Action
+    {
+        return Action::make('setDueDate')
+            ->label(__('pieces.actions.set_due_date'))
+            ->icon('heroicon-o-calendar-days')
+            ->color('gray')
+            ->hidden(fn (Piece $record): bool => $record->trashed())
+            ->fillForm(fn (Piece $record): array => ['due_date' => $record->due_date?->toDateString()])
+            ->schema([
+                DatePicker::make('due_date')
+                    ->label(__('pieces.fields.due_date'))
+                    ->native(false),
+            ])
+            ->action(function (array $data, Piece $record): void {
+                $dueDate = filled($data['due_date'] ?? null) ? CarbonImmutable::parse($data['due_date']) : null;
+
+                self::report(
+                    fn () => app(SetPieceDueDateAction::class)->handle($record, $dueDate, Auth::user()),
+                    __('pieces.notifications.due_date_saved'),
+                );
+            });
+    }
+
+    public static function markInProduction(): Action
+    {
+        return self::stateAction('markInProduction', 'heroicon-o-play', 'info', PieceStatus::Pending, fn (Piece $record) => app(MarkPieceInProductionAction::class)->handle($record, Auth::user()));
+    }
+
+    public static function markInReview(): Action
+    {
+        return self::stateAction('markInReview', 'heroicon-o-eye', 'warning', PieceStatus::InProduction, fn (Piece $record) => app(MarkPieceInReviewAction::class)->handle($record, Auth::user()));
+    }
+
+    public static function markDelivered(): Action
+    {
+        return self::stateAction('markDelivered', 'heroicon-o-truck', 'success', PieceStatus::Approved, fn (Piece $record) => app(MarkPieceDeliveredAction::class)->handle($record, Auth::user()));
+    }
+
+    /** Sends a piece in review to the client with its file (RF-22, RF-23, RF-28, RF-31). */
+    public static function sendForApproval(): Action
+    {
+        return Action::make('sendForApproval')
+            ->label(__('pieces.actions.sendForApproval'))
+            ->icon('heroicon-o-paper-airplane')
+            ->color('primary')
+            ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status !== PieceStatus::InReview)
+            ->schema([
+                FileUpload::make('file')
+                    ->label(__('pieces.fields.file'))
+                    ->helperText(__('pieces.actions.file_help'))
+                    // The Action receives the uploaded file itself and validates format and size.
+                    ->storeFiles(false),
+            ])
+            ->action(function (array $data, Action $action, Piece $record): void {
+                try {
+                    app(SendPieceForClientApprovalAction::class)->handle($record, $data['file'] ?? null, Auth::user());
+                } catch (ValidationException $exception) {
+                    FormValidation::forAction($exception, $action);
+                } catch (InvalidPieceTransitionException $exception) {
+                    Notification::make()->danger()->title($exception->getMessage())->send();
+
+                    return;
+                }
+
+                Notification::make()->success()->title(__('pieces.notifications.sendForApproval'))->send();
+            });
+    }
+
+    /** Discards a pending piece; it is kept with its history (RF-26, RF-27). */
+    public static function discard(): Action
+    {
+        return Action::make('discardPiece')
+            ->label(__('pieces.actions.discard'))
+            ->icon('heroicon-o-trash')
+            ->color('danger')
+            ->requiresConfirmation()
+            ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status !== PieceStatus::Pending)
+            ->action(function (Piece $record, $livewire): void {
+                try {
+                    app(DiscardPieceAction::class)->handle($record, Auth::user());
+                } catch (PieceNotDiscardableException $exception) {
+                    Notification::make()->danger()->title($exception->getMessage())->send();
+
+                    return;
+                }
+
+                Notification::make()->success()->title(__('pieces.notifications.discarded'))->send();
+
+                $livewire->redirect(PieceResource::getUrl('index'));
+            });
+    }
+
+    /**
+     * @param  Closure(Piece): mixed  $handler
+     */
+    private static function stateAction(string $name, string $icon, string $color, PieceStatus $visibleFrom, Closure $handler): Action
+    {
+        return Action::make($name)
+            ->label(__("pieces.actions.{$name}"))
+            ->icon($icon)
+            ->color($color)
+            ->hidden(fn (Piece $record): bool => $record->trashed() || $record->status !== $visibleFrom)
+            ->action(function (Piece $record) use ($handler, $name): void {
+                self::report(fn () => $handler($record), __("pieces.notifications.{$name}"));
+            });
+    }
+
+    /** Runs a change and tells the user how it went. */
+    private static function report(Closure $change, string $successMessage): void
+    {
+        try {
+            $change();
+        } catch (InvalidPieceTransitionException|InvalidPieceAssigneeException|PieceDeliveredException $exception) {
+            Notification::make()->danger()->title($exception->getMessage())->send();
+
+            return;
+        }
+
+        Notification::make()->success()->title($successMessage)->send();
     }
 
     private static function budgetLabel(Budget $budget): string
