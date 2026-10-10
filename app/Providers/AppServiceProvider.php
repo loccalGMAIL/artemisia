@@ -8,6 +8,9 @@ use App\Models\AccessLog;
 use App\Models\AccountHistory;
 use App\Models\Budget;
 use App\Models\Client;
+use App\Models\Contract;
+use App\Models\ContractPeriod;
+use App\Models\Payment;
 use App\Models\Piece;
 use App\Models\Service;
 use App\Models\User;
@@ -16,6 +19,10 @@ use App\Policies\AccountPolicy;
 use App\Policies\BudgetPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ClientPortalPolicy;
+use App\Policies\ContractPeriodPolicy;
+use App\Policies\ContractPolicy;
+use App\Policies\ContractPortalPolicy;
+use App\Policies\PaymentPolicy;
 use App\Policies\PieceApprovalPortalPolicy;
 use App\Policies\PiecePolicy;
 use App\Policies\ServicePolicy;
@@ -51,6 +58,12 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Service::class, ServicePolicy::class);
         Gate::policy(Budget::class, BudgetPolicy::class);
         Gate::policy(Piece::class, PiecePolicy::class);
+        Gate::policy(Contract::class, ContractPolicy::class);
+        Gate::policy(ContractPeriod::class, ContractPeriodPolicy::class);
+        Gate::policy(Payment::class, PaymentPolicy::class);
+
+        // The contracts a client account sees in its portal are limited to its own client (spec 005).
+        Gate::define('portal.contracts.view', [ContractPortalPolicy::class, 'view']);
 
         // The client card lists the client's budgets now that the module exists (spec 003, RF-46).
         ClientBudgetsSection::register();

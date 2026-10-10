@@ -138,7 +138,7 @@
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y comprueba que `admin` y `staff` tienen los mismos permisos sobre contratos, períodos y pagos, que la cuenta `client` es rechazada con permiso insuficiente en cualquier acción de escritura, que nadie puede eliminar ni restaurar, y que `portal.contracts.view` permite solo los contratos del cliente vinculado y rechaza a otro cliente o a una cuenta sin vínculo; commit del test hecho.
 
-### - [ ] T16: Implementar `ContractPolicy`, `ContractPeriodPolicy`, `PaymentPolicy` y `ContractPortalPolicy`
+### - [x] T16: Implementar `ContractPolicy`, `ContractPeriodPolicy`, `PaymentPolicy` y `ContractPortalPolicy`
 
 - **Tipo**: impl
 - **Cubre**: RF-34, RF-80, RF-97, RF-98
