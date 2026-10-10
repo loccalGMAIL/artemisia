@@ -304,7 +304,7 @@
 
 ## Fase 7: Rendimiento, textos y cierre
 
-### - [ ] T37: Escribir test de rendimiento del listado con 5.000 piezas
+### - [x] T37: Escribir test de rendimiento del listado con 5.000 piezas
 
 - **Tipo**: test
 - **Cubre**: RNF-2
