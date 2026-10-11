@@ -179,84 +179,84 @@
 
 **Demo posible al cerrarlo**: listado de períodos con filtros, y en un período agregar extras y descuentos con justificación, ver el total, cargar la referencia de factura y quitar un concepto.
 
-### - [ ] T21: Escribir test de extras y descuentos
+### - [x] T21: Escribir test de extras y descuentos
 
 - **Tipo**: test
 - **Cubre**: RF-42, RF-43, RF-44, RF-45, RF-46, RF-49, RF-50, RF-51, RF-52, RNF-2
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y cubre agregar extras y descuentos, la justificación obligatoria del descuento, varios por período, el tope de 100 conceptos sin contar los quitados, el total como cuota más extras menos descuentos redondeado al centavo, el rechazo si el total quedara bajo cero o bajo lo ya pagado y el asiento de cada alta; commit del test hecho.
 
-### - [ ] T22: Implementar `AddPeriodExtraAction`, `AddPeriodDiscountAction` y `RecalculatePeriodTotalsAction`
+### - [x] T22: Implementar `AddPeriodExtraAction`, `AddPeriodDiscountAction` y `RecalculatePeriodTotalsAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-42, RF-43, RF-44, RF-45, RF-46, RF-49, RF-50, RF-51, RF-52, RNF-2
 - **Depende de**: T21
 - **Hecho cuando**: el test de T21 pasa, existen `ChangesPeriod` (transacción con bloqueo, recálculo e historial), `PeriodLimitExceededException` y `PeriodTotalException`, los importes se manejan en centavos con `Money` y la suite completa queda verde.
 
-### - [ ] T23: Escribir test del estado de pago y del vencido
+### - [x] T23: Escribir test del estado de pago y del vencido
 
 - **Tipo**: test
 - **Cubre**: RF-69, RF-70, RF-71, RF-72, RF-73, RF-74
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre el saldo, pendiente sin pagos, parcial con pagos y saldo, pagado con saldo cero incluso con total cero y sin pagos, que anular un pago devuelve el estado anterior y la señal de vencido sin cambiar el estado de pago, con los scopes de los filtros; commit del test hecho.
 
-### - [ ] T24: Implementar `PaymentStatus` derivado y los scopes del período
+### - [x] T24: Implementar `PaymentStatus` derivado y los scopes del período
 
 - **Tipo**: impl
 - **Cubre**: RF-69, RF-70, RF-71, RF-72, RF-73, RF-74
 - **Depende de**: T23
 - **Hecho cuando**: el test de T23 pasa, `ContractPeriod` expone el saldo, el estado de pago y los scopes de pendientes, parciales, pagados y vencidos sobre `total` y `paid_amount`, y la suite completa queda verde.
 
-### - [ ] T25: Escribir test de quitar un concepto
+### - [x] T25: Escribir test de quitar un concepto
 
 - **Tipo**: test
 - **Cubre**: RF-47, RF-48, RF-51, RF-52
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre quitar un extra o un descuento, el rechazo si el total quedara bajo lo ya pagado, que la fila se borra y su foto queda en el historial, y el recálculo del total; commit del test hecho.
 
-### - [ ] T26: Implementar `RemovePeriodConceptAction`
+### - [x] T26: Implementar `RemovePeriodConceptAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-47, RF-48, RF-51, RF-52
 - **Depende de**: T25
 - **Hecho cuando**: el test de T25 pasa y la suite completa queda verde.
 
-### - [ ] T27: Escribir test de la referencia de factura
+### - [x] T27: Escribir test de la referencia de factura
 
 - **Tipo**: test
 - **Cubre**: RF-53, RF-54, RF-55, RF-56, RF-57
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre cargar y modificar número y fecha, el rechazo con motivo si falta uno de los dos, un período sin referencia, el mismo número en más de un período y el asiento con valor anterior y nuevo; commit del test hecho.
 
-### - [ ] T28: Implementar `SetPeriodInvoiceAction`
+### - [x] T28: Implementar `SetPeriodInvoiceAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-53, RF-54, RF-55, RF-56, RF-57
 - **Depende de**: T27
 - **Hecho cuando**: el test de T27 pasa y la suite completa queda verde.
 
-### - [ ] T29: Escribir test del listado y la ficha de períodos
+### - [x] T29: Escribir test del listado y la ficha de períodos
 
 - **Tipo**: test
 - **Cubre**: RF-74, RF-85, RF-86, RF-87, RF-88, RF-89, RF-90
 - **Depende de**: T16, T24
 - **Hecho cuando**: el test falla y comprueba las columnas del listado, los filtros por cliente, estado de pago y vencidos, la señal de vencido, el detalle con cuota, extras, descuentos con su justificación, factura y pagos vigentes y anulados, y el historial cronológico del período; commit del test hecho.
 
-### - [ ] T30: Crear `ContractPeriodResource` con listado, ficha y relation managers
+### - [x] T30: Crear `ContractPeriodResource` con listado, ficha y relation managers
 
 - **Tipo**: ui
 - **Cubre**: RF-74, RF-85, RF-86, RF-87, RF-88, RF-89, RF-90
 - **Depende de**: T29
 - **Hecho cuando**: el test de T29 pasa, la tabla usa los scopes y los índices del plan y la suite completa queda verde.
 
-### - [ ] T31: Escribir test de las acciones de conceptos y factura sobre un período
+### - [x] T31: Escribir test de las acciones de conceptos y factura sobre un período
 
 - **Tipo**: test
 - **Cubre**: RF-42, RF-43, RF-47, RF-53
 - **Depende de**: T30, T26, T28
 - **Hecho cuando**: el test falla y comprueba agregar un extra y un descuento con su justificación, quitar un concepto y cargar la referencia de factura desde la ficha del período, y que un rechazo de la action se muestra con su motivo; commit del test hecho.
 
-### - [ ] T32: Crear las acciones de conceptos y factura en la ficha del período
+### - [x] T32: Crear las acciones de conceptos y factura en la ficha del período
 
 - **Tipo**: ui
 - **Cubre**: RF-42, RF-43, RF-47, RF-53
@@ -269,42 +269,42 @@
 
 **Demo posible al cerrarlo**: registrar un pago parcial, ver el período pasar a parcial y a pagado con su saldo, ver rechazado un pago que supera el saldo y anular un pago con justificación.
 
-### - [ ] T33: Escribir test de registro de pagos
+### - [x] T33: Escribir test de registro de pagos
 
 - **Tipo**: test
 - **Cubre**: RF-24, RF-35, RF-58, RF-59, RF-60, RF-61, RF-62, RF-63, RF-64, RF-65, RF-66, RF-67, RF-68, RF-69, RF-79, RNF-2
 - **Depende de**: T22
 - **Hecho cuando**: el test falla y cubre registrar un pago con fecha, importe y forma de pago, la referencia opcional, varios pagos por período, el importe mayor que cero y no mayor que el saldo con el saldo en el mensaje, la fecha futura rechazada y cualquier fecha pasada admitida, el tope de 100 pagos vigentes, el saldo que cambió entre la apertura y la confirmación, que se admiten pagos con el contrato cancelado, finalizado o con el cliente archivado y el asiento del pago; commit del test hecho.
 
-### - [ ] T34: Implementar `RegisterPaymentAction`
+### - [x] T34: Implementar `RegisterPaymentAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-24, RF-35, RF-58, RF-59, RF-60, RF-61, RF-62, RF-63, RF-64, RF-65, RF-66, RF-67, RF-68, RF-69, RF-79, RNF-2
 - **Depende de**: T33
 - **Hecho cuando**: el test de T33 pasa, existe `PaymentExceedsBalanceException`, la action abre una transacción y bloquea el período antes de validar, y la suite completa queda verde.
 
-### - [ ] T35: Escribir test de anulación de pagos
+### - [x] T35: Escribir test de anulación de pagos
 
 - **Tipo**: test
 - **Cubre**: RF-75, RF-76, RF-77, RF-78, RF-79, RF-80
 - **Depende de**: T34
 - **Hecho cuando**: el test falla y cubre anular solo un pago vigente con justificación obligatoria, que deja de computarse en lo pagado y se conserva con su justificación, su autor y su fecha, que ningún dato de un pago registrado se modifica, que no se elimina nunca y el asiento de la anulación; commit del test hecho.
 
-### - [ ] T36: Implementar `VoidPaymentAction`
+### - [x] T36: Implementar `VoidPaymentAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-75, RF-76, RF-77, RF-78, RF-79, RF-80
 - **Depende de**: T35
 - **Hecho cuando**: el test de T35 pasa, el modelo `Payment` rechaza cualquier modificación fuera de la anulación y la suite completa queda verde.
 
-### - [ ] T37: Escribir test de las acciones de pagos sobre un período
+### - [x] T37: Escribir test de las acciones de pagos sobre un período
 
 - **Tipo**: test
 - **Cubre**: RF-58, RF-75
 - **Depende de**: T32, T36
 - **Hecho cuando**: el test falla y comprueba registrar un pago y anularlo con su justificación desde la ficha del período, ver el saldo y el estado de pago cambiar, y que un rechazo de la action se muestra con su motivo; commit del test hecho.
 
-### - [ ] T38: Crear las acciones y el relation manager de pagos en la ficha del período
+### - [x] T38: Crear las acciones y el relation manager de pagos en la ficha del período
 
 - **Tipo**: ui
 - **Cubre**: RF-58, RF-75
@@ -317,119 +317,119 @@
 
 **Demo posible al cerrarlo**: cancelar y reactivar un contrato, cambiar el importe hacia adelante, las secciones de la ficha del cliente y el estado de cuenta de solo lectura en el portal del cliente.
 
-### - [ ] T39: Escribir test del comando programado
+### - [x] T39: Escribir test del comando programado
 
 - **Tipo**: test
 - **Cubre**: RF-29, RF-36
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y comprueba que `contracts:generate-periods` genera los períodos del mes, repone un mes que no corrió, finaliza los contratos de plazo fijo vencidos con autor nulo, no duplica al correr dos veces, sigue con los demás si un contrato falla y que está programado a diario en la hora de negocio; commit del test hecho.
 
-### - [ ] T40: Implementar el comando, `FinishExpiredContractsAction` y la programación
+### - [x] T40: Implementar el comando, `FinishExpiredContractsAction` y la programación
 
 - **Tipo**: impl
 - **Cubre**: RF-29, RF-36
 - **Depende de**: T39
 - **Hecho cuando**: el test de T39 pasa, la entrada está en `routes/console.php` junto a `access-logs:prune` y la suite completa queda verde.
 
-### - [ ] T41: Escribir test de cancelar y reactivar
+### - [x] T41: Escribir test de cancelar y reactivar
 
 - **Tipo**: test
 - **Cubre**: RF-21, RF-22, RF-23, RF-25, RF-26, RF-27, RF-28, RF-33
 - **Depende de**: T40
 - **Hecho cuando**: el test falla y cubre cancelar solo desde vigente, que los períodos existentes se conservan, reactivar y reponer los períodos faltantes sin pasar del plazo, el rechazo con motivo si el plazo fijo ya transcurrió, el rechazo de un contrato finalizado y el asiento de cada cambio de estado; commit del test hecho.
 
-### - [ ] T42: Implementar `CancelContractAction` y `ReactivateContractAction`
+### - [x] T42: Implementar `CancelContractAction` y `ReactivateContractAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-21, RF-22, RF-23, RF-25, RF-26, RF-27, RF-28, RF-33
 - **Depende de**: T41
 - **Hecho cuando**: el test de T41 pasa, existen `ChangesContractStatus` e `InvalidContractTransitionException` y la suite completa queda verde.
 
-### - [ ] T43: Escribir test de cambio de importe y de día de vencimiento
+### - [x] T43: Escribir test de cambio de importe y de día de vencimiento
 
 - **Tipo**: test
 - **Cubre**: RF-10, RF-30, RF-31, RF-32, RF-33
 - **Depende de**: T14
 - **Hecho cuando**: el test falla y cubre que solo se modifica un contrato vigente, el importe mayor que cero con a lo sumo 2 decimales, el día de 1 a 28, que el cambio rige desde los períodos que se generen después sin alterar los existentes ni el del mes en curso, y el asiento con valor anterior y nuevo; commit del test hecho.
 
-### - [ ] T44: Implementar `UpdateContractAmountAction` y `UpdateContractDueDayAction`
+### - [x] T44: Implementar `UpdateContractAmountAction` y `UpdateContractDueDayAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-10, RF-30, RF-31, RF-32, RF-33
 - **Depende de**: T43
 - **Hecho cuando**: el test de T43 pasa y la suite completa queda verde.
 
-### - [ ] T45: Escribir test de las acciones sobre un contrato
+### - [x] T45: Escribir test de las acciones sobre un contrato
 
 - **Tipo**: test
 - **Cubre**: RF-21, RF-25, RF-30, RF-31
 - **Depende de**: T20, T42, T44
 - **Hecho cuando**: el test falla y comprueba cancelar, reactivar, modificar el importe y modificar el día de vencimiento desde la ficha, que cada acción se ofrece solo en el estado que corresponde y que un rechazo de la action se muestra con su motivo; commit del test hecho.
 
-### - [ ] T46: Crear las acciones de la ficha del contrato
+### - [x] T46: Crear las acciones de la ficha del contrato
 
 - **Tipo**: ui
 - **Cubre**: RF-21, RF-25, RF-30, RF-31
 - **Depende de**: T45
 - **Hecho cuando**: el test de T45 pasa, las acciones delegan en las Actions de dominio y la suite completa queda verde.
 
-### - [ ] T47: Escribir test de las secciones de la ficha del cliente
+### - [x] T47: Escribir test de las secciones de la ficha del cliente
 
 - **Tipo**: test
 - **Cubre**: RF-91, RF-92
 - **Depende de**: T16
 - **Hecho cuando**: el test falla y comprueba que la ficha del cliente muestra sus contratos y su historial de pagos con vigentes y anulados, y que no muestra los de otro cliente; se revisan los tests de `ClientCardExtensions` que asumen qué secciones hay registradas; commit del test hecho.
 
-### - [ ] T48: Crear `ClientContractsSection` y `ClientPaymentsSection`
+### - [x] T48: Crear `ClientContractsSection` y `ClientPaymentsSection`
 
 - **Tipo**: ui
 - **Cubre**: RF-91, RF-92
 - **Depende de**: T47
 - **Hecho cuando**: el test de T47 pasa, las dos secciones se registran en `ClientCardExtensions` desde `AppServiceProvider` y la suite completa queda verde.
 
-### - [ ] T49: Escribir test del estado de cuenta del cliente
+### - [x] T49: Escribir test del estado de cuenta del cliente
 
 - **Tipo**: test
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-97
 - **Depende de**: T16
 - **Hecho cuando**: el test falla y comprueba que `BuildClientStatementAction` devuelve solo los contratos del cliente de la cuenta, con períodos, extras, descuentos con su justificación, total, pagado, saldo, estado de pago y vencimiento, solo pagos vigentes, nada de otros clientes y nada para una cuenta sin vínculo; commit del test hecho.
 
-### - [ ] T50: Implementar `BuildClientStatementAction`
+### - [x] T50: Implementar `BuildClientStatementAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-97
 - **Depende de**: T49
 - **Hecho cuando**: el test de T49 pasa, la action aplica `portal.contracts.view` a cada contrato y carga todo de una vez, y la suite completa queda verde.
 
-### - [ ] T51: Escribir test de `ContractsPage`
+### - [x] T51: Escribir test de `ContractsPage`
 
 - **Tipo**: test
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-98
 - **Depende de**: T50
 - **Hecho cuando**: el test falla y comprueba que la cuenta vinculada ve sus contratos, períodos y pagos en el portal, no ve los de otro cliente ni los pagos anulados, que la página no ofrece ninguna acción de escritura y que una cuenta sin vínculo ve el aviso correspondiente; commit del test hecho.
 
-### - [ ] T52: Crear `ContractsPage` del portal de clientes
+### - [x] T52: Crear `ContractsPage` del portal de clientes
 
 - **Tipo**: ui
 - **Cubre**: RF-93, RF-94, RF-95, RF-96, RF-98
 - **Depende de**: T51
 - **Hecho cuando**: el test de T51 pasa, la página usa secciones de estado perezoso y la suite completa queda verde.
 
-### - [ ] T53: Escribir tests de rendimiento
+### - [x] T53: Escribir tests de rendimiento
 
 - **Tipo**: test
 - **Cubre**: RNF-3, RNF-4, RNF-5
 - **Depende de**: T30, T48, T52
 - **Hecho cuando**: los tests del grupo `performance` verifican con el mejor de tres corridas el listado de 5.000 períodos con filtros en menos de 2 s, la generación del mes para 500 contratos con 12 períodos cada uno en menos de 10 s y el portal de un cliente con 60 períodos y 200 pagos en menos de 2 s, y que no hay consultas por fila; commit del test hecho.
 
-### - [ ] T54: Optimizar consultas y validar textos
+### - [x] T54: Optimizar consultas y validar textos
 
 - **Tipo**: refactor
 - **Cubre**: RF-91, RNF-1, RNF-3, RNF-4, RNF-5
 - **Depende de**: T53
 - **Hecho cuando**: los tests de T53 pasan, todos los mensajes visibles están en `lang/es/contracts.php`, un test comprueba que cada importe del módulo se expresa con 2 decimales, y `php artisan test` y `./vendor/bin/pint` corren sin errores.
 
-### - [ ] T55: Documentar la programación en `AGENTS.md` y sincronizar plan y tareas
+### - [x] T55: Documentar la programación en `AGENTS.md` y sincronizar plan y tareas
 
 - **Tipo**: docs
 - **Cubre**: RNF-6
@@ -561,3 +561,6 @@ Cosas que se hicieron visibles al bajar a tareas y que idealmente vuelven al pla
 - **El plan no dice qué muestra la ficha de un contrato eliminado lógicamente.** No hay forma funcional de eliminarlo, así que T19 solo comprueba que no aparece en el listado.
 - **La hora de ejecución (00:10) del comando programado es una decisión del plan (D-9)** que la spec no fija; conviene confirmarla antes de implementar T40.
 - **Tests existentes de la ficha del cliente.** `ClientCardExtensionsTest` y `ClientBudgetsSectionTest` asumen qué secciones hay registradas; T47 los revisa, pero el plan solo lo menciona como riesgo.
+
+**Estado final**: las 55 tareas están hechas. Lo que la implementación ajustó respecto del plan quedó
+anotado en la sección 15 de `plan.md`.

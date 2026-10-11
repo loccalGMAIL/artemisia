@@ -59,6 +59,17 @@ GOOGLE_CLIENT_SECRET=
 GOOGLE_REDIRECT_URI="${APP_URL}/auth/google/callback"
 ```
 
+Programación de contratos (spec 005): `contracts:generate-periods` crea los períodos que falten de
+cada contrato vigente y finaliza los de plazo fijo vencidos. Está declarado en `routes/console.php`
+para correr todos los días a las 00:10 de la hora de negocio, así que **producción necesita el ciclo
+de `schedule:run`** (un cron cada minuto con `php artisan schedule:run`, o `schedule:work`). En local se
+puede correr a mano con `php artisan contracts:generate-periods`; es idempotente y repone los meses que
+no corrieron. Si un contrato falla, el comando lo informa, sigue con los demás y termina con código de error.
+
+La zona de negocio es `config('app.business_timezone')`, que sale de `APP_BUSINESS_TIMEZONE` y vale
+`America/Argentina/Buenos_Aires` por defecto. De ella salen el «hoy», el mes actual, los vencimientos y la
+validación de fecha futura de los pagos. La zona de la aplicación (`APP_TIMEZONE`) sigue en UTC y no se toca.
+
 El `RateLimiter` de login usa cache persistente. En local y tests se usa cache en base de datos
 (`CACHE_STORE=database`) para que los limites de intentos sean reproducibles entre solicitudes.
 

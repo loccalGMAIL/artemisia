@@ -415,3 +415,18 @@ Ninguna: las decisiones técnicas quedaron resueltas en la sección 3, cada una 
 ## 14. Aprobación
 
 - [x] Aprobado por Claudio el 2026-10-10
+
+## 15. Ajustes durante la implementación
+
+Lo que se implementó y difiere de lo descrito arriba, o lo completa. Ninguno cambia un requisito.
+
+- **Historial de una baja de concepto (D-5).** `new_value` de `period_histories` y de `contract_histories` no admite nulo, así que `concept_removed` guarda la foto del concepto en `old_value` y `{"removed": true}` en `new_value`, igual que la baja de un ítem de presupuesto.
+- **Asientos.** `status_changed` guarda `{"status": …}` antes y después; `amount_changed` y `due_day_changed`, `{"monthly_amount": …}` y `{"due_day": …}`; `invoice_changed`, `{"number", "date"}` (ambos nulos cuando se quita la referencia); `payment_registered`, la foto del pago; `payment_voided`, la foto del pago en `old_value` y `{"id", "justification"}` en `new_value`.
+- **Bases abstractas.** Además de `ChangesContractStatus` y `ChangesPeriod` existen `AddsPeriodConcept` (extras y descuentos) y `ChangesContractTerms` (importe y día de vencimiento). `ChangesPeriod` valida al final que el total no quede bajo cero ni bajo lo pagado, y revierte todo si falla.
+- **Excepciones.** `InvalidContractTransitionException` se construye con `transition()` (cancelar, reactivar) o `notActive()` (modificar un contrato que no está vigente); `PeriodLimitExceededException`, con `concepts()` o `payments()`.
+- **`ContractPeriod`.** Expone `balance`, `payment_status` e `isOverdue()`, y los scopes `pending`, `partial`, `paid` y `overdue` sobre `total`, `paid_amount` y `due_date`. El estado de pago no se cachea como objeto, porque el recálculo cambia las columnas de las que depende.
+- **`Payment`.** El modelo rechaza cualquier modificación que no sea la anulación (una vez) y cualquier baja, también la lógica, no solo el borrado definitivo (RF-78, RF-80).
+- **Anulación y concurrencia.** `VoidPaymentAction` relee el pago con el período bloqueado, así que una segunda anulación sobre un pago ya anulado se rechaza.
+- **Estado de cuenta.** `BuildClientStatementAction` devuelve arrays (contratos y períodos del más reciente al más antiguo, con los pagos vigentes), no modelos, y arma todo con una cantidad fija de consultas.
+- **Comando.** `contracts:generate-periods` termina con código de error si algún contrato falló, además de informarlo; `FinishExpiredContractsAction` se ejecuta después de la generación.
+- **Importes de formularios.** Los formularios de Filament entregan los números como `int` o `float`; las Actions los normalizan y rechazan los que no sean enteros o tengan más de 2 decimales, sin redondear los del importe mensual.

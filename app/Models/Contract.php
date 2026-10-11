@@ -57,6 +57,16 @@ class Contract extends Model
         ];
     }
 
+    /**
+     * The state of the contract, for the history entry of a change of state (RF-33).
+     *
+     * @return array{status: string}
+     */
+    public function statusSnapshot(): array
+    {
+        return ['status' => $this->status->value];
+    }
+
     /** A contract without an end date (RF-8). */
     public function isIndefinite(): bool
     {
