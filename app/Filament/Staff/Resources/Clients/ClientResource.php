@@ -7,8 +7,11 @@ use App\Filament\Staff\Resources\Clients\Pages\EditClient;
 use App\Filament\Staff\Resources\Clients\Pages\ListClients;
 use App\Filament\Staff\Resources\Clients\Pages\ViewClient;
 use App\Filament\Staff\Resources\Clients\RelationManagers\AccountsRelationManager;
+use App\Filament\Staff\Resources\Clients\RelationManagers\BudgetsRelationManager;
 use App\Filament\Staff\Resources\Clients\RelationManagers\ContactsRelationManager;
+use App\Filament\Staff\Resources\Clients\RelationManagers\ContractsRelationManager;
 use App\Filament\Staff\Resources\Clients\RelationManagers\HistoriesRelationManager;
+use App\Filament\Staff\Resources\Clients\RelationManagers\PaymentsRelationManager;
 use App\Filament\Staff\Resources\Clients\Schemas\ClientForm;
 use App\Filament\Staff\Resources\Clients\Schemas\ClientInfolist;
 use App\Filament\Staff\Resources\Clients\Tables\ClientsTable;
@@ -69,8 +72,11 @@ class ClientResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ContactsRelationManager::class,
+            BudgetsRelationManager::class,
+            ContractsRelationManager::class,
+            PaymentsRelationManager::class,
             AccountsRelationManager::class,
+            ContactsRelationManager::class,
             HistoriesRelationManager::class,
         ];
     }

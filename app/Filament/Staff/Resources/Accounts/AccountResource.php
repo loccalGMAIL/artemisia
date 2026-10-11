@@ -36,6 +36,11 @@ class AccountResource extends Resource
         return __('accounts.plural');
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.settings');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return AccountForm::configure($schema);

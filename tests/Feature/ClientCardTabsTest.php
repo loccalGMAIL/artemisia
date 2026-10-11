@@ -115,7 +115,7 @@ it('la pestaña de usuarios es la de las cuentas vinculadas al cliente', functio
         ->assertDontSee('Cuenta ajena');
 });
 
-it('la pestaña de presupuestos muestra los del cliente con número, título, total, estado y emisión', function () {
+it('RF-46 (003): la pestaña de presupuestos muestra los del cliente con número, título, total, estado y emisión', function () {
     $client = tabClient();
     $other = Client::factory()->create();
     $budget = Budget::factory()->sent()->create([
@@ -138,11 +138,11 @@ it('la pestaña de presupuestos muestra los del cliente con número, título, to
         ->assertSee(BudgetResource::getUrl('view', ['record' => $budget]), false);
 });
 
-it('la pestaña de presupuestos de un cliente sin presupuestos lo indica', function () {
+it('RF-46 (003): la pestaña de presupuestos de un cliente sin presupuestos lo indica', function () {
     relationTab(BudgetsRelationManager::class, tabClient())->assertSee('Este cliente todavía no tiene presupuestos.');
 });
 
-it('la pestaña de contratos muestra los del cliente con importe, inicio, plazo y estado', function () {
+it('RF-91: la pestaña de contratos muestra los del cliente con importe, inicio, plazo y estado', function () {
     $client = tabClient();
     $fixed = tabContract($client, ['monthly_amount' => '1500.00', 'start_date' => '2026-09-01', 'term_months' => 6, 'term_end_month' => '2027-02-01']);
     $cancelled = tabContract($client, ['monthly_amount' => '2200.00', 'start_date' => '2025-05-10', 'status' => 'cancelled']);
@@ -162,11 +162,11 @@ it('la pestaña de contratos muestra los del cliente con importe, inicio, plazo 
         ->assertSee(ContractResource::getUrl('view', ['record' => $fixed]), false);
 });
 
-it('la pestaña de contratos de un cliente sin contratos lo indica', function () {
+it('RF-91: la pestaña de contratos de un cliente sin contratos lo indica', function () {
     relationTab(ContractsRelationManager::class, tabClient())->assertSee('Este cliente todavía no tiene contratos.');
 });
 
-it('la pestaña de pagos muestra los pagos del cliente, vigentes y anulados, con la justificación de la anulación', function () {
+it('RF-92: la pestaña de pagos muestra los pagos del cliente, vigentes y anulados, con la justificación de la anulación', function () {
     $client = tabClient();
     $period = ContractPeriod::factory()->create(['contract_id' => tabContract($client)->id, 'month' => '2026-09-01']);
     $valid = Payment::factory()->create(['contract_period_id' => $period->id, 'paid_on' => '2026-09-12', 'amount' => '400.00', 'reference' => 'Transf. 4455']);
@@ -187,11 +187,11 @@ it('la pestaña de pagos muestra los pagos del cliente, vigentes y anulados, con
         ->assertSee('Pago duplicado');
 });
 
-it('la pestaña de pagos de un cliente sin pagos lo indica', function () {
+it('RF-92: la pestaña de pagos de un cliente sin pagos lo indica', function () {
     relationTab(PaymentsRelationManager::class, tabClient())->assertSee('Este cliente todavía no tiene pagos.');
 });
 
-it('los datos del cliente no repiten las listas que ahora están en las pestañas', function () {
+it('RF-91, RF-92: los datos del cliente no repiten las listas que ahora están en las pestañas', function () {
     $client = tabClient();
     tabContract($client, ['monthly_amount' => '1500.00']);
 

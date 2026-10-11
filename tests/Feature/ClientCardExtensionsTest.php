@@ -22,16 +22,13 @@ afterEach(function () {
     ClientCardExtensions::flush();
 });
 
-it('RF-46, RF-47, RF-48: sin los módulos implementados la ficha no muestra presupuestos, contratos ni pagos', function () {
+it('RF-46, RF-47, RF-48: sin secciones registradas la ficha no agrega ninguna sección a los datos del cliente', function () {
     $client = Client::factory()->create(['first_name' => 'Ana', 'last_name' => 'Pérez']);
 
     expect(ClientCardExtensions::registered())->toBe([]);
 
     Livewire::test(ViewClient::class, ['record' => $client->getKey()])
-        ->assertSee('Ana Pérez')
-        ->assertDontSee('Presupuestos')
-        ->assertDontSee('Contratos')
-        ->assertDontSee('Pagos');
+        ->assertSee('Ana Pérez');
 });
 
 it('RF-46, RF-47, RF-48: un módulo registrado agrega su sección a la ficha con el cliente que se está viendo', function () {
