@@ -3,9 +3,6 @@
 namespace App\Providers;
 
 use App\Enums\AccessPortal;
-use App\Filament\Staff\Resources\Budgets\ClientBudgetsSection;
-use App\Filament\Staff\Resources\Contracts\ClientContractsSection;
-use App\Filament\Staff\Resources\Contracts\ClientPaymentsSection;
 use App\Models\AccessLog;
 use App\Models\AccountHistory;
 use App\Models\Budget;
@@ -66,13 +63,6 @@ class AppServiceProvider extends ServiceProvider
 
         // The contracts a client account sees in its portal are limited to its own client (spec 005).
         Gate::define('portal.contracts.view', [ContractPortalPolicy::class, 'view']);
-
-        // The client card lists the client's budgets now that the module exists (spec 003, RF-46).
-        ClientBudgetsSection::register();
-
-        // So do the contracts and the payments of the client now that spec 005 exists (RF-91, RF-92).
-        ClientContractsSection::register();
-        ClientPaymentsSection::register();
 
         // One policy per model, so the portal abilities are registered by name (spec 003).
         Gate::define('portal.view', [ClientPortalPolicy::class, 'view']);

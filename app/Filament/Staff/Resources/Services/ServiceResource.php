@@ -37,6 +37,11 @@ class ServiceResource extends Resource
         return __('budgets.services.plural');
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('navigation.settings');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ServiceForm::configure($schema);

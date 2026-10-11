@@ -51,7 +51,7 @@ return [
     ],
     'relations' => [
         'contacts' => 'Contactos',
-        'accounts' => 'Cuentas del portal',
+        'accounts' => 'Usuarios',
         'histories' => 'Historial',
     ],
     'actions' => [
