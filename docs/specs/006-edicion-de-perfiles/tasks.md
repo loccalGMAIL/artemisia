@@ -110,7 +110,7 @@
 - **Depende de**: T10
 - **Hecho cuando**: `pest --filter=EmailChangeSession` corre y pasa: tras el cambio el ingreso con contraseña y con Google funciona con el email nuevo y no con el anterior, y una sesión abierta de esa cuenta sigue abierta; commit del test hecho.
 
-### - [ ] T12: Escribir test del historial de cuentas con los hechos nuevos (caracterización)
+### - [x] T12: Escribir test del historial de cuentas con los hechos nuevos (caracterización)
 
 - **Tipo**: test
 - **Cubre**: RF-24
