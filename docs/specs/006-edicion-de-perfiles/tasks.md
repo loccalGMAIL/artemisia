@@ -61,7 +61,7 @@
 - **Depende de**: T3
 - **Hecho cuando**: el test de T3 pasa y la suite completa queda verde.
 
-### - [ ] T5: Escribir test de `UpdateAccountProfileAction` para el email
+### - [x] T5: Escribir test de `UpdateAccountProfileAction` para el email
 
 - **Tipo**: test
 - **Cubre**: RF-12, RF-14, RF-15, RF-16, RF-21
