@@ -54,7 +54,7 @@
 - **Depende de**: T2
 - **Hecho cuando**: `pest --filter=UpdateAccountProfileAction` corre y falla por la aserción en los casos de nombre nuevo guardado con asiento (anterior y nuevo, autor y fecha), nombre vacío o de más de 150 caracteres rechazado sin cambios, y guardado sin cambios sin asiento; commit del test hecho.
 
-### - [ ] T4: Implementar `UpdateAccountProfileAction` para el nombre
+### - [x] T4: Implementar `UpdateAccountProfileAction` para el nombre
 
 - **Tipo**: impl
 - **Cubre**: RF-2, RF-4, RF-20, RF-23
