@@ -68,7 +68,7 @@
 - **Depende de**: T4
 - **Hecho cuando**: `pest --filter=UpdateAccountProfileAction` falla en los casos de email nuevo guardado en minúsculas y sin espacios exteriores con su asiento, email vacío o con formato inválido rechazado, email de otra cuenta (incluida una inactiva) rechazado con la cuenta existente en el mensaje, el mismo email de la propia cuenta sin conflicto, y el cambio del email propio rechazado con `CannotChangeOwnEmailException`; commit del test hecho.
 
-### - [ ] T6: Implementar el cambio de email en `UpdateAccountProfileAction`
+### - [x] T6: Implementar el cambio de email en `UpdateAccountProfileAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-12, RF-14, RF-15, RF-16, RF-21

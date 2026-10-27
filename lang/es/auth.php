@@ -3,6 +3,7 @@
 return [
     'email_conflict' => 'Ya existe una cuenta con el email :email (:name).',
     'cannot_change_own_role' => 'No se puede cambiar el rol de la propia cuenta.',
+    'cannot_change_own_email' => 'No se puede cambiar el email de la propia cuenta: lo cambia otro admin.',
     'cannot_deactivate_own_account' => 'No se puede desactivar la propia cuenta.',
     'invalid_password_link' => 'El enlace venció o ya fue usado. Solicite uno nuevo.',
     'password_reset_requested' => 'Si el email corresponde a una cuenta activa, enviamos un enlace para definir la contraseña.',
