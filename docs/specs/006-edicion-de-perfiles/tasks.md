@@ -96,7 +96,7 @@
 - **Depende de**: T8
 - **Hecho cuando**: `pest --filter=AccountEditAction` corre y falla porque la acción `edit` no existe; cubre admin que edita nombre y email de otra cuenta, acción oculta en la fila propia, staff rechazado por falta de permiso, mensaje de conflicto en el campo email y error de formato; commit del test hecho.
 
-### - [ ] T10: Agregar la acción «Editar» al listado de cuentas
+### - [x] T10: Agregar la acción «Editar» al listado de cuentas
 
 - **Tipo**: ui
 - **Cubre**: RF-11, RF-12, RF-13, RF-14, RF-15

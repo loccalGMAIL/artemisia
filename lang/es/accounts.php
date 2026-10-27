@@ -16,12 +16,14 @@ return [
         'created_at' => 'Creada',
     ],
     'actions' => [
+        'edit' => 'Editar',
         'change_role' => 'Cambiar rol',
         'deactivate' => 'Desactivar',
         'activate' => 'Activar',
     ],
     'notifications' => [
         'created' => 'Cuenta creada. Se envió el enlace para definir la contraseña.',
+        'updated' => 'Cuenta actualizada.',
         'role_changed' => 'Rol actualizado.',
         'deactivated' => 'Cuenta desactivada.',
         'activated' => 'Cuenta activada.',
