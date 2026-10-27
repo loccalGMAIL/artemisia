@@ -27,7 +27,8 @@ it('RF-11: un admin edita el nombre y el email de otra cuenta desde el listado',
     Livewire::test(ListAccounts::class)
         ->mountAction(TestAction::make('edit')->table($target))
         ->assertActionDataSet(['name' => 'Ana Peres', 'email' => 'ana@example.com'])
-        ->callAction(TestAction::make('edit')->table($target), ['name' => 'Ana Pérez', 'email' => 'ana.nueva@example.com'])
+        ->setActionData(['name' => 'Ana Pérez', 'email' => 'ana.nueva@example.com'])
+        ->callMountedAction()
         ->assertHasNoFormErrors()
         ->assertNotified(__('accounts.notifications.updated'));
 
@@ -74,10 +75,12 @@ it('RF-14: el formulario muestra el conflicto con una cuenta existente, incluso 
     User::factory()->client()->inactive()->create(['name' => 'Luis Gómez', 'email' => 'luis@example.com']);
     $this->actingAs($admin);
 
-    Livewire::test(ListAccounts::class)
+    $page = Livewire::test(ListAccounts::class)
         ->callAction(TestAction::make('edit')->table($target), ['name' => 'Ana Pérez', 'email' => 'LUIS@example.com'])
-        ->assertHasFormErrors(['email'])
-        ->assertSee('Ya existe una cuenta con el email luis@example.com (Luis Gómez).');
+        ->assertHasFormErrors(['email']);
+
+    expect($page->errors()->first('mountedActions.0.data.email'))
+        ->toBe('Ya existe una cuenta con el email luis@example.com (Luis Gómez).');
 
     expect($target->refresh()->email)->toBe('ana@example.com')
         ->and($target->name)->toBe('Ana Peres')

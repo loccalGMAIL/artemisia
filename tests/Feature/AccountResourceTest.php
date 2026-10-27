@@ -110,7 +110,7 @@ it('RF-32: un admin desactiva y vuelve a activar otra cuenta', function () {
     expect($target->refresh()->is_active)->toBeTrue();
 });
 
-it('RF-34: la sección no ofrece borrar ni editar cuentas', function () {
+it('RF-34: la sección no ofrece borrar cuentas', function () {
     $admin = User::factory()->admin()->create();
     $target = User::factory()->staff()->create();
     $this->actingAs($admin);
@@ -118,6 +118,5 @@ it('RF-34: la sección no ofrece borrar ni editar cuentas', function () {
     expect(array_keys(AccountResource::getPages()))->toBe(['index', 'create']);
 
     Livewire::test(ListAccounts::class)
-        ->assertActionDoesNotExist(TestAction::make('delete')->table($target))
-        ->assertActionDoesNotExist(TestAction::make('edit')->table($target));
+        ->assertActionDoesNotExist(TestAction::make('delete')->table($target));
 });
