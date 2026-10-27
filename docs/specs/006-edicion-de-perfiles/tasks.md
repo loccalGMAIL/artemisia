@@ -151,7 +151,7 @@
 - **Depende de**: T15
 - **Hecho cuando**: el test de T15 pasa, la clave de sesión se toma de `Filament::getAuthGuard()` y la suite completa queda verde.
 
-### - [ ] T17: Escribir test del perfil propio en el portal de staff
+### - [x] T17: Escribir test del perfil propio en el portal de staff
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-9, RF-10
