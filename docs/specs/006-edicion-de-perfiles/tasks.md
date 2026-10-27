@@ -89,7 +89,7 @@
 - **Depende de**: T7
 - **Hecho cuando**: el test de T7 pasa, existen la notificación `AccountEmailChanged` y sus textos en `lang/es/accounts.php`, y la suite completa queda verde.
 
-### - [ ] T9: Escribir test de la acción «Editar» del listado de cuentas
+### - [x] T9: Escribir test de la acción «Editar» del listado de cuentas
 
 - **Tipo**: test
 - **Cubre**: RF-11, RF-12, RF-13, RF-14, RF-15
