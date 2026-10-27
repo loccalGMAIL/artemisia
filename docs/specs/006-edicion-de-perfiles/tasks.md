@@ -123,7 +123,7 @@
 
 **Demo posible al cerrarlo**: un miembro del staff y una cuenta cliente abren su perfil desde el menú de usuario, cambian su nombre y su contraseña, ven el email sin poder editarlo, y las otras sesiones de esa cuenta quedan cerradas.
 
-### - [ ] T13: Escribir test de `ChangeOwnPasswordAction`
+### - [x] T13: Escribir test de `ChangeOwnPasswordAction`
 
 - **Tipo**: test
 - **Cubre**: RF-6, RF-7, RF-8, RF-9, RF-22
