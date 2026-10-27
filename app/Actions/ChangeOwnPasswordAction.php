@@ -7,6 +7,9 @@ use App\Exceptions\AccountHasNoPasswordException;
 use App\Models\AccountHistory;
 use App\Models\User;
 use Closure;
+use Filament\Facades\Filament;
+use Illuminate\Auth\SessionGuard;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -46,6 +49,25 @@ class ChangeOwnPasswordAction
                 'author_id' => $account->id,
             ]);
         });
+
+        $this->keepCurrentSessionOpen($account);
+    }
+
+    /**
+     * Every session remembers the password hash it was opened with and the session middleware cuts
+     * the ones that no longer match, which closes the other sessions (RF-10). The session that made
+     * the change takes the new hash so it is the one that stays.
+     */
+    private function keepCurrentSessionOpen(User $account): void
+    {
+        $guardName = Filament::getAuthGuard();
+        $guard = Auth::guard($guardName);
+
+        if (! $guard instanceof SessionGuard || $guard->id() !== $account->getAuthIdentifier()) {
+            return;
+        }
+
+        session()->put("password_hash_{$guardName}", $guard->hashPasswordForCookie($account->password));
     }
 
     private function matches(User $account): Closure

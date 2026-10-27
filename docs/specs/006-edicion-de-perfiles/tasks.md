@@ -144,7 +144,7 @@
 - **Depende de**: T14
 - **Hecho cuando**: `pest --filter=PasswordChangeSession` corre y falla porque la segunda sesión de la cuenta sigue abierta tras el cambio; cubre también que la sesión desde la que se cambió sigue abierta; commit del test hecho.
 
-### - [ ] T16: Refrescar el hash de la sesión actual al cambiar la contraseña
+### - [x] T16: Refrescar el hash de la sesión actual al cambiar la contraseña
 
 - **Tipo**: impl
 - **Cubre**: RF-10
