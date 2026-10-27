@@ -137,7 +137,7 @@
 - **Depende de**: T13
 - **Hecho cuando**: el test de T13 pasa, el mensaje de la excepción está en `lang/es/auth.php` y la suite completa queda verde.
 
-### - [ ] T15: Escribir test del corte de las otras sesiones
+### - [x] T15: Escribir test del corte de las otras sesiones
 
 - **Tipo**: test
 - **Cubre**: RF-10
