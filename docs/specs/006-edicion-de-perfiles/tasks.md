@@ -75,7 +75,7 @@
 - **Depende de**: T5
 - **Hecho cuando**: el test de T5 pasa, `CannotChangeOwnEmailException` tiene su mensaje en `lang/es/auth.php` y la suite completa queda verde.
 
-### - [ ] T7: Escribir test del aviso y de la baja de enlaces al cambiar el email
+### - [x] T7: Escribir test del aviso y de la baja de enlaces al cambiar el email
 
 - **Tipo**: test
 - **Cubre**: RF-17, RF-18

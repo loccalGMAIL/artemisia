@@ -6,7 +6,11 @@ use App\Exceptions\CannotChangeOwnEmailException;
 use App\Exceptions\DuplicateAccountEmailException;
 use App\Models\AccountHistory;
 use App\Models\User;
+use App\Notifications\AccountEmailChanged;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
 beforeEach(function () {
@@ -191,4 +195,95 @@ it('RF-12: una cuenta sí puede guardar su nombre con su mismo email', function 
 
     expect($admin->refresh()->name)->toBe('Ana Pérez')
         ->and($admin->email)->toBe('ana@example.com');
+});
+
+it('RF-17: avisa del cambio de email al email anterior y al nuevo', function () {
+    Notification::fake();
+    $actor = User::factory()->admin()->create();
+    $target = User::factory()->staff()->create(['name' => 'Ana Pérez', 'email' => 'ana@example.com']);
+
+    app(UpdateAccountProfileAction::class)->handle(
+        $target,
+        ['name' => 'Ana Pérez', 'email' => 'ana.nueva@example.com'],
+        $actor,
+    );
+
+    Notification::assertSentOnDemandTimes(AccountEmailChanged::class, 2);
+
+    Notification::assertSentOnDemand(
+        AccountEmailChanged::class,
+        function (AccountEmailChanged $notification, array $channels, object $notifiable): bool {
+            $mail = $notification->toMail($notifiable);
+
+            return $notifiable->routes['mail'] === 'ana@example.com'
+                && ! $notification->forNewAddress
+                && $mail->subject !== null
+                && str_contains(implode(' ', $mail->introLines), 'ana.nueva@example.com');
+        },
+    );
+
+    Notification::assertSentOnDemand(
+        AccountEmailChanged::class,
+        function (AccountEmailChanged $notification, array $channels, object $notifiable): bool {
+            $mail = $notification->toMail($notifiable);
+
+            return $notifiable->routes['mail'] === 'ana.nueva@example.com'
+                && $notification->forNewAddress
+                && $mail->subject !== null
+                && str_contains(implode(' ', $mail->introLines), 'ana@example.com');
+        },
+    );
+});
+
+it('RF-17: solo avisa si el email cambia y si el cambio se confirma', function () {
+    Notification::fake();
+    $actor = User::factory()->admin()->create();
+    $changed = User::factory()->staff()->create(['name' => 'Ana Pérez', 'email' => 'ana@example.com']);
+    $nameOnly = User::factory()->staff()->create(['name' => 'Luis', 'email' => 'luis@example.com']);
+    $rolledBack = User::factory()->staff()->create(['name' => 'Eva', 'email' => 'eva@example.com']);
+    $action = app(UpdateAccountProfileAction::class);
+
+    $action->handle($changed, ['name' => 'Ana Pérez', 'email' => 'ana.nueva@example.com'], $actor);
+    Notification::assertSentOnDemandTimes(AccountEmailChanged::class, 2);
+
+    $action->handle($nameOnly, ['name' => 'Luis Gómez', 'email' => 'luis@example.com'], $actor);
+    $action->handle($nameOnly->refresh(), ['name' => 'Luis Gómez'], $actor);
+    Notification::assertSentOnDemandTimes(AccountEmailChanged::class, 2);
+
+    try {
+        DB::transaction(function () use ($action, $rolledBack, $actor): void {
+            $action->handle($rolledBack, ['name' => 'Eva', 'email' => 'eva.nueva@example.com'], $actor);
+
+            throw new RuntimeException('rollback');
+        });
+    } catch (RuntimeException) {
+    }
+
+    Notification::assertSentOnDemandTimes(AccountEmailChanged::class, 2);
+    expect($rolledBack->refresh()->email)->toBe('eva@example.com');
+});
+
+it('RF-18: invalida los enlaces de definición de contraseña pendientes del email anterior', function () {
+    Notification::fake();
+    $actor = User::factory()->admin()->create();
+    $target = User::factory()->staff()->create(['name' => 'Ana Pérez', 'email' => 'ana@example.com']);
+    $other = User::factory()->staff()->create(['email' => 'otra@example.com']);
+    $nameOnly = User::factory()->staff()->create(['name' => 'Luis', 'email' => 'luis@example.com']);
+    $broker = Password::broker();
+
+    $targetToken = $broker->createToken($target);
+    $otherToken = $broker->createToken($other);
+    $nameOnlyToken = $broker->createToken($nameOnly);
+
+    $action = app(UpdateAccountProfileAction::class);
+
+    $action->handle($nameOnly, ['name' => 'Luis Gómez'], $actor);
+    expect($broker->tokenExists($nameOnly, $nameOnlyToken))->toBeTrue();
+
+    $action->handle($target, ['name' => 'Ana Pérez', 'email' => 'ana.nueva@example.com'], $actor);
+
+    expect(DB::table('password_reset_tokens')->where('email', 'ana@example.com')->exists())->toBeFalse()
+        ->and(DB::table('password_reset_tokens')->where('email', 'ana.nueva@example.com')->exists())->toBeFalse()
+        ->and($broker->tokenExists($target->refresh(), $targetToken))->toBeFalse()
+        ->and($broker->tokenExists($other, $otherToken))->toBeTrue();
 });
