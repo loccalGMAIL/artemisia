@@ -82,7 +82,7 @@
 - **Depende de**: T6
 - **Hecho cuando**: `pest --filter=UpdateAccountProfileAction` falla en los casos de aviso enviado al email anterior y al nuevo, ningún aviso cuando el email no cambia, ningún aviso si la operación se revierte, y enlace de definición de contraseña pendiente del email anterior invalidado; commit del test hecho.
 
-### - [ ] T8: Implementar el aviso y la baja de enlaces
+### - [x] T8: Implementar el aviso y la baja de enlaces
 
 - **Tipo**: impl
 - **Cubre**: RF-17, RF-18

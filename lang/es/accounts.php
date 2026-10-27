@@ -26,4 +26,11 @@ return [
         'deactivated' => 'Cuenta desactivada.',
         'activated' => 'Cuenta activada.',
     ],
+    'email_changed' => [
+        'subject' => 'El email de su cuenta en :app cambió',
+        'greeting' => 'Hola :name,',
+        'old_address' => 'El email de su cuenta en :app cambió a :email. Esta dirección ya no identifica a la cuenta.',
+        'new_address' => 'Esta dirección es ahora el email de su cuenta en :app. Antes era :email.',
+        'unexpected' => 'Si no esperaba este cambio, comuníquese con la agencia.',
+    ],
 ];

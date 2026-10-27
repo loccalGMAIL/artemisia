@@ -7,8 +7,11 @@ use App\Exceptions\CannotChangeOwnEmailException;
 use App\Exceptions\DuplicateAccountEmailException;
 use App\Models\AccountHistory;
 use App\Models\User;
+use App\Notifications\AccountEmailChanged;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -69,9 +72,16 @@ class UpdateAccountProfileAction
         }
 
         if ($email !== null) {
-            $this->record($target, AccountHistoryField::EmailChanged, ['email' => $target->email], ['email' => $email], $actor);
+            $oldEmail = $target->email;
+
+            $this->record($target, AccountHistoryField::EmailChanged, ['email' => $oldEmail], ['email' => $email], $actor);
+
+            // The pending links are stored under the old email, so they go before it changes.
+            Password::deleteToken($target);
 
             $target->email = $email;
+
+            DB::afterCommit(fn () => $this->notifyEmailChange($target->name, $oldEmail, $email));
         }
 
         $target->save();
@@ -92,6 +102,12 @@ class UpdateAccountProfileAction
             'new_value' => $new,
             'author_id' => $actor->id,
         ]);
+    }
+
+    private function notifyEmailChange(string $name, string $oldEmail, string $newEmail): void
+    {
+        Notification::route('mail', $oldEmail)->notify(new AccountEmailChanged($name, $oldEmail, $newEmail, forNewAddress: false));
+        Notification::route('mail', $newEmail)->notify(new AccountEmailChanged($name, $oldEmail, $newEmail, forNewAddress: true));
     }
 
     /**
