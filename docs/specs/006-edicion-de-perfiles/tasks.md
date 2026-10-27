@@ -103,7 +103,7 @@
 - **Depende de**: T9
 - **Hecho cuando**: el test de T9 pasa, la acción está en `AccountsTable` con `->authorize('update')`, el docblock de `AccountResource` ya no dice que las cuentas no se editan, los textos están en `lang/es/accounts.php` y la suite completa queda verde.
 
-### - [ ] T11: Escribir test de ingreso y sesión tras el cambio de email (caracterización)
+### - [x] T11: Escribir test de ingreso y sesión tras el cambio de email (caracterización)
 
 - **Tipo**: test
 - **Cubre**: RF-16, RF-19
