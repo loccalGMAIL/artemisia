@@ -47,7 +47,7 @@
 - **Depende de**: T1
 - **Hecho cuando**: el test de T1 pasa, las tres claves están en `lang/es/logs.php` y la suite completa queda verde.
 
-### - [ ] T3: Escribir test de `UpdateAccountProfileAction` para el nombre
+### - [x] T3: Escribir test de `UpdateAccountProfileAction` para el nombre
 
 - **Tipo**: test
 - **Cubre**: RF-2, RF-4, RF-20, RF-23
