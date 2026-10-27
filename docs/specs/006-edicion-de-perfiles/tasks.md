@@ -33,7 +33,7 @@
 
 **Demo posible al cerrarlo**: desde Configuración → Cuentas, un admin corrige el nombre y el email de otra cuenta; la persona recibe el aviso en los dos correos, entra con el email nuevo y los cambios aparecen en el historial de cuentas.
 
-### - [ ] T1: Escribir test de las etiquetas de los hechos nuevos del historial
+### - [x] T1: Escribir test de las etiquetas de los hechos nuevos del historial
 
 - **Tipo**: test
 - **Cubre**: RF-20, RF-21, RF-22, RF-24
