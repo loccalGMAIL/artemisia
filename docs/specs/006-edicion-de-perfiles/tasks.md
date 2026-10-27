@@ -130,7 +130,7 @@
 - **Depende de**: T2
 - **Hecho cuando**: `pest --filter=ChangeOwnPasswordAction` corre y falla por la aserción en los casos de contraseña cambiada con la actual correcta y una nueva válida, contraseña actual incorrecta rechazada sin cambios, contraseña nueva de menos de 8 caracteres rechazada, cuenta sin contraseña rechazada con `AccountHasNoPasswordException`, y asiento con autor y fecha sin ningún dato de contraseña; commit del test hecho.
 
-### - [ ] T14: Implementar `ChangeOwnPasswordAction`
+### - [x] T14: Implementar `ChangeOwnPasswordAction`
 
 - **Tipo**: impl
 - **Cubre**: RF-6, RF-7, RF-8, RF-9, RF-22
