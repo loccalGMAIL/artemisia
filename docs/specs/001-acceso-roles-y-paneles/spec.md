@@ -126,7 +126,7 @@ ingresos exitosos e intentos fallidos.
 - **Más de un rol por cuenta** — no hay caso de uso conocido; si aparece, spec aparte.
 - **Segundo factor de autenticación** — endurecimiento posterior.
 - **Invitaciones por email con aceptación previa** — se descartó: la cuenta nace activa.
-- **Edición del perfil propio** (cambiar nombre, email o contraseña estando dentro) — spec posterior; hoy la contraseña se cambia por el flujo de recuperación.
+- **Edición del perfil propio** (cambiar nombre, email o contraseña estando dentro) — se define en la spec `006-edicion-de-perfiles`.
 - **Proveedores de identidad distintos de Google** — no previstos.
 
 ## 9. Dependencias y supuestos
