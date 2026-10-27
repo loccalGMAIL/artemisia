@@ -165,7 +165,7 @@
 - **Depende de**: T17
 - **Hecho cuando**: el test de T17 pasa, existen `PortalEditProfile` y `Staff\Pages\Auth\EditProfile`, `StaffPanelProvider` registra `->profile()`, los textos están en `lang/es/accounts.php` y la suite completa queda verde.
 
-### - [ ] T19: Escribir test del perfil propio en el portal de clientes
+### - [x] T19: Escribir test del perfil propio en el portal de clientes
 
 - **Tipo**: test
 - **Cubre**: RF-1, RF-2, RF-3, RF-5, RF-9, RF-10
