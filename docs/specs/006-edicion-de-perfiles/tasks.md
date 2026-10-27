@@ -4,7 +4,7 @@
 |---|---|
 | **Spec** | docs/specs/006-edicion-de-perfiles/spec.md |
 | **Plan** | docs/specs/006-edicion-de-perfiles/plan.md |
-| **Estado** | En curso |
+| **Estado** | Completado |
 | **Fecha** | 2026-10-27 |
 
 ## Convenciones
@@ -172,7 +172,7 @@
 - **Depende de**: T18
 - **Hecho cuando**: `pest --filter=ClientProfile` corre y falla porque `/portal/profile` no existe o no es la página propia; cubre una cuenta cliente que cambia su nombre y su contraseña, email deshabilitado, y que la ficha del cliente de `ClientProfilePage` no se modifica; commit del test hecho.
 
-### - [ ] T20: Implementar el perfil propio del portal de clientes
+### - [x] T20: Implementar el perfil propio del portal de clientes
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-2, RF-3, RF-5, RF-9, RF-10
