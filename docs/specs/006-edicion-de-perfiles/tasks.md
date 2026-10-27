@@ -40,7 +40,7 @@
 - **Depende de**: —
 - **Hecho cuando**: `pest --filter=AccountHistoryField` corre y falla porque los casos `NameChanged`, `EmailChanged` y `PasswordChanged` del enum no tienen etiqueta en español; commit del test hecho.
 
-### - [ ] T2: Agregar los casos del enum y sus etiquetas
+### - [x] T2: Agregar los casos del enum y sus etiquetas
 
 - **Tipo**: impl
 - **Cubre**: RF-20, RF-21, RF-22, RF-24
