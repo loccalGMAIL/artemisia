@@ -24,9 +24,17 @@ return [
     'notifications' => [
         'created' => 'Cuenta creada. Se envió el enlace para definir la contraseña.',
         'updated' => 'Cuenta actualizada.',
+        'profile_saved' => 'Perfil actualizado.',
         'role_changed' => 'Rol actualizado.',
         'deactivated' => 'Cuenta desactivada.',
         'activated' => 'Cuenta activada.',
+    ],
+    'profile' => [
+        'email_hint' => 'El email lo cambia un administrador.',
+        'current_password' => 'Contraseña actual',
+        'new_password' => 'Contraseña nueva',
+        'new_password_confirmation' => 'Repetir la contraseña nueva',
+        'no_password' => 'Su cuenta todavía no tiene contraseña. Para definirla, use la recuperación de contraseña de la pantalla de acceso.',
     ],
     'email_changed' => [
         'subject' => 'El email de su cuenta en :app cambió',

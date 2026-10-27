@@ -158,7 +158,7 @@
 - **Depende de**: T16
 - **Hecho cuando**: `pest --filter=StaffProfile` corre y falla porque `/staff/profile` no existe o no es la página propia; cubre nombre y email visibles, email deshabilitado, nombre guardado con asiento, nombre vacío rechazado en el formulario, cambio de contraseña con la actual, errores de contraseña en sus campos, y sección de contraseña oculta con aviso de recuperación en una cuenta sin contraseña; commit del test hecho.
 
-### - [ ] T18: Implementar el perfil propio del portal de staff
+### - [x] T18: Implementar el perfil propio del portal de staff
 
 - **Tipo**: ui
 - **Cubre**: RF-1, RF-2, RF-3, RF-4, RF-5, RF-9, RF-10
