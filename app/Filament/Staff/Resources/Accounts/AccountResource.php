@@ -15,8 +15,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Account management for admins. Accounts are never edited or deleted from here:
- * only created, re-roled and (de)activated, always through the account Actions.
+ * Account management for admins. Accounts are never deleted from here: only created, edited
+ * (name and email), re-roled and (de)activated, always through the account Actions.
  */
 class AccountResource extends Resource
 {

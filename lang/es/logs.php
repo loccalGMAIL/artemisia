@@ -43,5 +43,8 @@ return [
         'activated' => 'Activación',
         'deactivated' => 'Desactivación',
         'role_changed' => 'Cambio de rol',
+        'name_changed' => 'Cambio de nombre',
+        'email_changed' => 'Cambio de email',
+        'password_changed' => 'Cambio de contraseña',
     ],
 ];

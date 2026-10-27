@@ -8,6 +8,9 @@ enum AccountHistoryField: string
     case Activated = 'activated';
     case Deactivated = 'deactivated';
     case RoleChanged = 'role_changed';
+    case NameChanged = 'name_changed';
+    case EmailChanged = 'email_changed';
+    case PasswordChanged = 'password_changed';
 
     public function label(): string
     {

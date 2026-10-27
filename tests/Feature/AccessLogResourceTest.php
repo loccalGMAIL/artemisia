@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\AccountHistoryField;
 use App\Filament\Staff\Resources\AccessLogs\AccessLogResource;
 use App\Filament\Staff\Resources\AccessLogs\Pages\ListAccessLogs;
 use App\Filament\Staff\Resources\AccountHistories\AccountHistoryResource;
@@ -73,3 +74,37 @@ it('RF-35, RNF-6: las secciones son de solo lectura, sin crear, editar ni borrar
         ->assertActionDoesNotExist(TestAction::make('edit')->table($history))
         ->assertActionDoesNotExist(TestAction::make('delete')->table($history));
 });
+
+it('RF-24: un admin ve en el historial de cuentas los cambios de nombre, email y contraseña con su etiqueta', function () {
+    $this->actingAs(User::factory()->admin()->create());
+    $account = User::factory()->staff()->create();
+
+    $name = AccountHistory::factory()->for($account)->create([
+        'field' => AccountHistoryField::NameChanged,
+        'old_value' => ['name' => 'Ana Peres'],
+        'new_value' => ['name' => 'Ana Pérez'],
+    ]);
+    $email = AccountHistory::factory()->for($account)->create([
+        'field' => AccountHistoryField::EmailChanged,
+        'old_value' => ['email' => 'ana@example.com'],
+        'new_value' => ['email' => 'ana.nueva@example.com'],
+    ]);
+    $password = AccountHistory::factory()->for($account)->create([
+        'field' => AccountHistoryField::PasswordChanged,
+        'old_value' => null,
+        'new_value' => ['changed' => true],
+    ]);
+
+    Livewire::test(ListAccountHistories::class)
+        ->assertCanSeeTableRecords([$name, $email, $password])
+        ->assertTableColumnFormattedStateSet('field', 'Cambio de nombre', $name)
+        ->assertTableColumnFormattedStateSet('field', 'Cambio de email', $email)
+        ->assertTableColumnFormattedStateSet('field', 'Cambio de contraseña', $password)
+        ->assertTableColumnStateSet('new_value', '{"changed":true}', $password);
+});
+
+it('RF-24: quien no es admin no puede consultar los cambios de perfil en el historial', function (string $role) {
+    $this->actingAs(User::factory()->{$role}()->create());
+
+    $this->get('/staff/account-histories')->assertForbidden();
+})->with(['staff', 'client']);
